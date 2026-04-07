@@ -1,1 +1,145 @@
-{"type":"footer","name":"Footer Group","sections":{"icons-with-text":{"type":"icons-with-text","blocks":{"icons-with-text-1":{"type":"item","settings":{"icon":"box","use_custom_icon_color":false,"icon_color":"#000000","heading":"Envío Gratis","text":"<p>Sobre $30.000<\/p>","link":""}},"icons-with-text-2":{"type":"item","settings":{"icon":"chat_bubble","use_custom_icon_color":false,"icon_color":"#000000","heading":"¿Hablemos?","text":"<p>¡Despejemos tus dudas!<\/p>","link":""}},"icons-with-text-3":{"type":"item","settings":{"icon":"leaf","use_custom_icon_color":false,"icon_color":"#000000","heading":"Reduce el plástico","text":"<p>Minimicemos el uso de plástico innecesario<\/p>","link":""}},"icons-with-text-4":{"type":"item","settings":{"icon":"check_mark_in_circle","use_custom_icon_color":false,"icon_color":"#000000","heading":"7 Años de Experiencia","text":"<p>Más de 20.000 pedidos entregados<\/p>","link":""}},"item_TCHhUi":{"type":"item","settings":{"icon":"credit_card","use_custom_icon_color":false,"icon_color":"#000000","heading":"Paga como quieras","text":"<p>Tenemos diversos medios de pago<\/p>","link":""}}},"block_order":["icons-with-text-1","icons-with-text-2","icons-with-text-3","icons-with-text-4","item_TCHhUi"],"settings":{"heading":"","heading_align":"text-start","icon_size":44,"title_type_scale":"medium","text_type_scale":"medium","icon_position":"beside","mobile_stack":false,"section_height":"medium","color_scheme":"none","full_width":true,"dividers":"border-top","prevent_animation":false}},"footer":{"type":"footer","blocks":{"text":{"type":"text","settings":{"image_width":150,"heading":"Talk about your store","text":"<p>Share store details, promotions, or brand content with your customers.<\/p>","enable_follow_on_shop":false,"show_social":true,"text_align":"text-start"}},"link-list-1":{"type":"link_list","settings":{"heading":"Footer links","menu":"footer"}},"link-list-2":{"type":"link_list","settings":{"heading":"Footer links","menu":"footer"}},"newsletter":{"type":"newsletter","settings":{"heading":"Newsletter","text":"<p>Sign up for exclusive offers, original stories, events and more.<\/p>","collapse_mobile":true}}},"block_order":["text","link-list-1","link-list-2","newsletter"],"settings":{"show_back_to_top":true,"show_payment_icons":true,"show_powered_by":true,"enable_country_selector":true,"enable_language_selector":true,"secondary_menu":"","bg_color":"#ebebeb","text_color":"#222222"}}},"order":["icons-with-text","footer"]}
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "icons-with-text": {
+      "type": "icons-with-text",
+      "blocks": {
+        "icons-with-text-1": {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Envío Gratis",
+            "text": "<p>Sobre $30.000</p>",
+            "link": ""
+          }
+        },
+        "icons-with-text-2": {
+          "type": "item",
+          "settings": {
+            "icon": "chat_bubble",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "¿Hablemos?",
+            "text": "<p>¡Despejemos tus dudas!</p>",
+            "link": ""
+          }
+        },
+        "icons-with-text-3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Reduce el plástico",
+            "text": "<p>Minimicemos el uso de plástico innecesario</p>",
+            "link": ""
+          }
+        },
+        "icons-with-text-4": {
+          "type": "item",
+          "settings": {
+            "icon": "check_mark_in_circle",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "7 Años de Experiencia",
+            "text": "<p>Más de 20.000 pedidos entregados</p>",
+            "link": ""
+          }
+        },
+        "item_TCHhUi": {
+          "type": "item",
+          "settings": {
+            "icon": "credit_card",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Paga como quieras",
+            "text": "<p>Tenemos diversos medios de pago</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "icons-with-text-1",
+        "icons-with-text-2",
+        "icons-with-text-3",
+        "icons-with-text-4",
+        "item_TCHhUi"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_align": "text-start",
+        "icon_size": 44,
+        "title_type_scale": "medium",
+        "text_type_scale": "medium",
+        "icon_position": "beside",
+        "mobile_stack": false,
+        "section_height": "medium",
+        "color_scheme": "none",
+        "full_width": true,
+        "dividers": "border-top",
+        "prevent_animation": false
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "image_width": 150,
+            "heading": "Frutiferia",
+            "text": "<p>Frutas y verduras frescas directo a tu puerta. Más de 7 años abasteciendo hogares y negocios en la Región de Valparaíso.</p>",
+            "enable_follow_on_shop": false,
+            "show_social": true,
+            "text_align": "text-start"
+          }
+        },
+        "link-list-1": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Información",
+            "menu": "footer"
+          }
+        },
+        "link-list-2": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Ayuda",
+            "menu": "footer"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Ofertas y novedades",
+            "text": "<p>Suscríbete y recibe nuestras ofertas semanales.</p>",
+            "collapse_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "link-list-1",
+        "link-list-2",
+        "newsletter"
+      ],
+      "settings": {
+        "show_back_to_top": true,
+        "show_payment_icons": true,
+        "show_powered_by": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "secondary_menu": "",
+        "bg_color": "#ebebeb",
+        "text_color": "#222222"
+      }
+    }
+  },
+  "order": [
+    "icons-with-text",
+    "footer"
+  ]
+}
