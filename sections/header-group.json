@@ -13,8 +13,8 @@
         "link2_label": "Envío gratis sobre $30.000",
         "enable_country_selector": true,
         "enable_language_selector": true,
-        "bg_color": "#ebebeb",
-        "text_color": "#222222",
+        "bg_color": "#6dae1e",
+        "text_color": "#ffffff",
         "text_type_scale": "small",
         "read_time": 7
       }

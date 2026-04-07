@@ -849,33 +849,33 @@
         "column_9fzDCC": {
           "type": "column",
           "settings": {
-            "enable_media": true,
+            "enable_media": false,
             "media_scale": 100,
-            "heading": "Column",
-            "text": "<p>Pair text with an image to focus on a product, collection or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "Optional Button",
+            "heading": "1. Elige tus productos",
+            "text": "<p>Navega nuestro catálogo de frutas, verduras, despensa y FrutiPacks. También puedes pedir por WhatsApp.</p>",
+            "button_label": "",
             "button_link": ""
           }
         },
         "column_mpdqwY": {
           "type": "column",
           "settings": {
-            "enable_media": true,
+            "enable_media": false,
             "media_scale": 100,
-            "heading": "Column",
-            "text": "<p>Pair text with an image to focus on a product, collection or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "Optional Button",
+            "heading": "2. Paga como prefieras",
+            "text": "<p>Aceptamos transferencia, tarjeta de crédito/débito y más. Envío gratis sobre $30.000.</p>",
+            "button_label": "",
             "button_link": ""
           }
         },
         "column_dqyJDz": {
           "type": "column",
           "settings": {
-            "enable_media": true,
+            "enable_media": false,
             "media_scale": 100,
-            "heading": "Column",
-            "text": "<p>Pair text with an image to focus on a product, collection or blog post. Add details on availability, style, or even provide a review.</p>",
-            "button_label": "Optional Button",
+            "heading": "3. Recibe en tu puerta",
+            "text": "<p>Entregamos los martes, miércoles, viernes y sábados en Viña del Mar, Reñaca, Concón, Quilpué y más.</p>",
+            "button_label": "",
             "button_link": ""
           }
         },
@@ -894,22 +894,22 @@
       "block_order": [
         "column_9fzDCC",
         "column_mpdqwY",
-        "column_dqyJDz",
-        "column_fbaMVB"
+        "column_dqyJDz"
       ],
       "settings": {
-        "title": "Multi-column",
-        "heading_align": "text-start",
-        "button_label": "View all",
-        "button_link": "",
-        "layout": "carousel",
+        "title": "¿Cómo funciona?",
+        "heading_align": "text-center",
+        "button_label": "Haz tu pedido",
+        "button_link": "shopify://collections/all",
+        "layout": "grid",
         "column_size": "medium",
-        "column_align": "left",
+        "column_align": "center",
         "media_align": "text-center",
         "image_ratio": "1",
-        "color_scheme": "none",
+        "color_scheme": "1",
         "button_style": "btn btn--primary"
-      }
+      },
+      "disabled": false
     },
     "countdown_timer_GUE8qp": {
       "type": "countdown-timer",
@@ -1299,23 +1299,15 @@
   "order": [
     "slideshow",
     "3721924b-630b-4a60-b724-521fef7aa78e",
+    "multi_column_RXLTtT",
     "featured-collection",
     "collection-list",
-    "rich_text_HULyzR",
-    "promo_grid_DMUYkR",
     "video_9nrWpD",
-    "background_video_N97WRE",
     "media_with_text_VAd4Hi",
     "testimonials_JERNA6",
-    "multi_column_RXLTtT",
-    "countdown_timer_GUE8qp",
-    "shoppable_image_hj3QLH",
-    "product_comparison_grid_tEphXb",
-    "scrolling_banner_TMrgrE",
-    "link_lists_gP8pzV",
-    "featured_blog_Rm6jWF",
+    "scrolling_banner_ArEtdk",
     "newsletter_WXJigB",
     "17365669696872c38c",
-    "scrolling_banner_ArEtdk"
+    "scrolling_banner_TMrgrE"
   ]
 }

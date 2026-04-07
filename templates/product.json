@@ -1,1 +1,183 @@
-{"sections":{"main":{"type":"main-product","blocks":{"613a93aa-8edd-4bb9-b8f1-df3133990e99":{"type":"vendor-sku","settings":{"show_vendor":true,"show_sku":false,"show_barcode":false}},"title":{"type":"title","settings":{"show_weight":false}},"3f73b6ee-a6b2-40ae-8379-a02a42756d8d":{"type":"rating","settings":{}},"price":{"type":"price","settings":{"show_tax_and_shipping":false}},"divider-0":{"type":"divider","settings":{"show_line":true}},"variant-picker":{"type":"variant-picker","settings":{"selector_style":"dropdown","enable_dynamic_availability":true,"show_backorder_text":true,"enable_size_chart":false,"size_chart_variant":"Size","size_chart_page":""}},"buy-buttons":{"type":"buy-buttons","settings":{"show_qty_selector":true,"enable_dynamic_checkout":true,"show_pickup_availability":true,"show_gift_card_recipient":false}},"divider-1":{"type":"divider","settings":{"show_line":true}},"1cc6422d-211f-4764-af07-884ee26ed3d7":{"type":"description","settings":{"show_as_collapsible_content":false,"icon":"none","open":false}}},"block_order":["613a93aa-8edd-4bb9-b8f1-df3133990e99","title","3f73b6ee-a6b2-40ae-8379-a02a42756d8d","price","divider-0","variant-picker","buy-buttons","divider-1","1cc6422d-211f-4764-af07-884ee26ed3d7"],"settings":{"stick_on_scroll":true,"sticky_atc_panel":true,"sticky_atc_position":"end-dock","sticky_atc_mobile":true,"media_layout":"slider","media_size":"default","media_ratio":"1","media_crop":"none","enable_video_looping":false,"enable_zoom":true,"zoom_mode":"hover","enable_lightbox_mobile":false,"hover_zoom":"large","stacked_scroll":"always","underline_active":true,"media_arrows":"desktop","show_slide_count":true,"media_thumbs":"desktop","lightbox_thumbnails":true,"thumb_ratio":"1","thumb_crop":"none","border_color":"#eeeeee","bg_color":"#f4f4f4","enable_media_grouping":false,"media_grouping_option":"Color,Colour,Couleur,Farbe"}},"details":{"type":"product-details","blocks":{"71057e1b-320d-4706-a43a-06d66046c5a7":{"type":"tabs","settings":{"style":"collapsible","open_first":false,"show_description":true,"show_reviews":true,"show_reviews_count":true,"custom_reviews":"","show_specification":false,"spec_heading":"Specifications","spec_metafields":"","spec_right_align":false,"spec_show_empty_metafields":true,"spec_empty_field_text":"-","tab_1_title":"","tab_1_text":"","tab_1_page":"","tab_2_title":"","tab_2_text":"","tab_2_page":"","tab_3_title":"","tab_3_text":"","tab_3_page":""}},"highlight_text_qEpJN4":{"type":"highlight-text","settings":{"text":"<h4>Highlight title<\/h4><p>Text to highlight a key feature of your product<\/p>"}},"highlight_text_r3c7Pb":{"type":"highlight-text","settings":{"text":"<h4>Highlight title<\/h4><p>Text to highlight a key feature of your product<\/p>"}}},"block_order":["71057e1b-320d-4706-a43a-06d66046c5a7","highlight_text_qEpJN4","highlight_text_r3c7Pb"],"settings":{"content_size":"default","placement":"left","text":"<h3>Key product features<\/h3><p>Can be highlighted here.<\/p>","show_image_first":false,"color_scheme":"default","full_width":false}},"recommendations":{"type":"product-recommendations","settings":{"heading":"You may also like","heading_align":"text-start","layout":"carousel","card_size_mobile":"small","card_size":"small","products_to_show":5}}},"order":["main","details","recommendations"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "613a93aa-8edd-4bb9-b8f1-df3133990e99": {
+          "type": "vendor-sku",
+          "settings": {
+            "show_vendor": true,
+            "show_sku": false,
+            "show_barcode": false
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "show_weight": true
+          }
+        },
+        "3f73b6ee-a6b2-40ae-8379-a02a42756d8d": {
+          "type": "rating",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_tax_and_shipping": true
+          }
+        },
+        "divider-0": {
+          "type": "divider",
+          "settings": {
+            "show_line": true
+          }
+        },
+        "variant-picker": {
+          "type": "variant-picker",
+          "settings": {
+            "selector_style": "dropdown",
+            "enable_dynamic_availability": true,
+            "show_backorder_text": true,
+            "enable_size_chart": false,
+            "size_chart_variant": "Size",
+            "size_chart_page": ""
+          }
+        },
+        "buy-buttons": {
+          "type": "buy-buttons",
+          "settings": {
+            "show_qty_selector": true,
+            "enable_dynamic_checkout": true,
+            "show_pickup_availability": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "divider-1": {
+          "type": "divider",
+          "settings": {
+            "show_line": true
+          }
+        },
+        "1cc6422d-211f-4764-af07-884ee26ed3d7": {
+          "type": "description",
+          "settings": {
+            "show_as_collapsible_content": false,
+            "icon": "none",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "613a93aa-8edd-4bb9-b8f1-df3133990e99",
+        "title",
+        "3f73b6ee-a6b2-40ae-8379-a02a42756d8d",
+        "price",
+        "divider-0",
+        "variant-picker",
+        "buy-buttons",
+        "divider-1",
+        "1cc6422d-211f-4764-af07-884ee26ed3d7"
+      ],
+      "settings": {
+        "stick_on_scroll": true,
+        "sticky_atc_panel": true,
+        "sticky_atc_position": "end-dock",
+        "sticky_atc_mobile": true,
+        "media_layout": "slider",
+        "media_size": "default",
+        "media_ratio": "1",
+        "media_crop": "none",
+        "enable_video_looping": false,
+        "enable_zoom": true,
+        "zoom_mode": "hover",
+        "enable_lightbox_mobile": false,
+        "hover_zoom": "large",
+        "stacked_scroll": "always",
+        "underline_active": true,
+        "media_arrows": "desktop",
+        "show_slide_count": true,
+        "media_thumbs": "desktop",
+        "lightbox_thumbnails": true,
+        "thumb_ratio": "1",
+        "thumb_crop": "none",
+        "border_color": "#eeeeee",
+        "bg_color": "#f4f4f4",
+        "enable_media_grouping": false,
+        "media_grouping_option": "Color,Colour,Couleur,Farbe"
+      }
+    },
+    "details": {
+      "type": "product-details",
+      "blocks": {
+        "71057e1b-320d-4706-a43a-06d66046c5a7": {
+          "type": "tabs",
+          "settings": {
+            "style": "collapsible",
+            "open_first": false,
+            "show_description": true,
+            "show_reviews": true,
+            "show_reviews_count": true,
+            "custom_reviews": "",
+            "show_specification": false,
+            "spec_heading": "Specifications",
+            "spec_metafields": "",
+            "spec_right_align": false,
+            "spec_show_empty_metafields": true,
+            "spec_empty_field_text": "-",
+            "tab_1_title": "",
+            "tab_1_text": "",
+            "tab_1_page": "",
+            "tab_2_title": "",
+            "tab_2_text": "",
+            "tab_2_page": "",
+            "tab_3_title": "",
+            "tab_3_text": "",
+            "tab_3_page": ""
+          }
+        },
+        "highlight_text_qEpJN4": {
+          "type": "highlight-text",
+          "settings": {
+            "text": "<h4>Frescura garantizada</h4><p>Seleccionamos cada producto a mano para asegurar la mejor calidad. Si no estás conforme, lo resolvemos.</p>"
+          }
+        },
+        "highlight_text_r3c7Pb": {
+          "type": "highlight-text",
+          "settings": {
+            "text": "<h4>Entrega a domicilio</h4><p>Recibe tus frutas y verduras frescas en la puerta de tu casa. Envío gratis sobre $30.000.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "71057e1b-320d-4706-a43a-06d66046c5a7",
+        "highlight_text_qEpJN4",
+        "highlight_text_r3c7Pb"
+      ],
+      "settings": {
+        "content_size": "default",
+        "placement": "left",
+        "text": "<h3>¿Por qué elegir Frutiferia?</h3><p>Más de 7 años entregando productos frescos y de calidad en la Región de Valparaíso.</p>",
+        "show_image_first": false,
+        "color_scheme": "default",
+        "full_width": false
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "También te puede gustar",
+        "heading_align": "text-start",
+        "layout": "carousel",
+        "card_size_mobile": "small",
+        "card_size": "small",
+        "products_to_show": 5
+      }
+    }
+  },
+  "order": [
+    "main",
+    "details",
+    "recommendations"
+  ]
+}
