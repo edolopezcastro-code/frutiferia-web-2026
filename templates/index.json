@@ -1182,20 +1182,20 @@
     "featured_blog_Rm6jWF": {
       "type": "featured-blog",
       "settings": {
-        "title": "Featured blog",
+        "title": "Recetas y consejos",
         "heading_align": "text-start",
         "show_view_all": true,
-        "blog": "",
+        "blog": "recetas",
         "layout": "carousel",
-        "posts_to_show": 8,
+        "posts_to_show": 4,
         "show_featured_image": true,
         "show_tags": false,
         "show_excerpt": true,
-        "show_author": true,
+        "show_author": false,
         "show_date": true,
         "show_button": true,
         "color_scheme": "none",
-        "image_ratio": "1.77"
+        "image_ratio": "1"
       }
     },
     "newsletter_WXJigB": {
@@ -1294,6 +1294,85 @@
         "dividers": "none",
         "prevent_animation": false
       }
+    },
+    "faq_homepage": {
+      "type": "faq",
+      "blocks": {
+        "cat_pedidos": {
+          "type": "category",
+          "settings": {
+            "text": "Sobre tu pedido"
+          }
+        },
+        "q_como_pedir": {
+          "type": "question",
+          "settings": {
+            "icon": "question_mark",
+            "heading": "¿Cómo hago un pedido?",
+            "text": "<p>Elige tus productos en la tienda online, agrégalos al carrito y paga. También puedes pedir por WhatsApp al +56 9 9575 4109.</p>"
+          }
+        },
+        "q_envio_gratis": {
+          "type": "question",
+          "settings": {
+            "icon": "box",
+            "heading": "¿Tienen envío gratis?",
+            "text": "<p>Sí, el envío es gratis para pedidos sobre $30.000. Para montos menores, el costo varía según tu zona.</p>"
+          }
+        },
+        "cat_entrega": {
+          "type": "category",
+          "settings": {
+            "text": "Entrega"
+          }
+        },
+        "q_zonas": {
+          "type": "question",
+          "settings": {
+            "icon": "map_pin",
+            "heading": "¿A qué zonas entregan?",
+            "text": "<p>Viña del Mar, Reñaca, Concón, Quilpué, Valparaíso y alrededores. Consulta nuestra <a href=\"/pages/reparto\">página de repartos</a> para más detalles.</p>"
+          }
+        },
+        "q_dias": {
+          "type": "question",
+          "settings": {
+            "icon": "calendar",
+            "heading": "¿Qué días entregan?",
+            "text": "<p>Martes, miércoles, viernes y sábados. El día depende de tu zona de entrega.</p>"
+          }
+        },
+        "cat_calidad": {
+          "type": "category",
+          "settings": {
+            "text": "Calidad"
+          }
+        },
+        "q_frescura": {
+          "type": "question",
+          "settings": {
+            "icon": "leaf",
+            "heading": "¿Cómo garantizan la frescura?",
+            "text": "<p>Seleccionamos cada producto a mano. Si algo no cumple tus expectativas, contáctanos y lo resolvemos.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "cat_pedidos",
+        "q_como_pedir",
+        "q_envio_gratis",
+        "cat_entrega",
+        "q_zonas",
+        "q_dias",
+        "cat_calidad",
+        "q_frescura"
+      ],
+      "settings": {
+        "heading": "Preguntas frecuentes",
+        "heading_align": "text-center",
+        "color_scheme": "none",
+        "full_width": true
+      }
     }
   },
   "order": [
@@ -1305,6 +1384,8 @@
     "video_9nrWpD",
     "media_with_text_VAd4Hi",
     "testimonials_JERNA6",
+    "faq_homepage",
+    "featured_blog_Rm6jWF",
     "scrolling_banner_ArEtdk",
     "newsletter_WXJigB",
     "17365669696872c38c",

@@ -84,4 +84,41 @@
       }
     }
   </script>
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Frutiferia",
+      "description": "Frutas y verduras frescas a domicilio en la Región de Valparaíso. Más de 7 años de experiencia.",
+      "url": {{ shop.url | json }},
+      "telephone": "+56995754109",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Maravillar 2017",
+        "addressLocality": "Viña del Mar",
+        "addressRegion": "Valparaíso",
+        "addressCountry": "CL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -33.0245,
+        "longitude": -71.5518
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Viña del Mar" },
+        { "@type": "City", "name": "Concón" },
+        { "@type": "City", "name": "Reñaca" },
+        { "@type": "City", "name": "Quilpué" },
+        { "@type": "City", "name": "Valparaíso" }
+      ],
+      "priceRange": "$",
+      "openingHours": "Mo-Sa 09:00-19:00",
+      {%- if section.settings.logo %}
+        "image": {{ section.settings.logo | image_url: width: section.settings.logo.width | prepend: "https:" | json }},
+      {%- endif %}
+      "sameAs": [
+        {{ sameAs_json | remove_last: ',' }}
+      ]
+    }
+  </script>
 {%- endif -%}
