@@ -27,11 +27,11 @@
             "hide_on_filter": true,
             "min_height": 150,
             "link_url": "",
-            "content": "<h6>Promotion text</h6>",
+            "content": "<h6>Ofertas especiales</h6>",
             "text_type_scale": "1em",
             "text_width": 400,
             "text_alignment": "justify-center items-center text-center",
-            "button_label": "Optional Button",
+            "button_label": "",
             "button_style": "link",
             "text_color": "#ffffff",
             "tint_color": "#000000",
@@ -76,54 +76,50 @@
     "collection_list_9gEhfq": {
       "type": "collection-list",
       "blocks": {
-        "collection_mgTRm6": {
+        "col_frutas": {
           "type": "collection",
           "settings": {
             "collection": "frutas-deliciosas"
           }
         },
-        "collection_W6dEWC": {
+        "col_verduras": {
           "type": "collection",
           "settings": {
             "collection": "verduras-frescas"
           }
         },
-        "collection_Q7kRdM": {
+        "col_despensa": {
           "type": "collection",
           "settings": {
             "collection": "despensa"
           }
         },
-        "collection_r4Dym7": {
+        "col_frutipacks": {
           "type": "collection",
           "settings": {
             "collection": "frutipack"
           }
         },
-        "collection_gdET6F": {
+        "col_snacks": {
           "type": "collection",
           "settings": {
-            "collection": ""
+            "collection": "snacks"
           }
         },
-        "collection_kpqUgT": {
+        "col_mayor": {
           "type": "collection",
           "settings": {
-            "collection": ""
-          }
-        },
-        "collection_Q7girn": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
+            "collection": "por-mayor"
           }
         }
       },
       "block_order": [
-        "collection_mgTRm6",
-        "collection_W6dEWC",
-        "collection_Q7kRdM",
-        "collection_r4Dym7"
+        "col_frutas",
+        "col_verduras",
+        "col_despensa",
+        "col_frutipacks",
+        "col_snacks",
+        "col_mayor"
       ],
       "settings": {
         "title": "Explora más categorías",
@@ -132,17 +128,68 @@
         "button_link": "shopify://collections",
         "layout": "carousel",
         "card_size": "medium",
-        "use_product_image": false,
+        "use_product_image": true,
         "circle_image": true,
         "show_border": true,
         "color_scheme": "none",
         "full_width": true
+      }
+    },
+    "trust_collection": {
+      "type": "icons-with-text",
+      "blocks": {
+        "ic_fresh": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "heading": "Selección a mano",
+            "text": "<p>Solo lo más fresco</p>",
+            "link": ""
+          }
+        },
+        "ic_envio": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "heading": "Envío gratis",
+            "text": "<p>Sobre $30.000</p>",
+            "link": ""
+          }
+        },
+        "ic_garantia": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "heading": "Garantía",
+            "text": "<p>Reposición asegurada</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "ic_fresh",
+        "ic_envio",
+        "ic_garantia"
+      ],
+      "settings": {
+        "heading": "",
+        "icon_size": 32,
+        "title_type_scale": "small",
+        "text_type_scale": "small",
+        "icon_position": "beside",
+        "mobile_stack": false,
+        "section_height": "xsmall",
+        "color_scheme": "3",
+        "full_width": true,
+        "dividers": "none",
+        "prevent_animation": false
       }
     }
   },
   "order": [
     "collection-banner",
     "collection-products",
+    "trust_collection",
     "featured_collection_Nzeq8M",
     "collection_list_9gEhfq"
   ]

@@ -229,60 +229,36 @@
     "collection-list": {
       "type": "collection-list",
       "blocks": {
-        "collection-list-collection-1": {
+        "col_frutas": {
           "type": "collection",
           "settings": {
             "collection": "frutas-deliciosas"
           }
         },
-        "collection-list-collection-2": {
+        "col_verduras": {
           "type": "collection",
           "settings": {
             "collection": "verduras-frescas"
           }
         },
-        "collection-list-collection-3": {
-          "type": "collection",
-          "settings": {
-            "collection": "despensa"
-          }
-        },
-        "collection-list-collection-4": {
+        "col_frutipacks": {
           "type": "collection",
           "settings": {
             "collection": "frutipack"
           }
         },
-        "collection-list-collection-5": {
+        "col_despensa": {
           "type": "collection",
           "settings": {
-            "collection": ""
-          }
-        },
-        "collection-list-collection-6": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-list-collection-7": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-list-collection-8": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
+            "collection": "despensa"
           }
         }
       },
       "block_order": [
-        "collection-list-collection-1",
-        "collection-list-collection-2",
-        "collection-list-collection-3",
-        "collection-list-collection-4"
+        "col_frutas",
+        "col_verduras",
+        "col_frutipacks",
+        "col_despensa"
       ],
       "settings": {
         "title": "Descubre más categorías",
@@ -293,7 +269,7 @@
         "card_size": "medium",
         "use_product_image": true,
         "circle_image": true,
-        "show_border": false,
+        "show_border": true,
         "color_scheme": "none",
         "full_width": true
       }
