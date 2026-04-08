@@ -14,7 +14,7 @@
     "announcement": {
       "type": "announcement",
       "settings": {
-        "announcement_homepage_only": false,
+        "announcement_homepage_only": true,
         "link1": "shopify://pages/reparto",
         "link1_label": "Envíos: Mar, Mié, Vie y Sáb",
         "link2": "shopify://collections/all",
@@ -24,7 +24,7 @@
         "bg_color": "#9640e6",
         "text_color": "#ffffff",
         "text_type_scale": "small",
-        "read_time": 7
+        "read_time": 4
       }
     },
     "header": {
