@@ -1,19 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header Group",
   "sections": {
     "announcement": {
       "type": "announcement",
-      "disabled": false,
       "settings": {
         "announcement_homepage_only": false,
         "link1": "shopify://pages/reparto",
-        "link1_label": "Envíos: Mar, Mié, Vie y Sáb →",
+        "link1_label": "Envíos: Mar, Mié, Vie y Sáb",
         "link2": "shopify://collections/all",
-        "link2_label": "Envío gratis sobre $30.000 →",
+        "link2_label": "Envío gratis sobre $30.000",
         "enable_country_selector": true,
         "enable_language_selector": true,
-        "bg_color": "#6dae1e",
+        "bg_color": "#9640e6",
         "text_color": "#ffffff",
         "text_type_scale": "small",
         "read_time": 7
@@ -39,10 +47,12 @@
         "menu": "menu-frutiferia",
         "menu_center": false,
         "repeat_links": true,
-        "menu_featured_link": "Ofertas",
+        "menu_featured_link": "Sale",
+        "enable_customer_account_component": false,
+        "customer_account_menu": "customer-account-main-menu",
         "cta_show": true,
-        "cta_icon": "chat_bubble",
-        "cta_label": "WhatsApp",
+        "cta_icon": "phone",
+        "cta_label": "Conversemos",
         "cta_link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20necesito%20de%20su%20ayuda!",
         "cta_border_color": "#8c40da",
         "cta_bg_color": "#8c40da",
@@ -62,7 +72,7 @@
         "heading_RAFRCV": {
           "type": "heading",
           "settings": {
-            "heading": "¡Bienvenido a Frutiferia!",
+            "heading": "¿Primer pedido?",
             "heading_size": "h5",
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -71,7 +81,7 @@
         "text_PwkiA7": {
           "type": "text",
           "settings": {
-            "text": "<p>Tu primer pedido con <strong>20% OFF</strong> usando el código:</p>",
+            "text": "<p>Prueba nuestro servicio con un<strong> 20% de descuento</strong></p>",
             "enlarge_text": false,
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -82,22 +92,12 @@
           "settings": {
             "discount_code": "Primera20"
           }
-        },
-        "text_b2b": {
-          "type": "text",
-          "settings": {
-            "text": "<p>¿Eres empresa? <a href=\"/pages/por-mayor\">Compra por mayor →</a></p>",
-            "enlarge_text": false,
-            "show_on_mobile": false,
-            "show_on_desktop": true
-          }
         }
       },
       "block_order": [
         "heading_RAFRCV",
         "text_PwkiA7",
-        "discount_HztBeh",
-        "text_b2b"
+        "discount_HztBeh"
       ],
       "settings": {
         "section_height": "small",
