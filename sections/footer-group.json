@@ -8,11 +8,11 @@
         "icons-with-text-1": {
           "type": "item",
           "settings": {
-            "icon": "box",
+            "icon": "truck",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Envío Gratis",
-            "text": "<p>Sobre $30.000</p>",
+            "heading": "Envío gratis",
+            "text": "<p>En pedidos sobre $30.000</p>",
             "link": ""
           }
         },
@@ -22,9 +22,9 @@
             "icon": "chat_bubble",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "¿Hablemos?",
-            "text": "<p>¡Despejemos tus dudas!</p>",
-            "link": ""
+            "heading": "WhatsApp directo",
+            "text": "<p>Atención rápida al +56 9 9575 4109</p>",
+            "link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo!"
           }
         },
         "icons-with-text-3": {
@@ -33,8 +33,8 @@
             "icon": "leaf",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Reduce el plástico",
-            "text": "<p>Minimicemos el uso de plástico innecesario</p>",
+            "heading": "Eco-friendly",
+            "text": "<p>Mínimo plástico por pedido</p>",
             "link": ""
           }
         },
@@ -44,19 +44,19 @@
             "icon": "check_mark_in_circle",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "7 Años de Experiencia",
-            "text": "<p>Más de 20.000 pedidos entregados</p>",
+            "heading": "+20.000 pedidos",
+            "text": "<p>7 años de confianza</p>",
             "link": ""
           }
         },
         "item_TCHhUi": {
           "type": "item",
           "settings": {
-            "icon": "credit_card",
+            "icon": "lock",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Paga como quieras",
-            "text": "<p>Tenemos diversos medios de pago</p>",
+            "heading": "Pago seguro",
+            "text": "<p>Tarjeta, transferencia y más</p>",
             "link": ""
           }
         }
@@ -71,12 +71,12 @@
       "settings": {
         "heading": "",
         "heading_align": "text-start",
-        "icon_size": 44,
-        "title_type_scale": "medium",
-        "text_type_scale": "medium",
+        "icon_size": 36,
+        "title_type_scale": "small",
+        "text_type_scale": "small",
         "icon_position": "beside",
         "mobile_stack": false,
-        "section_height": "medium",
+        "section_height": "small",
         "color_scheme": "none",
         "full_width": true,
         "dividers": "border-top",
@@ -91,8 +91,8 @@
           "settings": {
             "image_width": 150,
             "heading": "Frutiferia",
-            "text": "<p>Frutas y verduras frescas directo a tu puerta. Más de 7 años abasteciendo hogares y negocios en la Región de Valparaíso.</p>",
-            "enable_follow_on_shop": false,
+            "text": "<p>Frutas y verduras frescas a domicilio. Más de 7 años al servicio de hogares y negocios en la V Región. Maravillar 2017, Viña del Mar.</p>",
+            "enable_follow_on_shop": true,
             "show_social": true,
             "text_align": "text-start"
           }
@@ -100,7 +100,7 @@
         "link-list-1": {
           "type": "link_list",
           "settings": {
-            "heading": "Información",
+            "heading": "Comprar",
             "menu": "footer"
           }
         },
@@ -114,8 +114,8 @@
         "newsletter": {
           "type": "newsletter",
           "settings": {
-            "heading": "Ofertas y novedades",
-            "text": "<p>Suscríbete y recibe nuestras ofertas semanales.</p>",
+            "heading": "Ofertas semanales",
+            "text": "<p>Recibe descuentos exclusivos y novedades cada semana. Sin spam.</p>",
             "collapse_mobile": true
           }
         }
@@ -129,12 +129,12 @@
       "settings": {
         "show_back_to_top": true,
         "show_payment_icons": true,
-        "show_powered_by": true,
+        "show_powered_by": false,
         "enable_country_selector": true,
         "enable_language_selector": true,
         "secondary_menu": "",
-        "bg_color": "#ebebeb",
-        "text_color": "#222222"
+        "bg_color": "#1a1a1a",
+        "text_color": "#ffffff"
       }
     }
   },
