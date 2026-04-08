@@ -42,7 +42,7 @@
         "menu_featured_link": "Sale",
         "cta_show": true,
         "cta_icon": "phone",
-        "cta_label": "Convercemos",
+        "cta_label": "Conversemos",
         "cta_link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20necesito%20de%20su%20ayuda!",
         "cta_border_color": "#8c40da",
         "cta_bg_color": "#8c40da",
