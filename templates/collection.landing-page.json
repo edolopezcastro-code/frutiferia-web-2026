@@ -11,20 +11,57 @@
         "text_align": "text-center",
         "text_position": "justify-center items-center",
         "show_image": true,
-        "use_product_image": false,
-        "collection_image": "natural",
+        "use_product_image": true,
+        "collection_image": "fill",
         "color_scheme": "default"
       }
     },
     "trust_landing": {
       "type": "icons-with-text",
       "blocks": {
-        "ic_fresh": { "type": "item", "settings": { "icon": "leaf", "heading": "100% Fresco", "text": "<p>Seleccionado a mano</p>", "link": "" } },
-        "ic_envio": { "type": "item", "settings": { "icon": "truck", "heading": "Envío gratis", "text": "<p>Sobre $30.000</p>", "link": "" } },
-        "ic_dias": { "type": "item", "settings": { "icon": "calendar", "heading": "4 días de entrega", "text": "<p>Mar, Mié, Vie, Sáb</p>", "link": "" } },
-        "ic_garantia": { "type": "item", "settings": { "icon": "return", "heading": "Garantía", "text": "<p>Reposición asegurada</p>", "link": "" } }
+        "ic_fresh": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "heading": "100% Fresco",
+            "text": "<p>Seleccionado a mano</p>",
+            "link": ""
+          }
+        },
+        "ic_envio": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "heading": "Envío gratis",
+            "text": "<p>Sobre $30.000</p>",
+            "link": ""
+          }
+        },
+        "ic_dias": {
+          "type": "item",
+          "settings": {
+            "icon": "calendar",
+            "heading": "4 días de entrega",
+            "text": "<p>Mar, Mié, Vie, Sáb</p>",
+            "link": ""
+          }
+        },
+        "ic_garantia": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "heading": "Garantía",
+            "text": "<p>Reposición asegurada</p>",
+            "link": ""
+          }
+        }
       },
-      "block_order": ["ic_fresh", "ic_envio", "ic_dias", "ic_garantia"],
+      "block_order": [
+        "ic_fresh",
+        "ic_envio",
+        "ic_dias",
+        "ic_garantia"
+      ],
       "settings": {
         "heading": "",
         "icon_size": 36,
@@ -75,14 +112,51 @@
     "categorias_landing": {
       "type": "collection-list",
       "blocks": {
-        "col_frutas": { "type": "collection", "settings": { "collection": "frutas-deliciosas" } },
-        "col_verduras": { "type": "collection", "settings": { "collection": "verduras-frescas" } },
-        "col_despensa": { "type": "collection", "settings": { "collection": "despensa" } },
-        "col_frutipacks": { "type": "collection", "settings": { "collection": "frutipack" } },
-        "col_snacks": { "type": "collection", "settings": { "collection": "snacks" } },
-        "col_mayor": { "type": "collection", "settings": { "collection": "por-mayor" } }
+        "col_frutas": {
+          "type": "collection",
+          "settings": {
+            "collection": "frutas-deliciosas"
+          }
+        },
+        "col_verduras": {
+          "type": "collection",
+          "settings": {
+            "collection": "verduras-frescas"
+          }
+        },
+        "col_despensa": {
+          "type": "collection",
+          "settings": {
+            "collection": "despensa"
+          }
+        },
+        "col_frutipacks": {
+          "type": "collection",
+          "settings": {
+            "collection": "frutipack"
+          }
+        },
+        "col_snacks": {
+          "type": "collection",
+          "settings": {
+            "collection": "snacks"
+          }
+        },
+        "col_mayor": {
+          "type": "collection",
+          "settings": {
+            "collection": "por-mayor"
+          }
+        }
       },
-      "block_order": ["col_frutas", "col_verduras", "col_despensa", "col_frutipacks", "col_snacks", "col_mayor"],
+      "block_order": [
+        "col_frutas",
+        "col_verduras",
+        "col_despensa",
+        "col_frutipacks",
+        "col_snacks",
+        "col_mayor"
+      ],
       "settings": {
         "title": "Explora más categorías",
         "heading_align": "text-start",
@@ -119,7 +193,11 @@
           "settings": {}
         }
       },
-      "block_order": ["heading_nl", "text_nl", "form_nl"],
+      "block_order": [
+        "heading_nl",
+        "text_nl",
+        "form_nl"
+      ],
       "settings": {
         "overlay_position": "justify-center",
         "text_align": "text-center",

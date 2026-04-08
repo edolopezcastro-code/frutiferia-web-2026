@@ -6,14 +6,14 @@
         "show_collection_title": true,
         "show_product_count": true,
         "show_collection_description": true,
-        "collection_title_size": "h2",
+        "collection_title_size": "h1",
         "text_width": "wide",
-        "text_align": "text-start",
+        "text_align": "text-center",
         "text_position": "justify-center items-center",
         "show_image": true,
-        "use_product_image": false,
-        "collection_image": "1.77",
-        "color_scheme": "1"
+        "use_product_image": true,
+        "collection_image": "fill",
+        "color_scheme": "default"
       }
     },
     "collection-products": {

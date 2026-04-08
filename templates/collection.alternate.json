@@ -8,11 +8,11 @@
         "show_collection_description": true,
         "collection_title_size": "h1",
         "text_width": "wide",
-        "text_align": "text-start",
+        "text_align": "text-center",
         "text_position": "justify-center items-center",
         "show_image": true,
-        "use_product_image": false,
-        "collection_image": "1.77",
+        "use_product_image": true,
+        "collection_image": "fill",
         "color_scheme": "2"
       }
     },
@@ -38,7 +38,10 @@
           }
         }
       },
-      "block_order": ["heading_b2b", "text_b2b"],
+      "block_order": [
+        "heading_b2b",
+        "text_b2b"
+      ],
       "settings": {
         "section_height": "small",
         "color_scheme": "2",
@@ -91,7 +94,11 @@
           }
         }
       },
-      "block_order": ["heading_cta", "text_cta", "button_cta"],
+      "block_order": [
+        "heading_cta",
+        "text_cta",
+        "button_cta"
+      ],
       "settings": {
         "image": "shopify://shop_images/Frutiferia.png",
         "layout": "right",
@@ -106,12 +113,49 @@
     "trust_b2b": {
       "type": "icons-with-text",
       "blocks": {
-        "ic_vol": { "type": "item", "settings": { "icon": "box", "heading": "Precios por volumen", "text": "<p>Descuentos desde 10 kg</p>", "link": "" } },
-        "ic_despacho": { "type": "item", "settings": { "icon": "truck", "heading": "Despacho programado", "text": "<p>Tú eliges el día</p>", "link": "" } },
-        "ic_factura": { "type": "item", "settings": { "icon": "briefcase", "heading": "Facturación", "text": "<p>Boleta y factura</p>", "link": "" } },
-        "ic_whatsapp": { "type": "item", "settings": { "icon": "chat_bubble", "heading": "Atención directa", "text": "<p>WhatsApp dedicado</p>", "link": "" } }
+        "ic_vol": {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "heading": "Precios por volumen",
+            "text": "<p>Descuentos desde 10 kg</p>",
+            "link": ""
+          }
+        },
+        "ic_despacho": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "heading": "Despacho programado",
+            "text": "<p>Tú eliges el día</p>",
+            "link": ""
+          }
+        },
+        "ic_factura": {
+          "type": "item",
+          "settings": {
+            "icon": "briefcase",
+            "heading": "Facturación",
+            "text": "<p>Boleta y factura</p>",
+            "link": ""
+          }
+        },
+        "ic_whatsapp": {
+          "type": "item",
+          "settings": {
+            "icon": "chat_bubble",
+            "heading": "Atención directa",
+            "text": "<p>WhatsApp dedicado</p>",
+            "link": ""
+          }
+        }
       },
-      "block_order": ["ic_vol", "ic_despacho", "ic_factura", "ic_whatsapp"],
+      "block_order": [
+        "ic_vol",
+        "ic_despacho",
+        "ic_factura",
+        "ic_whatsapp"
+      ],
       "settings": {
         "heading": "Beneficios para tu negocio",
         "heading_align": "text-center",
@@ -130,12 +174,37 @@
     "collection_list_b2b": {
       "type": "collection-list",
       "blocks": {
-        "col_frutas": { "type": "collection", "settings": { "collection": "frutas-deliciosas" } },
-        "col_verduras": { "type": "collection", "settings": { "collection": "verduras-frescas" } },
-        "col_despensa": { "type": "collection", "settings": { "collection": "despensa" } },
-        "col_frutipacks": { "type": "collection", "settings": { "collection": "frutipack" } }
+        "col_frutas": {
+          "type": "collection",
+          "settings": {
+            "collection": "frutas-deliciosas"
+          }
+        },
+        "col_verduras": {
+          "type": "collection",
+          "settings": {
+            "collection": "verduras-frescas"
+          }
+        },
+        "col_despensa": {
+          "type": "collection",
+          "settings": {
+            "collection": "despensa"
+          }
+        },
+        "col_frutipacks": {
+          "type": "collection",
+          "settings": {
+            "collection": "frutipack"
+          }
+        }
       },
-      "block_order": ["col_frutas", "col_verduras", "col_despensa", "col_frutipacks"],
+      "block_order": [
+        "col_frutas",
+        "col_verduras",
+        "col_despensa",
+        "col_frutipacks"
+      ],
       "settings": {
         "title": "También te puede interesar",
         "heading_align": "text-start",
