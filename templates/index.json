@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "slideshow": {
@@ -8,20 +17,20 @@
           "settings": {
             "image_desktop": "shopify://shop_images/Portada-2_72ca34db-a87d-4587-93b4-6a9df0069288.jpg",
             "url": "",
-            "overlay_position": "justify-start items-center",
-            "overlay_text_align": "text-start",
-            "mob_center_text": true,
-            "subheading": "Delivery de frutas y verduras en la V Región",
+            "overlay_position": "justify-center items-center",
+            "overlay_text_align": "text-center",
+            "mob_center_text": false,
+            "subheading": "Frutas y verduras frescas a tu puerta",
             "heading": "Frescura que se nota",
             "heading_size": "h0",
             "heading_h1": true,
-            "text": "<p>Seleccionamos a mano los mejores productos para tu hogar y negocio. Envío gratis sobre $30.000.</p>",
+            "text": "<p>Seleccionamos los mejores productos de la región de Valparaíso para ti</p>",
             "enlarge_text": true,
-            "button_1_label": "Comprar ahora",
+            "button_1_label": "Ver productos",
             "button_1_link": "shopify://collections/all",
             "button_1_style": "btn btn--primary",
-            "button_2_label": "Ver FrutiPacks",
-            "button_2_link": "shopify://collections/frutipack",
+            "button_2_label": "Ofertas de la semana",
+            "button_2_link": "shopify://collections/ofertas",
             "button_2_style": "btn btn--secondary",
             "transparent_content_color": "#ffffff",
             "countdown_show": false,
@@ -43,20 +52,20 @@
           "settings": {
             "image_desktop": "shopify://shop_images/Portada-1_42ee3109-73be-44b7-a000-e70157827132.jpg",
             "url": "",
-            "overlay_position": "justify-start items-center",
-            "overlay_text_align": "text-start",
+            "overlay_position": "justify-center items-center",
+            "overlay_text_align": "text-center",
             "mob_center_text": true,
-            "subheading": "Cajas armadas listas para ti",
-            "heading": "FrutiPacks",
+            "subheading": "Más de 20.000 pedidos entregados",
+            "heading": "7 años cuidando tu mesa",
             "heading_size": "h0",
             "heading_h1": false,
-            "text": "<p>Frutas, verduras y mix seleccionados. La forma más fácil de comer sano toda la semana.</p>",
+            "text": "<p>Envío gratis sobre $30.000 en Viña del Mar, Reñaca, Concón y más</p>",
             "enlarge_text": true,
-            "button_1_label": "Ver FrutiPacks",
-            "button_1_link": "shopify://collections/frutipack",
+            "button_1_label": "Comprar ahora",
+            "button_1_link": "shopify://collections/all",
             "button_1_style": "btn btn--primary",
-            "button_2_label": "Ofertas de la semana",
-            "button_2_link": "shopify://collections/ofertas",
+            "button_2_label": "Conócenos",
+            "button_2_link": "shopify://pages/conocenos",
             "button_2_style": "btn btn--secondary",
             "transparent_content_color": "#ffffff",
             "countdown_show": false,
@@ -80,14 +89,14 @@
             "url": "",
             "overlay_position": "justify-center items-center",
             "overlay_text_align": "text-center",
-            "mob_center_text": true,
-            "subheading": "¿Primera vez en Frutiferia?",
-            "heading": "20% OFF en tu primer pedido",
+            "mob_center_text": false,
+            "subheading": "¿Primer pedido?",
+            "heading": "20% de descuento",
             "heading_size": "h0",
             "heading_h1": false,
-            "text": "<p>Usa el código <strong>PRIMERA20</strong> y prueba la frescura que nos hace diferentes.</p>",
+            "text": "<p>Usa el código PRIMERA20 en tu primer pedido</p>",
             "enlarge_text": true,
-            "button_1_label": "Comprar con descuento",
+            "button_1_label": "Aprovecha ahora",
             "button_1_link": "shopify://collections/all",
             "button_1_style": "btn btn--primary",
             "button_2_label": "",
@@ -116,8 +125,8 @@
       ],
       "settings": {
         "height_mode": "fixed",
-        "fixed_height_desktop": 560,
-        "fixed_height_mobile": 420,
+        "fixed_height_desktop": 480,
+        "fixed_height_mobile": 360,
         "mobile_stacked": false,
         "nav_style": "slideshow_nav_dots",
         "pagination_color": "#ffffff",
@@ -125,13 +134,13 @@
         "transition": "slide-fade",
         "autoplay": true,
         "slider_pause": true,
-        "autoplay_speed": 5,
+        "autoplay_speed": 6,
         "color_scheme": "white",
         "full_width": true,
         "tint_color": "#000000",
-        "tint_opacity": 25,
+        "tint_opacity": 0,
         "accessibility_info": "",
-        "prevent_animation": false
+        "prevent_animation": true
       }
     },
     "3721924b-630b-4a60-b724-521fef7aa78e": {
@@ -143,8 +152,8 @@
             "icon": "box",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Envío gratis",
-            "text": "<p>En pedidos sobre $30.000</p>",
+            "heading": "Envío Gratis",
+            "text": "<p>Sobre $30.000</p>",
             "link": "shopify://pages/reparto"
           }
         },
@@ -154,8 +163,8 @@
             "icon": "chat_bubble",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "WhatsApp directo",
-            "text": "<p>Pedí por chat al instante</p>",
+            "heading": "¿Hablemos?",
+            "text": "<p>¡Despejemos tus dudas!</p>",
             "link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20necesito%20de%20su%20ayuda!"
           }
         },
@@ -165,8 +174,8 @@
             "icon": "leaf",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Eco-friendly",
-            "text": "<p>Mínimo plástico en cada pedido</p>",
+            "heading": "Reduce el plástico",
+            "text": "<p>Minimicemos el uso de plástico innecesario</p>",
             "link": ""
           }
         },
@@ -176,8 +185,8 @@
             "icon": "check_mark_in_circle",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "+20.000 pedidos",
-            "text": "<p>7 años de confianza</p>",
+            "heading": "7 Años de Experiencia",
+            "text": "<p>Más de 20.000 pedidos entregados</p>",
             "link": ""
           }
         },
@@ -187,29 +196,29 @@
             "icon": "credit_card",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Pago flexible",
-            "text": "<p>Tarjeta, transferencia y más</p>",
+            "heading": "Paga como quieras",
+            "text": "<p>Tenemos diversos medios de pago</p>",
             "link": ""
           }
         }
       },
       "block_order": [
         "template--16154615972040__3721924b-630b-4a60-b724-521fef7aa78e-item-1",
-        "item_7zJ3Lp",
-        "item_BF9fk4",
+        "template--16154615972040__3721924b-630b-4a60-b724-521fef7aa78e-item-2",
         "item_8hDrkT",
-        "template--16154615972040__3721924b-630b-4a60-b724-521fef7aa78e-item-2"
+        "item_7zJ3Lp",
+        "item_BF9fk4"
       ],
       "settings": {
         "heading": "",
         "heading_align": "text-start",
-        "icon_size": 36,
-        "title_type_scale": "small",
-        "text_type_scale": "small",
+        "icon_size": 44,
+        "title_type_scale": "medium",
+        "text_type_scale": "medium",
         "icon_position": "beside",
         "mobile_stack": false,
-        "section_height": "xsmall",
-        "color_scheme": "3",
+        "section_height": "small",
+        "color_scheme": "1",
         "full_width": true,
         "dividers": "none",
         "prevent_animation": false
@@ -218,14 +227,14 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Los más pedidos esta semana",
+        "title": "Los favoritos 😍",
         "heading_align": "text-start",
         "show_view_all": true,
         "collection": "ofertas",
         "layout": "carousel",
         "card_size_mobile": "small",
         "card_size": "small",
-        "products_to_show": 8,
+        "products_to_show": 12,
         "color_scheme": "1",
         "card_contain": true,
         "full_width": true
@@ -264,16 +273,16 @@
         },
         "collection-3": {
           "type": "collection",
-          "disabled": false,
+          "disabled": true,
           "settings": {
-            "collection": "snacks"
+            "collection": ""
           }
         },
         "collection-6": {
           "type": "collection",
-          "disabled": false,
+          "disabled": true,
           "settings": {
-            "collection": "por-mayor"
+            "collection": ""
           }
         },
         "6293ae32-73a5-444b-9594-15fb43c8eefe": {
@@ -297,20 +306,197 @@
         "collection-2",
         "collection_xdEtxH",
         "collection-3",
-        "collection-6"
+        "collection-6",
+        "6293ae32-73a5-444b-9594-15fb43c8eefe",
+        "collection_zbJXwV"
       ],
       "settings": {
-        "title": "Explora nuestras categorías",
+        "title": "¿Qué buscas?",
         "heading_align": "text-start",
-        "button_label": "Ver todas",
+        "button_label": "Ver todo",
         "button_link": "shopify://collections",
         "layout": "carousel",
-        "card_size": "small",
+        "card_size": "medium",
         "use_product_image": true,
         "circle_image": true,
         "show_border": true,
         "color_scheme": "none",
         "full_width": true
+      }
+    },
+    "rich_text_HULyzR": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_dNzhdw": {
+          "type": "subheading",
+          "settings": {
+            "text": "Subheading"
+          }
+        },
+        "heading_R3a3CA": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rich text headline",
+            "heading_size": "h2",
+            "heading_h1": false
+          }
+        },
+        "text_URQcjT": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your store with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "enlarge_text": false
+          }
+        },
+        "button_xzKF6F": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Optional button",
+            "button_1_link": "",
+            "button_1_style": "btn--primary",
+            "button_2_label": "Optional button",
+            "button_2_link": "",
+            "button_2_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_dNzhdw",
+        "heading_R3a3CA",
+        "text_URQcjT",
+        "button_xzKF6F"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "color_scheme": "none",
+        "full_width": true,
+        "prevent_animation": false
+      }
+    },
+    "promo_grid_DMUYkR": {
+      "type": "promo-grid",
+      "blocks": {
+        "media_KCEa6e": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 2,
+            "rows": 2,
+            "line1_text": "Save up to",
+            "line1_text_type_scale": "text-h6",
+            "line2_text": "50%",
+            "line2_text_type_scale": "text-h3",
+            "line3_text": "",
+            "line3_text_type_scale": "text-h6",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-center",
+            "promo_circle": false,
+            "background_color": "#e32b2b",
+            "text_color": "#ffffff",
+            "subheading": "Subheading",
+            "link_text": "",
+            "text_type_scale": "h6",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        },
+        "media_i6jxXb": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "line1_text": "",
+            "line1_text_type_scale": "text-h6",
+            "line2_text": "25%",
+            "line2_text_type_scale": "text-h3",
+            "line3_text": "off",
+            "line3_text_type_scale": "text-h6",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-center",
+            "promo_circle": false,
+            "background_color": "#e32b2b",
+            "text_color": "#ffffff",
+            "subheading": "Subheading",
+            "link_text": "",
+            "text_type_scale": "h6",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        },
+        "media_74eVdC": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 1,
+            "rows": 1,
+            "line1_text": "Now only",
+            "line1_text_type_scale": "text-h6",
+            "line2_text": "$999",
+            "line2_text_type_scale": "text-h3",
+            "line3_text": "",
+            "line3_text_type_scale": "text-h6",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-center",
+            "promo_circle": false,
+            "background_color": "#e32b2b",
+            "text_color": "#ffffff",
+            "subheading": "Subheading",
+            "link_text": "",
+            "text_type_scale": "h6",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        },
+        "media_6aK7KR": {
+          "type": "media",
+          "settings": {
+            "link_url": "",
+            "columns": 2,
+            "rows": 1,
+            "line1_text": "Save up to",
+            "line1_text_type_scale": "text-h6",
+            "line2_text": "1/3",
+            "line2_text_type_scale": "text-h3",
+            "line3_text": "",
+            "line3_text_type_scale": "text-h6",
+            "overlay_position": "justify-start items-start",
+            "text_alignment": "text-center",
+            "promo_circle": false,
+            "background_color": "#e32b2b",
+            "text_color": "#ffffff",
+            "subheading": "Subheading",
+            "link_text": "",
+            "text_type_scale": "h6",
+            "tint_color": "#000000",
+            "tint_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "media_KCEa6e",
+        "media_i6jxXb",
+        "media_74eVdC",
+        "media_6aK7KR"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Promo grid",
+        "heading_align": "text-start",
+        "button_label": "View all",
+        "button_link": "",
+        "gallery_cols_max": 4,
+        "mobile_carousel": false,
+        "gallery_cols_min": "1",
+        "fixed_height_desktop": 180,
+        "fixed_height_mobile": 280,
+        "text_overlay_spacing": false,
+        "text_overlay_font": "heading",
+        "color_scheme": "default",
+        "overlay_border_radius": 4
       }
     },
     "video_9nrWpD": {
@@ -328,6 +514,7 @@
       "block_order": [
         "heading_4jrfKz"
       ],
+      "disabled": true,
       "name": "Video",
       "settings": {
         "video_shopify": "shopify://files/videos/Testimonio Tamar.mp4",
@@ -337,6 +524,56 @@
         "video_autoplay": true,
         "text_align": "text-center",
         "color_scheme": "default"
+      }
+    },
+    "background_video_N97WRE": {
+      "type": "background-video",
+      "blocks": {
+        "heading_BJAmCY": {
+          "type": "heading",
+          "settings": {
+            "heading": "Background Video",
+            "heading_size": "h1",
+            "heading_h1": false
+          }
+        },
+        "text_8KQaUW": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Add text to a video to showcase a detail of your brand or product line.</p>",
+            "enlarge_text": true
+          }
+        },
+        "button_3AYzFx": {
+          "type": "button",
+          "settings": {
+            "button_label": "Optional Button",
+            "button_link": "",
+            "button_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BJAmCY",
+        "text_8KQaUW",
+        "button_3AYzFx"
+      ],
+      "disabled": true,
+      "settings": {
+        "video_shopify": "shopify://files/videos/Testimonio Tamar.mp4",
+        "video_external": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_description": "",
+        "video_height": "md",
+        "overlay_text_align": "text-center",
+        "overlay_position": "justify-center items-center",
+        "mob_center_text": true,
+        "color_scheme": "white",
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#000000",
+        "tint_opacity": 40,
+        "tint_gradient": "",
+        "lazyload": true,
+        "prevent_animation": false
       }
     },
     "media_with_text_VAd4Hi": {
@@ -361,7 +598,7 @@
           "type": "button",
           "settings": {
             "button_label": "Conoce más de nosotros",
-            "button_link": "shopify://pages/sobre-nosotros",
+            "button_link": "",
             "button_style": "btn btn--primary"
           }
         }
@@ -417,37 +654,15 @@
             "show_star_rating": true,
             "star_rating": 5
           }
-        },
-        "testimonial_b2b_rest": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "<p>Somos restaurant y llevamos más de un año comprando por mayor con Frutiferia. Nos ha simplificado toda la logística de abastecimiento. Súper recomendable.</p>",
-            "author": "Chef Andrés V.",
-            "author_info": "Restaurant en Concón",
-            "show_star_rating": true,
-            "star_rating": 5
-          }
-        },
-        "testimonial_familia": {
-          "type": "testimonial",
-          "settings": {
-            "testimonial": "<p>Con 3 hijos, ir a la feria era un caos. Ahora pedimos el FrutiPack familiar y nos llega todo fresquito a la casa. No volvemos atrás.</p>",
-            "author": "Valentina R.",
-            "author_info": "Mamá de 3 - Quilpué",
-            "show_star_rating": true,
-            "star_rating": 5
-          }
         }
       },
       "block_order": [
         "testimonial_7McUUW",
-        "testimonial_b2b_rest",
         "testimonial_3eypfh",
-        "testimonial_familia",
         "testimonial_TCn6Rg"
       ],
       "settings": {
-        "heading": "Miles de familias y negocios confían en nosotros",
+        "heading": "Lo que dicen nuestros clientes",
         "show_quotes": false,
         "testimonial_size": "h3",
         "testimonial_font": "heading",
@@ -457,140 +672,10 @@
         "transition": "slide-fade",
         "autoplay": true,
         "slider_pause": false,
-        "autoplay_speed": 6,
+        "autoplay_speed": 5,
         "color_scheme": "1",
         "star_color": "#f7c346",
         "full_width": true
-      }
-    },
-    "multi_column_RXLTtT": {
-      "type": "multi-column",
-      "blocks": {
-        "column_9fzDCC": {
-          "type": "column",
-          "settings": {
-            "enable_media": false,
-            "media_scale": 100,
-            "heading": "1. Elige",
-            "text": "<p>Navega nuestro catálogo o pide por WhatsApp. Frutas, verduras, despensa y FrutiPacks listos para ti.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "column_mpdqwY": {
-          "type": "column",
-          "settings": {
-            "enable_media": false,
-            "media_scale": 100,
-            "heading": "2. Paga",
-            "text": "<p>Tarjeta, transferencia o el medio que prefieras. Envío gratis sobre $30.000.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "column_dqyJDz": {
-          "type": "column",
-          "settings": {
-            "enable_media": false,
-            "media_scale": 100,
-            "heading": "3. Recibe",
-            "text": "<p>Entregamos Mar, Mié, Vie y Sáb en Viña del Mar, Reñaca, Concón, Quilpué y más.</p>",
-            "button_label": "",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column_9fzDCC",
-        "column_mpdqwY",
-        "column_dqyJDz"
-      ],
-      "settings": {
-        "title": "¿Cómo funciona?",
-        "heading_align": "text-center",
-        "button_label": "Haz tu pedido ahora",
-        "button_link": "shopify://collections/all",
-        "layout": "grid",
-        "column_size": "large",
-        "column_align": "center",
-        "media_align": "text-center",
-        "image_ratio": "1",
-        "color_scheme": "none",
-        "button_style": "btn btn--primary"
-      },
-      "disabled": false
-    },
-    "scrolling_banner_TMrgrE": {
-      "type": "scrolling-banner",
-      "blocks": {
-        "text_nTjbxA": {
-          "type": "text",
-          "settings": {
-            "text": "Envío gratis sobre $30.000",
-            "link": "",
-            "font": "heading",
-            "heading_size": "h1"
-          }
-        },
-        "icon_wka9WP": {
-          "type": "icon",
-          "settings": {
-            "icon": "heart",
-            "icon_size": 64
-          }
-        },
-        "text_6QAzCH": {
-          "type": "text",
-          "settings": {
-            "text": "Frutas y verduras frescas a tu puerta",
-            "link": "",
-            "font": "body",
-            "heading_size": "h1"
-          }
-        },
-        "button_wePAqg": {
-          "type": "button",
-          "settings": {
-            "button_label": "Comprar ahora",
-            "button_link": "shopify://collections/all",
-            "button_style": "btn btn--primary"
-          }
-        }
-      },
-      "block_order": [
-        "text_nTjbxA",
-        "icon_wka9WP",
-        "text_6QAzCH",
-        "button_wePAqg"
-      ],
-      "settings": {
-        "section_height": "medium",
-        "spacing": 40,
-        "speed": 24,
-        "direction": "normal",
-        "pausable": true,
-        "color_scheme": "1",
-        "dividers": "none",
-        "prevent_animation": false
-      }
-    },
-    "featured_blog_Rm6jWF": {
-      "type": "featured-blog",
-      "settings": {
-        "title": "Recetas y consejos",
-        "heading_align": "text-start",
-        "show_view_all": true,
-        "blog": "recetas",
-        "layout": "carousel",
-        "posts_to_show": 4,
-        "show_featured_image": true,
-        "show_tags": false,
-        "show_excerpt": true,
-        "show_author": false,
-        "show_date": true,
-        "show_button": true,
-        "color_scheme": "none",
-        "image_ratio": "1"
       }
     },
     "newsletter_WXJigB": {
@@ -599,14 +684,14 @@
         "heading_cUJ39A": {
           "type": "heading",
           "settings": {
-            "heading": "Ofertas frescas cada semana",
+            "heading": "Recibe nuestras ofertas",
             "heading_size": "h4"
           }
         },
         "text_p3LHH3": {
           "type": "text",
           "settings": {
-            "text": "<p>Únete a +2.000 suscriptores que reciben nuestras ofertas exclusivas, recetas y novedades antes que nadie. Sin spam, solo frescura.</p>",
+            "text": "<p>Suscríbete y sé el primero en conocer nuestras ofertas semanales y novedades.</p>",
             "enlarge_text": false
           }
         },
@@ -628,13 +713,6 @@
         "transparent_content_color": "#ffffff",
         "tint_color": "#000000",
         "tint_opacity": 20
-      }
-    },
-    "17365669696872c38c": {
-      "type": "apps",
-      "settings": {
-        "full_width": false,
-        "show_space": true
       }
     },
     "scrolling_banner_ArEtdk": {
@@ -671,49 +749,13 @@
             "icon": "box",
             "icon_size": 64
           }
-        },
-        "text_comunas": {
-          "type": "text",
-          "settings": {
-            "text": "5 Comunas de la V Región",
-            "link": "",
-            "font": "heading",
-            "heading_size": "h1"
-          }
-        },
-        "icon_leaf": {
-          "type": "icon",
-          "settings": {
-            "icon": "leaf",
-            "icon_size": 44
-          }
-        },
-        "text_eco": {
-          "type": "text",
-          "settings": {
-            "text": "Packaging Eco-Friendly",
-            "link": "",
-            "font": "body",
-            "heading_size": "h1"
-          }
-        },
-        "icon_star": {
-          "type": "icon",
-          "settings": {
-            "icon": "award",
-            "icon_size": 44
-          }
         }
       },
       "block_order": [
         "text_TznU3D",
         "icon_yNWEkf",
         "text_Ppd7a7",
-        "icon_HCkhVj",
-        "text_comunas",
-        "icon_leaf",
-        "text_eco",
-        "icon_star"
+        "icon_HCkhVj"
       ],
       "settings": {
         "section_height": "medium",
@@ -725,286 +767,6 @@
         "dividers": "none",
         "prevent_animation": false
       }
-    },
-    "faq_homepage": {
-      "type": "faq",
-      "blocks": {
-        "cat_pedidos": {
-          "type": "category",
-          "settings": {
-            "text": "Sobre tu pedido"
-          }
-        },
-        "q_como_pedir": {
-          "type": "question",
-          "settings": {
-            "icon": "question_mark",
-            "heading": "¿Cómo hago un pedido?",
-            "text": "<p>Elige tus productos en la tienda online, agrégalos al carrito y paga. También puedes pedir por WhatsApp al +56 9 9575 4109.</p>"
-          }
-        },
-        "q_envio_gratis": {
-          "type": "question",
-          "settings": {
-            "icon": "box",
-            "heading": "¿Tienen envío gratis?",
-            "text": "<p>Sí, el envío es gratis para pedidos sobre $30.000. Para montos menores, el costo varía según tu zona.</p>"
-          }
-        },
-        "cat_entrega": {
-          "type": "category",
-          "settings": {
-            "text": "Entrega"
-          }
-        },
-        "q_zonas": {
-          "type": "question",
-          "settings": {
-            "icon": "map_pin",
-            "heading": "¿A qué zonas entregan?",
-            "text": "<p>Viña del Mar, Reñaca, Concón, Quilpué, Valparaíso y alrededores. Consulta nuestra <a href=\"/pages/reparto\">página de repartos</a> para más detalles.</p>"
-          }
-        },
-        "q_dias": {
-          "type": "question",
-          "settings": {
-            "icon": "calendar",
-            "heading": "¿Qué días entregan?",
-            "text": "<p>Martes, miércoles, viernes y sábados. El día depende de tu zona de entrega.</p>"
-          }
-        },
-        "cat_calidad": {
-          "type": "category",
-          "settings": {
-            "text": "Calidad"
-          }
-        },
-        "q_frescura": {
-          "type": "question",
-          "settings": {
-            "icon": "leaf",
-            "heading": "¿Cómo garantizan la frescura?",
-            "text": "<p>Seleccionamos cada producto a mano. Si algo no cumple tus expectativas, contáctanos y lo resolvemos.</p>"
-          }
-        },
-        "q_devolucion": {
-          "type": "question",
-          "settings": {
-            "icon": "shield",
-            "heading": "¿Qué pasa si un producto llega en mal estado?",
-            "text": "<p>Tu satisfacción es prioridad. Si algo no cumple tus expectativas, contáctanos por WhatsApp con una foto y lo reponemos o reembolsamos sin problema.</p>"
-          }
-        },
-        "q_pago": {
-          "type": "question",
-          "settings": {
-            "icon": "credit_card",
-            "heading": "¿Qué medios de pago aceptan?",
-            "text": "<p>Tarjeta de crédito/débito, transferencia bancaria, y también puedes pagar con Mercado Pago. Todo 100% seguro.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "cat_pedidos",
-        "q_como_pedir",
-        "q_envio_gratis",
-        "q_pago",
-        "cat_entrega",
-        "q_zonas",
-        "q_dias",
-        "cat_calidad",
-        "q_frescura",
-        "q_devolucion"
-      ],
-      "settings": {
-        "heading": "Preguntas frecuentes",
-        "heading_align": "text-center",
-        "color_scheme": "none",
-        "full_width": true
-      }
-    },
-    "frutipacks_featured": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "FrutiPacks: cajas listas para ti",
-        "heading_align": "text-start",
-        "show_view_all": true,
-        "collection": "frutipack",
-        "layout": "carousel",
-        "card_size_mobile": "small",
-        "card_size": "small",
-        "products_to_show": 8,
-        "color_scheme": "3",
-        "card_contain": true,
-        "full_width": true
-      }
-    },
-    "b2b_por_mayor": {
-      "type": "media-with-text",
-      "blocks": {
-        "heading_b2b": {
-          "type": "heading",
-          "settings": {
-            "heading": "¿Compras para tu negocio?",
-            "heading_size": "h2",
-            "heading_h1": false
-          }
-        },
-        "text_b2b": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Abastecemos restaurantes, hoteles, cafeterías y oficinas en toda la Región de Valparaíso. <strong>Precios por mayor, despacho programado y atención personalizada.</strong></p>",
-            "enlarge_text": true
-          }
-        },
-        "button_b2b_1": {
-          "type": "button",
-          "settings": {
-            "button_label": "Ver productos por mayor",
-            "button_link": "shopify://collections/por-mayor",
-            "button_style": "btn btn--primary"
-          }
-        },
-        "button_b2b_2": {
-          "type": "button",
-          "settings": {
-            "button_label": "Cotizar por WhatsApp",
-            "button_link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20me%20interesa%20comprar%20por%20mayor",
-            "button_style": "btn btn--secondary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_b2b",
-        "text_b2b",
-        "button_b2b_1",
-        "button_b2b_2"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/Frutiferia.png",
-        "video_external": "",
-        "video_description": "",
-        "video_autoplay": false,
-        "layout": "right",
-        "image_fit": "contain",
-        "media_width": 50,
-        "media_scale": 100,
-        "text_align": "text-start",
-        "color_scheme": "2",
-        "only_content_color_scheme": false
-      }
-    },
-    "logos_confianza": {
-      "type": "logo-list",
-      "blocks": {
-        "logo_1": {
-          "type": "logo",
-          "settings": {
-            "logo_width": 120
-          }
-        },
-        "logo_2": {
-          "type": "logo",
-          "settings": {
-            "logo_width": 120
-          }
-        },
-        "logo_3": {
-          "type": "logo",
-          "settings": {
-            "logo_width": 120
-          }
-        },
-        "logo_4": {
-          "type": "logo",
-          "settings": {
-            "logo_width": 120
-          }
-        },
-        "logo_5": {
-          "type": "logo",
-          "settings": {
-            "logo_width": 120
-          }
-        },
-        "logo_6": {
-          "type": "logo",
-          "settings": {
-            "logo_width": 120
-          }
-        }
-      },
-      "block_order": [
-        "logo_1",
-        "logo_2",
-        "logo_3",
-        "logo_4",
-        "logo_5",
-        "logo_6"
-      ],
-      "settings": {
-        "title": "Restaurantes, hoteles y oficinas que nos eligen",
-        "heading_align": "text-center",
-        "button_label": "",
-        "button_link": "",
-        "layout": "carousel",
-        "spacing": 60,
-        "logo_width": 120,
-        "grayscale": true,
-        "color_scheme": "1",
-        "full_width": true
-      }
-    },
-    "closing_cta": {
-      "type": "rich-text",
-      "blocks": {
-        "subheading_cta": {
-          "type": "subheading",
-          "settings": {
-            "text": "¿Listo para probar?"
-          }
-        },
-        "heading_cta": {
-          "type": "heading",
-          "settings": {
-            "heading": "Tu primera compra con 20% de descuento",
-            "heading_size": "h1",
-            "heading_h1": false
-          }
-        },
-        "text_cta": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Usa el código <strong>PRIMERA20</strong> en tu primer pedido. Frutas y verduras frescas, directo a tu puerta. Sin compromisos.</p>",
-            "enlarge_text": true
-          }
-        },
-        "button_cta": {
-          "type": "button",
-          "settings": {
-            "button_1_label": "Comprar con descuento",
-            "button_1_link": "shopify://collections/all",
-            "button_1_style": "btn--primary",
-            "button_2_label": "Hablar por WhatsApp",
-            "button_2_link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20quiero%20hacer%20mi%20primer%20pedido!",
-            "button_2_style": "btn btn--secondary"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_cta",
-        "heading_cta",
-        "text_cta",
-        "button_cta"
-      ],
-      "settings": {
-        "text_position": "justify-center",
-        "text_align": "text-center",
-        "mob_center_text": true,
-        "color_scheme": "3",
-        "full_width": true,
-        "prevent_animation": false
-      }
     }
   },
   "order": [
@@ -1012,19 +774,13 @@
     "3721924b-630b-4a60-b724-521fef7aa78e",
     "featured-collection",
     "collection-list",
-    "frutipacks_featured",
-    "multi_column_RXLTtT",
+    "rich_text_HULyzR",
+    "promo_grid_DMUYkR",
     "video_9nrWpD",
-    "media_with_text_VAd4Hi",
-    "b2b_por_mayor",
-    "logos_confianza",
+    "background_video_N97WRE",
     "testimonials_JERNA6",
-    "scrolling_banner_ArEtdk",
-    "closing_cta",
-    "faq_homepage",
-    "featured_blog_Rm6jWF",
+    "media_with_text_VAd4Hi",
     "newsletter_WXJigB",
-    "17365669696872c38c",
-    "scrolling_banner_TMrgrE"
+    "scrolling_banner_ArEtdk"
   ]
 }
