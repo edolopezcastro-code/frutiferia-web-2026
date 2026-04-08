@@ -36,7 +36,7 @@
         "variant-picker": {
           "type": "variant-picker",
           "settings": {
-            "selector_style": "dropdown",
+            "selector_style": "listed",
             "enable_dynamic_availability": true,
             "show_backorder_text": true,
             "enable_size_chart": false,
@@ -66,6 +66,66 @@
             "icon": "none",
             "open": false
           }
+        },
+        "inventory_status": {
+          "type": "inventory-status",
+          "settings": {
+            "show_urgency_message": true,
+            "text_very_low": "<p>¡Últimas unidades disponibles!</p>",
+            "text_low": "<p>¡Quedan pocas unidades, no te quedes sin!</p>",
+            "text_normal": "",
+            "text_no_stock": "<p>Agotado temporalmente</p>",
+            "text_no_stock_backordered": "<p>Disponible por encargo</p>"
+          }
+        },
+        "msg_envio": {
+          "type": "message",
+          "settings": {
+            "icon": "truck",
+            "title": "<p>Envío gratis en pedidos sobre $30.000</p>",
+            "close": "once",
+            "show_over_media": false,
+            "bg_color": "#e8f5e9",
+            "text_color": "#2e7d32"
+          }
+        },
+        "complementary": {
+          "type": "complementary",
+          "settings": {
+            "heading": "Combina bien con",
+            "products_to_show": 4,
+            "layout": "carousel"
+          }
+        },
+        "share": {
+          "type": "share"
+        },
+        "collapsible_envio": {
+          "type": "collapsible-content",
+          "settings": {
+            "heading": "Envío y entrega",
+            "icon": "truck",
+            "text": "<p>Entregamos <strong>Martes, Miércoles, Viernes y Sábados</strong> en Viña del Mar, Reñaca, Concón, Quilpué y Valparaíso. Envío gratis sobre $30.000.</p>",
+            "open": false
+          }
+        },
+        "collapsible_pago": {
+          "type": "collapsible-content",
+          "settings": {
+            "heading": "Medios de pago",
+            "icon": "credit_card",
+            "text": "<p>Aceptamos tarjeta de crédito, débito, transferencia bancaria y Mercado Pago. Todas las transacciones son 100% seguras.</p>",
+            "open": false
+          }
+        },
+        "collapsible_garantia": {
+          "type": "collapsible-content",
+          "settings": {
+            "heading": "Garantía de frescura",
+            "icon": "leaf",
+            "text": "<p>Cada producto es seleccionado a mano. Si algo no cumple tus expectativas, contáctanos por WhatsApp y lo resolvemos con reposición o reembolso.</p>",
+            "open": false
+          }
         }
       },
       "block_order": [
@@ -73,11 +133,18 @@
         "title",
         "3f73b6ee-a6b2-40ae-8379-a02a42756d8d",
         "price",
+        "inventory_status",
+        "msg_envio",
         "divider-0",
         "variant-picker",
         "buy-buttons",
+        "complementary",
         "divider-1",
-        "1cc6422d-211f-4764-af07-884ee26ed3d7"
+        "1cc6422d-211f-4764-af07-884ee26ed3d7",
+        "collapsible_envio",
+        "collapsible_pago",
+        "collapsible_garantia",
+        "share"
       ],
       "settings": {
         "stick_on_scroll": true,
@@ -114,13 +181,13 @@
           "type": "tabs",
           "settings": {
             "style": "collapsible",
-            "open_first": false,
+            "open_first": true,
             "show_description": true,
             "show_reviews": true,
             "show_reviews_count": true,
             "custom_reviews": "",
             "show_specification": false,
-            "spec_heading": "Specifications",
+            "spec_heading": "Especificaciones",
             "spec_metafields": "",
             "spec_right_align": false,
             "spec_show_empty_metafields": true,
@@ -147,17 +214,24 @@
           "settings": {
             "text": "<h4>Entrega a domicilio</h4><p>Recibe tus frutas y verduras frescas en la puerta de tu casa. Envío gratis sobre $30.000.</p>"
           }
+        },
+        "highlight_whatsapp": {
+          "type": "highlight-text",
+          "settings": {
+            "text": "<h4>¿Prefieres pedir por WhatsApp?</h4><p>Escríbenos al +56 9 9575 4109 y te ayudamos con tu pedido en minutos.</p>"
+          }
         }
       },
       "block_order": [
         "71057e1b-320d-4706-a43a-06d66046c5a7",
         "highlight_text_qEpJN4",
-        "highlight_text_r3c7Pb"
+        "highlight_text_r3c7Pb",
+        "highlight_whatsapp"
       ],
       "settings": {
         "content_size": "default",
         "placement": "left",
-        "text": "<h3>¿Por qué elegir Frutiferia?</h3><p>Más de 7 años entregando productos frescos y de calidad en la Región de Valparaíso.</p>",
+        "text": "<h3>¿Por qué elegir Frutiferia?</h3><p>Más de 7 años entregando productos frescos y de calidad a hogares y negocios de la Región de Valparaíso. +20.000 pedidos nos respaldan.</p>",
         "show_image_first": false,
         "color_scheme": "default",
         "full_width": false
@@ -166,18 +240,105 @@
     "recommendations": {
       "type": "product-recommendations",
       "settings": {
-        "heading": "También te puede gustar",
+        "heading": "Clientes también compraron",
         "heading_align": "text-start",
         "layout": "carousel",
         "card_size_mobile": "small",
         "card_size": "small",
-        "products_to_show": 5
+        "products_to_show": 8
+      }
+    },
+    "trust_bar_product": {
+      "type": "icons-with-text",
+      "blocks": {
+        "trust_fresh": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "100% Fresco",
+            "text": "<p>Seleccionado a mano</p>",
+            "link": ""
+          }
+        },
+        "trust_envio": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Envío gratis",
+            "text": "<p>Sobre $30.000</p>",
+            "link": ""
+          }
+        },
+        "trust_garantia": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Garantía",
+            "text": "<p>Reposición si no cumple</p>",
+            "link": ""
+          }
+        },
+        "trust_pago": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Pago seguro",
+            "text": "<p>Todas las tarjetas</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "trust_fresh",
+        "trust_envio",
+        "trust_garantia",
+        "trust_pago"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_align": "text-start",
+        "icon_size": 36,
+        "title_type_scale": "small",
+        "text_type_scale": "small",
+        "icon_position": "beside",
+        "mobile_stack": false,
+        "section_height": "xsmall",
+        "color_scheme": "3",
+        "full_width": true,
+        "dividers": "none",
+        "prevent_animation": false
+      }
+    },
+    "cross_sell": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Ofertas de la semana",
+        "heading_align": "text-start",
+        "show_view_all": true,
+        "collection": "ofertas",
+        "layout": "carousel",
+        "card_size_mobile": "small",
+        "card_size": "small",
+        "products_to_show": 8,
+        "color_scheme": "1",
+        "card_contain": true,
+        "full_width": true
       }
     }
   },
   "order": [
     "main",
+    "trust_bar_product",
     "details",
-    "recommendations"
+    "recommendations",
+    "cross_sell"
   ]
 }
