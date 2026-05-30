@@ -1,0 +1,230 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_page_title": false,
+        "heading_size": "h2",
+        "heading_align": "text-center"
+      }
+    },
+    "hero_fmenu": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_hero": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tu semana de comidas, lista en 1 minuto",
+            "heading_size": "h0",
+            "heading_h1": true
+          }
+        },
+        "text_hero": {
+          "type": "text",
+          "settings": {
+            "text": "<p>FrutiMenu arma tu plan de 7 días con recetas chilenas saludables y te entrega la lista de compras lista para pedir en Frutiferia. Sin registro.</p>",
+            "enlarge_text": true
+          }
+        },
+        "button_hero": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Armar mi semana",
+            "button_1_link": "https://mi-frutimenu.lovable.app/",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "Ver productos frescos",
+            "button_2_link": "shopify://collections/all",
+            "button_2_style": "btn btn--secondary"
+          }
+        }
+      },
+      "block_order": ["heading_hero", "text_hero", "button_hero"],
+      "settings": {
+        "url": "",
+        "height_mode": "fixed",
+        "fixed_height_desktop": 480,
+        "fixed_height_mobile": 400,
+        "overlay_position": "justify-center items-center",
+        "overlay_text_align": "text-center",
+        "mob_center_text": true,
+        "mobile_stacked": false,
+        "color_scheme": "white",
+        "full_width": true,
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#000000",
+        "prevent_animation": false
+      }
+    },
+    "beneficios_fmenu": {
+      "type": "icons-with-text",
+      "blocks": {
+        "ic_recetas": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Recetas chilenas",
+            "text": "<p>7 días de comidas ricas y saludables, pensadas para nuestra mesa.</p>",
+            "link": ""
+          }
+        },
+        "ic_macros": {
+          "type": "item",
+          "settings": {
+            "icon": "check_mark_in_circle",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Calorías y proteína",
+            "text": "<p>Cada comida con su aporte de calorías y proteína para que comas equilibrado.</p>",
+            "link": ""
+          }
+        },
+        "ic_lista": {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Lista de compras lista",
+            "text": "<p>Tu lista de ingredientes lista para pedir directo en Frutiferia.</p>",
+            "link": ""
+          }
+        },
+        "ic_rapido": {
+          "type": "item",
+          "settings": {
+            "icon": "award",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Listo en 1 minuto",
+            "text": "<p>Respondes unas pocas preguntas y tienes tu plan. Sin registro.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["ic_recetas", "ic_macros", "ic_lista", "ic_rapido"],
+      "settings": {
+        "heading": "¿Por qué usar FrutiMenu?",
+        "heading_align": "text-center",
+        "icon_size": 48,
+        "title_type_scale": "base",
+        "text_type_scale": "small",
+        "icon_position": "above",
+        "mobile_stack": true,
+        "section_height": "medium",
+        "color_scheme": "1",
+        "full_width": true,
+        "dividers": "none",
+        "prevent_animation": false
+      }
+    },
+    "como_funciona_fmenu": {
+      "type": "multi-column",
+      "blocks": {
+        "paso_1": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "1. Cuéntanos tu nivel",
+            "text": "<p>Responde unas preguntas rápidas sobre cuánto cocinas y qué te gusta. Toma menos de un minuto.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "paso_2": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "2. Recibe tu semana",
+            "text": "<p>FrutiMenu te arma 7 días de recetas chilenas con sus calorías y proteína, al instante.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "paso_3": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "3. Compra en Frutiferia",
+            "text": "<p>Recibes la lista de ingredientes lista para pedir frescos en Frutiferia y cocinar tranquilo toda la semana.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": ["paso_1", "paso_2", "paso_3"],
+      "settings": {
+        "title": "¿Cómo funciona?",
+        "heading_align": "text-center",
+        "button_label": "",
+        "button_link": "",
+        "layout": "grid",
+        "column_size": "large",
+        "column_align": "center",
+        "media_align": "text-center",
+        "image_ratio": "1",
+        "color_scheme": "none",
+        "button_style": "btn btn--primary"
+      }
+    },
+    "cta_fmenu": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_cta": {
+          "type": "heading",
+          "settings": {
+            "heading": "Arma tu semana ahora",
+            "heading_size": "h1",
+            "heading_h1": false
+          }
+        },
+        "text_cta": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Planifica, ahorra tiempo y come mejor. Gratis y sin registro.</p>",
+            "enlarge_text": false
+          }
+        },
+        "button_cta": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Armar mi semana",
+            "button_1_link": "https://mi-frutimenu.lovable.app/",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "",
+            "button_2_link": "",
+            "button_2_style": "btn btn--secondary"
+          }
+        }
+      },
+      "block_order": ["heading_cta", "text_cta", "button_cta"],
+      "settings": {
+        "url": "",
+        "height_mode": "fixed",
+        "fixed_height_desktop": 360,
+        "fixed_height_mobile": 320,
+        "overlay_position": "justify-center items-center",
+        "overlay_text_align": "text-center",
+        "mob_center_text": true,
+        "mobile_stacked": false,
+        "color_scheme": "white",
+        "full_width": true,
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#2e7d32",
+        "prevent_animation": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_fmenu",
+    "beneficios_fmenu",
+    "como_funciona_fmenu",
+    "cta_fmenu"
+  ]
+}
