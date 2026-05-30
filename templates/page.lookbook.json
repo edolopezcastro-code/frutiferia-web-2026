@@ -24,7 +24,7 @@
         "subheading_PbFJyb": {
           "type": "subheading",
           "settings": {
-            "text": "Get Inspired"
+            "text": "Inspírate"
           }
         },
         "heading_KVNLkr": {
@@ -38,17 +38,17 @@
         "text_Ug8NME": {
           "type": "text",
           "settings": {
-            "text": "<p>Explore the pieces you'll love in our latest collection</p>",
+            "text": "<p>Descubre los productos frescos que vas a amar de nuestra selección</p>",
             "enlarge_text": false
           }
         },
         "button_9ft6Uy": {
           "type": "button",
           "settings": {
-            "button_1_label": "Optional button",
+            "button_1_label": "Ver más",
             "button_1_link": "",
             "button_1_style": "btn btn--primary",
-            "button_2_label": "Optional button",
+            "button_2_label": "Ver más",
             "button_2_link": "",
             "button_2_style": "btn btn--primary"
           }
@@ -82,7 +82,7 @@
         "heading_ACwPJM": {
           "type": "heading",
           "settings": {
-            "heading": "Rich text headline",
+            "heading": "Frescura que llega a tu mesa",
             "heading_size": "h2",
             "heading_h1": false
           }
@@ -118,7 +118,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -136,7 +136,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -154,7 +154,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -172,7 +172,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -190,7 +190,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -208,7 +208,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -226,7 +226,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -244,7 +244,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -290,7 +290,7 @@
         "heading_aqrnAm": {
           "type": "heading",
           "settings": {
-            "heading": "Background Video",
+            "heading": "Video de fondo",
             "heading_size": "h1",
             "heading_h1": false
           }
@@ -298,7 +298,7 @@
         "text_TFL4h9": {
           "type": "text",
           "settings": {
-            "text": "<p>Add text to a video to showcase a detail of your brand or product line.</p>",
+            "text": "<p>Agrega un texto al video para mostrar un detalle de Frutiferia o de tus productos.</p>",
             "enlarge_text": true
           }
         },
@@ -367,8 +367,8 @@
       "settings": {
         "show_vendor": true,
         "show_content": true,
-        "heading": "Shoppable image",
-        "text": "<p>Create a Shop the Look section to assist with upselling or helping customers with purchasing complementary products.</p>",
+        "heading": "Imagen comprable",
+        "text": "<p>Crea una sección \"Arma tu pedido\" para sugerir productos que combinan y ayudar a tus clientes a comprar.</p>",
         "button_label": "",
         "button_link": "",
         "hotspot_color": "#222222",
@@ -386,7 +386,7 @@
             "columns": 2,
             "rows": 2,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -404,7 +404,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -422,7 +422,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -440,7 +440,7 @@
             "columns": 2,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Media heading</p>",
+            "title": "<p>Título del contenido</p>",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -479,7 +479,7 @@
     "featured_collection_4DYtHa": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured collection",
+        "title": "Selección destacada",
         "heading_align": "text-start",
         "show_view_all": true,
         "collection": "",
