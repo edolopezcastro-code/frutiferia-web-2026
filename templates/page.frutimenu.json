@@ -41,6 +41,7 @@
       },
       "block_order": ["heading_hero", "text_hero", "button_hero"],
       "settings": {
+        "image_desktop": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
         "url": "",
         "height_mode": "fixed",
         "fixed_height_desktop": 480,
@@ -53,6 +54,7 @@
         "full_width": true,
         "transparent_content_color": "#ffffff",
         "tint_color": "#000000",
+        "tint_opacity": 45,
         "prevent_animation": false
       }
     },
@@ -204,6 +206,7 @@
       },
       "block_order": ["heading_cta", "text_cta", "button_cta"],
       "settings": {
+        "image_desktop": "shopify://shop_images/front-view-vegetable.jpg",
         "url": "",
         "height_mode": "fixed",
         "fixed_height_desktop": 360,
@@ -216,6 +219,7 @@
         "full_width": true,
         "transparent_content_color": "#ffffff",
         "tint_color": "#2e7d32",
+        "tint_opacity": 55,
         "prevent_animation": false
       }
     }

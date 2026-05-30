@@ -252,6 +252,48 @@
         "full_width": true
       }
     },
+    "frutimenu_promo": {
+      "type": "media-with-text",
+      "blocks": {
+        "fm_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "¿No sabes qué cocinar?",
+            "heading_size": "h3",
+            "heading_h1": false
+          }
+        },
+        "fm_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>FrutiMenu arma tu semana de comidas con recetas chilenas saludables y te entrega la lista de compras lista para pedir en Frutiferia. Gratis y en 1 minuto.</p>",
+            "enlarge_text": false
+          }
+        },
+        "fm_button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Armar mi semana",
+            "button_link": "shopify://pages/frutimenu",
+            "button_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": ["fm_heading", "fm_text", "fm_button"],
+      "settings": {
+        "image": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
+        "video_external": "",
+        "video_description": "",
+        "video_autoplay": false,
+        "layout": "right",
+        "image_fit": "cover",
+        "media_width": 50,
+        "media_scale": 100,
+        "text_align": "text-start",
+        "color_scheme": "none",
+        "only_content_color_scheme": false
+      }
+    },
     "video_9nrWpD": {
       "type": "video",
       "blocks": {
@@ -477,6 +519,7 @@
     "3721924b-630b-4a60-b724-521fef7aa78e",
     "featured-collection",
     "collection-list",
+    "frutimenu_promo",
     "video_9nrWpD",
     "testimonials_JERNA6",
     "media_with_text_VAd4Hi",

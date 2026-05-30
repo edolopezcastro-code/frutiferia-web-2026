@@ -50,6 +50,7 @@
       },
       "block_order": ["heading_hero", "text_hero", "button_hero"],
       "settings": {
+        "image_desktop": "shopify://shop_images/front-view-vegetable.jpg",
         "url": "",
         "height_mode": "fixed",
         "fixed_height_desktop": 480,
@@ -62,6 +63,7 @@
         "full_width": true,
         "transparent_content_color": "#ffffff",
         "tint_color": "#000000",
+        "tint_opacity": 45,
         "prevent_animation": false
       }
     },
