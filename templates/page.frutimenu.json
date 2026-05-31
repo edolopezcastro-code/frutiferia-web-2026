@@ -31,7 +31,7 @@
           "type": "button",
           "settings": {
             "button_1_label": "Armar mi semana",
-            "button_1_link": "https://mi-frutimenu.lovable.app/",
+            "button_1_link": "#frutimenu-app",
             "button_1_style": "btn btn--primary",
             "button_2_label": "Ver productos frescos",
             "button_2_link": "shopify://collections/all",
@@ -39,7 +39,11 @@
           }
         }
       },
-      "block_order": ["heading_hero", "text_hero", "button_hero"],
+      "block_order": [
+        "heading_hero",
+        "text_hero",
+        "button_hero"
+      ],
       "settings": {
         "image_desktop": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
         "url": "",
@@ -106,7 +110,12 @@
           }
         }
       },
-      "block_order": ["ic_recetas", "ic_macros", "ic_lista", "ic_rapido"],
+      "block_order": [
+        "ic_recetas",
+        "ic_macros",
+        "ic_lista",
+        "ic_rapido"
+      ],
       "settings": {
         "heading": "¿Por qué usar FrutiMenu?",
         "heading_align": "text-center",
@@ -159,7 +168,11 @@
           }
         }
       },
-      "block_order": ["paso_1", "paso_2", "paso_3"],
+      "block_order": [
+        "paso_1",
+        "paso_2",
+        "paso_3"
+      ],
       "settings": {
         "title": "¿Cómo funciona?",
         "heading_align": "text-center",
@@ -196,7 +209,7 @@
           "type": "button",
           "settings": {
             "button_1_label": "Armar mi semana",
-            "button_1_link": "https://mi-frutimenu.lovable.app/",
+            "button_1_link": "#frutimenu-app",
             "button_1_style": "btn btn--primary",
             "button_2_label": "",
             "button_2_link": "",
@@ -204,7 +217,11 @@
           }
         }
       },
-      "block_order": ["heading_cta", "text_cta", "button_cta"],
+      "block_order": [
+        "heading_cta",
+        "text_cta",
+        "button_cta"
+      ],
       "settings": {
         "image_desktop": "shopify://shop_images/front-view-vegetable.jpg",
         "url": "",
@@ -222,11 +239,27 @@
         "tint_opacity": 55,
         "prevent_animation": false
       }
+    },
+    "frutimenu_app": {
+      "type": "frutimenu-embed",
+      "settings": {
+        "embed_url": "https://mi-frutimenu.lovable.app/",
+        "heading": "Arma tu semana",
+        "height_desktop": 900,
+        "height_mobile": 720,
+        "corner_radius": 12,
+        "show_fullscreen_button": true,
+        "fullscreen_label": "Abrir en pantalla completa",
+        "iframe_title": "FrutiMenu - planifica tu semana",
+        "full_width": false,
+        "section_height": "small"
+      }
     }
   },
   "order": [
     "main",
     "hero_fmenu",
+    "frutimenu_app",
     "beneficios_fmenu",
     "como_funciona_fmenu",
     "cta_fmenu"
