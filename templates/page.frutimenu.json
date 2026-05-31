@@ -18,59 +18,6 @@
         "heading_align": "text-center"
       }
     },
-    "hero_fmenu": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_hero": {
-          "type": "heading",
-          "settings": {
-            "heading": "Tu semana de comidas, lista en 1 minuto",
-            "heading_size": "h0",
-            "heading_h1": true
-          }
-        },
-        "text_hero": {
-          "type": "text",
-          "settings": {
-            "text": "<p>FrutiMenu arma tu plan de 7 días con recetas chilenas saludables y te entrega la lista de compras lista para pedir en Frutiferia. Sin registro.</p>",
-            "enlarge_text": true
-          }
-        },
-        "button_hero": {
-          "type": "button",
-          "settings": {
-            "button_1_label": "Armar mi semana",
-            "button_1_link": "#frutimenu-app",
-            "button_1_style": "btn btn--primary",
-            "button_2_label": "Ver productos frescos",
-            "button_2_link": "shopify://collections/all",
-            "button_2_style": "btn btn--secondary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_hero",
-        "text_hero",
-        "button_hero"
-      ],
-      "settings": {
-        "image_desktop": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
-        "url": "",
-        "height_mode": "fixed",
-        "fixed_height_desktop": 480,
-        "fixed_height_mobile": 400,
-        "overlay_position": "justify-center items-center",
-        "overlay_text_align": "text-center",
-        "mob_center_text": true,
-        "mobile_stacked": false,
-        "color_scheme": "white",
-        "full_width": true,
-        "transparent_content_color": "#ffffff",
-        "tint_color": "#000000",
-        "tint_opacity": 45,
-        "prevent_animation": false
-      }
-    },
     "beneficios_fmenu": {
       "type": "icons-with-text",
       "blocks": {
@@ -196,59 +143,6 @@
         "button_style": "btn btn--primary"
       }
     },
-    "cta_fmenu": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_cta": {
-          "type": "heading",
-          "settings": {
-            "heading": "Arma tu semana ahora",
-            "heading_size": "h1",
-            "heading_h1": false
-          }
-        },
-        "text_cta": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Planifica, ahorra tiempo y come mejor. Gratis y sin registro.</p>",
-            "enlarge_text": false
-          }
-        },
-        "button_cta": {
-          "type": "button",
-          "settings": {
-            "button_1_label": "Armar mi semana",
-            "button_1_link": "#frutimenu-app",
-            "button_1_style": "btn btn--primary",
-            "button_2_label": "",
-            "button_2_link": "",
-            "button_2_style": "btn btn--secondary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_cta",
-        "text_cta",
-        "button_cta"
-      ],
-      "settings": {
-        "image_desktop": "shopify://shop_images/front-view-vegetable.jpg",
-        "url": "",
-        "height_mode": "fixed",
-        "fixed_height_desktop": 360,
-        "fixed_height_mobile": 320,
-        "overlay_position": "justify-center items-center",
-        "overlay_text_align": "text-center",
-        "mob_center_text": true,
-        "mobile_stacked": false,
-        "color_scheme": "white",
-        "full_width": true,
-        "transparent_content_color": "#ffffff",
-        "tint_color": "#2e7d32",
-        "tint_opacity": 55,
-        "prevent_animation": false
-      }
-    },
     "frutimenu_app": {
       "type": "frutimenu-embed",
       "settings": {
@@ -263,11 +157,94 @@
         "full_width": false,
         "section_height": "small"
       }
+    },
+    "intro_fmenu": {
+      "type": "rich-text",
+      "blocks": {
+        "intro_eyebrow": {
+          "type": "subheading",
+          "settings": {
+            "text": "Gratis y sin registro"
+          }
+        },
+        "intro_title": {
+          "type": "heading",
+          "settings": {
+            "heading": "Tu semana de comidas, lista en 1 minuto",
+            "heading_size": "h1",
+            "heading_h1": true
+          }
+        },
+        "intro_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>FrutiMenu arma tu plan de 7 días con recetas chilenas saludables y te deja la lista de compras lista para pedir en Frutiferia.</p>",
+            "enlarge_text": true
+          }
+        }
+      },
+      "block_order": [
+        "intro_eyebrow",
+        "intro_title",
+        "intro_text"
+      ],
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "color_scheme": "none",
+        "full_width": false,
+        "prevent_animation": true
+      }
+    },
+    "cta_fmenu": {
+      "type": "rich-text",
+      "blocks": {
+        "cta_title": {
+          "type": "heading",
+          "settings": {
+            "heading": "¿Listo para tu semana?",
+            "heading_size": "h2",
+            "heading_h1": false
+          }
+        },
+        "cta_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Arma tu menú en 1 minuto. Gratis y sin registro.</p>",
+            "enlarge_text": false
+          }
+        },
+        "cta_button": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Armar mi semana",
+            "button_1_link": "#frutimenu-app",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "",
+            "button_2_link": "",
+            "button_2_style": "btn btn--secondary"
+          }
+        }
+      },
+      "block_order": [
+        "cta_title",
+        "cta_text",
+        "cta_button"
+      ],
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "color_scheme": "2",
+        "full_width": true,
+        "prevent_animation": false
+      }
     }
   },
   "order": [
     "main",
-    "hero_fmenu",
+    "intro_fmenu",
     "frutimenu_app",
     "beneficios_fmenu",
     "como_funciona_fmenu",
