@@ -2,9 +2,22 @@
   assign embed_url = section.settings.embed_url | default: 'https://menu-frutiferia.com/'
   assign h_desktop = section.settings.height_desktop | default: 900
   assign h_mobile = section.settings.height_mobile | default: 720
+  assign fullscreen = section.settings.fullscreen
+  assign vp_offset = section.settings.viewport_offset | default: 0
 -%}
 
 <style>
+  {%- if fullscreen -%}
+  #{{ section.id }} .frutimenu-embed__frame-wrap {
+    position: relative;
+    width: 100%;
+    height: calc(100svh - {{ vp_offset }}px);
+    min-height: 480px;
+    border-radius: 0;
+    overflow: hidden;
+    background: #f2f4f3;
+  }
+  {%- else -%}
   #{{ section.id }} .frutimenu-embed__frame-wrap {
     position: relative;
     width: 100%;
@@ -13,6 +26,12 @@
     overflow: hidden;
     background: #f2f4f3;
   }
+  @media (min-width: 750px) {
+    #{{ section.id }} .frutimenu-embed__frame-wrap {
+      height: {{ h_desktop }}px;
+    }
+  }
+  {%- endif -%}
   #{{ section.id }} .frutimenu-embed__frame {
     position: absolute;
     inset: 0;
@@ -20,11 +39,6 @@
     height: 100%;
     border: 0;
     display: block;
-  }
-  @media (min-width: 750px) {
-    #{{ section.id }} .frutimenu-embed__frame-wrap {
-      height: {{ h_desktop }}px;
-    }
   }
   #{{ section.id }} .frutimenu-embed__bar {
     display: flex;
@@ -97,6 +111,28 @@
       "id": "heading",
       "label": "Título sobre la app",
       "default": "Arma tu semana"
+    },
+    {
+      "type": "header",
+      "content": "Pantalla completa"
+    },
+    {
+      "type": "checkbox",
+      "id": "fullscreen",
+      "label": "Ocupar toda la pantalla",
+      "info": "La app llena el ancho y el alto de la ventana. Ignora el alto del marco de abajo.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "viewport_offset",
+      "label": "Descontar alto (px)",
+      "info": "Resta la altura del encabezado/menú fijo para que la app no quede tapada.",
+      "min": 0,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "header",

@@ -147,54 +147,17 @@
       "type": "frutimenu-embed",
       "settings": {
         "embed_url": "https://menu-frutiferia.com/",
-        "heading": "Arma tu semana",
+        "heading": "",
         "height_desktop": 900,
         "height_mobile": 720,
-        "corner_radius": 12,
-        "show_fullscreen_button": true,
+        "corner_radius": 0,
+        "fullscreen": true,
+        "viewport_offset": 0,
+        "show_fullscreen_button": false,
         "fullscreen_label": "Abrir en pantalla completa",
         "iframe_title": "FrutiMenu - planifica tu semana",
-        "full_width": false,
-        "section_height": "small"
-      }
-    },
-    "intro_fmenu": {
-      "type": "rich-text",
-      "blocks": {
-        "intro_eyebrow": {
-          "type": "subheading",
-          "settings": {
-            "text": "Gratis y sin registro"
-          }
-        },
-        "intro_title": {
-          "type": "heading",
-          "settings": {
-            "heading": "Tu semana de comidas, lista en 1 minuto",
-            "heading_size": "h1",
-            "heading_h1": true
-          }
-        },
-        "intro_text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>FrutiMenu arma tu plan de 7 días con recetas chilenas saludables y te deja la lista de compras lista para pedir en Frutiferia.</p>",
-            "enlarge_text": true
-          }
-        }
-      },
-      "block_order": [
-        "intro_eyebrow",
-        "intro_title",
-        "intro_text"
-      ],
-      "settings": {
-        "text_position": "justify-center",
-        "text_align": "text-center",
-        "mob_center_text": true,
-        "color_scheme": "none",
-        "full_width": false,
-        "prevent_animation": true
+        "full_width": true,
+        "section_height": "tight"
       }
     },
     "cta_fmenu": {
@@ -244,7 +207,6 @@
   },
   "order": [
     "main",
-    "intro_fmenu",
     "frutimenu_app",
     "beneficios_fmenu",
     "como_funciona_fmenu",
