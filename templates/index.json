@@ -185,13 +185,6 @@
             "image": "shopify://shop_images/front-view-vegetable.jpg"
           }
         },
-        "collection-2": {
-          "type": "collection",
-          "settings": {
-            "collection": "despensa",
-            "image": "shopify://shop_images/2149238972.jpg"
-          }
-        },
         "collection_xdEtxH": {
           "type": "collection",
           "settings": {
@@ -199,44 +192,33 @@
             "image": "shopify://shop_images/364.jpg"
           }
         },
-        "collection-3": {
+        "collection-2": {
           "type": "collection",
-          "disabled": true,
           "settings": {
-            "collection": ""
+            "collection": "despensa",
+            "image": "shopify://shop_images/2149238972.jpg"
           }
         },
-        "collection-6": {
+        "collection-990": {
           "type": "collection",
-          "disabled": true,
           "settings": {
-            "collection": ""
+            "collection": "990"
           }
         },
-        "6293ae32-73a5-444b-9594-15fb43c8eefe": {
+        "collection-ofertas": {
           "type": "collection",
-          "disabled": true,
           "settings": {
-            "collection": ""
-          }
-        },
-        "collection_zbJXwV": {
-          "type": "collection",
-          "disabled": true,
-          "settings": {
-            "collection": ""
+            "collection": "ofertas"
           }
         }
       },
       "block_order": [
         "collection-0",
         "collection-1",
-        "collection-2",
         "collection_xdEtxH",
-        "collection-3",
-        "collection-6",
-        "6293ae32-73a5-444b-9594-15fb43c8eefe",
-        "collection_zbJXwV"
+        "collection-2",
+        "collection-990",
+        "collection-ofertas"
       ],
       "settings": {
         "title": "¿Qué buscas?",
@@ -279,7 +261,11 @@
           }
         }
       },
-      "block_order": ["fm_heading", "fm_text", "fm_button"],
+      "block_order": [
+        "fm_heading",
+        "fm_text",
+        "fm_button"
+      ],
       "settings": {
         "image": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
         "video_external": "",
