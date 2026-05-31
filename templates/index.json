@@ -256,7 +256,7 @@
           "type": "button",
           "settings": {
             "button_label": "Armar mi semana gratis",
-            "button_link": "shopify://pages/frutimenu",
+            "button_link": "shopify://pages/menu-frutiferia",
             "button_style": "btn btn--primary"
           }
         }
