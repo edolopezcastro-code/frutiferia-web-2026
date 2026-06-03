@@ -379,7 +379,7 @@
         "color_scheme": "none",
         "full_width": false,
         "button_style": "btn btn--primary",
-        "crm_endpoint": "",
+        "crm_endpoint": "https://ykvexpxvlivcqamqsafe.supabase.co/functions/v1/b2b-lead-intake",
         "crm_source": "web-b2b"
       }
     },
