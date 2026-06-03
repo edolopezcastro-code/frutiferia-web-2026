@@ -185,6 +185,14 @@
         {%- endfor -%}
       </div>
 
+      {%- comment -%} Honeypot anti-spam para captura CRM (oculto a usuarios reales) {%- endcomment -%}
+      {%- if section.settings.crm_endpoint != blank -%}
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;" tabindex="-1">
+          <label for="{{ form_id }}-b2b-hp">No completar</label>
+          <input type="text" id="{{ form_id }}-b2b-hp" name="contact[b2b-hp]" tabindex="-1" autocomplete="off">
+        </div>
+      {%- endif -%}
+
       {%- if form.posted_successfully? -%}
         <div class="alert mt-8 bg-success-bg text-success-text" tabindex="-1" autofocus{% if settings.animations_enabled != "disabled" %} data-cc-animate{% endif %}>
           {{ 'contact.form.post_success' | t }}
@@ -208,6 +216,19 @@
         </div>
       {%- endif -%}
     {%- endform -%}
+
+    {%- comment -%} Envio del lead al CRM B2B (Frutiferia-OS) sin romper el envio nativo {%- endcomment -%}
+    {%- if section.settings.crm_endpoint != blank -%}
+      <script src="{{ 'b2b-lead-capture.js' | asset_url }}" defer></script>
+      <script>
+        window.FrutiLeadCapture = window.FrutiLeadCapture || [];
+        window.FrutiLeadCapture.push({
+          formId: {{ form_id | json }},
+          endpoint: {{ section.settings.crm_endpoint | json }},
+          source: {{ section.settings.crm_source | default: 'web-b2b' | json }}
+        });
+      </script>
+    {%- endif -%}
 
     {%- if image and section.settings.image_position == 'bottom' -%}
       {{ image }}
@@ -330,6 +351,25 @@
         }
       ],
       "default": "btn btn--primary"
+    },
+    {
+      "type": "header",
+      "content": "CRM (Frutiferia-OS)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Si pegas una URL de edge function, cada envio de este formulario tambien se manda al CRM B2B (ademas del email nativo de Shopify). Dejar vacio = solo email."
+    },
+    {
+      "type": "url",
+      "id": "crm_endpoint",
+      "label": "Endpoint CRM (edge function)"
+    },
+    {
+      "type": "text",
+      "id": "crm_source",
+      "label": "Origen del lead (source)",
+      "default": "web-b2b"
     }
   ],
   "blocks": [
