@@ -234,6 +234,57 @@
         "full_width": true
       }
     },
+    "b2b_band": {
+      "type": "rich-text",
+      "blocks": {
+        "b2b_subheading": {
+          "type": "subheading",
+          "settings": {
+            "text": "FRUTIFERIA PARA NEGOCIOS"
+          }
+        },
+        "b2b_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "¿Tienes un negocio?",
+            "heading_size": "h2",
+            "heading_h1": false
+          }
+        },
+        "b2b_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Restaurantes, hoteles, cafeterías y oficinas: abastécete con frutas y verduras frescas a <strong>precio por volumen</strong>, con <strong>factura electrónica</strong> y <strong>despacho programado</strong> a la puerta de tu negocio.</p>",
+            "enlarge_text": true
+          }
+        },
+        "b2b_button": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Comprar por mayor",
+            "button_1_link": "shopify://pages/venta-a-negocios",
+            "button_1_style": "btn--primary",
+            "button_2_label": "",
+            "button_2_link": "",
+            "button_2_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "b2b_subheading",
+        "b2b_heading",
+        "b2b_text",
+        "b2b_button"
+      ],
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "color_scheme": "2",
+        "full_width": true,
+        "prevent_animation": false
+      }
+    },
     "frutimenu_promo": {
       "type": "media-with-text",
       "blocks": {
@@ -505,6 +556,7 @@
     "3721924b-630b-4a60-b724-521fef7aa78e",
     "featured-collection",
     "collection-list",
+    "b2b_band",
     "frutimenu_promo",
     "video_9nrWpD",
     "testimonials_JERNA6",
