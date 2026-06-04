@@ -20,14 +20,15 @@
             "overlay_position": "justify-center items-center",
             "overlay_text_align": "text-center",
             "mob_center_text": false,
+            "offer_badge": "🎁 20% OFF en tu primer pedido · código PRIMERA20",
             "subheading": "Envío gratis sobre $30.000 · Región de Valparaíso",
             "heading": "Frescura que se nota",
             "heading_size": "h0",
             "heading_h1": true,
-            "text": "<p>Frutas y verduras seleccionadas a mano, directo a tu puerta. <strong>20% OFF en tu primer pedido con el código PRIMERA20.</strong></p>",
+            "text": "<p>Frutas y verduras seleccionadas a mano, directo a tu puerta.</p>",
             "enlarge_text": true,
-            "button_1_label": "Comprar ahora",
-            "button_1_link": "shopify://collections/all",
+            "button_1_label": "Comprar con 20% OFF",
+            "button_1_link": "/discount/PRIMERA20?redirect=/collections/all",
             "button_1_style": "btn btn--primary",
             "button_2_label": "Ofertas de la semana",
             "button_2_link": "shopify://collections/ofertas",
@@ -466,14 +467,14 @@
         "heading_cUJ39A": {
           "type": "heading",
           "settings": {
-            "heading": "Recibe nuestras ofertas",
+            "heading": "20% OFF en tu primer pedido",
             "heading_size": "h4"
           }
         },
         "text_p3LHH3": {
           "type": "text",
           "settings": {
-            "text": "<p>Suscríbete y sé el primero en conocer nuestras ofertas semanales y novedades.</p>",
+            "text": "<p>Déjanos tu correo y te damos el código <strong>PRIMERA20</strong> al instante. De paso, recibes nuestras ofertas de la semana antes que nadie.</p>",
             "enlarge_text": false
           }
         },

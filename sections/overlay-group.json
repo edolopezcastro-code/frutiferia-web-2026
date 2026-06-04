@@ -99,10 +99,54 @@
         "compare-6"
       ],
       "settings": {}
+    },
+    "pop-up-welcome": {
+      "type": "pop-up",
+      "blocks": {
+        "popup_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "20% OFF en tu primer pedido",
+            "heading_size": "h3"
+          }
+        },
+        "popup_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Déjanos tu correo y te damos el código <strong>PRIMERA20</strong> al instante para estrenar tu despensa con frescura.</p>",
+            "text_size": ""
+          }
+        },
+        "popup_signup": {
+          "type": "newsletter-signup",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "popup_heading",
+        "popup_text",
+        "popup_signup"
+      ],
+      "settings": {
+        "trigger": "delay",
+        "delay": 10,
+        "show_to_guests_only": true,
+        "show_on_mobile": true,
+        "dismiss_days": 30,
+        "position": "justify-center items-center",
+        "text_align": "text-center",
+        "padding": "large",
+        "shrink_width": false,
+        "heading_color": "#6a25b0",
+        "text_color": "#070707",
+        "bg_color": "#ffffff",
+        "tint_opacity": 0
+      }
     }
   },
   "order": [
     "cart-drawer",
-    "product-compare"
+    "product-compare",
+    "pop-up-welcome"
   ]
 }

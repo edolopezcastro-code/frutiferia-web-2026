@@ -210,9 +210,15 @@
             </div>
           {%- endif -%}
 
-          {%- if block.settings.heading != blank or block.settings.subheading != blank or block.settings.text != blank or block.settings.button_1_label != blank or block.settings.button_2_label != blank or block.settings.countdown_show -%}
+          {%- if block.settings.heading != blank or block.settings.subheading != blank or block.settings.offer_badge != blank or block.settings.text != blank or block.settings.button_1_label != blank or block.settings.button_2_label != blank or block.settings.countdown_show -%}
             <div class="slideshow__text container flex {{ overlay_position | first }}{% if block.settings.mob_center_text %} md-down:center{% endif %}{% unless bg_color %}{% if section.settings.full_width %} md-down:p-xl{% endif %}{% if section.settings.mobile_stacked %} md-down:p-xl h-full md:h-auto{% endif %}{% endunless %}"{% if settings.animations_enabled != "disabled" and section.settings.prevent_animation == false %} data-cc-animate{% endif %}>
               <div class="text-overlay{% if bg_color %} text-overlay--bg{% endif %} {{ block.settings.overlay_text_align }}{% if block.settings.mob_center_text %} md-down:text-center{% endif %}{% if section.settings.color_scheme != "white" %}{% if section.settings.full_width %} md-down:p-xl{% endif %}{% if section.settings.mobile_stacked %} md-down:p-xl h-full md:h-auto{% endif %}{% endif %} has-motion">
+                {%- if block.settings.offer_badge != blank -%}
+                  <p class="text-overlay__block hero-offer-badge">
+                    <span class="hero-offer-badge__pill">{{- block.settings.offer_badge | escape -}}</span>
+                  </p>
+                {%- endif -%}
+
                 {%- if block.settings.subheading != blank -%}
                   <p class="text-overlay__block subheading">
                     {{- block.settings.subheading | escape -}}
@@ -669,6 +675,12 @@
           "id": "mob_center_text",
           "label": "Center text on mobile",
           "default": false
+        },
+        {
+          "type": "text",
+          "id": "offer_badge",
+          "label": "Offer badge",
+          "info": "Shown as a prominent pill above the subheading. Leave blank to hide. Example: 20% OFF tu primer pedido - codigo PRIMERA20"
         },
         {
           "type": "text",

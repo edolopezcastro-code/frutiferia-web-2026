@@ -24,6 +24,25 @@
   margin-bottom: 0;
 }
 
+.hero-offer-badge {
+  margin-bottom: calc(3 * var(--space-unit));
+}
+.hero-offer-badge__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  background: var(--hero-offer-bg, #ffd23f);
+  color: var(--hero-offer-text, #14110f);
+  font-weight: 600;
+  font-size: clamp(0.8rem, 0.7rem + 0.5vw, 1rem);
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+}
+
 .text-overlay__heading:last-child {
   margin-bottom: 0;
 }
