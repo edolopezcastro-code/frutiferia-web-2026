@@ -299,6 +299,25 @@
         </tr>
         </tfoot>
       </table>
+
+      {%- comment -%} Volver a pedir este pedido en 1 clic (S3.1). {%- endcomment -%}
+      {%- liquid
+        assign reorder_path = ''
+        for line_item in order.line_items
+          if line_item.variant.id and line_item.variant.available
+            assign reorder_path = reorder_path | append: ',' | append: line_item.variant.id | append: ':' | append: line_item.quantity
+          endif
+        endfor
+        assign reorder_path = reorder_path | remove_first: ','
+      -%}
+      {%- if reorder_path != blank -%}
+        <div class="text-center mt-8">
+          <a class="btn btn--primary" href="{{ routes.cart_url }}/{{ reorder_path }}?utm_source=cuenta&amp;utm_medium=reorder&amp;utm_campaign=retencion">
+            Volver a pedir estos productos
+          </a>
+          <p class="text-sm mt-2">Armamos el carrito con lo que siga disponible. Lo revisas antes de pagar.</p>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </div>

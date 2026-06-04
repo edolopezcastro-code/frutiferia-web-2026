@@ -17,6 +17,29 @@
       <div class="mt-8 text-center">
         <h2 class="h4">{{ 'customer.orders.title' | t }}</h2>
 
+        {%- comment -%} Reorder en 1 clic: arma el carrito con las variantes disponibles del último pedido (S3.1). {%- endcomment -%}
+        {%- liquid
+          assign last_order = customer.orders.first
+          assign reorder_path = ''
+          if last_order
+            for line_item in last_order.line_items
+              if line_item.variant.id and line_item.variant.available
+                assign reorder_path = reorder_path | append: ',' | append: line_item.variant.id | append: ':' | append: line_item.quantity
+              endif
+            endfor
+            assign reorder_path = reorder_path | remove_first: ','
+          endif
+        -%}
+        {%- if reorder_path != blank -%}
+          <div class="address-box mx-auto mb-8 text-center reorder-banner">
+            <p class="h5 mb-1">¿Repetimos lo de siempre? 🌿</p>
+            <p class="text-sm mb-4">Te dejamos el carrito listo con tu último pedido ({{ last_order.name }}). Revísalo y paga.</p>
+            <a class="btn btn--primary" href="{{ routes.cart_url }}/{{ reorder_path }}?utm_source=cuenta&amp;utm_medium=reorder&amp;utm_campaign=retencion">
+              Repetir mi último pedido
+            </a>
+          </div>
+        {%- endif -%}
+
         {%- paginate customer.orders by 20 -%}
           {%- if customer.orders.size > 0 -%}
             <table class="orders w-full mb-8">
