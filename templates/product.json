@@ -140,6 +140,10 @@
         "share": {
           "type": "share",
           "settings": {}
+        },
+        "judge_me_reviews_preview_badge_PT87gQ": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
         }
       },
       "block_order": [
@@ -158,7 +162,8 @@
         "collapsible_envio",
         "collapsible_pago",
         "collapsible_garantia",
-        "share"
+        "share",
+        "judge_me_reviews_preview_badge_PT87gQ"
       ],
       "settings": {
         "stick_on_scroll": true,
