@@ -127,13 +127,16 @@
     "social_facebook_url": "https://www.facebook.com/Frutiferia.Delivery/",
     "social_youtube_url": "",
     "social_instagram_url": "https://www.instagram.com/frutiferia.delivery/",
-    "social_twitter_url": "",
-    "social_tiktok_url": "https://www.tiktok.com/@frutiferia/",
     "social_whatsapp_url": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo!",
+    "social_tiktok_url": "https://www.tiktok.com/@frutiferia/",
+    "social_twitter_url": "",
     "predictive_search_limit": 6,
     "predictive_search_show_vendor": true,
     "predictive_search_show_price": true,
     "predictive_search_include_skus": true,
+    "search_input_placeholder_1": "Buscar productos",
+    "search_input_placeholder_2": "Buscar colecciones",
+    "search_input_placeholder_3": "Buscar artículos",
     "enable_speech_search": true,
     "speech_icon_color": "#8c40da",
     "show_currency_code": false,
@@ -172,14 +175,6 @@
     "card_atc_mobile": "icon_button_bottom",
     "card_atc_desktop": "text_button_bottom",
     "heading_type_scale": "1.3",
-    "content_for_index": [],
-    "blocks": {
-      "18171216174956455555": {
-        "type": "shopify://apps/order-delivery-date/blocks/odd-block/80605365-b4f4-42ba-9b84-3d39984a49dc",
-        "disabled": false,
-        "settings": {}
-      }
-    },
     "free_shipping_threshold": "30000",
     "inv_show_count": "low",
     "inv_low": 10,
@@ -188,9 +183,19 @@
     "inv_low_stock_color": "#f57c00",
     "inv_very_low_stock_color": "#c62020",
     "enable_breadcrumbs": true,
-    "search_input_placeholder_1": "Buscar productos",
-    "search_input_placeholder_2": "Buscar colecciones",
-    "search_input_placeholder_3": "Buscar artículos"
+    "content_for_index": [],
+    "blocks": {
+      "18171216174956455555": {
+        "type": "shopify://apps/order-delivery-date/blocks/odd-block/80605365-b4f4-42ba-9b84-3d39984a49dc",
+        "disabled": false,
+        "settings": {}
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {
     "Canopy": {
