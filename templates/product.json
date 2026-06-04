@@ -36,6 +36,29 @@
             "show_tax_and_shipping": true
           }
         },
+        "inventory_status": {
+          "type": "inventory-status",
+          "settings": {
+            "show_urgency_message": true,
+            "text_very_low": "<p>¡Últimas unidades disponibles!</p>",
+            "text_low": "<p>¡Quedan pocas unidades, no te quedes sin!</p>",
+            "text_normal": "",
+            "text_no_stock": "<p>Agotado temporalmente</p>",
+            "text_no_stock_backordered": "<p>Disponible por encargo</p>"
+          }
+        },
+        "msg_envio": {
+          "type": "message",
+          "settings": {
+            "icon": "truck",
+            "title": "<p>Envío gratis en pedidos sobre $30.000</p>",
+            "close": "once",
+            "show_over_media": false,
+            "visibility_duration": 7,
+            "bg_color": "#e8f5e9",
+            "text_color": "#2e7d32"
+          }
+        },
         "divider-0": {
           "type": "divider",
           "settings": {
@@ -62,6 +85,14 @@
             "show_gift_card_recipient": false
           }
         },
+        "complementary": {
+          "type": "complementary",
+          "settings": {
+            "heading": "Combina bien con",
+            "products_to_show": 4,
+            "layout": "carousel"
+          }
+        },
         "divider-1": {
           "type": "divider",
           "settings": {
@@ -76,46 +107,13 @@
             "open": false
           }
         },
-        "inventory_status": {
-          "type": "inventory-status",
-          "settings": {
-            "show_urgency_message": true,
-            "text_very_low": "<p>¡Últimas unidades disponibles!</p>",
-            "text_low": "<p>¡Quedan pocas unidades, no te quedes sin!</p>",
-            "text_normal": "",
-            "text_no_stock": "<p>Agotado temporalmente</p>",
-            "text_no_stock_backordered": "<p>Disponible por encargo</p>"
-          }
-        },
-        "msg_envio": {
-          "type": "message",
-          "settings": {
-            "icon": "truck",
-            "title": "<p>Envío gratis en pedidos sobre $30.000</p>",
-            "close": "once",
-            "show_over_media": false,
-            "bg_color": "#e8f5e9",
-            "text_color": "#2e7d32"
-          }
-        },
-        "complementary": {
-          "type": "complementary",
-          "settings": {
-            "heading": "Combina bien con",
-            "products_to_show": 4,
-            "layout": "carousel"
-          }
-        },
-        "share": {
-          "type": "share",
-          "settings": {}
-        },
         "collapsible_envio": {
           "type": "collapsible-content",
           "settings": {
             "heading": "Envío y entrega",
             "icon": "truck",
             "text": "<p>Entregamos <strong>Martes, Miércoles, Viernes y Sábados</strong> en Viña del Mar, Reñaca, Concón, Quilpué y Valparaíso. Envío gratis sobre $30.000.</p>",
+            "page": "",
             "open": false
           }
         },
@@ -125,6 +123,7 @@
             "heading": "Medios de pago",
             "icon": "credit_card",
             "text": "<p>Aceptamos tarjeta de crédito, débito, transferencia bancaria y Mercado Pago. Todas las transacciones son 100% seguras.</p>",
+            "page": "",
             "open": false
           }
         },
@@ -134,8 +133,13 @@
             "heading": "Garantía de frescura",
             "icon": "leaf",
             "text": "<p>Cada producto es seleccionado a mano. Si algo no cumple tus expectativas, contáctanos por WhatsApp y lo resolvemos con reposición o reembolso.</p>",
+            "page": "",
             "open": false
           }
+        },
+        "share": {
+          "type": "share",
+          "settings": {}
         }
       },
       "block_order": [
@@ -182,6 +186,75 @@
         "bg_color": "#f4f4f4",
         "enable_media_grouping": false,
         "media_grouping_option": "Color,Colour,Couleur,Farbe"
+      }
+    },
+    "trust_bar_product": {
+      "type": "icons-with-text",
+      "blocks": {
+        "trust_fresh": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "100% Fresco",
+            "text": "<p>Seleccionado a mano</p>",
+            "link": ""
+          }
+        },
+        "trust_envio": {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Envío gratis",
+            "text": "<p>Sobre $30.000</p>",
+            "link": ""
+          }
+        },
+        "trust_garantia": {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Garantía",
+            "text": "<p>Reposición si no cumple</p>",
+            "link": ""
+          }
+        },
+        "trust_pago": {
+          "type": "item",
+          "settings": {
+            "icon": "lock",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Pago seguro",
+            "text": "<p>Todas las tarjetas</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "trust_fresh",
+        "trust_envio",
+        "trust_garantia",
+        "trust_pago"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_align": "text-start",
+        "icon_size": 36,
+        "title_type_scale": "small",
+        "text_type_scale": "small",
+        "icon_position": "beside",
+        "mobile_stack": false,
+        "section_height": "xsmall",
+        "color_scheme": "3",
+        "full_width": true,
+        "dividers": "none",
+        "prevent_animation": false
       }
     },
     "details": {
@@ -258,75 +331,6 @@
         "products_to_show": 8
       }
     },
-    "trust_bar_product": {
-      "type": "icons-with-text",
-      "blocks": {
-        "trust_fresh": {
-          "type": "item",
-          "settings": {
-            "icon": "leaf",
-            "use_custom_icon_color": false,
-            "icon_color": "#000000",
-            "heading": "100% Fresco",
-            "text": "<p>Seleccionado a mano</p>",
-            "link": ""
-          }
-        },
-        "trust_envio": {
-          "type": "item",
-          "settings": {
-            "icon": "truck",
-            "use_custom_icon_color": false,
-            "icon_color": "#000000",
-            "heading": "Envío gratis",
-            "text": "<p>Sobre $30.000</p>",
-            "link": ""
-          }
-        },
-        "trust_garantia": {
-          "type": "item",
-          "settings": {
-            "icon": "return",
-            "use_custom_icon_color": false,
-            "icon_color": "#000000",
-            "heading": "Garantía",
-            "text": "<p>Reposición si no cumple</p>",
-            "link": ""
-          }
-        },
-        "trust_pago": {
-          "type": "item",
-          "settings": {
-            "icon": "lock",
-            "use_custom_icon_color": false,
-            "icon_color": "#000000",
-            "heading": "Pago seguro",
-            "text": "<p>Todas las tarjetas</p>",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "trust_fresh",
-        "trust_envio",
-        "trust_garantia",
-        "trust_pago"
-      ],
-      "settings": {
-        "heading": "",
-        "heading_align": "text-start",
-        "icon_size": 36,
-        "title_type_scale": "small",
-        "text_type_scale": "small",
-        "icon_position": "beside",
-        "mobile_stack": false,
-        "section_height": "xsmall",
-        "color_scheme": "3",
-        "full_width": true,
-        "dividers": "none",
-        "prevent_animation": false
-      }
-    },
     "cross_sell": {
       "type": "featured-collection",
       "settings": {
@@ -342,6 +346,27 @@
         "card_contain": true,
         "full_width": true
       }
+    },
+    "1780585006ec95da1b": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_CBbfhr": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_CBbfhr"
+      ],
+      "settings": {
+        "full_width": false,
+        "show_space": true
+      }
     }
   },
   "order": [
@@ -349,6 +374,7 @@
     "trust_bar_product",
     "details",
     "recommendations",
-    "cross_sell"
+    "cross_sell",
+    "1780585006ec95da1b"
   ]
 }
