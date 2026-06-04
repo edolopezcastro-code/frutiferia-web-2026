@@ -437,12 +437,23 @@
             "show_star_rating": true,
             "star_rating": 5
           }
+        },
+        "testimonial_b2b_resto": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "<p>Abastecemos toda la cocina del restaurante con Frutiferia. Despacho programado, factura al día y producto parejo todas las semanas. Nos sacó un peso de encima.</p>",
+            "author": "Jefe de cocina",
+            "author_info": "Restaurante - Viña del Mar",
+            "show_star_rating": true,
+            "star_rating": 5
+          }
         }
       },
       "block_order": [
         "testimonial_7McUUW",
         "testimonial_3eypfh",
-        "testimonial_TCn6Rg"
+        "testimonial_TCn6Rg",
+        "testimonial_b2b_resto"
       ],
       "settings": {
         "heading": "Lo que dicen nuestros clientes",
@@ -459,6 +470,67 @@
         "color_scheme": "1",
         "star_color": "#f7c346",
         "full_width": true
+      }
+    },
+    "business_logos": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Restaurantes" }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Hoteles" }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Cafeterías" }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Casinos" }
+        },
+        "logo_5": {
+          "type": "logo",
+          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Oficinas" }
+        },
+        "logo_6": {
+          "type": "logo",
+          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Almacenes" }
+        }
+      },
+      "block_order": ["logo_1", "logo_2", "logo_3", "logo_4", "logo_5", "logo_6"],
+      "settings": {
+        "title": "Negocios que se abastecen con Frutiferia",
+        "heading_align": "text-center",
+        "button_label": "Vender a tu negocio",
+        "button_link": "shopify://pages/venta-a-negocios",
+        "layout": "carousel",
+        "spacing": 56,
+        "logo_grid_align": "justify-center",
+        "image_opacity": 100,
+        "color_scheme": "none",
+        "full_width": true
+      }
+    },
+    "featured_blog_recetas": {
+      "type": "featured-blog",
+      "settings": {
+        "title": "Recetas y tips frescos",
+        "heading_align": "text-start",
+        "show_view_all": true,
+        "blog": "news",
+        "layout": "carousel",
+        "posts_to_show": 6,
+        "show_featured_image": true,
+        "show_tags": false,
+        "show_excerpt": true,
+        "show_author": false,
+        "show_date": true,
+        "show_button": true,
+        "color_scheme": "none",
+        "image_ratio": "1.77"
       }
     },
     "newsletter_WXJigB": {
@@ -561,7 +633,9 @@
     "frutimenu_promo",
     "video_9nrWpD",
     "testimonials_JERNA6",
+    "business_logos",
     "media_with_text_VAd4Hi",
+    "featured_blog_recetas",
     "newsletter_WXJigB",
     "scrolling_banner_ArEtdk"
   ]
