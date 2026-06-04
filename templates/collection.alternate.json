@@ -98,7 +98,7 @@
           "type": "button",
           "settings": {
             "button_label": "Cotizar por WhatsApp",
-            "button_link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20necesito%20cotizar%20un%20pedido%20por%20mayor",
+            "button_link": "https://api.whatsapp.com/send?phone=+56993261147&text=Hola%20Francisco,%20necesito%20cotizar%20un%20pedido%20por%20mayor",
             "button_style": "btn btn--primary"
           }
         }

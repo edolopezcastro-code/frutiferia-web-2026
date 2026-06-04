@@ -43,7 +43,7 @@
             "button_1_link": "shopify://collections/por-mayor",
             "button_1_style": "btn btn--primary",
             "button_2_label": "Cotizar por WhatsApp",
-            "button_2_link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20soy%20empresa%20y%20me%20interesa%20comprar%20por%20mayor",
+            "button_2_link": "https://api.whatsapp.com/send?phone=+56993261147&text=Hola%20Francisco,%20soy%20empresa%20y%20me%20interesa%20comprar%20por%20mayor",
             "button_2_style": "btn btn--secondary"
           }
         }
