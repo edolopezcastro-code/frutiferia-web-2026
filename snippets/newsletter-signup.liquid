@@ -34,6 +34,12 @@
 {% form 'customer', class: class, id: form_id %}
   <input type="hidden" name="contact[tags]" value="prospect, {{ tags }}">
 
+  {%- comment -%} Honeypot anti-spam para la captura B2C (lo lee b2c-welcome-capture.js) {%- endcomment -%}
+  <div aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;overflow:hidden;">
+    <label for="{{ id }}-b2c-hp">No completar</label>
+    <input type="text" id="{{ id }}-b2c-hp" name="contact[b2c-hp]" tabindex="-1" autocomplete="off">
+  </div>
+
   {% if return_to %}
     <input type="hidden" name="return_to" value="{{ return_to }}?customer_posted=true">
   {% endif %}
@@ -96,3 +102,16 @@
     </div>
   {%- endif -%}
 {% endform %}
+
+{%- comment -%}
+  Captura B2C → CRM Frutiferia-OS + correo de bienvenida PRIMERA20.
+  No bloquea el alta nativa de Shopify (keepalive POST). Ver b2c-welcome-capture.js.
+{%- endcomment -%}
+<script src="{{ 'b2c-welcome-capture.js' | asset_url }}" defer></script>
+<script>
+  window.FrutiB2CCapture = window.FrutiB2CCapture || [];
+  window.FrutiB2CCapture.push({
+    formId: {{ form_id | json }},
+    endpoint: 'https://ykvexpxvlivcqamqsafe.supabase.co/functions/v1/b2c-welcome-intake'
+  });
+</script>
