@@ -57,6 +57,14 @@
   color: currentColor;
 }
 
+/* Legibilidad del texto blanco del hero sobre foto (sin fondo de bloque).
+   Sombra suave para no depender de oscurecer la imagen — clave en movil. */
+.color-scheme--white .text-overlay:not(.text-overlay--bg) .text-overlay__heading,
+.color-scheme--white .text-overlay:not(.text-overlay--bg) .subheading,
+.color-scheme--white .text-overlay:not(.text-overlay--bg) .rte {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45), 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
 @media (max-width: 599.98px) {
   .mobile-stacked .text-overlay {
     --ctrl-bottom: 0;
