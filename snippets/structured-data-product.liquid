@@ -1,11 +1,83 @@
 {%- comment -%}
+  Schema.org Product JSON-LD para rich snippets de Google.
+  Construido a mano (en vez del filtro {{ product | structured_data }}) para poder
+  forzar: precio numerico inequivoco, availability por stock real, y aggregateRating
+  desde el metafield estandar `reviews.rating` (que Judge.me y otras apps llenan).
+
   Parameters:
   - product {Object} - Product object.
+  - current_variant {Object} - Variante seleccionada (opcional).
 
   Usage:
-  {% render 'structured-data-product', product: product %}
+  {% render 'structured-data-product', product: product, current_variant: current_variant %}
 {%- endcomment -%}
 
+{%- liquid
+  assign target_variant = current_variant | default: product.selected_or_first_available_variant
+  assign currency_code = cart.currency.iso_code | default: shop.currency
+  if product.available
+    assign availability = 'https://schema.org/InStock'
+  else
+    assign availability = 'https://schema.org/OutOfStock'
+  endif
+  assign has_rating = false
+  if product.metafields.reviews.rating.value != blank and product.metafields.reviews.rating_count != blank and product.metafields.reviews.rating_count > 0
+    assign has_rating = true
+  endif
+-%}
+
 <script type="application/ld+json">
-  {{ product | structured_data }}
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ shop.url | append: product.url | json }},
+  {%- if product.images.size > 0 -%}
+  "image": [
+    {%- for image in product.images limit: 5 -%}
+      {{ image | image_url: width: 1200 | prepend: "https:" | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  {%- endif -%}
+  {%- if product.description != blank -%}
+  "description": {{ product.description | strip_html | truncate: 5000 | json }},
+  {%- endif -%}
+  {%- if product.vendor != blank -%}
+  "brand": {
+    "@type": "Brand",
+    "name": {{ product.vendor | json }}
+  },
+  {%- endif -%}
+  {%- if target_variant.sku != blank -%}
+  "sku": {{ target_variant.sku | json }},
+  {%- endif -%}
+  {%- if has_rating -%}
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ product.metafields.reviews.rating.value.rating | json }},
+    "reviewCount": {{ product.metafields.reviews.rating_count | json }},
+    "bestRating": {{ product.metafields.reviews.rating.value.scale_max | json }},
+    "worstRating": {{ product.metafields.reviews.rating.value.scale_min | json }}
+  },
+  {%- endif -%}
+  {%- if product.variants.size > 1 -%}
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": {{ currency_code | json }},
+    "lowPrice": {{ product.price_min | divided_by: 100.0 }},
+    "highPrice": {{ product.price_max | divided_by: 100.0 }},
+    "offerCount": {{ product.variants.size }},
+    "availability": {{ availability | json }},
+    "url": {{ shop.url | append: product.url | json }}
+  }
+  {%- else -%}
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": {{ currency_code | json }},
+    "price": {{ target_variant.price | divided_by: 100.0 }},
+    "availability": {{ availability | json }},
+    "url": {{ shop.url | append: product.url | json }}
+  }
+  {%- endif -%}
+}
 </script>
