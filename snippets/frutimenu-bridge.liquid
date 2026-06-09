@@ -29,6 +29,7 @@
 
     var REQUEST = "frutimenu:add-to-cart";
     var ACK = "frutimenu:cart-ok";
+    var TRACK = "frutimenu:track";
 
     function iframeEl() {
       var sec = document.getElementById(SECTION_ID);
@@ -69,7 +70,19 @@
     window.addEventListener("message", function (e) {
       if (e.origin !== ALLOWED) return;
       var data = e.data;
-      if (!data || data.type !== REQUEST || !Array.isArray(data.items) || !data.items.length) return;
+      if (!data) return;
+
+      // Reenvío de analítica del menú al pixel vivo del padre (744287072814737).
+      // La app del iframe no tiene pixel propio; acá frutiferia.com sí. Solo eventos
+      // custom no-PII. Respeta el consentimiento que ya gobierna el pixel del sitio.
+      if (data.type === TRACK && typeof data.event === "string") {
+        var p = data.params && typeof data.params === "object" ? data.params : {};
+        try { if (typeof window.fbq === "function") window.fbq("trackCustom", data.event, p); } catch (err) { /* noop */ }
+        try { if (typeof window.gtag === "function") window.gtag("event", data.event, p); } catch (err) { /* noop */ }
+        return;
+      }
+
+      if (data.type !== REQUEST || !Array.isArray(data.items) || !data.items.length) return;
 
       // Saneo: solo variantId numérico y cantidad positiva (tope defensivo).
       var items = data.items
