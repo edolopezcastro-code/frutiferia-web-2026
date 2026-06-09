@@ -87,6 +87,9 @@
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+
+      {%- comment -%} Puente carrito nativo: escucha el postMessage de la app y agrega al drawer (F1-5). {%- endcomment -%}
+      {% render 'frutimenu-bridge', section_id: section.id, embed_url: embed_url %}
     </div>
 
   {%- unless section.settings.full_width -%}

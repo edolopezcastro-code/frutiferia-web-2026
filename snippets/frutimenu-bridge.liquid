@@ -1,0 +1,95 @@
+{%- comment -%}
+  Puente FrutiMenu -> carrito nativo de Canopy (F1-5, camino B).
+
+  La app "Mi Menú Semanal" (mi-frutimenu) vive en un iframe cross-origin dentro de la
+  sección cc-frutimenu-embed. Al apretar "Comprar", la app hace postMessage con los
+  ítems del carrito. Este puente los agrega vía /cart/add.js, fija el cupón y abre el
+  drawer de Canopy — SIN navegar, SIN pestaña nueva, SIN saltar a checkout.
+
+  Contrato del mensaje (app -> tema), origin === embed_url:
+    { type:"frutimenu:add-to-cart", items:[{variantId, quantity}], discount, fallbackUrl }
+  Respuesta (tema -> app): { type:"frutimenu:cart-ok" }  (ack: "lo manejo nativo").
+
+  Robustez:
+    - Origen estricto (solo el del iframe) + saneo de ids/cantidades: nadie más puede
+      empujar al carrito desde otra pestaña/origen.
+    - El ack se manda AL RECIBIR (no al terminar) para frenar el fallback de la app
+      aunque el add tarde en móvil. Si el add falla, el tema navega al fallbackUrl
+      (mismo destino que el fallback de la app) → nunca queda colgado.
+
+  Params: section_id (string), embed_url (string)
+{%- endcomment -%}
+<script>
+  (function () {
+    var SECTION_ID = {{ section_id | json }};
+    var EMBED_URL = {{ embed_url | json }};
+    var ALLOWED;
+    try { ALLOWED = new URL(EMBED_URL, window.location.origin).origin; }
+    catch (e) { ALLOWED = "https://menu-frutiferia.com"; }
+
+    var REQUEST = "frutimenu:add-to-cart";
+    var ACK = "frutimenu:cart-ok";
+
+    function iframeEl() {
+      var sec = document.getElementById(SECTION_ID);
+      return sec ? sec.querySelector(".frutimenu-embed__frame") : null;
+    }
+
+    function ack() {
+      var f = iframeEl();
+      if (f && f.contentWindow) f.contentWindow.postMessage({ type: ACK }, ALLOWED);
+    }
+
+    function addToCart(items) {
+      return fetch("/cart/add.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          items: items.map(function (i) { return { id: i.variantId, quantity: i.quantity }; }),
+        }),
+      }).then(function (res) {
+        if (!res.ok) throw new Error("cart/add " + res.status);
+        return res.json();
+      });
+    }
+
+    // Best-effort: fija el código de descuento en el carrito (aplica en checkout).
+    // El cupón igual viaja en el permalink del fallback, así que nunca bloquea.
+    function applyDiscount(code) {
+      if (!code) return Promise.resolve();
+      return fetch("/discount/" + encodeURIComponent(code), { credentials: "same-origin" })
+        .catch(function () { /* noop */ });
+    }
+
+    function openDrawer() {
+      document.dispatchEvent(new CustomEvent("dispatch:cart-drawer:refresh"));
+      document.dispatchEvent(new CustomEvent("dispatch:cart-drawer:open"));
+    }
+
+    window.addEventListener("message", function (e) {
+      if (e.origin !== ALLOWED) return;
+      var data = e.data;
+      if (!data || data.type !== REQUEST || !Array.isArray(data.items) || !data.items.length) return;
+
+      // Saneo: solo variantId numérico y cantidad positiva (tope defensivo).
+      var items = data.items
+        .filter(function (i) { return i && /^\d+$/.test(String(i.variantId)) && i.quantity > 0; })
+        .map(function (i) {
+          return { variantId: String(i.variantId), quantity: Math.min(parseInt(i.quantity, 10) || 1, 99) };
+        });
+      if (!items.length) return;
+
+      // Ack inmediato: "lo manejo nativo, no navegues". Frena el timeout de la app.
+      ack();
+
+      addToCart(items)
+        .then(function () { return applyDiscount(data.discount); })
+        .then(openDrawer)
+        .catch(function (err) {
+          if (window.console) console.warn("[frutimenu-bridge] add falló, navego al fallback", err);
+          // Mismo destino que el fallback de la app: /cart con los ítems + cupón.
+          if (data.fallbackUrl) window.location.assign(data.fallbackUrl);
+        });
+    });
+  })();
+</script>
