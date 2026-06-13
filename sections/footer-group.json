@@ -77,7 +77,7 @@
         "icons-with-text-4",
         "item_TCHhUi"
       ],
-      "disabled": true,
+      "disabled": false,
       "settings": {
         "heading": "",
         "heading_align": "text-start",

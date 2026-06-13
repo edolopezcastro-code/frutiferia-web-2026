@@ -474,6 +474,7 @@
     },
     "business_logos": {
       "type": "logo-list",
+      "disabled": true,
       "blocks": {
         "logo_1": {
           "type": "logo",

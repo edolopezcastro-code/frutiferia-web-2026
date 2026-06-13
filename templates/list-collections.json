@@ -1,1 +1,36 @@
-{"sections":{"image_banner_yNBpVK":{"type":"image-banner","blocks":{"heading_kcUNHK":{"type":"heading","settings":{"heading":"Image banner","heading_size":"h1","heading_h1":false}},"text_CwtDYg":{"type":"text","settings":{"text":"<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>","enlarge_text":false}},"button_nkGRph":{"type":"button","settings":{"button_1_label":"Optional button","button_1_link":"","button_1_style":"btn btn--primary","button_2_label":"Optional button","button_2_link":"","button_2_style":"btn btn--primary"}}},"block_order":["heading_kcUNHK","text_CwtDYg","button_nkGRph"],"disabled":true,"settings":{"url":"","height_mode":"fixed","fixed_height_desktop":480,"fixed_height_mobile":350,"overlay_position":"justify-center items-center","overlay_text_align":"text-center","mob_center_text":false,"mobile_stacked":false,"color_scheme":"white","full_width":true,"transparent_content_color":"#ffffff","tint_color":"#000000","tint_opacity":40,"prevent_animation":false}},"main":{"type":"main-list-collections","settings":{"title":"","heading_size":"h1","description":"","enlarge_description":false,"text_align":"items-center text-center","display_type":"all","selected_collections":[],"collections_per_page":12,"card_size":"medium","use_product_image":false}},"featured_collection_KTde8T":{"type":"featured-collection","settings":{"title":"Mira las ofertas de la semana 👇","heading_align":"text-start","show_view_all":true,"collection":"ofertas","layout":"carousel","card_size_mobile":"small","card_size":"small","products_to_show":8,"color_scheme":"none","card_contain":true,"full_width":true}}},"order":["image_banner_yNBpVK","main","featured_collection_KTde8T"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "title": "Compra por categoría",
+        "heading_size": "h1",
+        "description": "Frutas, verduras, despensa y packs frescos — todo lo que tu semana necesita, seleccionado a mano.",
+        "enlarge_description": false,
+        "text_align": "items-center text-center",
+        "display_type": "all",
+        "selected_collections": [],
+        "collections_per_page": 12,
+        "card_size": "medium",
+        "use_product_image": false
+      }
+    },
+    "featured_collection_KTde8T": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Mira las ofertas de la semana 👇",
+        "heading_align": "text-start",
+        "show_view_all": true,
+        "collection": "ofertas",
+        "layout": "carousel",
+        "card_size_mobile": "small",
+        "card_size": "small",
+        "products_to_show": 8,
+        "color_scheme": "none",
+        "card_contain": true,
+        "full_width": true
+      }
+    }
+  },
+  "order": ["main", "featured_collection_KTde8T"]
+}

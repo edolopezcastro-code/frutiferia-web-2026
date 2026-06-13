@@ -141,8 +141,8 @@
         "button_k3gg6B": {
           "type": "button",
           "settings": {
-            "button_label": "",
-            "button_link": "",
+            "button_label": "Compra fruta de temporada",
+            "button_link": "shopify://collections/all",
             "button_style": "btn btn--primary"
           }
         }
@@ -186,8 +186,8 @@
         "button_8GNbFz": {
           "type": "button",
           "settings": {
-            "button_label": "",
-            "button_link": "",
+            "button_label": "Arma tu semana con FrutiMenu",
+            "button_link": "shopify://pages/frutimenu",
             "button_style": "btn btn--primary"
           }
         }
