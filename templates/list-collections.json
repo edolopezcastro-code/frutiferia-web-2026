@@ -5,7 +5,7 @@
       "settings": {
         "title": "Compra por categoría",
         "heading_size": "h1",
-        "description": "Frutas, verduras, despensa y packs frescos — todo lo que tu semana necesita, seleccionado a mano.",
+        "description": "<p>Frutas, verduras, despensa y packs frescos — todo lo que tu semana necesita, seleccionado a mano.</p>",
         "enlarge_description": false,
         "text_align": "items-center text-center",
         "display_type": "all",
