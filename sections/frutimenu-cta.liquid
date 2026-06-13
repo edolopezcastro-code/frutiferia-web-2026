@@ -1,0 +1,147 @@
+{%- comment -%}
+  Frutiferia Web 4.0 — Franja "Arma tu semana con FrutiMenu" (WS-6).
+  Entrada reutilizable a FrutiMenu para sembrar la palanca de recompra/CLV B2C en las
+  superficies de intencion (PDP, coleccion, carrito) donde hoy hay 0 enlaces al menu.
+  Acento celeste (canal Hogares/B2C). Diseno compacto que no compite con el producto.
+{%- endcomment -%}
+
+{%- liquid
+  assign color_scheme = section.settings.color_scheme
+  assign accent = section.settings.accent | default: '#2C9CDB'
+-%}
+
+<style>
+  #{{ section.id }} .frutimenu-cta {
+    --fm-accent: {{ accent }};
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    background: color-mix(in srgb, var(--fm-accent) 7%, #ffffff);
+    border: 1px solid color-mix(in srgb, var(--fm-accent) 30%, #ffffff);
+    border-radius: 16px;
+    padding: 18px 22px;
+  }
+  #{{ section.id }} .frutimenu-cta__emoji {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    font-size: 26px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--fm-accent) 16%, #ffffff);
+  }
+  #{{ section.id }} .frutimenu-cta__body {
+    flex: 1 1 240px;
+    min-width: 0;
+  }
+  #{{ section.id }} .frutimenu-cta__eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--fm-accent);
+  }
+  #{{ section.id }} .frutimenu-cta__heading {
+    margin: 2px 0 3px;
+    line-height: 1.2;
+  }
+  #{{ section.id }} .frutimenu-cta__text {
+    margin: 0;
+    color: rgba(20, 8, 30, 0.7);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+  #{{ section.id }} .frutimenu-cta__btn {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--fm-accent);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 11px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: filter 0.18s ease, gap 0.18s ease;
+  }
+  #{{ section.id }} .frutimenu-cta__btn:hover {
+    filter: brightness(0.93);
+    gap: 12px;
+  }
+  @media (max-width: 749px) {
+    #{{ section.id }} .frutimenu-cta { gap: 14px; }
+    #{{ section.id }} .frutimenu-cta__btn { width: 100%; justify-content: center; }
+  }
+</style>
+
+<div
+  class="section section--padded{% if section.settings.full_width %} section--full-width{% endif %}{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}"
+  id="{{ section.id }}"
+  {% if settings.animations_enabled != "disabled" and section.settings.prevent_animation == false %}data-cc-animate{% endif %}
+>
+  <div class="container">
+    <div class="frutimenu-cta">
+      {%- if section.settings.emoji != blank -%}
+        <span class="frutimenu-cta__emoji" aria-hidden="true">{{ section.settings.emoji }}</span>
+      {%- endif -%}
+      <div class="frutimenu-cta__body">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="frutimenu-cta__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="frutimenu-cta__heading h5">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="frutimenu-cta__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.cta_label != blank -%}
+        <a class="frutimenu-cta__btn" href="{{ section.settings.cta_link | default: '/pages/frutimenu' }}">
+          {{ section.settings.cta_label }} <span aria-hidden="true">&rarr;</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FrutiMenu CTA",
+  "tag": "section",
+  "class": "cc-frutimenu-cta",
+  "settings": [
+    { "type": "text", "id": "emoji", "label": "Emoji", "default": "🥗" },
+    { "type": "text", "id": "eyebrow", "label": "Etiqueta (eyebrow)", "default": "Tu semana, resuelta" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "¿No sabes qué cocinar?" },
+    { "type": "text", "id": "text", "label": "Texto", "default": "FrutiMenu arma tu menú de 7 días y tu lista de compra en un minuto. Gratis y sin registro." },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Arma tu semana" },
+    { "type": "url", "id": "cta_link", "label": "Enlace del botón" },
+    { "type": "color", "id": "accent", "label": "Color de acento", "default": "#2C9CDB" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "options": [
+        { "value": "none", "label": "Ninguno (transparente)" },
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "none"
+    },
+    { "type": "checkbox", "id": "full_width", "label": "Ancho completo", "default": false },
+    { "type": "checkbox", "id": "prevent_animation", "label": "Desactivar animación de entrada", "default": false }
+  ],
+  "presets": [
+    {
+      "name": "FrutiMenu CTA",
+      "settings": {
+        "cta_link": "shopify://pages/frutimenu"
+      }
+    }
+  ]
+}
+{% endschema %}

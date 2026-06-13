@@ -325,6 +325,21 @@
         "full_width": false
       }
     },
+    "frutimenu_cta_product": {
+      "type": "frutimenu-cta",
+      "settings": {
+        "emoji": "🥗",
+        "eyebrow": "Tu semana, resuelta",
+        "heading": "¿No sabes qué cocinar con esto?",
+        "text": "FrutiMenu arma tu menú de 7 días con recetas que aprovechan este y otros productos frescos, y te deja la lista de compra lista.",
+        "cta_label": "Arma tu semana",
+        "cta_link": "shopify://pages/frutimenu",
+        "accent": "#2C9CDB",
+        "color_scheme": "none",
+        "full_width": true,
+        "prevent_animation": false
+      }
+    },
     "recommendations": {
       "type": "product-recommendations",
       "settings": {
@@ -378,6 +393,7 @@
     "main",
     "trust_bar_product",
     "details",
+    "frutimenu_cta_product",
     "recommendations",
     "cross_sell",
     "1780585006ec95da1b"

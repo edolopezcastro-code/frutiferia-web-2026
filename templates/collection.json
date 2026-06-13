@@ -25,6 +25,21 @@
         "color_scheme": "default"
       }
     },
+    "frutimenu_cta_collection": {
+      "type": "frutimenu-cta",
+      "settings": {
+        "emoji": "🥗",
+        "eyebrow": "Planifica en 1 minuto",
+        "heading": "¿No sabes qué llevar?",
+        "text": "Deja que FrutiMenu te proponga 7 días de recetas y arme tu carrito con lo justo. Gratis y sin registro.",
+        "cta_label": "Probar FrutiMenu",
+        "cta_link": "shopify://pages/frutimenu",
+        "accent": "#2C9CDB",
+        "color_scheme": "none",
+        "full_width": true,
+        "prevent_animation": false
+      }
+    },
     "collection-products": {
       "type": "main-collection-products",
       "blocks": {
@@ -197,6 +212,7 @@
   },
   "order": [
     "collection-banner",
+    "frutimenu_cta_collection",
     "collection-products",
     "trust_collection",
     "featured_collection_Nzeq8M",
