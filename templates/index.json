@@ -72,6 +72,52 @@
         "prevent_animation": true
       }
     },
+    "audience_doors": {
+      "type": "audience-doors",
+      "blocks": {
+        "door_hogares": {
+          "type": "door",
+          "settings": {
+            "eyebrow": "Para tu casa",
+            "title": "Tu semana resuelta",
+            "text": "<p>Frutas y verduras frescas a tu puerta, y <strong>FrutiMenu</strong> que arma tu menú de 7 días y la lista de compra en un minuto.</p>",
+            "cta_label": "Arma tu semana",
+            "cta_link": "shopify://pages/frutimenu",
+            "accent": "#2C9CDB"
+          }
+        },
+        "door_negocios": {
+          "type": "door",
+          "settings": {
+            "eyebrow": "Para tu negocio",
+            "title": "Abastecimiento sin quiebres",
+            "text": "<p>Restaurantes, hoteles y cafeterías: calidad pareja, despacho programado y factura al día. <strong>Cotización en menos de 24 h.</strong></p>",
+            "cta_label": "Cotiza para tu negocio",
+            "cta_link": "shopify://pages/venta-a-negocios",
+            "accent": "#671D90"
+          }
+        },
+        "door_bienestar": {
+          "type": "door",
+          "settings": {
+            "eyebrow": "Para tu equipo",
+            "title": "Bienestar que se nota",
+            "text": "<p>Cajas de fruta para colaboradores, charlas de bienestar e informes para RRHH. Equipos más sanos, más presentes.</p>",
+            "cta_label": "Fruta para tu equipo",
+            "cta_link": "shopify://pages/bienestar",
+            "accent": "#D6457D"
+          }
+        }
+      },
+      "block_order": ["door_hogares", "door_negocios", "door_bienestar"],
+      "settings": {
+        "subheading": "Frutiferia para cada quien",
+        "heading": "¿Cómo te abasteces con Frutiferia?",
+        "color_scheme": "none",
+        "full_width": true,
+        "prevent_animation": false
+      }
+    },
     "3721924b-630b-4a60-b724-521fef7aa78e": {
       "type": "icons-with-text",
       "blocks": {
@@ -255,14 +301,14 @@
         "b2b_text": {
           "type": "text",
           "settings": {
-            "text": "<p>Restaurantes, hoteles, cafeterías y oficinas: abastécete con frutas y verduras frescas a <strong>precio por volumen</strong>, con <strong>factura electrónica</strong> y <strong>despacho programado</strong> a la puerta de tu negocio.</p>",
+            "text": "<p>Restaurantes, hoteles, cafeterías y casinos: <strong>cero quiebres de stock</strong>, calidad pareja en cada entrega, <strong>despacho programado</strong> y factura al día. Tu cocina, siempre abastecida — cotización en menos de 24 h.</p>",
             "enlarge_text": true
           }
         },
         "b2b_button": {
           "type": "button",
           "settings": {
-            "button_1_label": "Comprar por mayor",
+            "button_1_label": "Abastece tu negocio",
             "button_1_link": "shopify://pages/venta-a-negocios",
             "button_1_style": "btn--primary",
             "button_2_label": "",
@@ -627,17 +673,18 @@
   },
   "order": [
     "slideshow",
+    "audience_doors",
     "3721924b-630b-4a60-b724-521fef7aa78e",
     "featured-collection",
     "collection-list",
-    "b2b_band",
     "frutimenu_promo",
-    "video_9nrWpD",
+    "b2b_band",
     "testimonials_JERNA6",
-    "business_logos",
     "media_with_text_VAd4Hi",
     "featured_blog_recetas",
     "newsletter_WXJigB",
-    "scrolling_banner_ArEtdk"
+    "scrolling_banner_ArEtdk",
+    "video_9nrWpD",
+    "business_logos"
   ]
 }
