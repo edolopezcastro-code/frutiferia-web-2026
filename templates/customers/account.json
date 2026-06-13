@@ -1,1 +1,21 @@
-{"sections":{"main":{"type":"main-account","settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "main": { "type": "main-account", "settings": {} },
+    "frutimenu_cta_account": {
+      "type": "frutimenu-cta",
+      "settings": {
+        "emoji": "🗓️",
+        "eyebrow": "Tu próxima semana",
+        "heading": "¿Re-armamos tu menú?",
+        "text": "Arma un nuevo menú de 7 días con FrutiMenu y deja tu carrito listo en un minuto. Pide una vez, come toda la semana.",
+        "cta_label": "Armar mi menú",
+        "cta_link": "shopify://pages/frutimenu",
+        "accent": "#2C9CDB",
+        "color_scheme": "none",
+        "full_width": false,
+        "prevent_animation": false
+      }
+    }
+  },
+  "order": ["main", "frutimenu_cta_account"]
+}
