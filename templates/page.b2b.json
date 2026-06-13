@@ -67,17 +67,70 @@
         "prevent_animation": false
       }
     },
+    "sla_b2b": {
+      "type": "icons-with-text",
+      "blocks": {
+        "sla_cotiza": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Cotización en menos de 24 h",
+            "text": "<p>Nos cuentas qué necesitas y te respondemos con propuesta y precios el mismo día.</p>",
+            "link": ""
+          }
+        },
+        "sla_despacho": {
+          "type": "item",
+          "settings": {
+            "icon": "calendar",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Despacho Mar · Mié · Vie · Sáb",
+            "text": "<p>Días fijos y frecuencia a tu medida. Tu cocina recibe siempre a tiempo.</p>",
+            "link": ""
+          }
+        },
+        "sla_reposicion": {
+          "type": "item",
+          "settings": {
+            "icon": "check_mark_in_circle",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Reposición garantizada",
+            "text": "<p>Si algo no cumple tu estándar, lo reponemos en la siguiente entrega. Sin vueltas.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["sla_cotiza", "sla_despacho", "sla_reposicion"],
+      "settings": {
+        "heading": "Nuestro compromiso contigo",
+        "heading_align": "text-center",
+        "icon_size": 44,
+        "title_type_scale": "base",
+        "text_type_scale": "small",
+        "icon_position": "above",
+        "mobile_stack": true,
+        "section_height": "small",
+        "color_scheme": "1",
+        "full_width": true,
+        "dividers": "none",
+        "prevent_animation": false
+      }
+    },
     "beneficios_b2b": {
       "type": "icons-with-text",
       "blocks": {
         "ic_precio": {
           "type": "item",
           "settings": {
-            "icon": "price_tag",
+            "icon": "box",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Precios por volumen",
-            "text": "<p>Descuentos progresivos según cantidad. Mientras más pides, más ahorras.</p>",
+            "heading": "Cero quiebres de stock",
+            "text": "<p>Producto parejo y disponible cada semana. Tu carta nunca se queda sin insumos.</p>",
             "link": ""
           }
         },
@@ -443,6 +496,7 @@
   "order": [
     "main",
     "hero_b2b",
+    "sla_b2b",
     "beneficios_b2b",
     "como_funciona_b2b",
     "productos_b2b",

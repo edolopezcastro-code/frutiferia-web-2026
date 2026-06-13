@@ -31,7 +31,7 @@
     "color_scheme_2_btn_bg": "#ffffff",
     "color_scheme_2_btn_text": "#333333",
     "color_scheme_3_bg": "#b985f0",
-    "color_scheme_3_bg_grad": "linear-gradient(22deg, rgba(92, 159, 10, 1) 16%, rgba(109, 174, 30, 1) 84%)",
+    "color_scheme_3_bg_grad": "",
     "color_scheme_3_heading": "#333333",
     "color_scheme_3_text": "#333333",
     "color_scheme_3_btn_bg": "#8c40da",
