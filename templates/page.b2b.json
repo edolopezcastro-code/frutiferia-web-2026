@@ -305,9 +305,9 @@
             "enable_media": false,
             "media_scale": 100,
             "heading": "Oficinas y Empresas",
-            "text": "<p>FrutiPacks corporativos para tu equipo. Snacks saludables y cajas de frutas semanales.</p>",
-            "button_label": "",
-            "button_link": ""
+            "text": "<p>¿Bienestar para tu equipo? Cajas de fruta para colaboradores, charlas e informes para RRHH.</p>",
+            "button_label": "Ver programa de bienestar",
+            "button_link": "shopify://pages/bienestar"
           }
         },
         "sector_cafe": {

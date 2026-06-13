@@ -1,0 +1,342 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_page_title": false,
+        "heading_size": "h2",
+        "heading_align": "text-center"
+      }
+    },
+    "hero_wellness": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_hero": {
+          "type": "heading",
+          "settings": {
+            "heading": "Equipos más sanos, más presentes",
+            "heading_size": "h0",
+            "heading_h1": true
+          }
+        },
+        "text_hero": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Cajas de fruta fresca para tus colaboradores, charlas de bienestar e informes para RRHH. El beneficio que se nota cada semana — sin que tú gestiones nada.</p>",
+            "enlarge_text": true
+          }
+        },
+        "button_hero": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Cotizar para mi equipo",
+            "button_1_link": "https://api.whatsapp.com/send?phone=+56993261147&text=Hola,%20me%20interesa%20el%20programa%20de%20bienestar%20con%20fruta%20para%20mi%20equipo",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "",
+            "button_2_link": "",
+            "button_2_style": "btn btn--secondary"
+          }
+        }
+      },
+      "block_order": ["heading_hero", "text_hero", "button_hero"],
+      "settings": {
+        "image_desktop": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
+        "url": "",
+        "height_mode": "fixed",
+        "fixed_height_desktop": 480,
+        "fixed_height_mobile": 380,
+        "overlay_position": "justify-center items-center",
+        "overlay_text_align": "text-center",
+        "mob_center_text": true,
+        "mobile_stacked": false,
+        "color_scheme": "white",
+        "full_width": true,
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#000000",
+        "tint_opacity": 55,
+        "prevent_animation": false
+      }
+    },
+    "sla_wellness": {
+      "type": "icons-with-text",
+      "blocks": {
+        "sla_gestion": {
+          "type": "item",
+          "settings": {
+            "icon": "gift",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Beneficio sin gestión",
+            "text": "<p>Nosotros coordinamos todo. Tú solo disfrutas el resultado.</p>",
+            "link": ""
+          }
+        },
+        "sla_programado": {
+          "type": "item",
+          "settings": {
+            "icon": "calendar",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Despacho programado",
+            "text": "<p>Entregas fijas a tu oficina, sin que pidas cada semana.</p>",
+            "link": ""
+          }
+        },
+        "sla_informe": {
+          "type": "item",
+          "settings": {
+            "icon": "check_mark_in_circle",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Informe a RRHH",
+            "text": "<p>Reporte de consumo y participación para medir el impacto.</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["sla_gestion", "sla_programado", "sla_informe"],
+      "settings": {
+        "heading": "El bienestar de tu equipo, resuelto",
+        "heading_align": "text-center",
+        "icon_size": 44,
+        "title_type_scale": "base",
+        "text_type_scale": "small",
+        "icon_position": "above",
+        "mobile_stack": true,
+        "section_height": "small",
+        "color_scheme": "1",
+        "full_width": true,
+        "dividers": "none",
+        "prevent_animation": false
+      }
+    },
+    "servicios_wellness": {
+      "type": "multi-column",
+      "blocks": {
+        "serv_cajas": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "Cajas semanales para colaboradores",
+            "text": "<p>Fruta de temporada seleccionada a mano, en la cantidad justa para tu equipo. Individuales o para compartir en la cocina de la oficina.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "serv_charlas": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "Charlas de bienestar con Katalina",
+            "text": "<p>Sesiones prácticas sobre alimentación, energía y hábitos saludables, pensadas para la realidad de tu gente en el trabajo.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "serv_informe": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "Informe a RRHH",
+            "text": "<p>Te entregamos un reporte de consumo y participación para mostrar, con datos, el impacto del beneficio en tu equipo.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": ["serv_cajas", "serv_charlas", "serv_informe"],
+      "settings": {
+        "title": "Qué incluye el programa",
+        "heading_align": "text-center",
+        "button_label": "",
+        "button_link": "",
+        "layout": "grid",
+        "column_size": "medium",
+        "column_align": "center",
+        "media_align": "text-center",
+        "image_ratio": "1",
+        "color_scheme": "none",
+        "button_style": "btn btn--primary"
+      }
+    },
+    "como_funciona_wellness": {
+      "type": "multi-column",
+      "blocks": {
+        "paso_1": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "1. Cuéntanos de tu equipo",
+            "text": "<p>Cuántos son, dónde están y qué buscas (cajas, charlas o ambas). Por WhatsApp o el formulario, en un par de minutos.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "paso_2": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "2. Recibe tu propuesta",
+            "text": "<p>Te armamos un plan a medida con frecuencia, cantidades y valor, en menos de 24 horas.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "paso_3": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "3. Reciben cada semana",
+            "text": "<p>Despachamos a tu oficina en los días acordados. Tú no gestionas nada; tu equipo solo disfruta.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": ["paso_1", "paso_2", "paso_3"],
+      "settings": {
+        "title": "¿Cómo funciona?",
+        "heading_align": "text-center",
+        "button_label": "",
+        "button_link": "",
+        "layout": "grid",
+        "column_size": "large",
+        "column_align": "center",
+        "media_align": "text-center",
+        "image_ratio": "1",
+        "color_scheme": "none",
+        "button_style": "btn btn--primary"
+      }
+    },
+    "productos_wellness": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Cajas y FrutiPacks para tu equipo",
+        "heading_align": "text-start",
+        "show_view_all": true,
+        "collection": "frutipack",
+        "layout": "carousel",
+        "card_size_mobile": "small",
+        "card_size": "small",
+        "products_to_show": 8,
+        "color_scheme": "1",
+        "card_contain": true,
+        "full_width": true
+      }
+    },
+    "contacto_wellness": {
+      "type": "contact-form",
+      "blocks": {
+        "name_w": { "type": "name", "settings": { "required": true, "half_width": true } },
+        "email_w": { "type": "email", "settings": { "required": true, "half_width": true } },
+        "phone_w": { "type": "phone", "settings": { "required": true, "half_width": true } },
+        "empresa_w": {
+          "type": "custom",
+          "settings": { "title": "Empresa", "type": "text", "required": true, "half_width": true }
+        },
+        "colaboradores_w": {
+          "type": "custom",
+          "settings": { "title": "N° de colaboradores (aprox.)", "type": "text", "required": false, "half_width": true }
+        },
+        "area_w": {
+          "type": "dropdown",
+          "settings": {
+            "title": "Área que decide",
+            "options": "Recursos Humanos\nGerencia\nBienestar / Cultura\nOtra",
+            "half_width": true
+          }
+        },
+        "interes_w": {
+          "type": "dropdown",
+          "settings": {
+            "title": "Te interesa",
+            "options": "Cajas semanales para el equipo\nCharlas de bienestar\nAmbas\nAún no lo tengo claro",
+            "half_width": false
+          }
+        },
+        "mensaje_w": { "type": "body", "settings": { "required": false, "half_width": false } }
+      },
+      "block_order": ["name_w", "email_w", "phone_w", "empresa_w", "colaboradores_w", "area_w", "interes_w", "mensaje_w"],
+      "settings": {
+        "heading": "Conversemos sobre tu equipo",
+        "heading_align": "text-center",
+        "image_position": "bottom",
+        "color_scheme": "none",
+        "full_width": false,
+        "button_style": "btn btn--primary",
+        "crm_endpoint": "https://ykvexpxvlivcqamqsafe.supabase.co/functions/v1/b2b-lead-intake",
+        "crm_source": "web-wellness"
+      }
+    },
+    "faq_wellness": {
+      "type": "faq",
+      "blocks": {
+        "cat_general": { "type": "category", "settings": { "text": "Programa de bienestar" } },
+        "q_minimo": {
+          "type": "question",
+          "settings": {
+            "icon": "box",
+            "heading": "¿Desde cuántos colaboradores funciona?",
+            "text": "<p>Armamos propuestas desde equipos pequeños. Cuéntanos cuántos son y lo adaptamos a tu realidad.</p>"
+          }
+        },
+        "q_entrega": {
+          "type": "question",
+          "settings": {
+            "icon": "truck",
+            "heading": "¿Cómo se entregan las cajas?",
+            "text": "<p>Despacho programado a tu oficina en días fijos. Tú no gestionas nada; nosotros coordinamos cada entrega.</p>"
+          }
+        },
+        "q_charlas": {
+          "type": "question",
+          "settings": {
+            "icon": "chat_bubble",
+            "heading": "¿Las charlas de bienestar tienen costo aparte?",
+            "text": "<p>Depende del plan. Las coordinamos según el tamaño de tu equipo y los objetivos que tengas. Lo conversamos en la propuesta.</p>"
+          }
+        },
+        "q_factura": {
+          "type": "question",
+          "settings": {
+            "icon": "credit_card",
+            "heading": "¿Emiten factura?",
+            "text": "<p>Sí, boleta y factura electrónica. Todo formal y en regla para tu empresa.</p>"
+          }
+        },
+        "q_zonas": {
+          "type": "question",
+          "settings": {
+            "icon": "map_pin",
+            "heading": "¿A qué zonas llegan?",
+            "text": "<p>Viña del Mar, Concón, Reñaca, Quilpué, Valparaíso y alrededores. Para otras zonas, consúltanos disponibilidad.</p>"
+          }
+        }
+      },
+      "block_order": ["cat_general", "q_minimo", "q_entrega", "q_charlas", "q_factura", "q_zonas"],
+      "settings": {
+        "heading": "Preguntas frecuentes",
+        "heading_align": "text-center",
+        "color_scheme": "none",
+        "full_width": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_wellness",
+    "sla_wellness",
+    "servicios_wellness",
+    "como_funciona_wellness",
+    "productos_wellness",
+    "contacto_wellness",
+    "faq_wellness"
+  ]
+}
