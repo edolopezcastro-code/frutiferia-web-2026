@@ -21,7 +21,7 @@
             "overlay_text_align": "text-center",
             "mob_center_text": false,
             "offer_badge": "🎁 20% OFF en tu primer pedido · código PRIMERA20",
-            "subheading": "Envío gratis sobre $30.000 · Región de Valparaíso",
+            "subheading": "Envío gratis sobre $50.000 · Región de Valparaíso",
             "heading": "Frescura que se nota",
             "heading_size": "h0",
             "heading_h1": true,
@@ -128,7 +128,7 @@
             "use_custom_icon_color": false,
             "icon_color": "#000000",
             "heading": "Envío Gratis",
-            "text": "<p>Sobre $30.000</p>",
+            "text": "<p>Sobre $50.000</p>",
             "link": "shopify://pages/reparto"
           }
         },
@@ -328,6 +328,57 @@
         "text_align": "text-center",
         "mob_center_text": true,
         "color_scheme": "2",
+        "full_width": true,
+        "prevent_animation": false
+      }
+    },
+    "shipping_rates": {
+      "type": "rich-text",
+      "blocks": {
+        "sr_subheading": {
+          "type": "subheading",
+          "settings": {
+            "text": "DESPACHO · REGIÓN DE VALPARAÍSO"
+          }
+        },
+        "sr_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Actualizamos nuestras tarifas de despacho",
+            "heading_size": "h2",
+            "heading_h1": false
+          }
+        },
+        "sr_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Envío gratis en pedidos sobre $50.000.</strong> Y mientras más grande tu pedido, más bajo el despacho:</p><ul><li>Sobre <strong>$50.000</strong> — <strong>Gratis</strong></li><li>$40.000 a $49.999 — $990</li><li>$30.000 a $39.999 — $1.990</li><li>$20.000 a $29.999 — $2.990</li><li>$10.001 a $20.000 — $3.990</li><li>Hasta $10.000 — $4.990</li></ul><p>Entrega en 1 a 3 días hábiles según tu zona (Viña del Mar, Reñaca, Concón, Quilpué, Valparaíso y alrededores).</p>",
+            "enlarge_text": false
+          }
+        },
+        "sr_button": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Ver zonas y días de entrega",
+            "button_1_link": "shopify://pages/reparto",
+            "button_1_style": "btn--secondary",
+            "button_2_label": "",
+            "button_2_link": "",
+            "button_2_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "sr_subheading",
+        "sr_heading",
+        "sr_text",
+        "sr_button"
+      ],
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "color_scheme": "1",
         "full_width": true,
         "prevent_animation": false
       }
@@ -678,6 +729,7 @@
     "featured-collection",
     "collection-list",
     "frutimenu_promo",
+    "shipping_rates",
     "testimonials_JERNA6",
     "media_with_text_VAd4Hi",
     "featured_blog_recetas",

@@ -51,7 +51,7 @@
           "type": "message",
           "settings": {
             "icon": "truck",
-            "title": "<p>Envío gratis en pedidos sobre $30.000</p>",
+            "title": "<p>Envío gratis en pedidos sobre $50.000</p>",
             "close": "once",
             "show_over_media": false,
             "visibility_duration": 7,
@@ -112,7 +112,7 @@
           "settings": {
             "heading": "Envío y entrega",
             "icon": "truck",
-            "text": "<p>Entregamos <strong>Martes, Miércoles, Viernes y Sábados</strong> en Viña del Mar, Reñaca, Concón, Quilpué y Valparaíso. Envío gratis sobre $30.000.</p>",
+            "text": "<p>Entregamos <strong>Martes, Miércoles, Viernes y Sábados</strong> en Viña del Mar, Reñaca, Concón, Quilpué y Valparaíso. Envío gratis sobre $50.000.</p>",
             "page": "",
             "open": false
           }
@@ -214,7 +214,7 @@
             "use_custom_icon_color": false,
             "icon_color": "#000000",
             "heading": "Envío gratis",
-            "text": "<p>Sobre $30.000</p>",
+            "text": "<p>Sobre $50.000</p>",
             "link": ""
           }
         },
@@ -300,7 +300,7 @@
         "highlight_text_r3c7Pb": {
           "type": "highlight-text",
           "settings": {
-            "text": "<h4>Entrega a domicilio</h4><p>Recibe tus frutas y verduras frescas en la puerta de tu casa. Envío gratis sobre $30.000.</p>"
+            "text": "<h4>Entrega a domicilio</h4><p>Recibe tus frutas y verduras frescas en la puerta de tu casa. Envío gratis sobre $50.000.</p>"
           }
         },
         "highlight_whatsapp": {

@@ -175,7 +175,7 @@
     "card_atc_mobile": "icon_button_bottom",
     "card_atc_desktop": "text_button_bottom",
     "heading_type_scale": "1.3",
-    "free_shipping_threshold": "30000",
+    "free_shipping_threshold": "50000",
     "inv_show_count": "low",
     "inv_low": 10,
     "inv_very_low": 3,

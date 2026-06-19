@@ -22,7 +22,7 @@
         "cart_terms_page": "",
         "continue_shopping_page": "shopify://collections/all",
         "cart_notification_show": true,
-        "cart_notification_text": "<p>Envío gratis en pedidos sobre $30.000. ¡Agrega más y ahorra!</p>",
+        "cart_notification_text": "<p>Envío gratis en pedidos sobre $50.000. ¡Agrega más y ahorra!</p>",
         "cart_notification_pos": "",
         "show_shipping_calculator": true,
         "shipping_calculator_default_country": "Chile"
@@ -36,7 +36,7 @@
           "settings": {
             "icon": "truck",
             "heading": "Envío gratis",
-            "text": "<p>Sobre $30.000</p>",
+            "text": "<p>Sobre $50.000</p>",
             "link": ""
           }
         },
