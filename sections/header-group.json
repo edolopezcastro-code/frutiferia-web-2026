@@ -81,7 +81,7 @@
         "text_PwkiA7": {
           "type": "text",
           "settings": {
-            "text": "<p>Prueba nuestro servicio con un<strong> 20% de descuento</strong></p>",
+            "text": "<p>Prueba nuestro servicio con un<strong> 15% de descuento</strong></p>",
             "enlarge_text": false,
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -90,7 +90,7 @@
         "discount_HztBeh": {
           "type": "discount",
           "settings": {
-            "discount_code": "Primera20"
+            "discount_code": "PRIMERA15"
           }
         }
       },

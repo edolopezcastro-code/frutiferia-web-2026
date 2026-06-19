@@ -253,7 +253,7 @@
         "text_7Y8TxM": {
           "type": "text",
           "settings": {
-            "text": "<p>Usa el código <strong>PRIMERA20</strong> y obtén un 20% de descuento.</p>",
+            "text": "<p>Usa el código <strong>PRIMERA15</strong> y obtén un 15% de descuento.</p>",
             "enlarge_text": false,
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -262,7 +262,7 @@
         "discount_Fznakx": {
           "type": "discount",
           "settings": {
-            "discount_code": "Primera20"
+            "discount_code": "PRIMERA15"
           }
         }
       },

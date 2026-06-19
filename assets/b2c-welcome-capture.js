@@ -3,7 +3,7 @@
  * ------------------------------------------------------------
  * Captura el email de los formularios de newsletter/popup y lo
  * envia a la edge function `b2c-welcome-intake` de Frutiferia-OS
- * (CRM B2C + correo de bienvenida PRIMERA20), SIN bloquear el envio
+ * (CRM B2C + correo de bienvenida PRIMERA15), SIN bloquear el envio
  * nativo de Shopify (que sigue creando el suscriptor).
  *
  * Activacion: el snippet newsletter-signup empuja config por form:
