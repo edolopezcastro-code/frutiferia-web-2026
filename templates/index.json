@@ -165,7 +165,7 @@
             "use_custom_icon_color": false,
             "icon_color": "#000000",
             "heading": "7 Años de Experiencia",
-            "text": "<p>Más de 20.000 pedidos entregados</p>",
+            "text": "<p>Más de 20.000 pedidos entregados a hogares y negocios de la región</p>",
             "link": ""
           }
         },
@@ -361,9 +361,9 @@
             "button_1_label": "Abastece tu negocio",
             "button_1_link": "shopify://pages/venta-a-negocios",
             "button_1_style": "btn--primary",
-            "button_2_label": "",
-            "button_2_link": "",
-            "button_2_style": "link"
+            "button_2_label": "Cotiza por WhatsApp",
+            "button_2_link": "https://api.whatsapp.com/send?phone=+56993261147&text=Hola%20Francisco%2C%20tengo%20un%20negocio%20y%20quiero%20cotizar%20con%20Frutiferia",
+            "button_2_style": "btn--secondary"
           }
         }
       },
