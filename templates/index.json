@@ -83,7 +83,7 @@
             "text": "<p>Frutas y verduras frescas a tu puerta, y <strong>FrutiMenu</strong> que arma tu menú de 7 días y la lista de compra en un minuto.</p>",
             "cta_label": "Arma tu semana",
             "cta_link": "shopify://pages/frutimenu",
-            "accent": "#2C9CDB"
+            "accent": "#2c9cdb"
           }
         },
         "door_negocios": {
@@ -94,7 +94,7 @@
             "text": "<p>Restaurantes, hoteles y cafeterías: calidad pareja, despacho programado y factura al día. <strong>Cotización en menos de 24 h.</strong></p>",
             "cta_label": "Cotiza para tu negocio",
             "cta_link": "shopify://pages/venta-a-negocios",
-            "accent": "#671D90"
+            "accent": "#671d90"
           }
         },
         "door_bienestar": {
@@ -105,11 +105,15 @@
             "text": "<p>Cajas de fruta para colaboradores, charlas de bienestar e informes para RRHH. Equipos más sanos, más presentes.</p>",
             "cta_label": "Fruta para tu equipo",
             "cta_link": "shopify://pages/bienestar",
-            "accent": "#D6457D"
+            "accent": "#d6457d"
           }
         }
       },
-      "block_order": ["door_hogares", "door_negocios", "door_bienestar"],
+      "block_order": [
+        "door_hogares",
+        "door_negocios",
+        "door_bienestar"
+      ],
       "settings": {
         "subheading": "Frutiferia para cada quien",
         "heading": "¿Cómo te abasteces con Frutiferia?",
@@ -128,7 +132,7 @@
             "use_custom_icon_color": false,
             "icon_color": "#000000",
             "heading": "Envío Gratis",
-            "text": "<p>Sobre $50.000</p>",
+            "text": "<p>Sobre $30.000</p>",
             "link": "shopify://pages/reparto"
           }
         },
@@ -281,6 +285,52 @@
         "full_width": true
       }
     },
+    "frutimenu_promo": {
+      "type": "media-with-text",
+      "blocks": {
+        "fm_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "¿No sabes qué cocinar esta semana?",
+            "heading_size": "h2",
+            "heading_h1": false
+          }
+        },
+        "fm_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Deja de improvisar a última hora. <strong>FrutiMenu</strong> arma tu plan de 7 días con recetas chilenas saludables y te entrega la lista de compras lista para pedir en Frutiferia.</p><ul><li>🥗 Recetas ricas y balanceadas para la mesa chilena</li><li>🔥 Con las calorías y proteína de cada plato</li><li>🛒 Tu lista de ingredientes lista para pedir fresca</li></ul><p><strong>Gratis, sin registro y en 1 minuto.</strong></p>",
+            "enlarge_text": false
+          }
+        },
+        "fm_button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Armar mi semana gratis",
+            "button_link": "shopify://pages/frutimenu",
+            "button_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "fm_heading",
+        "fm_text",
+        "fm_button"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
+        "video_external": "",
+        "video_description": "",
+        "video_autoplay": false,
+        "layout": "right",
+        "image_fit": "cover",
+        "media_width": 50,
+        "media_scale": 100,
+        "text_align": "text-start",
+        "color_scheme": "1",
+        "only_content_color_scheme": false
+      }
+    },
     "b2b_band": {
       "type": "rich-text",
       "blocks": {
@@ -330,176 +380,6 @@
         "color_scheme": "2",
         "full_width": true,
         "prevent_animation": false
-      }
-    },
-    "shipping_rates": {
-      "type": "rich-text",
-      "blocks": {
-        "sr_subheading": {
-          "type": "subheading",
-          "settings": {
-            "text": "DESPACHO · REGIÓN DE VALPARAÍSO"
-          }
-        },
-        "sr_heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Actualizamos nuestras tarifas de despacho",
-            "heading_size": "h2",
-            "heading_h1": false
-          }
-        },
-        "sr_text": {
-          "type": "text",
-          "settings": {
-            "text": "<p><strong>Envío gratis en pedidos sobre $50.000.</strong> Y mientras más grande tu pedido, más bajo el despacho:</p><ul><li>Sobre <strong>$50.000</strong> — <strong>Gratis</strong></li><li>$40.000 a $49.999 — $990</li><li>$30.000 a $39.999 — $1.990</li><li>$20.000 a $29.999 — $2.990</li><li>$10.001 a $20.000 — $3.990</li><li>Hasta $10.000 — $4.990</li></ul><p>Entrega en 1 a 3 días hábiles según tu zona (Viña del Mar, Reñaca, Concón, Quilpué, Valparaíso y alrededores).</p>",
-            "enlarge_text": false
-          }
-        },
-        "sr_button": {
-          "type": "button",
-          "settings": {
-            "button_1_label": "Ver zonas y días de entrega",
-            "button_1_link": "shopify://pages/reparto",
-            "button_1_style": "btn--secondary",
-            "button_2_label": "",
-            "button_2_link": "",
-            "button_2_style": "link"
-          }
-        }
-      },
-      "block_order": [
-        "sr_subheading",
-        "sr_heading",
-        "sr_text",
-        "sr_button"
-      ],
-      "settings": {
-        "text_position": "justify-center",
-        "text_align": "text-center",
-        "mob_center_text": true,
-        "color_scheme": "1",
-        "full_width": true,
-        "prevent_animation": false
-      }
-    },
-    "frutimenu_promo": {
-      "type": "media-with-text",
-      "blocks": {
-        "fm_heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "¿No sabes qué cocinar esta semana?",
-            "heading_size": "h2",
-            "heading_h1": false
-          }
-        },
-        "fm_text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Deja de improvisar a última hora. <strong>FrutiMenu</strong> arma tu plan de 7 días con recetas chilenas saludables y te entrega la lista de compras lista para pedir en Frutiferia.</p><ul><li>🥗 Recetas ricas y balanceadas para la mesa chilena</li><li>🔥 Con las calorías y proteína de cada plato</li><li>🛒 Tu lista de ingredientes lista para pedir fresca</li></ul><p><strong>Gratis, sin registro y en 1 minuto.</strong></p>",
-            "enlarge_text": false
-          }
-        },
-        "fm_button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Armar mi semana gratis",
-            "button_link": "shopify://pages/frutimenu",
-            "button_style": "btn btn--primary"
-          }
-        }
-      },
-      "block_order": [
-        "fm_heading",
-        "fm_text",
-        "fm_button"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
-        "video_external": "",
-        "video_description": "",
-        "video_autoplay": false,
-        "layout": "right",
-        "image_fit": "cover",
-        "media_width": 50,
-        "media_scale": 100,
-        "text_align": "text-start",
-        "color_scheme": "1",
-        "only_content_color_scheme": false
-      }
-    },
-    "video_9nrWpD": {
-      "type": "video",
-      "blocks": {
-        "heading_4jrfKz": {
-          "type": "heading",
-          "settings": {
-            "heading": "Experiencia Frutiferia",
-            "heading_size": "h1",
-            "heading_h1": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_4jrfKz"
-      ],
-      "disabled": true,
-      "name": "Video",
-      "settings": {
-        "video_shopify": "shopify://files/videos/Testimonio Tamar.mp4",
-        "video_external": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_description": "",
-        "video_size": "md",
-        "video_autoplay": true,
-        "text_align": "text-center",
-        "color_scheme": "default"
-      }
-    },
-    "media_with_text_VAd4Hi": {
-      "type": "media-with-text",
-      "blocks": {
-        "heading_9Ab4Ax": {
-          "type": "heading",
-          "settings": {
-            "heading": "Más de 7 años",
-            "heading_size": "h3",
-            "heading_h1": false
-          }
-        },
-        "text_EhT6af": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Abasteciendo con las mejores frutas y verduras a hogares y negocios de la Región de Valparaíso</p>",
-            "enlarge_text": false
-          }
-        },
-        "button_bpJb3G": {
-          "type": "button",
-          "settings": {
-            "button_label": "Conoce más de nosotros",
-            "button_link": "shopify://pages/conocenos",
-            "button_style": "btn btn--primary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_9Ab4Ax",
-        "text_EhT6af",
-        "button_bpJb3G"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/Frutiferia.png",
-        "video_external": "",
-        "video_description": "",
-        "video_autoplay": false,
-        "layout": "left",
-        "image_fit": "contain",
-        "media_width": 50,
-        "media_scale": 100,
-        "text_align": "text-start",
-        "color_scheme": "none",
-        "only_content_color_scheme": false
       }
     },
     "testimonials_JERNA6": {
@@ -569,47 +449,50 @@
         "full_width": true
       }
     },
-    "business_logos": {
-      "type": "logo-list",
-      "disabled": true,
+    "media_with_text_VAd4Hi": {
+      "type": "media-with-text",
       "blocks": {
-        "logo_1": {
-          "type": "logo",
-          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Restaurantes" }
+        "heading_9Ab4Ax": {
+          "type": "heading",
+          "settings": {
+            "heading": "Más de 7 años",
+            "heading_size": "h3",
+            "heading_h1": false
+          }
         },
-        "logo_2": {
-          "type": "logo",
-          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Hoteles" }
+        "text_EhT6af": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Abasteciendo con las mejores frutas y verduras a hogares y negocios de la Región de Valparaíso</p>",
+            "enlarge_text": false
+          }
         },
-        "logo_3": {
-          "type": "logo",
-          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Cafeterías" }
-        },
-        "logo_4": {
-          "type": "logo",
-          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Casinos" }
-        },
-        "logo_5": {
-          "type": "logo",
-          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Oficinas" }
-        },
-        "logo_6": {
-          "type": "logo",
-          "settings": { "image": "", "url": "", "logo_width": 150, "text": "Almacenes" }
+        "button_bpJb3G": {
+          "type": "button",
+          "settings": {
+            "button_label": "Conoce más de nosotros",
+            "button_link": "shopify://pages/conocenos",
+            "button_style": "btn btn--primary"
+          }
         }
       },
-      "block_order": ["logo_1", "logo_2", "logo_3", "logo_4", "logo_5", "logo_6"],
+      "block_order": [
+        "heading_9Ab4Ax",
+        "text_EhT6af",
+        "button_bpJb3G"
+      ],
       "settings": {
-        "title": "Negocios que se abastecen con Frutiferia",
-        "heading_align": "text-center",
-        "button_label": "Vender a tu negocio",
-        "button_link": "shopify://pages/venta-a-negocios",
-        "layout": "carousel",
-        "spacing": 56,
-        "logo_grid_align": "justify-center",
-        "image_opacity": 100,
+        "image": "shopify://shop_images/Frutiferia.png",
+        "video_external": "",
+        "video_description": "",
+        "video_autoplay": false,
+        "layout": "left",
+        "image_fit": "contain",
+        "media_width": 50,
+        "media_scale": 100,
+        "text_align": "text-start",
         "color_scheme": "none",
-        "full_width": true
+        "only_content_color_scheme": false
       }
     },
     "featured_blog_recetas": {
@@ -637,14 +520,14 @@
         "heading_cUJ39A": {
           "type": "heading",
           "settings": {
-            "heading": "15% OFF en tu primer pedido",
+            "heading": "20% OFF en tu primer pedido",
             "heading_size": "h4"
           }
         },
         "text_p3LHH3": {
           "type": "text",
           "settings": {
-            "text": "<p>Déjanos tu correo y te damos el código <strong>PRIMERA15</strong> al instante. De paso, recibes nuestras ofertas de la semana antes que nadie.</p>",
+            "text": "<p>Déjanos tu correo y te damos el código <strong>PRIMERA20</strong> al instante. De paso, recibes nuestras ofertas de la semana antes que nadie.</p>",
             "enlarge_text": false
           }
         },
@@ -720,6 +603,107 @@
         "dividers": "none",
         "prevent_animation": false
       }
+    },
+    "video_9nrWpD": {
+      "type": "video",
+      "blocks": {
+        "heading_4jrfKz": {
+          "type": "heading",
+          "settings": {
+            "heading": "Experiencia Frutiferia",
+            "heading_size": "h1",
+            "heading_h1": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_4jrfKz"
+      ],
+      "disabled": true,
+      "name": "Video",
+      "settings": {
+        "video_shopify": "shopify://files/videos/Testimonio Tamar.mp4",
+        "video_external": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_description": "",
+        "video_size": "md",
+        "video_autoplay": true,
+        "text_align": "text-center",
+        "color_scheme": "default"
+      }
+    },
+    "business_logos": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Restaurantes"
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Hoteles"
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Cafeterías"
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Casinos"
+          }
+        },
+        "logo_5": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Oficinas"
+          }
+        },
+        "logo_6": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Almacenes"
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "logo_5",
+        "logo_6"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Negocios que se abastecen con Frutiferia",
+        "heading_align": "text-center",
+        "button_label": "Vender a tu negocio",
+        "button_link": "shopify://pages/venta-a-negocios",
+        "layout": "carousel",
+        "spacing": 56,
+        "logo_grid_align": "justify-center",
+        "image_opacity": 100,
+        "color_scheme": "none",
+        "full_width": true
+      }
     }
   },
   "order": [
@@ -729,7 +713,7 @@
     "featured-collection",
     "collection-list",
     "frutimenu_promo",
-    "shipping_rates",
+    "b2b_band",
     "testimonials_JERNA6",
     "media_with_text_VAd4Hi",
     "featured_blog_recetas",
