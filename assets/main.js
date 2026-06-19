@@ -175,6 +175,10 @@ function setHeaderHeight() {
   const announcement = document.getElementById('shopify-section-announcement');
   if (announcement) height += announcement.offsetHeight;
 
+  // Add free-shipping bar height (replaces the announcement bar at the top).
+  const freeShippingBar = document.getElementById('shopify-section-free-shipping-bar');
+  if (freeShippingBar) height += freeShippingBar.offsetHeight;
+
   document.documentElement.style.setProperty('--header-height', `${height}px`);
 }
 

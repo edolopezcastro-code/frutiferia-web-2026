@@ -1,0 +1,215 @@
+/* ============================================================
+   Free Shipping Bar — barra superior dinámica de envío gratis
+   Marca Frutiferia. Texto blanco sobre morado profundo (AAA),
+   estado logrado en mint sólido (AA). Riel de progreso a tope
+   del borde inferior, con borde de avance luminoso.
+   ============================================================ */
+
+.cc-free-shipping-bar {
+  position: relative;
+  z-index: 32;
+}
+
+.fbar {
+  --fbar-bg-top: #6a1e96;
+  --fbar-bg-mid: #551584;
+  --fbar-bg-bot: #4a0f73;
+  --fbar-text: #ffffff;
+  --fbar-soft: #e6d9f0;
+  --fbar-accent: #ffe6a3;          /* monto que falta — cálido, llamativo (>=9:1) */
+  --fbar-track: rgba(255, 255, 255, 0.18);
+  --fbar-fill-a: #9b3ddb;
+  --fbar-fill-b: #ebcbff;          /* borde de avance brillante: pop sobre el morado */
+  --fbar-glow: rgba(243, 225, 255, 0.95);
+
+  --fbar-ok-bg: #16703f;           /* mint sólido — blanco = 6.25:1 (AA) */
+  --fbar-ok-soft: #dff5e9;
+  --fbar-ok-fill: rgba(255, 255, 255, 0.92);
+
+  --progress: 0%;
+
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 40px;
+  overflow: hidden;
+  color: var(--fbar-text);
+  background: linear-gradient(180deg, var(--fbar-bg-top) 0%, var(--fbar-bg-mid) 55%, var(--fbar-bg-bot) 100%);
+  font-family: inherit;
+  transition: background 0.45s ease;
+}
+
+/* sutil brillo superior — profundidad sin movimiento */
+.fbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(130% 200% at 20% -60%, rgba(255, 255, 255, 0.10), transparent 60%);
+}
+
+.fbar__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 6px 22px 8px;
+  text-align: center;
+}
+
+.fbar__icon {
+  flex-shrink: 0;
+  font-size: 15px;
+  line-height: 1;
+  transform: translateY(0.5px);
+}
+
+.fbar__msg {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fbar__msg .fbar__hero {
+  font-weight: 700;
+  color: var(--fbar-accent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.fbar__link {
+  flex-shrink: 0;
+  color: var(--fbar-soft);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(230, 217, 240, 0.45);
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.fbar__link:hover,
+.fbar__link:focus-visible {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+/* ---- riel de progreso, pegado al borde inferior (full-bleed) ---- */
+.fbar__rail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--fbar-track);
+  z-index: 1;
+}
+.fbar__rail-fill {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: var(--progress);
+  background: linear-gradient(90deg, var(--fbar-fill-a) 0%, #c071ef 65%, var(--fbar-fill-b) 100%);
+  border-radius: 0 4px 4px 0;
+  transition: width 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+/* borde de avance luminoso — el único punto de luz en movimiento */
+.fbar__rail-fill::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translate(50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--fbar-glow), rgba(199, 125, 245, 0) 70%);
+  opacity: 1;
+}
+
+/* estado vacío: riel calmo al 0%, sin glow */
+.fbar--empty .fbar__rail-fill { width: 0; }
+.fbar--empty .fbar__rail-fill::after { opacity: 0; }
+
+/* ---- estado LOGRADO: mint sólido ---- */
+.fbar--done {
+  background: var(--fbar-ok-bg);
+}
+.fbar--done .fbar__rail { background: rgba(255, 255, 255, 0.24); }
+.fbar--done .fbar__rail-fill {
+  width: 100%;
+  background: var(--fbar-ok-fill);
+}
+.fbar--done .fbar__rail-fill::after { opacity: 0; }
+.fbar--done .fbar__link { color: var(--fbar-ok-soft); border-bottom-color: rgba(223, 245, 233, 0.5); }
+.fbar--done .fbar__link:hover { color: #fff; border-bottom-color: #fff; }
+
+/* ---- celebración (una sola vez, controlada por JS) ---- */
+.fbar.is-celebrating::before {
+  background:
+    radial-gradient(130% 200% at 20% -60%, rgba(255, 255, 255, 0.10), transparent 60%),
+    rgba(141, 233, 191, 0.5);
+  animation: fbar-wash 1.4s ease-out forwards;
+}
+@keyframes fbar-wash {
+  0% { opacity: 0; }
+  18% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.fbar__confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+.fbar__confetti span {
+  position: absolute;
+  top: -8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 1px;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.fbar.is-celebrating .fbar__confetti span {
+  animation: fbar-confetti var(--dur, 950ms) ease-in forwards;
+  animation-delay: var(--delay, 0ms);
+}
+@keyframes fbar-confetti {
+  0% { opacity: 0; transform: translateY(-6px) rotate(0deg) scale(0.7); }
+  12% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(46px) rotate(220deg) scale(1); }
+}
+
+/* ---- móvil ---- */
+@media (max-width: 560px) {
+  .fbar { min-height: 34px; }
+  .fbar__inner {
+    min-height: 34px;
+    gap: 8px;
+    padding: 5px 14px 7px;
+  }
+  .fbar__icon { font-size: 14px; }
+  .fbar__msg { font-size: 12.5px; }
+  .fbar__link { display: none; } /* el enlace de reparto vive también en el footer */
+}
+
+/* ---- accesibilidad: respetar reduce-motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .fbar,
+  .fbar__rail-fill { transition: none; }
+  .fbar.is-celebrating::before { animation: none; opacity: 0; }
+  .fbar.is-celebrating .fbar__confetti span { animation: none; opacity: 0; }
+}

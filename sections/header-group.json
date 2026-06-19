@@ -11,20 +11,18 @@
   "type": "header",
   "name": "Header Group",
   "sections": {
-    "announcement": {
-      "type": "announcement",
+    "free-shipping-bar": {
+      "type": "free-shipping-bar",
       "settings": {
-        "announcement_homepage_only": true,
-        "link1": "shopify://pages/reparto",
-        "link1_label": "Envíos: Mar, Mié, Vie y Sáb",
-        "link2": "shopify://collections/all",
-        "link2_label": "Nuevas tarifas · envío gratis sobre $50.000",
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "bg_color": "#9640e6",
-        "text_color": "#ffffff",
-        "text_type_scale": "small",
-        "read_time": 4
+        "enabled": true,
+        "homepage_only": false,
+        "threshold": 50000,
+        "delivery_days": "Mar, Mié, Vie y Sáb",
+        "copy_empty": "Envío gratis en tus compras sobre {threshold} · Repartimos {days}",
+        "copy_progress": "Te faltan {falta} para tu envío gratis",
+        "copy_done": "¡Tienes envío gratis! Tu pedido supera los {threshold}",
+        "reparto_link": "shopify://pages/reparto",
+        "reparto_label": "Ver reparto"
       }
     },
     "header": {
@@ -109,7 +107,7 @@
     }
   },
   "order": [
-    "announcement",
+    "free-shipping-bar",
     "header",
     "promo_strip_QLcH46"
   ]

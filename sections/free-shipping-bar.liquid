@@ -1,0 +1,215 @@
+{%- comment -%}
+  Free Shipping Bar — barra superior dinámica de envío gratis (carrito-aware).
+  Muestra el progreso del carrito hacia el umbral de envío gratis y se actualiza
+  en vivo a medida que el cliente agrega/quita productos (igual que FrutiMenu).
+
+  3 estados:
+    - vacío        -> invita: "Envío gratis sobre $50.000 · Repartimos ..."
+    - en progreso  -> "Te faltan $X para tu envío gratis" + barra de progreso
+    - logrado      -> celebración mint "¡Tienes envío gratis!" + confeti (1 vez)
+
+  Render inicial server-side (correcto sin JS / en el editor de temas).
+  Actualización en vivo en assets/free-shipping-bar.js (node-patch sobre /cart.js).
+{%- endcomment -%}
+
+{%- liquid
+  assign threshold = section.settings.threshold | default: 50000
+  assign threshold_cents = threshold | times: 100
+  assign total = cart.total_price | default: 0
+  assign item_count = cart.item_count | default: 0
+
+  assign pct = 0
+  if threshold_cents > 0
+    assign pct = total | times: 100.0 | divided_by: threshold_cents
+  endif
+  if pct > 100
+    assign pct = 100
+  endif
+
+  assign state = 'progress'
+  if item_count == 0
+    assign state = 'empty'
+  elsif total >= threshold_cents
+    assign state = 'done'
+  endif
+
+  assign falta_cents = threshold_cents | minus: total
+  if falta_cents < 0
+    assign falta_cents = 0
+  endif
+
+  assign days = section.settings.delivery_days
+  assign threshold_money = threshold_cents | money
+  assign falta_money = falta_cents | money
+  assign total_money = total | money
+
+  assign tpl_empty = section.settings.copy_empty
+  assign tpl_progress = section.settings.copy_progress
+  assign tpl_done = section.settings.copy_done
+
+  capture falta_html
+    echo '<b class="fbar__hero">'
+    echo falta_money
+    echo '</b>'
+  endcapture
+
+  capture msg_empty
+    assign t = tpl_empty | replace: '{threshold}', threshold_money | replace: '{total}', total_money | replace: '{days}', days
+    echo t
+  endcapture
+  capture msg_progress
+    assign t = tpl_progress | replace: '{falta}', falta_html | replace: '{threshold}', threshold_money | replace: '{total}', total_money | replace: '{days}', days
+    echo t
+  endcapture
+  capture msg_done
+    assign t = tpl_done | replace: '{threshold}', threshold_money | replace: '{total}', total_money | replace: '{days}', days
+    echo t
+  endcapture
+
+  if state == 'empty'
+    assign initial_msg = msg_empty
+  elsif state == 'done'
+    assign initial_msg = msg_done
+  else
+    assign initial_msg = msg_progress
+  endif
+-%}
+
+{%- liquid
+  assign do_render = true
+  if section.settings.enabled == false
+    assign do_render = false
+  endif
+  if section.settings.homepage_only and request.page_type != 'index'
+    assign do_render = false
+  endif
+-%}
+
+{{ 'free-shipping-bar.css' | asset_url | stylesheet_tag }}
+
+{%- if do_render -%}
+  <free-shipping-bar
+    class="fbar-section{% if section.settings.homepage_only %} fbar-section--home-only{% endif %}"
+    data-threshold="{{ threshold_cents }}"
+    data-state="{{ state }}"
+  >
+    <div
+      class="fbar fbar--{{ state }}"
+      style="--progress: {{ pct }}%;"
+      role="status"
+      aria-live="polite"
+    >
+      <div class="fbar__inner">
+        <span class="fbar__icon" aria-hidden="true">
+          {%- if state == 'done' -%}🎉{%- else -%}🚚{%- endif -%}
+        </span>
+
+        <span class="fbar__msg" data-fbar-msg>{{ initial_msg }}</span>
+
+        {%- if section.settings.reparto_link != blank -%}
+          <a class="fbar__link" href="{{ section.settings.reparto_link }}">{{ section.settings.reparto_label | default: 'Ver reparto' }}</a>
+        {%- endif -%}
+      </div>
+
+      <span class="fbar__rail" aria-hidden="true"><span class="fbar__rail-fill" data-fbar-fill></span></span>
+      <span class="fbar__confetti" data-fbar-confetti aria-hidden="true"></span>
+    </div>
+
+    <script type="application/json" data-fbar-config>
+      {
+        "threshold": {{ threshold_cents }},
+        "copyEmpty": {{ tpl_empty | json }},
+        "copyProgress": {{ tpl_progress | json }},
+        "copyDone": {{ tpl_done | json }},
+        "thresholdLabel": {{ threshold_money | json }},
+        "days": {{ days | json }},
+        "currency": {{ cart.currency.iso_code | json }}
+      }
+    </script>
+  </free-shipping-bar>
+
+  <script src="{{ 'free-shipping-bar.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barra envío gratis",
+  "class": "cc-free-shipping-bar",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Barra superior que muestra en vivo cuánto le falta al carrito para el envío gratis. Se actualiza sola al agregar o quitar productos."
+    },
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Mostrar la barra",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "homepage_only",
+      "label": "Mostrar solo en la portada",
+      "info": "Recomendado dejarlo desactivado: la barra convierte mejor en fichas de producto, colección y carrito.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Umbral"
+    },
+    {
+      "type": "number",
+      "id": "threshold",
+      "label": "Monto para envío gratis (en pesos)",
+      "default": 50000,
+      "info": "Debe coincidir con tu regla de envío en Shopify."
+    },
+    {
+      "type": "text",
+      "id": "delivery_days",
+      "label": "Días de reparto",
+      "default": "Mar, Mié, Vie y Sáb"
+    },
+    {
+      "type": "header",
+      "content": "Textos (usa {falta}, {total}, {threshold}, {days})"
+    },
+    {
+      "type": "text",
+      "id": "copy_empty",
+      "label": "Carrito vacío",
+      "default": "Envío gratis en tus compras sobre {threshold} · Repartimos {days}"
+    },
+    {
+      "type": "text",
+      "id": "copy_progress",
+      "label": "En progreso",
+      "default": "Te faltan {falta} para tu envío gratis"
+    },
+    {
+      "type": "text",
+      "id": "copy_done",
+      "label": "Logrado",
+      "default": "¡Tienes envío gratis! Tu pedido supera los {threshold}"
+    },
+    {
+      "type": "header",
+      "content": "Enlace de reparto"
+    },
+    {
+      "type": "url",
+      "id": "reparto_link",
+      "label": "Enlace"
+    },
+    {
+      "type": "text",
+      "id": "reparto_label",
+      "label": "Texto del enlace",
+      "default": "Ver reparto"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}
