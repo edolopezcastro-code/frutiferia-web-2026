@@ -464,7 +464,7 @@
           "settings": {
             "icon": "truck",
             "heading": "¿Con qué frecuencia pueden despachar?",
-            "text": "<p>Despachamos a negocios los <strong>martes y viernes</strong>, y también miércoles y sábado. Podemos coordinar entregas semanales fijas según tu necesidad.</p>"
+            "text": "<p>Despachamos a negocios <strong>martes, miércoles, viernes y sábado</strong>. Podemos coordinar entregas semanales fijas según tu necesidad.</p>"
           }
         },
         "q_calidad": {

@@ -97,7 +97,7 @@
         "text_AtwLJM": {
           "type": "text",
           "settings": {
-            "text": "<p>¿Prefieres hablar directo? Escríbenos por WhatsApp al <strong>+56 9 9575 4109</strong> o visítanos en nuestra tienda FrutiLocal en Maravillar 2017, Viña del Mar.</p>",
+            "text": "<p>¿Prefieres hablar directo? Escríbenos por WhatsApp al <strong>+56 9 6609 3891</strong> o visítanos en nuestra tienda FrutiLocal en Maravillar 2017, Viña del Mar.</p>",
             "enlarge_text": false
           }
         },
@@ -105,7 +105,7 @@
           "type": "button",
           "settings": {
             "button_label": "Abrir WhatsApp",
-            "button_link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20necesito%20ayuda!",
+            "button_link": "https://api.whatsapp.com/send?phone=+56966093891&text=Hola%20FrutiEquipo,%20necesito%20ayuda!",
             "button_style": "btn btn--primary"
           }
         }

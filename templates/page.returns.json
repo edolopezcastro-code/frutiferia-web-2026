@@ -62,7 +62,7 @@
           "settings": {
             "enable_media": false,
             "heading": "1. Contáctanos",
-            "text": "<p>Escríbenos por WhatsApp al +56 9 9575 4109 con una foto del producto y tu número de pedido.</p>",
+            "text": "<p>Escríbenos por WhatsApp al +56 9 6609 3891 con una foto del producto y tu número de pedido.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -173,7 +173,7 @@
           "type": "button",
           "settings": {
             "button_label": "Abrir WhatsApp",
-            "button_link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20tengo%20un%20problema%20con%20mi%20pedido",
+            "button_link": "https://api.whatsapp.com/send?phone=+56966093891&text=Hola%20FrutiEquipo,%20tengo%20un%20problema%20con%20mi%20pedido",
             "button_style": "btn btn--primary"
           }
         }

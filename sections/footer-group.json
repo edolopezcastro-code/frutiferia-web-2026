@@ -32,8 +32,8 @@
             "use_custom_icon_color": false,
             "icon_color": "#000000",
             "heading": "WhatsApp directo",
-            "text": "<p>Atención rápida al +56 9 9575 4109</p>",
-            "link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo!"
+            "text": "<p>Atención rápida al +56 9 6609 3891</p>",
+            "link": "https://api.whatsapp.com/send?phone=+56966093891&text=Hola%20FrutiEquipo!"
           }
         },
         "icons-with-text-3": {

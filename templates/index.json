@@ -91,7 +91,7 @@
           "settings": {
             "eyebrow": "Para tu negocio",
             "title": "Abastecimiento sin quiebres",
-            "text": "<p>Restaurantes, hoteles y cafeterías: calidad pareja, despacho programado y factura al día. <strong>Cotización en menos de 24 h.</strong></p><p>🚚 Despachamos martes y viernes (también miércoles y sábado).</p>",
+            "text": "<p>Restaurantes, hoteles y cafeterías: calidad pareja, despacho programado y factura al día. <strong>Cotización en menos de 24 h.</strong></p><p>🚚 Despachamos <strong>martes, miércoles, viernes y sábado</strong>.</p>",
             "cta_label": "Cotiza para tu negocio",
             "cta_link": "shopify://pages/venta-a-negocios",
             "accent": "#671d90"
@@ -144,7 +144,7 @@
             "icon_color": "#000000",
             "heading": "¿Hablemos?",
             "text": "<p>¡Despejemos tus dudas!</p>",
-            "link": "https://api.whatsapp.com/send?phone=+56995754109&text=Hola%20FrutiEquipo,%20necesito%20de%20su%20ayuda!"
+            "link": "https://api.whatsapp.com/send?phone=+56966093891&text=Hola%20FrutiEquipo,%20necesito%20de%20su%20ayuda!"
           }
         },
         "item_8hDrkT": {

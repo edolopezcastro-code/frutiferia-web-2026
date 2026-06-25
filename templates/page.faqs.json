@@ -74,7 +74,7 @@
           "settings": {
             "icon": "question_mark",
             "heading": "¿Cómo hago un pedido?",
-            "text": "<p>Puedes hacer tu pedido directamente en nuestra tienda online o por WhatsApp al +56 9 9575 4109. Elige tus productos, agrégalos al carrito y procede al pago. ¡Así de simple!</p>"
+            "text": "<p>Puedes hacer tu pedido directamente en nuestra tienda online o por WhatsApp al +56 9 6609 3891. Elige tus productos, agrégalos al carrito y procede al pago. ¡Así de simple!</p>"
           }
         },
         "faq-question-2": {
@@ -104,7 +104,7 @@
           "settings": {
             "icon": "calendar",
             "heading": "¿Qué días entregan?",
-            "text": "<p>El día depende de tu tipo de cliente y zona:</p><ul><li><strong>Hogares:</strong> miércoles y sábado</li><li><strong>Negocios:</strong> martes y viernes (también miércoles y sábado)</li><li><strong>Oficinas y bienestar:</strong> lunes (AM) y miércoles</li></ul><p>Coordinamos el día exacto al momento de tu pedido. ¿Necesitas otro día? Escríbenos y lo agendamos.</p>"
+            "text": "<p>El día depende de tu tipo de cliente y zona:</p><ul><li><strong>Hogares:</strong> miércoles y sábado</li><li><strong>Negocios:</strong> martes, miércoles, viernes y sábado</li><li><strong>Oficinas y bienestar:</strong> lunes (AM) y miércoles</li></ul><p>Coordinamos el día exacto al momento de tu pedido. ¿Necesitas otro día? Escríbenos y lo agendamos.</p>"
           }
         },
         "faq-category-3": {
