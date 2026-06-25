@@ -17,10 +17,10 @@
         "enabled": true,
         "homepage_only": false,
         "threshold": 50000,
-        "delivery_days": "Mar, Mié, Vie y Sáb",
-        "copy_empty": "Envío gratis en tus compras sobre {threshold} · Repartimos {days}",
-        "copy_progress": "Te faltan {falta} para tu envío gratis",
-        "copy_done": "¡Tienes envío gratis! Tu pedido supera los {threshold}",
+        "delivery_days": "Mié y Sáb",
+        "copy_empty": "Despacho GRATIS sobre {threshold} · Repartimos {days}",
+        "copy_progress": "Te faltan {falta} para tu despacho gratis",
+        "copy_done": "¡Tienes despacho gratis! Tu pedido supera los {threshold}",
         "reparto_link": "shopify://pages/reparto",
         "reparto_label": "Ver reparto"
       }

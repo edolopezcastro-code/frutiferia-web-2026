@@ -50,8 +50,8 @@
           "type": "item",
           "settings": {
             "icon": "calendar",
-            "heading": "4 días de entrega",
-            "text": "<p>Mar, Mié, Vie, Sáb</p>",
+            "heading": "Entrega a domicilio",
+            "text": "<p>Miércoles y sábado</p>",
             "link": ""
           }
         },

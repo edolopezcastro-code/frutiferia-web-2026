@@ -104,7 +104,7 @@
           "settings": {
             "icon": "calendar",
             "heading": "¿Qué días entregan?",
-            "text": "<p>Realizamos entregas los martes, miércoles, viernes y sábados. El día exacto depende de tu zona. Revisa nuestra página de repartos para más detalles.</p>"
+            "text": "<p>El día depende de tu tipo de cliente y zona:</p><ul><li><strong>Hogares:</strong> miércoles y sábado</li><li><strong>Negocios:</strong> martes y viernes (también miércoles y sábado)</li><li><strong>Oficinas y bienestar:</strong> lunes (AM) y miércoles</li></ul><p>Coordinamos el día exacto al momento de tu pedido. ¿Necesitas otro día? Escríbenos y lo agendamos.</p>"
           }
         },
         "faq-category-3": {

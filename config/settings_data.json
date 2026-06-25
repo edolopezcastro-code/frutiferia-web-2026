@@ -154,6 +154,7 @@
     "cart_shaking": true,
     "cart_shaking_frequency": 2,
     "show_free_shipping_notice": true,
+    "free_shipping_minimum": "CLP:50000",
     "free_shipping_color_scheme": "1",
     "animations_enabled": "mobile_desktop",
     "animation_speed": "fast",

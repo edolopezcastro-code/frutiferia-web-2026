@@ -80,7 +80,7 @@
           "settings": {
             "eyebrow": "Para tu casa",
             "title": "Tu semana resuelta",
-            "text": "<p>Frutas y verduras frescas a tu puerta, y <strong>FrutiMenu</strong> que arma tu menú de 7 días y la lista de compra en un minuto.</p>",
+            "text": "<p>Frutas y verduras frescas a tu puerta, y <strong>FrutiMenu</strong> que arma tu menú de 7 días y la lista de compra en un minuto.</p><p>🚚 <strong>Despacho gratis sobre $50.000</strong> · llegamos miércoles y sábado.</p>",
             "cta_label": "Arma tu semana",
             "cta_link": "shopify://pages/frutimenu",
             "accent": "#2c9cdb"
@@ -91,7 +91,7 @@
           "settings": {
             "eyebrow": "Para tu negocio",
             "title": "Abastecimiento sin quiebres",
-            "text": "<p>Restaurantes, hoteles y cafeterías: calidad pareja, despacho programado y factura al día. <strong>Cotización en menos de 24 h.</strong></p>",
+            "text": "<p>Restaurantes, hoteles y cafeterías: calidad pareja, despacho programado y factura al día. <strong>Cotización en menos de 24 h.</strong></p><p>🚚 Despachamos martes y viernes (también miércoles y sábado).</p>",
             "cta_label": "Cotiza para tu negocio",
             "cta_link": "shopify://pages/venta-a-negocios",
             "accent": "#671d90"
@@ -102,7 +102,7 @@
           "settings": {
             "eyebrow": "Para tu equipo",
             "title": "Bienestar que se nota",
-            "text": "<p>Cajas de fruta para colaboradores, charlas de bienestar e informes para RRHH. Equipos más sanos, más presentes.</p>",
+            "text": "<p>Cajas de fruta para colaboradores, charlas de bienestar e informes para RRHH. Equipos más sanos, más presentes.</p><p>🚚 Entrega a la oficina lunes (AM) y miércoles.</p>",
             "cta_label": "Fruta para tu equipo",
             "cta_link": "shopify://pages/bienestar",
             "accent": "#d6457d"
