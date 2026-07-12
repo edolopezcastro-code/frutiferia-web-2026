@@ -7,8 +7,10 @@
   drawer de Canopy — SIN navegar, SIN pestaña nueva, SIN saltar a checkout.
 
   Contrato del mensaje (app -> tema), origin === embed_url:
-    { type:"frutimenu:add-to-cart", items:[{variantId, quantity}], discount, fallbackUrl }
-  Respuesta (tema -> app): { type:"frutimenu:cart-ok" }  (ack: "lo manejo nativo").
+    { type:"frutimenu:add-to-cart", nonce, items:[{variantId, quantity}], discount, fallbackUrl }
+  Respuesta (tema -> app): { type:"frutimenu:cart-ok", nonce }  (ack: "lo manejo nativo").
+  El nonce se ecoa tal cual (FM-4.1, mi-frutimenu): la app lo usa para descartar acks
+  de un intento viejo (doble-click) en vez de resolver el intento equivocado.
 
   Robustez:
     - Origen estricto (solo el del iframe) + saneo de ids/cantidades: nadie más puede
@@ -36,9 +38,11 @@
       return sec ? sec.querySelector(".frutimenu-embed__frame") : null;
     }
 
-    function ack() {
+    function ack(nonce) {
       var f = iframeEl();
-      if (f && f.contentWindow) f.contentWindow.postMessage({ type: ACK }, ALLOWED);
+      var msg = { type: ACK };
+      if (typeof nonce === "string") msg.nonce = nonce;
+      if (f && f.contentWindow) f.contentWindow.postMessage(msg, ALLOWED);
     }
 
     function addToCart(items) {
@@ -93,7 +97,8 @@
       if (!items.length) return;
 
       // Ack inmediato: "lo manejo nativo, no navegues". Frena el timeout de la app.
-      ack();
+      // Ecoa el nonce del pedido (FM-4.1) para que la app sepa que es ESTE intento.
+      ack(data.nonce);
 
       addToCart(items)
         .then(function () { return applyDiscount(data.discount); })
