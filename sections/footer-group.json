@@ -111,7 +111,7 @@
           "type": "link_list",
           "settings": {
             "heading": "Comprar",
-            "menu": "footer"
+            "menu": "footer-comprar"
           }
         },
         "link-list-2": {
