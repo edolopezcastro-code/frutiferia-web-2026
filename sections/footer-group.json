@@ -118,7 +118,7 @@
           "type": "link_list",
           "settings": {
             "heading": "Ayuda",
-            "menu": "footer"
+            "menu": "footer-ayuda"
           }
         },
         "newsletter": {
