@@ -13,6 +13,21 @@
       "type": "main-search",
       "settings": {}
     },
+    "frutimenu_cta_search": {
+      "type": "frutimenu-cta",
+      "settings": {
+        "emoji": "🥗",
+        "eyebrow": "Tu semana, resuelta",
+        "heading": "¿No sabes qué cocinar?",
+        "text": "FrutiMenu arma tu menú de 7 días con recetas que aprovechan lo que compras, y te deja la lista de compra lista.",
+        "cta_label": "Arma tu semana",
+        "cta_link": "shopify://pages/frutimenu",
+        "accent": "#2C9CDB",
+        "color_scheme": "none",
+        "full_width": false,
+        "prevent_animation": false
+      }
+    },
     "collection_list": {
       "type": "collection-list",
       "blocks": {
@@ -78,6 +93,7 @@
   },
   "order": [
     "main",
+    "frutimenu_cta_search",
     "collection_list"
   ]
 }

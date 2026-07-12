@@ -387,6 +387,17 @@
         "full_width": false,
         "show_space": true
       }
+    },
+    "recently_viewed_product": {
+      "type": "recently-viewed",
+      "settings": {
+        "heading": "Vistos recientemente",
+        "heading_align": "text-start",
+        "layout": "carousel",
+        "card_size_mobile": "small",
+        "card_size": "small",
+        "limit": 10
+      }
     }
   },
   "order": [
@@ -396,6 +407,7 @@
     "frutimenu_cta_product",
     "recommendations",
     "cross_sell",
-    "1780585006ec95da1b"
+    "1780585006ec95da1b",
+    "recently_viewed_product"
   ]
 }

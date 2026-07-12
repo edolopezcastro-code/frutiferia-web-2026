@@ -1,1 +1,1 @@
-{"sections":{"main":{"type":"main-order","settings":{}}},"order":["main"]}
+{"sections":{"main":{"type":"main-order","settings":{}},"frutimenu_cta_order":{"type":"frutimenu-cta","settings":{"emoji":"🥗","eyebrow":"Tu semana, resuelta","heading":"¿Y la próxima semana?","text":"FrutiMenu arma tu menú de 7 días con recetas ricas y tu lista de compra lista en un minuto.","cta_label":"Arma tu semana","cta_link":"shopify://pages/frutimenu","accent":"#2C9CDB","color_scheme":"none","full_width":false,"prevent_animation":false}}},"order":["main","frutimenu_cta_order"]}

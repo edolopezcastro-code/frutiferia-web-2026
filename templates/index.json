@@ -30,8 +30,8 @@
             "button_1_label": "Comprar con 15% OFF",
             "button_1_link": "/discount/PRIMERA15?redirect=/collections/all",
             "button_1_style": "btn btn--primary",
-            "button_2_label": "Ofertas de la semana",
-            "button_2_link": "shopify://collections/ofertas",
+            "button_2_label": "Arma tu semana gratis",
+            "button_2_link": "/pages/frutimenu",
             "button_2_style": "btn btn--secondary",
             "transparent_content_color": "#ffffff",
             "countdown_show": false,
@@ -704,6 +704,17 @@
         "color_scheme": "none",
         "full_width": true
       }
+    },
+    "recently_viewed_home": {
+      "type": "recently-viewed",
+      "settings": {
+        "heading": "Vistos recientemente",
+        "heading_align": "text-start",
+        "layout": "carousel",
+        "card_size_mobile": "small",
+        "card_size": "small",
+        "limit": 10
+      }
     }
   },
   "order": [
@@ -720,6 +731,7 @@
     "newsletter_WXJigB",
     "scrolling_banner_ArEtdk",
     "video_9nrWpD",
-    "business_logos"
+    "business_logos",
+    "recently_viewed_home"
   ]
 }
