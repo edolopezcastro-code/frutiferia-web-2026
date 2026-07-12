@@ -31,7 +31,7 @@
         "shipping_calculator_default_country": "Chile",
         "promoted_products_visibility": "always",
         "promoted_products_heading": "¿Te falta algo?",
-        "promoted_products_list": [],
+        "promoted_products_list": ["platano-3-u", "palta-hass-u", "limon-u", "tomate-u", "cebolla-5-kg"],
         "promoted_products_layout": "carousel",
         "show_media_promotion": true,
         "media_promotion_visibility": "below_threshold",
