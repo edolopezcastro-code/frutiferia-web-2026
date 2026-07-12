@@ -39,8 +39,8 @@
         "button_hero": {
           "type": "button",
           "settings": {
-            "button_1_label": "Ver productos por mayor",
-            "button_1_link": "shopify://collections/por-mayor",
+            "button_1_label": "Cotiza online en minutos",
+            "button_1_link": "https://cotiza.frutiferia.com",
             "button_1_style": "btn btn--primary",
             "button_2_label": "Cotizar por WhatsApp",
             "button_2_link": "https://api.whatsapp.com/send?phone=+56993261147&text=Hola%20Francisco,%20soy%20empresa%20y%20me%20interesa%20comprar%20por%20mayor",
@@ -123,6 +123,17 @@
     "beneficios_b2b": {
       "type": "icons-with-text",
       "blocks": {
+        "ic_cotiza": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "use_custom_icon_color": false,
+            "icon_color": "#000000",
+            "heading": "Cotiza online en minutos",
+            "text": "<p>Ingresa tus productos y cantidades sin llamar ni escribir. Recibe tu propuesta al instante.</p>",
+            "link": "https://cotiza.frutiferia.com"
+          }
+        },
         "ic_precio": {
           "type": "item",
           "settings": {
@@ -190,7 +201,7 @@
           }
         }
       },
-      "block_order": ["ic_precio", "ic_despacho", "ic_factura", "ic_atencion", "ic_calidad", "ic_experiencia"],
+      "block_order": ["ic_cotiza", "ic_precio", "ic_despacho", "ic_factura", "ic_atencion", "ic_calidad", "ic_experiencia"],
       "settings": {
         "heading": "¿Por qué elegirnos como proveedor?",
         "heading_align": "text-center",
