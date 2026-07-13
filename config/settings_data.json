@@ -81,7 +81,7 @@
     "coll_border_color": "rgba(0,0,0,0)",
     "prod_card_image_ratio": "1",
     "prod_card_image_fit": "contain",
-    "prod_card_text_align": "center",
+    "prod_card_text_align": "start",
     "card_show_weight": true,
     "card_show_vendor": true,
     "card_show_subtitle": false,
