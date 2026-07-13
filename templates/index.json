@@ -9,8 +9,26 @@
  */
 {
   "sections": {
+    "fru_hero": {
+      "type": "fru-hero",
+      "settings": {
+        "image_alt": "Cajón de frutas y verduras de temporada de Frutiferia",
+        "overlay_opacity": 45,
+        "badge_text": "Código PRIMERA15 · 15% en tu primera compra",
+        "heading": "Fruta y verdura que llega",
+        "heading_highlight": "cuando dijimos",
+        "subheading": "<p>Reparto a domicilio miércoles y sábado en Viña, Valparaíso, Concón, Reñaca y Quilpué. Despacho gratis sobre $50.000.</p>",
+        "cta_label": "Pide tu primera caja con 15% OFF",
+        "cta_link": "/discount/PRIMERA15?redirect=/collections/all",
+        "cta2_label": "Arma tu semana gratis",
+        "cta2_link": "shopify://pages/frutimenu",
+        "color_scheme": "none",
+        "prevent_animation": false
+      }
+    },
     "slideshow": {
       "type": "slideshow",
+      "disabled": true,
       "blocks": {
         "slide-1": {
           "type": "slide",
@@ -117,7 +135,7 @@
       "settings": {
         "subheading": "Frutiferia para cada quien",
         "heading": "¿Cómo te abasteces con Frutiferia?",
-        "color_scheme": "none",
+        "color_scheme": "1",
         "full_width": true,
         "prevent_animation": false
       }
@@ -197,7 +215,7 @@
         "icon_position": "beside",
         "mobile_stack": false,
         "section_height": "small",
-        "color_scheme": "1",
+        "color_scheme": "none",
         "full_width": true,
         "dividers": "none",
         "prevent_animation": false
@@ -510,7 +528,7 @@
         "show_author": false,
         "show_date": true,
         "show_button": true,
-        "color_scheme": "none",
+        "color_scheme": "1",
         "image_ratio": "1.77"
       }
     },
@@ -718,12 +736,13 @@
     }
   },
   "order": [
-    "slideshow",
+    "fru_hero",
     "audience_doors",
+    "business_logos",
+    "frutimenu_promo",
     "3721924b-630b-4a60-b724-521fef7aa78e",
     "featured-collection",
     "collection-list",
-    "frutimenu_promo",
     "b2b_band",
     "testimonials_JERNA6",
     "media_with_text_VAd4Hi",
@@ -731,7 +750,7 @@
     "newsletter_WXJigB",
     "scrolling_banner_ArEtdk",
     "video_9nrWpD",
-    "business_logos",
-    "recently_viewed_home"
+    "recently_viewed_home",
+    "slideshow"
   ]
 }

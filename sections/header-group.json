@@ -37,7 +37,7 @@
         "logo": "shopify://shop_images/Frutiferia.com-Morado_9c000695-f65e-4165-9915-65163550a374.png",
         "logo_mobile": "shopify://shop_images/Frutiferia.com-Morado_9c000695-f65e-4165-9915-65163550a374.png",
         "logo_width": 230,
-        "logo_h1": true,
+        "logo_h1": false,
         "logo_position": "top-left",
         "enable_search": true,
         "minimise_search_mobile": false,
