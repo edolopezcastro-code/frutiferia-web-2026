@@ -1,0 +1,19 @@
+{%- comment -%}
+  Pitch de valor para crear/usar la cuenta — FRUTI3-9.C. Compartido entre
+  main-login y main-register (antes ninguna de las dos comunicaba un motivo
+  para crear cuenta).
+{%- endcomment -%}
+<div class="account-value-pitch">
+  <div class="account-benefit">
+    {%- render 'icon', icon: 'return', width: 22, height: 22 -%}
+    <p class="account-benefit__text">Repite tu pedido en 1 clic</p>
+  </div>
+  <div class="account-benefit">
+    {%- render 'icon', icon: 'map_pin', width: 22, height: 22 -%}
+    <p class="account-benefit__text">Guarda tus direcciones</p>
+  </div>
+  <div class="account-benefit">
+    {%- render 'icon', icon: 'gift', width: 22, height: 22 -%}
+    <p class="account-benefit__text">Beneficios exclusivos para ti</p>
+  </div>
+</div>

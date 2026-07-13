@@ -3,6 +3,8 @@
     <h1 class="{{ section.settings.heading_size }}">{{ 'customer.register.title' | t }}</h1>
   </div>
 
+  {%- render 'account-value-pitch' -%}
+
   {%- form 'create_customer', class: 'form form-width mx-auto', novalidate: 'novalidate' -%}
     {%- if form.errors -%}
       <div class="alert mb-8 bg-error-bg text-error-text" tabindex="-1" autofocus>

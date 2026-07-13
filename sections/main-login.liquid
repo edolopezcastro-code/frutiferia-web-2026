@@ -59,6 +59,8 @@
         <button class="btn btn--primary w-full">{{ 'customer.login.sign_in' | t }}</button>
       </div>
 
+      {%- render 'account-value-pitch' -%}
+
       <p class="mt-8 mb-0 text-center">
         {{ 'customer.login.new_customer' | t }}
         <a class="link" href="{{ routes.account_register_url }}">{{ 'customer.login.create_account' | t }}</a>
