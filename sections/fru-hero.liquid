@@ -1,0 +1,434 @@
+{%- comment -%}
+  Frutiferia Web 3.0 — Hero editorial (FRUTI3-7).
+  Layout asimetrico: titular a la izquierda (UN solo H1 del home), foto a sangre a la
+  derecha (radius 0) con overlay morado (nunca tinte negro). Badge PRIMERA15 como pill
+  menta calmo, UN CTA menta dominante + link secundario a FrutiMenu.
+
+  NO reemplaza a slideshow.liquid de Canopy: es una seccion custom paralela. En el home
+  se monta como primera seccion y el slideshow queda deshabilitado (rollback barato).
+
+  Diseno: skill frutiferia-style v2 (references/playbook-web-landing.md §2.1 +
+  direccion-de-fotografia.md §5). Todos los colores por var(--token) de tokens-frutiferia.css.
+  Tipografia: se usa la fuente de titulos NATIVA del tema (Montserrat via clase .h0);
+  Georgia/Righteous son GATE explicito (trampa §6 del plan) — no se fuerzan aca.
+{%- endcomment -%}
+
+{%- liquid
+  assign img_d = section.settings.image_desktop
+  assign img_m = section.settings.image_mobile
+  assign color_scheme = section.settings.color_scheme
+  assign alt_text = section.settings.image_alt | default: 'Cajon de frutas y verduras de temporada de Frutiferia'
+
+  # overlay morado (nunca negro): .45 por defecto en el borde junto al texto, se desvanece
+  # sobre la fruta para no matar su color real (direccion-de-fotografia §5/§6).
+  assign ov = section.settings.overlay_opacity | default: 45
+  assign ov_a = ov | divided_by: 100.0
+  assign ov_soft = ov | times: 0.38 | divided_by: 100.0
+
+  assign hero_static = false
+  if settings.animations_enabled == 'disabled' or section.settings.prevent_animation
+    assign hero_static = true
+  endif
+-%}
+
+{%- comment -%}
+  Preload del LCP (§5.13): idealmente vive en <head>, pero la imagen es un ajuste de
+  ESTA seccion y los ajustes de seccion no son accesibles desde layout/theme.liquid.
+  Al ser la primera seccion del home, el link va aqui: el preload scanner lo ve antes
+  de cualquier otro recurso del body. Se preescanean desktop/movil por media-query para
+  no descargar las dos.
+{%- endcomment -%}
+{%- if img_d != blank -%}
+  <link rel="preload" as="image" href="{{ img_d | image_url: width: 1600 }}" fetchpriority="high"{% if img_m != blank %} media="(min-width: 768px)"{% endif %}>
+  {%- if img_m != blank -%}
+    <link rel="preload" as="image" href="{{ img_m | image_url: width: 900 }}" fetchpriority="high" media="(max-width: 767px)">
+  {%- endif -%}
+{%- endif -%}
+
+<style>
+  #{{ section.id }} .fru-hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  #{{ section.id }} .fru-hero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2, 16px);
+    max-width: 40rem;
+    padding: var(--space-6, 48px) var(--gutter, 20px) var(--space-4, 32px);
+  }
+  #{{ section.id }} .fru-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--text-positive);
+    background: color-mix(in srgb, var(--fru-menta-500) 14%, var(--surface));
+    border: 1px solid color-mix(in srgb, var(--fru-menta-500) 32%, transparent);
+    border-radius: var(--radius-pill);
+  }
+  #{{ section.id }} .fru-hero__badge::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--fru-menta-500);
+    flex: 0 0 auto;
+  }
+  #{{ section.id }} .fru-hero__title {
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(2.2rem, 6vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+  #{{ section.id }} .fru-hero__hl {
+    color: var(--color-primary);
+    font-style: normal;
+  }
+  #{{ section.id }} .fru-hero__sub {
+    margin: 0;
+    max-width: 34rem;
+    color: var(--text-muted);
+    font-size: 1.12rem;
+    line-height: 1.55;
+  }
+  #{{ section.id }} .fru-hero__sub p { margin: 0; }
+  #{{ section.id }} .fru-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2, 16px);
+    margin-top: var(--space-1, 8px);
+  }
+  #{{ section.id }} .fru-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+    min-height: 52px;
+    padding: 15px 28px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--on-cta);
+    background: var(--grad-cta);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--dur-micro, 200ms) var(--ease-out), box-shadow var(--dur-micro, 200ms) var(--ease-out), background var(--dur-micro, 200ms) var(--ease-out);
+  }
+  #{{ section.id }} .fru-hero__cta:hover {
+    background: var(--fru-verde-700);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  #{{ section.id }} .fru-hero__cta:active { transform: translateY(0); }
+  #{{ section.id }} .fru-hero__cta:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  #{{ section.id }} .fru-hero__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+  #{{ section.id }} .fru-hero__link .fru-hero__arrow {
+    transition: transform var(--dur-micro, 200ms) var(--ease-out);
+  }
+  #{{ section.id }} .fru-hero__link:hover { text-decoration: underline; }
+  #{{ section.id }} .fru-hero__link:hover .fru-hero__arrow { transform: translateX(3px); }
+  #{{ section.id }} .fru-hero__link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  #{{ section.id }} .fru-hero__media {
+    position: relative;
+    height: clamp(260px, 62vw, 380px);
+    overflow: hidden;
+    background: var(--surface-muted);
+  }
+  #{{ section.id }} .fru-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Overlay morado (nunca negro). Direccional: intenso en el borde junto al texto,
+     transparente sobre la fruta. En movil (foto abajo) baja en diagonal 160deg. */
+  #{{ section.id }} .fru-hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(160deg,
+      rgba(103,29,144, var(--fru-hero-ov, .45)) 0%,
+      rgba(103,29,144, var(--fru-hero-ov-soft, .17)) 55%,
+      rgba(103,29,144, 0) 100%);
+  }
+  #{{ section.id }} .fru-hero__placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-muted);
+  }
+  #{{ section.id }} .fru-hero__placeholder svg {
+    width: 84px;
+    height: 84px;
+    color: var(--color-primary);
+    opacity: 0.16;
+  }
+
+  @media (min-width: 768px) {
+    #{{ section.id }} .fru-hero__grid {
+      grid-template-columns: 7fr 5fr;
+      align-items: stretch;
+      min-height: clamp(460px, 52vw, 600px);
+    }
+    #{{ section.id }} .fru-hero__text {
+      justify-content: center;
+      max-width: none;
+      padding-block: var(--space-8, 64px);
+      padding-inline-start: max(var(--gutter, 20px), calc((100vw - var(--page-width, 1320px)) / 2));
+      padding-inline-end: var(--space-6, 48px);
+    }
+    #{{ section.id }} .fru-hero__media { height: auto; }
+    #{{ section.id }} .fru-hero__media::after {
+      background: linear-gradient(90deg,
+        rgba(103,29,144, var(--fru-hero-ov, .45)) 0%,
+        rgba(103,29,144, var(--fru-hero-ov-soft, .17)) 46%,
+        rgba(103,29,144, 0) 100%);
+    }
+  }
+
+  @media (max-width: 767px) {
+    #{{ section.id }} .fru-hero__cta { width: 100%; justify-content: center; }
+    #{{ section.id }} .fru-hero__actions { width: 100%; }
+  }
+
+  /* Reveal escalonado (80-120ms). Solo la foto NO se anima (protege el LCP). Se apaga
+     con prefers-reduced-motion, sin JS, o con "Desactivar animacion". */
+  @media (prefers-reduced-motion: no-preference) {
+    #{{ section.id }}:not(.fru-hero--static) .fru-hero__reveal {
+      animation: fru-hero-rise var(--dur-hero, 600ms) var(--ease-out, cubic-bezier(.16,1,.3,1)) backwards;
+    }
+    #{{ section.id }}:not(.fru-hero--static) .fru-hero__reveal--1 { animation-delay: 40ms; }
+    #{{ section.id }}:not(.fru-hero--static) .fru-hero__reveal--2 { animation-delay: 150ms; }
+    #{{ section.id }}:not(.fru-hero--static) .fru-hero__reveal--3 { animation-delay: 250ms; }
+    #{{ section.id }}:not(.fru-hero--static) .fru-hero__reveal--4 { animation-delay: 350ms; }
+  }
+  @keyframes fru-hero-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+</style>
+
+<div
+  class="fru-hero section--full-width{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}{% if hero_static %} fru-hero--static{% endif %}"
+  id="{{ section.id }}"
+>
+  <div class="fru-hero__grid">
+    <div class="fru-hero__text">
+      {%- if section.settings.badge_text != blank -%}
+        <p class="fru-hero__badge fru-hero__reveal fru-hero__reveal--1">{{ section.settings.badge_text | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="fru-hero__title h0 fru-hero__reveal fru-hero__reveal--2">
+          {{- section.settings.heading | escape -}}
+          {%- if section.settings.heading_highlight != blank %} <em class="fru-hero__hl">{{ section.settings.heading_highlight | escape }}</em>{%- endif -%}
+        </h1>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <div class="fru-hero__sub rte fru-hero__reveal fru-hero__reveal--3">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.cta_label != blank or section.settings.cta2_label != blank -%}
+        <div class="fru-hero__actions fru-hero__reveal fru-hero__reveal--4">
+          {%- if section.settings.cta_label != blank -%}
+            <a class="fru-hero__cta" href="{{ section.settings.cta_link | default: '/collections/all' }}">{{ section.settings.cta_label | escape }}</a>
+          {%- endif -%}
+          {%- if section.settings.cta2_label != blank -%}
+            <a class="fru-hero__link" href="{{ section.settings.cta2_link | default: '/pages/frutimenu' }}">
+              {{- section.settings.cta2_label | escape }} <span class="fru-hero__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="fru-hero__media" style="--fru-hero-ov: {{ ov_a }}; --fru-hero-ov-soft: {{ ov_soft }};">
+      {%- if img_d != blank -%}
+        <picture class="fru-hero__picture">
+          {%- if img_m != blank -%}
+            {%- render 'image',
+              image: img_m,
+              src_width: 900,
+              widths: '480, 640, 900, 1200',
+              lazy_load: false,
+              sizes: '100vw',
+              alt_text: alt_text,
+              as_mobile_source: true
+            -%}
+          {%- endif -%}
+          {%- render 'image',
+            image: img_d,
+            src_width: 1600,
+            widths: '640, 960, 1280, 1600, 1920',
+            lazy_load: false,
+            sizes: '(min-width: 768px) 42vw, 100vw',
+            alt_text: alt_text,
+            attributes: 'fetchpriority="high"'
+          -%}
+        </picture>
+      {%- else -%}
+        {%- comment -%} GATE fotografico: sin foto real aun. Placeholder neutro morado, jamas IA como producto. {%- endcomment -%}
+        <div class="fru-hero__placeholder" role="img" aria-label="{{ alt_text | escape }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"/><path d="M4.5 15.5h15"/><path d="m5 11 4-7"/><path d="m9 11 1 9"/>
+          </svg>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero editorial",
+  "tag": "section",
+  "class": "cc-fru-hero",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Hero asimetrico del home: titular a la izquierda (unico H1), foto a sangre a la derecha con overlay morado. Sube imagen de escritorio Y de movil."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Imagen escritorio"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Imagen movil (obligatoria)",
+      "info": "Sin imagen movil, la foto se recorta mal en telefonos. Sube una version vertical / con foco centrado."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Texto alternativo de la foto (alt)",
+      "default": "Cajon de frutas y verduras de temporada de Frutiferia"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Intensidad del overlay morado",
+      "min": 0,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 45,
+      "info": "Tinta morada sobre el borde de la foto (nunca negro). Bajala cuando entre la foto real para no apagar el color de la fruta."
+    },
+    {
+      "type": "header",
+      "content": "Contenido"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge (pill menta)",
+      "default": "Codigo PRIMERA15 · 15% en tu primera compra"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular (H1)",
+      "default": "Fruta y verdura que llega"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Palabra/frase destacada (morado)",
+      "default": "cuando dijimos"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subtitulo",
+      "default": "<p>Reparto a domicilio miercoles y sabado en Vina, Valparaiso, Concon, Renaca y Quilpue. Despacho gratis sobre $50.000.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Botones"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA principal (menta)",
+      "default": "Pide tu primera caja con 15% OFF"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Enlace del CTA principal",
+      "info": "Ej. /discount/PRIMERA15?redirect=/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Enlace secundario (texto)",
+      "default": "Arma tu semana gratis"
+    },
+    {
+      "type": "url",
+      "id": "cta2_link",
+      "label": "Destino del enlace secundario",
+      "info": "Ej. /pages/frutimenu"
+    },
+    {
+      "type": "header",
+      "content": "Estilo"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "options": [
+        { "value": "none", "label": "Ninguno (blanco)" },
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "prevent_animation",
+      "label": "Desactivar animacion de entrada",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero editorial"
+    }
+  ]
+}
+{% endschema %}
