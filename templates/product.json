@@ -15,7 +15,7 @@
         "613a93aa-8edd-4bb9-b8f1-df3133990e99": {
           "type": "vendor-sku",
           "settings": {
-            "show_vendor": true,
+            "show_vendor": false,
             "show_sku": false,
             "show_barcode": false
           }
@@ -23,7 +23,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "show_weight": true
+            "show_weight": false
           }
         },
         "3f73b6ee-a6b2-40ae-8379-a02a42756d8d": {

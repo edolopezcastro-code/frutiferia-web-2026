@@ -79,6 +79,30 @@
       :root { --product-info-width: {% if settings.dock_cart_drawer and settings.cart_type == 'drawer' %}400{% else %}440{% endif %}px !important; }
     }
   {%- endif -%}
+
+  .fru-trust-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+  .fru-trust-row svg { flex: 0 0 auto; color: var(--text-positive); }
+
+  .fru-b2b-nudge {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: color-mix(in srgb, var(--color-primary) 6%, var(--surface));
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  .fru-b2b-nudge svg { flex: 0 0 auto; color: var(--color-primary); margin-top: 2px; }
+  .fru-b2b-nudge p { margin: 0; font-size: 0.92rem; color: var(--text); }
+  .fru-b2b-nudge a { color: var(--color-primary); font-weight: 600; text-decoration: underline; }
 {%- endstyle -%}
 
 {%- if first_3d_model -%}
@@ -394,7 +418,7 @@
                         <button
                           type="submit"
                           data-add-to-cart-text="{{ add_to_cart_text | escape }}"
-                          class="btn {% if enable_dynamic_checkout %}btn--secondary{% else %}btn--primary{% endif %} w-full"
+                          class="btn btn--primary w-full"
                           name="add"
                           data-preselection-disabled="true"
                           data-preselection-text="{{ 'products.variant.not_selected' | t | escape }}"
@@ -423,6 +447,20 @@
                   {% render 'pickup-availability', current_variant: current_variant %}
                 </div>
               {%- endif -%}
+
+              <div class="fru-trust-row">
+                {% render 'icon', icon: 'truck', width: 20, height: 20 %}
+                <span>Despacho miércoles y sábado · gratis sobre $50.000</span>
+              </div>
+
+              <div class="fru-b2b-nudge">
+                {% render 'icon', icon: 'briefcase', width: 20, height: 20 %}
+                <p>
+                  ¿Compras para un negocio?
+                  <a href="https://cotiza.frutiferia.com">Cotiza online</a>
+                  o <a href="https://wa.me/56993261147">escríbele a Francisco</a>
+                </p>
+              </div>
             </div>
 
           {%- when 'complementary' -%}
