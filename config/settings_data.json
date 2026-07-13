@@ -93,7 +93,7 @@
     "card_contain_image_inset": false,
     "card_bg_color": "#ffffff",
     "card_text_color": "#333333",
-    "card_border_color": "#dddddd",
+    "card_border_color": "#EDE4F2",
     "enable_compare": true,
     "compare_max": 4,
     "compare_column_width": "small",
