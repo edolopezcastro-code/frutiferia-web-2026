@@ -97,6 +97,18 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Prueba social B2B (logo-list): escala de grises por defecto -> color al hover
+   (playbook-web-landing §2.2). Sobrio, sin marco ni sombra. Aplica cuando entren
+   logos reales de clientes; la seccion business_logos vive disabled hasta entonces. */
+.cc-logo-list .logo-list__logo-image {
+  filter: grayscale(1);
+  transition: filter var(--dur-micro, 200ms) var(--ease-out, cubic-bezier(.16, 1, .3, 1));
+}
+.cc-logo-list .logo-list__logo-link:hover .logo-list__logo-image,
+.cc-logo-list .logo-list__logo-link:focus-visible .logo-list__logo-image {
+  filter: grayscale(0);
+}
+
 /* Canopy autogenera el hover de --btn-bg-color mezclándolo hacia --btn-text-color
    (blanco), es decir ACLARA en vez de oscurecer — con menta como btn_bg eso hace el
    AA aún peor. No existe un setting de hover en el Theme Editor (§5C del plan), así
