@@ -22,28 +22,28 @@
     }
   }
   #{{ section.id }} .audience-door {
-    --door-accent: #671D90;
+    --door-accent: var(--color-primary);
     display: flex;
     flex-direction: column;
-    background: #ffffff;
-    border: 1px solid rgba(20, 8, 30, 0.08);
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-top: 4px solid var(--door-accent);
-    border-radius: 16px;
+    border-radius: var(--radius);
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 1px 2px rgba(20, 8, 30, 0.04);
+    box-shadow: var(--shadow-sm);
     transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     height: 100%;
   }
   #{{ section.id }} .audience-door:hover {
     transform: translateY(-4px);
-    box-shadow: 0 14px 32px rgba(20, 8, 30, 0.12);
+    box-shadow: var(--shadow-lg);
   }
   #{{ section.id }} .audience-door__media {
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: color-mix(in srgb, var(--door-accent) 10%, #ffffff);
+    background: color-mix(in srgb, var(--door-accent) 10%, var(--surface));
   }
   #{{ section.id }} .audience-door__media img {
     width: 100%;
@@ -64,7 +64,7 @@
     text-transform: uppercase;
     font-weight: 700;
     color: var(--door-accent);
-    color: color-mix(in srgb, var(--door-accent), #000 24%);
+    color: color-mix(in srgb, var(--door-accent), var(--fru-tinta) 24%);
     display: inline-flex;
     align-items: center;
     gap: 9px;
@@ -73,7 +73,7 @@
     content: "";
     width: 10px;
     height: 10px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--door-accent);
     flex: 0 0 auto;
   }
@@ -84,7 +84,7 @@
   }
   #{{ section.id }} .audience-door__text {
     margin: 0;
-    color: rgba(20, 8, 30, 0.74);
+    color: var(--text-muted);
     font-size: 1.08rem;
     line-height: 1.55;
     flex: 1 1 auto;
@@ -96,12 +96,12 @@
     align-items: center;
     gap: 8px;
     background: var(--door-accent);
-    background: color-mix(in srgb, var(--door-accent), #000 24%);
-    color: #ffffff;
+    background: color-mix(in srgb, var(--door-accent), var(--fru-tinta) 24%);
+    color: var(--on-primary);
     font-weight: 600;
     font-size: 1.05rem;
     padding: 14px 26px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     transition: filter 0.18s ease, gap 0.18s ease;
   }
   @media (max-width: 749px) {
@@ -144,7 +144,7 @@
         <a
           class="audience-door"
           href="{{ block.settings.cta_link | default: '#' }}"
-          style="--door-accent: {{ block.settings.accent | default: '#671D90' }};"
+          style="--door-accent: {{ block.settings.accent | default: 'var(--color-primary)' }};"
           {{ block.shopify_attributes }}
         >
           {%- if block.settings.image != blank -%}
