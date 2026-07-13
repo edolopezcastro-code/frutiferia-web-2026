@@ -30,7 +30,7 @@
         "button_hero": {
           "type": "button",
           "settings": {
-            "button_1_label": "Cotizar para mi equipo",
+            "button_1_label": "Suma fruta a tu oficina",
             "button_1_link": "https://api.whatsapp.com/send?phone=+56993261147&text=Hola,%20me%20interesa%20el%20programa%20de%20bienestar%20con%20fruta%20para%20mi%20equipo",
             "button_1_style": "btn btn--primary",
             "button_2_label": "",
@@ -55,6 +55,16 @@
         "transparent_content_color": "#ffffff",
         "tint_color": "#000000",
         "tint_opacity": 55,
+        "prevent_animation": false
+      }
+    },
+    "frutologia_banner": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"container\"><div style=\"max-width:840px;margin:0 auto;padding:28px 26px;border-top:4px solid var(--pill-wellness);border-radius:var(--radius);background:color-mix(in srgb, var(--pill-wellness) 6%, var(--surface));text-align:center;\"><span style=\"display:inline-flex;align-items:center;gap:8px;font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--pill-wellness), var(--fru-tinta) 24%);\"><span style=\"width:9px;height:9px;border-radius:var(--radius-pill);background:var(--pill-wellness);display:inline-block;\"></span>Programa Frutología</span><p style=\"margin:12px auto 0;max-width:640px;color:var(--text-muted);\">Así llamamos a nuestro programa de bienestar corporativo: cajas de fruta fresca, charlas y datos para tu equipo. Cuéntanos de tu empresa y te armamos una propuesta en menos de 24 horas.</p></div></div>",
+        "section_height": "small",
+        "full_width": false,
+        "dividers": "none",
         "prevent_animation": false
       }
     },
@@ -332,6 +342,7 @@
   "order": [
     "main",
     "hero_wellness",
+    "frutologia_banner",
     "sla_wellness",
     "servicios_wellness",
     "como_funciona_wellness",
