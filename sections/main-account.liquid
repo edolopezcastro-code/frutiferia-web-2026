@@ -14,27 +14,160 @@
     <div class="account-width mx-auto">
       <h1 class="text-center h2">{{ 'customer.account.title' | t }}</h1>
 
+      {%- comment -%}
+        Reorder en 1 clic: arma el carrito con las variantes disponibles del
+        último pedido (S3.1). Se computa arriba porque el panel de canal
+        (FRUTI3-9.B) también lo usa para el CTA "Repetir tu última caja".
+      {%- endcomment -%}
+      {%- liquid
+        assign last_order = customer.orders.first
+        assign reorder_path = ''
+        if last_order
+          for line_item in last_order.line_items
+            if line_item.variant.id and line_item.variant.available
+              assign reorder_path = reorder_path | append: ',' | append: line_item.variant.id | append: ':' | append: line_item.quantity
+            endif
+          endfor
+          assign reorder_path = reorder_path | remove_first: ','
+        endif
+      -%}
+
+      {%- comment -%}
+        FRUTI3-9.A — "Tus beneficios": despacho gratis, días de reparto por
+        canal (customer.tags — empujados por FRUTI3-10 en el OS), PRIMERA15
+        para quien no ha hecho su primer pedido, o frecuencia de compra.
+      {%- endcomment -%}
+      {%- liquid
+        comment
+          'frutologia' (empleados Frutiferia) y 'wellness' (bienestar corporativo)
+          comparten ruta de reparto (oficinas) pero son canales distintos — la
+          fecha de abajo usa la agrupación logística completa; el panel B, más
+          abajo, usa el tag exacto (solo 'wellness' habla de programa corporativo).
+        endcomment
+        assign logistics_oficinas = false
+        assign logistics_negocios = false
+        if customer.tags contains 'wellness' or customer.tags contains 'frutologia'
+          assign logistics_oficinas = true
+        elsif customer.tags contains 'b2b' or customer.tags contains 'b2g'
+          assign logistics_negocios = true
+        endif
+
+        assign channel_days = 'Miércoles y sábado, a tu domicilio'
+        if logistics_oficinas
+          assign channel_days = 'Lunes en la mañana y miércoles, directo a tu oficina'
+        elsif logistics_negocios
+          assign channel_days = 'Martes y viernes, coordinado con tu pedido'
+        endif
+
+        assign panel_wellness = false
+        assign panel_b2b = false
+        if customer.tags contains 'wellness'
+          assign panel_wellness = true
+        endif
+        if customer.tags contains 'b2b'
+          assign panel_b2b = true
+        endif
+
+        assign orders_count = customer.orders_count | default: 0
+      -%}
+
+      <div class="account-benefits mt-8">
+        <div class="account-benefit">
+          {%- render 'icon', icon: 'truck', width: 24, height: 24 -%}
+          <div>
+            <p class="account-benefit__title">Despacho gratis</p>
+            <p class="account-benefit__text">En compras sobre $50.000.</p>
+          </div>
+        </div>
+        <div class="account-benefit">
+          {%- render 'icon', icon: 'calendar', width: 24, height: 24 -%}
+          <div>
+            <p class="account-benefit__title">Tus días de reparto</p>
+            <p class="account-benefit__text">{{ channel_days }}.</p>
+          </div>
+        </div>
+
+        {%- if orders_count == 0 -%}
+          <div class="account-benefit account-benefit--primera15">
+            {%- render 'icon', icon: 'gift', width: 24, height: 24 -%}
+            <div>
+              <p class="account-benefit__title">Aún no haces tu primer pedido</p>
+              <p class="account-benefit__text">Usa el código <strong>PRIMERA15</strong> y llévate 15% de descuento.</p>
+            </div>
+          </div>
+        {%- else -%}
+          <div class="account-benefit">
+            {%- render 'icon', icon: 'box', width: 24, height: 24 -%}
+            <div>
+              <p class="account-benefit__title">
+                {%- if orders_count == 1 -%}1 pedido{%- else -%}{{ orders_count }} pedidos{%- endif -%} con nosotros
+              </p>
+              {%- if orders_count > 1 -%}
+                {%- liquid
+                  assign first_order_epoch = customer.orders.last.created_at | date: '%s' | plus: 0
+                  assign last_order_epoch = customer.orders.first.created_at | date: '%s' | plus: 0
+                  assign span_days = last_order_epoch | minus: first_order_epoch | divided_by: 86400
+                  assign order_gaps = orders_count | minus: 1
+                  assign avg_days = span_days | divided_by: order_gaps
+                -%}
+                {%- if avg_days > 0 -%}
+                  <p class="account-benefit__text">En promedio, pides cada {{ avg_days }} días.</p>
+                {%- endif -%}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%}
+        FRUTI3-9.B — Panel por canal vía tags exactos (no la agrupación
+        logística de arriba: 'frutologia' son empleados internos, no forman
+        parte del programa de bienestar corporativo). Un cliente B2C estándar
+        (o frutologia/b2g, fuera de este alcance) no ve panel adicional.
+      {%- endcomment -%}
+      {%- if panel_wellness -%}
+        <div class="channel-panel channel-panel--wellness">
+          <p class="channel-panel__eyebrow">Programa de bienestar</p>
+          <p class="channel-panel__text">
+            Entregas a tu oficina los lunes en la mañana y los miércoles. Para
+            coordinar algo puntual, escríbele directo a Francisco.
+          </p>
+          <div class="channel-panel__actions">
+            {%- if reorder_path != blank -%}
+              <a class="btn btn--primary" href="{{ routes.cart_url }}/{{ reorder_path }}?utm_source=cuenta&amp;utm_medium=reorder&amp;utm_campaign=wellness">
+                Repetir tu última caja
+              </a>
+            {%- endif -%}
+            <a class="btn btn--secondary" href="https://wa.me/56993261147?text={{ 'Hola Francisco, tengo una consulta sobre mi programa de bienestar' | url_encode }}">
+              WhatsApp con Francisco
+            </a>
+          </div>
+        </div>
+      {%- elsif panel_b2b -%}
+        <div class="channel-panel channel-panel--b2b">
+          <p class="channel-panel__eyebrow">Cuenta de negocio</p>
+          <p class="channel-panel__text">
+            Cotiza online con tus precios de convenio o coordina directo con Francisco.
+          </p>
+          <div class="channel-panel__actions">
+            <a class="btn btn--primary" href="https://cotiza.frutiferia.com">
+              Cotiza online
+            </a>
+            <a class="btn btn--secondary" href="https://wa.me/56993261147?text={{ 'Hola Francisco, tengo una consulta sobre mi cuenta de negocio' | url_encode }}">
+              WhatsApp con Francisco
+            </a>
+          </div>
+        </div>
+      {%- endif -%}
+
       <div class="mt-8 text-center">
         <h2 class="h4">{{ 'customer.orders.title' | t }}</h2>
 
-        {%- comment -%} Reorder en 1 clic: arma el carrito con las variantes disponibles del último pedido (S3.1). {%- endcomment -%}
-        {%- liquid
-          assign last_order = customer.orders.first
-          assign reorder_path = ''
-          if last_order
-            for line_item in last_order.line_items
-              if line_item.variant.id and line_item.variant.available
-                assign reorder_path = reorder_path | append: ',' | append: line_item.variant.id | append: ':' | append: line_item.quantity
-              endif
-            endfor
-            assign reorder_path = reorder_path | remove_first: ','
-          endif
-        -%}
         {%- if reorder_path != blank -%}
           <div class="address-box mx-auto mb-8 text-center reorder-banner">
             <p class="h5 mb-1">¿Repetimos lo de siempre? 🌿</p>
             <p class="text-sm mb-4">Te dejamos el carrito listo con tu último pedido ({{ last_order.name }}). Revísalo y paga.</p>
-            <a class="btn btn--primary" href="{{ routes.cart_url }}/{{ reorder_path }}?utm_source=cuenta&amp;utm_medium=reorder&amp;utm_campaign=retencion">
+            <a class="btn btn--primary btn--cta-menta" href="{{ routes.cart_url }}/{{ reorder_path }}?utm_source=cuenta&amp;utm_medium=reorder&amp;utm_campaign=retencion">
               Repetir mi último pedido
             </a>
           </div>
@@ -63,10 +196,10 @@
                     {{- order.created_at | time_tag: format: 'date' -}}
                   </td>
                   <td class="orders__pay" data-label="{{ 'customer.orders.payment_status' | t }}">
-                    {{- order.financial_status_label -}}
+                    {%- render 'status-pill', status: order.financial_status, label: order.financial_status_label, kind: 'payment' -%}
                   </td>
                   <td class="orders__fulfil" data-label="{{ 'customer.orders.fulfillment_status' | t }}">
-                    {{- order.fulfillment_status_label -}}
+                    {%- render 'status-pill', status: order.fulfillment_status, label: order.fulfillment_status_label, kind: 'fulfillment' -%}
                   </td>
                   <td class="orders__total text-end" data-label="{{ 'customer.orders.total' | t }}">
                     {{- order.total_price | money_with_currency -}}

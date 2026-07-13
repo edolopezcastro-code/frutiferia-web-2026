@@ -39,7 +39,7 @@
           <h2 class="h5">{{ 'customer.order.billing_address' | t }}</h2>
           <p>
             <strong>{{ 'customer.order.payment_status' | t }}:</strong>
-            {{ order.financial_status_label }}
+            {%- render 'status-pill', status: order.financial_status, label: order.financial_status_label, kind: 'payment' -%}
           </p>
           <address>
             {{ order.billing_address | format_address }}
@@ -49,7 +49,7 @@
           <h2 class="h5">{{ 'customer.order.shipping_address' | t }}</h2>
           <p>
             <strong>{{ 'customer.order.fulfillment_status' | t }}:</strong>
-            {{ order.fulfillment_status_label }}
+            {%- render 'status-pill', status: order.fulfillment_status, label: order.fulfillment_status_label, kind: 'fulfillment' -%}
           </p>
           <address>
             {{ order.shipping_address | format_address }}
@@ -312,7 +312,7 @@
       -%}
       {%- if reorder_path != blank -%}
         <div class="text-center mt-8">
-          <a class="btn btn--primary" href="{{ routes.cart_url }}/{{ reorder_path }}?utm_source=cuenta&amp;utm_medium=reorder&amp;utm_campaign=retencion">
+          <a class="btn btn--primary btn--cta-menta" href="{{ routes.cart_url }}/{{ reorder_path }}?utm_source=cuenta&amp;utm_medium=reorder&amp;utm_campaign=retencion">
             Volver a pedir estos productos
           </a>
           <p class="text-sm mt-2">Armamos el carrito con lo que siga disponible. Lo revisas antes de pagar.</p>

@@ -43,6 +43,7 @@
   --pill-b2c:        #38BDF8;  /* celeste */
   --pill-frutologia: #84CC16;  /* lima */
   --pill-b2g:        #14B8A6;  /* teal */
+  --pill-wellness:   #D6457D;  /* rose — faltaba en Capa 3 (FRUTI3-9); ya vive hardcodeada en audience-doors y el plan */
 
   /* --- Gradientes (escasos, con carácter — jamás morado→lila difuso de fondo) --- */
   --grad-cta:  linear-gradient(135deg, #2DB87F 0%, #248F57 100%);  /* SOLO botón/CTA */

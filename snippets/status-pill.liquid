@@ -1,0 +1,48 @@
+{%- comment -%}
+  Pill de estado semántica (color + ícono, nunca solo color — checklist §5 del
+  plan Web 3.0). FRUTI3-9.A.
+
+  Parameters:
+  - status {String} - valor RAW de Shopify (order.financial_status u order.fulfillment_status).
+  - label {String} - texto ya traducido para mostrar (ej. order.financial_status_label).
+  - kind {String} - 'payment' | 'fulfillment'.
+
+  Usage:
+  {% render 'status-pill', status: order.financial_status, label: order.financial_status_label, kind: 'payment' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign pill_class = 'status-pill--neutral'
+  assign pill_icon = 'clock'
+
+  if kind == 'payment'
+    if status == 'paid'
+      assign pill_class = 'status-pill--success'
+      assign pill_icon = 'check_mark_in_circle'
+    elsif status == 'pending' or status == 'authorized' or status == 'partially_paid'
+      assign pill_class = 'status-pill--warning'
+      assign pill_icon = 'clock'
+    elsif status == 'refunded' or status == 'partially_refunded' or status == 'voided'
+      assign pill_class = 'status-pill--neutral'
+      assign pill_icon = 'return'
+    endif
+  else
+    if status == 'fulfilled'
+      assign pill_class = 'status-pill--success'
+      assign pill_icon = 'check_mark_in_circle'
+    elsif status == 'partial'
+      assign pill_class = 'status-pill--warning'
+      assign pill_icon = 'truck'
+    elsif status == 'restocked'
+      assign pill_class = 'status-pill--neutral'
+      assign pill_icon = 'return'
+    elsif status == blank
+      assign pill_class = 'status-pill--neutral'
+      assign pill_icon = 'clock'
+    endif
+  endif
+-%}
+<span class="status-pill {{ pill_class }}">
+  {%- render 'icon', icon: pill_icon, width: 14, height: 14 -%}
+  <span>{{ label }}</span>
+</span>
