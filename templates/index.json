@@ -12,11 +12,13 @@
     "fru_hero": {
       "type": "fru-hero",
       "settings": {
+        "image_desktop": "shopify://shop_images/314_c1180fc8-a974-4e9e-8a73-3fe41ddbfd98.jpg",
+        "image_mobile": "shopify://shop_images/314_c1180fc8-a974-4e9e-8a73-3fe41ddbfd98.jpg",
         "image_alt": "Cajón de frutas y verduras de temporada de Frutiferia",
         "overlay_opacity": 45,
         "badge_text": "Código PRIMERA15 · 15% en tu primera compra",
         "heading": "Fruta y verdura que llega",
-        "heading_highlight": "cuando dijimos",
+        "heading_highlight": "cuando lo necesitas",
         "subheading": "<p>Reparto a domicilio miércoles y sábado en Viña, Valparaíso, Concón, Reñaca y Quilpué. Despacho gratis sobre $50.000.</p>",
         "cta_label": "Pide tu primera caja con 15% OFF",
         "cta_link": "/discount/PRIMERA15?redirect=/collections/all",
@@ -24,70 +26,6 @@
         "cta2_link": "shopify://pages/frutimenu",
         "color_scheme": "none",
         "prevent_animation": false
-      }
-    },
-    "slideshow": {
-      "type": "slideshow",
-      "disabled": true,
-      "blocks": {
-        "slide-1": {
-          "type": "slide",
-          "settings": {
-            "image_desktop": "shopify://shop_images/Portada-2_72ca34db-a87d-4587-93b4-6a9df0069288.jpg",
-            "url": "",
-            "overlay_position": "justify-center items-center",
-            "overlay_text_align": "text-center",
-            "mob_center_text": false,
-            "offer_badge": "🎁 15% OFF en tu primer pedido · código PRIMERA15",
-            "subheading": "Envío gratis sobre $50.000 · Región de Valparaíso",
-            "heading": "Frescura que se nota",
-            "heading_size": "h0",
-            "heading_h1": true,
-            "text": "<p>Frutas y verduras seleccionadas a mano, directo a tu puerta.</p>",
-            "enlarge_text": true,
-            "button_1_label": "Comprar con 15% OFF",
-            "button_1_link": "/discount/PRIMERA15?redirect=/collections/all",
-            "button_1_style": "btn btn--primary",
-            "button_2_label": "Arma tu semana gratis",
-            "button_2_link": "/pages/frutimenu",
-            "button_2_style": "btn btn--secondary",
-            "transparent_content_color": "#ffffff",
-            "countdown_show": false,
-            "countdown_end_date": "",
-            "countdown_end_time": "",
-            "countdown_end_text": "",
-            "enlarge_end_text": false,
-            "countdown_hide_on_end": false,
-            "countdown_border_radius": 6,
-            "use_custom_colors": false,
-            "count_color": "#ffffff",
-            "count_border_color": "",
-            "bg_color": "#070707",
-            "bg_grad": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide-1"
-      ],
-      "settings": {
-        "height_mode": "fixed",
-        "fixed_height_desktop": 540,
-        "fixed_height_mobile": 420,
-        "mobile_stacked": false,
-        "nav_style": "slideshow_nav_dots",
-        "pagination_color": "#ffffff",
-        "nav_position": "justify-center",
-        "transition": "slide-fade",
-        "autoplay": false,
-        "slider_pause": true,
-        "autoplay_speed": 6,
-        "color_scheme": "white",
-        "full_width": true,
-        "tint_color": "#000000",
-        "tint_opacity": 25,
-        "accessibility_info": "",
-        "prevent_animation": true
       }
     },
     "audience_doors": {
@@ -138,6 +76,126 @@
         "color_scheme": "1",
         "full_width": true,
         "prevent_animation": false
+      }
+    },
+    "business_logos": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Restaurantes"
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Hoteles"
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Cafeterías"
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Casinos"
+          }
+        },
+        "logo_5": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Oficinas"
+          }
+        },
+        "logo_6": {
+          "type": "logo",
+          "settings": {
+            "url": "",
+            "logo_width": 150,
+            "text": "Almacenes"
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "logo_5",
+        "logo_6"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Negocios que se abastecen con Frutiferia",
+        "heading_align": "text-center",
+        "button_label": "Vender a tu negocio",
+        "button_link": "shopify://pages/venta-a-negocios",
+        "layout": "carousel",
+        "spacing": 56,
+        "logo_grid_align": "justify-center",
+        "image_opacity": 100,
+        "color_scheme": "none",
+        "full_width": true
+      }
+    },
+    "frutimenu_promo": {
+      "type": "media-with-text",
+      "blocks": {
+        "fm_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "¿No sabes qué cocinar esta semana?",
+            "heading_size": "h2",
+            "heading_h1": false
+          }
+        },
+        "fm_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Deja de improvisar a última hora. <strong>FrutiMenu</strong> arma tu plan de 7 días con recetas chilenas saludables y te entrega la lista de compras lista para pedir en Frutiferia.</p><ul><li>🥗 Recetas ricas y balanceadas para la mesa chilena</li><li>🔥 Con las calorías y proteína de cada plato</li><li>🛒 Tu lista de ingredientes lista para pedir fresca</li></ul><p><strong>Gratis, sin registro y en 1 minuto.</strong></p>",
+            "enlarge_text": false
+          }
+        },
+        "fm_button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Armar mi semana gratis",
+            "button_link": "shopify://pages/frutimenu",
+            "button_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "fm_heading",
+        "fm_text",
+        "fm_button"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
+        "video_external": "",
+        "video_description": "",
+        "video_autoplay": false,
+        "layout": "right",
+        "image_fit": "cover",
+        "media_width": 50,
+        "media_scale": 100,
+        "text_align": "text-start",
+        "color_scheme": "1",
+        "only_content_color_scheme": false
       }
     },
     "3721924b-630b-4a60-b724-521fef7aa78e": {
@@ -301,52 +359,6 @@
         "show_border": true,
         "color_scheme": "none",
         "full_width": true
-      }
-    },
-    "frutimenu_promo": {
-      "type": "media-with-text",
-      "blocks": {
-        "fm_heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "¿No sabes qué cocinar esta semana?",
-            "heading_size": "h2",
-            "heading_h1": false
-          }
-        },
-        "fm_text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Deja de improvisar a última hora. <strong>FrutiMenu</strong> arma tu plan de 7 días con recetas chilenas saludables y te entrega la lista de compras lista para pedir en Frutiferia.</p><ul><li>🥗 Recetas ricas y balanceadas para la mesa chilena</li><li>🔥 Con las calorías y proteína de cada plato</li><li>🛒 Tu lista de ingredientes lista para pedir fresca</li></ul><p><strong>Gratis, sin registro y en 1 minuto.</strong></p>",
-            "enlarge_text": false
-          }
-        },
-        "fm_button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Armar mi semana gratis",
-            "button_link": "shopify://pages/frutimenu",
-            "button_style": "btn btn--primary"
-          }
-        }
-      },
-      "block_order": [
-        "fm_heading",
-        "fm_text",
-        "fm_button"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/fresh-colorful-fruits-ripe-mellow-whole-juicy-isolated-white-floor.jpg",
-        "video_external": "",
-        "video_description": "",
-        "video_autoplay": false,
-        "layout": "right",
-        "image_fit": "cover",
-        "media_width": 50,
-        "media_scale": 100,
-        "text_align": "text-start",
-        "color_scheme": "1",
-        "only_content_color_scheme": false
       }
     },
     "b2b_band": {
@@ -649,80 +661,6 @@
         "color_scheme": "default"
       }
     },
-    "business_logos": {
-      "type": "logo-list",
-      "blocks": {
-        "logo_1": {
-          "type": "logo",
-          "settings": {
-            "url": "",
-            "logo_width": 150,
-            "text": "Restaurantes"
-          }
-        },
-        "logo_2": {
-          "type": "logo",
-          "settings": {
-            "url": "",
-            "logo_width": 150,
-            "text": "Hoteles"
-          }
-        },
-        "logo_3": {
-          "type": "logo",
-          "settings": {
-            "url": "",
-            "logo_width": 150,
-            "text": "Cafeterías"
-          }
-        },
-        "logo_4": {
-          "type": "logo",
-          "settings": {
-            "url": "",
-            "logo_width": 150,
-            "text": "Casinos"
-          }
-        },
-        "logo_5": {
-          "type": "logo",
-          "settings": {
-            "url": "",
-            "logo_width": 150,
-            "text": "Oficinas"
-          }
-        },
-        "logo_6": {
-          "type": "logo",
-          "settings": {
-            "url": "",
-            "logo_width": 150,
-            "text": "Almacenes"
-          }
-        }
-      },
-      "block_order": [
-        "logo_1",
-        "logo_2",
-        "logo_3",
-        "logo_4",
-        "logo_5",
-        "logo_6"
-      ],
-      "disabled": true,
-      "settings": {
-        "title": "Negocios que se abastecen con Frutiferia",
-        "heading_align": "text-center",
-        "button_label": "Vender a tu negocio",
-        "button_link": "shopify://pages/venta-a-negocios",
-        "layout": "carousel",
-        "spacing": 56,
-        "logo_grid_align": "justify-center",
-        "image_opacity": 100,
-        "color_scheme": "none",
-        "full_width": true
-      }
-    },
     "recently_viewed_home": {
       "type": "recently-viewed",
       "settings": {
@@ -732,6 +670,70 @@
         "card_size_mobile": "small",
         "card_size": "small",
         "limit": 10
+      }
+    },
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "image_desktop": "shopify://shop_images/Portada-2_72ca34db-a87d-4587-93b4-6a9df0069288.jpg",
+            "url": "",
+            "overlay_position": "justify-center items-center",
+            "overlay_text_align": "text-center",
+            "mob_center_text": false,
+            "offer_badge": "🎁 15% OFF en tu primer pedido · código PRIMERA15",
+            "subheading": "Envío gratis sobre $50.000 · Región de Valparaíso",
+            "heading": "Frescura que se nota",
+            "heading_size": "h0",
+            "heading_h1": true,
+            "text": "<p>Frutas y verduras seleccionadas a mano, directo a tu puerta.</p>",
+            "enlarge_text": true,
+            "button_1_label": "Comprar con 15% OFF",
+            "button_1_link": "/discount/PRIMERA15?redirect=/collections/all",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "Arma tu semana gratis",
+            "button_2_link": "/pages/frutimenu",
+            "button_2_style": "btn btn--secondary",
+            "transparent_content_color": "#ffffff",
+            "countdown_show": false,
+            "countdown_end_date": "",
+            "countdown_end_time": "",
+            "countdown_end_text": "",
+            "enlarge_end_text": false,
+            "countdown_hide_on_end": false,
+            "countdown_border_radius": 6,
+            "use_custom_colors": false,
+            "count_color": "#ffffff",
+            "count_border_color": "",
+            "bg_color": "#070707",
+            "bg_grad": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "height_mode": "fixed",
+        "fixed_height_desktop": 540,
+        "fixed_height_mobile": 420,
+        "mobile_stacked": false,
+        "nav_style": "slideshow_nav_dots",
+        "pagination_color": "#ffffff",
+        "nav_position": "justify-center",
+        "transition": "slide-fade",
+        "autoplay": false,
+        "slider_pause": true,
+        "autoplay_speed": 6,
+        "color_scheme": "white",
+        "full_width": true,
+        "tint_color": "#000000",
+        "tint_opacity": 25,
+        "accessibility_info": "",
+        "prevent_animation": true
       }
     }
   },
