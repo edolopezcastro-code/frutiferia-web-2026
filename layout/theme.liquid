@@ -383,6 +383,12 @@
     if settings.enable_quick_add
       render 'quick-add-drawer'
     endif
+
+    # FRUTI3-14.A: botón flotante de WhatsApp contextual, global salvo la
+    # pantalla de tienda cerrada (password/coming-soon).
+    unless request.page_type == 'password'
+      render 'fru-whatsapp'
+    endunless
   -%}
 
   <div class="overlay fixed top-0 right-0 bottom-0 left-0 js-overlay"></div>

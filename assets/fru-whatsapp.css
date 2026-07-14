@@ -1,0 +1,54 @@
+/* fru-whatsapp.css — FRUTI3-14.A: botón flotante de WhatsApp contextual.
+   Menta (--grad-cta), no verde WhatsApp genérico — regla del sistema de
+   diseño: acentos sueltos convergen a la tríada morado/menta, nunca color
+   ajeno a la paleta. z-index 35: por encima de .btn--compare (29, collection/
+   search), por debajo de .drawer/.main-menu__content (40) para que cualquier
+   overlay a pantalla completa lo tape sin lógica extra.
+
+   Fix de revisión adversarial: con dock_cart_drawer=true (config vigente,
+   umbral 1100px — ver config/settings_data.json), el carrito se auto-abre
+   dockeado como panel fixed de 320-360px pegado al borde derecho en
+   CUALQUIER página ≠ /cart. Sin restar --docked-cart-drawer-width, el FAB
+   quedaba flotando DENTRO de ese panel en vez de sobre el contenido — mismo
+   fix que ya aplica .end-dock (assets/main.css) para el sticky-atc-panel. */
+.fru-whatsapp-fab {
+  position: fixed;
+  right: calc(max(16px, env(safe-area-inset-right)) + var(--docked-cart-drawer-width, 0px));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--radius-pill, 9999px);
+  background: var(--grad-cta, linear-gradient(135deg, #2DB87F 0%, #248F57 100%));
+  color: #fff;
+  box-shadow: var(--shadow-lg, 0 12px 32px rgba(103, 29, 144, 0.12));
+  transition: filter var(--dur-micro, 200ms) var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.fru-whatsapp-fab:hover,
+.fru-whatsapp-fab:focus-visible {
+  filter: brightness(1.06);
+}
+
+.fru-whatsapp-fab .icon {
+  width: var(--icon-md, 24px);
+  height: var(--icon-md, 24px);
+}
+
+/* PDP: el sticky-atc-panel (templates/product.json, end-dock) vive fixed
+   bottom-0 anclado al mismo lado — despejarlo, tanto en mobile como desktop
+   (sticky_atc_mobile=true, se muestra en todos los tamaños). */
+.fru-whatsapp-fab--clear-dock {
+  bottom: 92px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fru-whatsapp-fab {
+    transition: none;
+  }
+}
