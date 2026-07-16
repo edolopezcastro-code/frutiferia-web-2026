@@ -1,0 +1,81 @@
+{%- comment -%}
+  Handshake de identidad FrutiMenu (FRUTI3-18).
+
+  Solo se renderiza para clientes LOGUEADOS en la tienda (la sección lo envuelve en
+  {% if customer %}). Reconoce al cliente dentro del iframe cross-origin de "Mi Menú
+  Semanal" SIN exponer su email/id: pide un TOKEN FIRMADO al App Proxy de Shopify y
+  reenvía SOLO ese token opaco al iframe, que lo canjea contra el OS.
+
+  Por qué App Proxy: la request a /apps/fruti-identity la sirve Shopify desde
+  frutiferia.com (primera parte → ve la cookie de sesión), le agrega logged_in_customer_id
+  y la FIRMA con HMAC. El OS verifica la firma y emite el token. Nada de esto depende del
+  storage particionado del iframe (por eso el handshake sobrevive al bloqueo de cookies
+  de terceros).
+
+  Contrato:
+    iframe -> tema : { type: "frutimenu:request-identity" }   (la app lo manda al montar)
+    tema  -> iframe: { type: "frutimenu:customer", token }     (token corto, TTL 5 min)
+
+  Seguridad (idéntico al puente de carrito, snippets/frutimenu-bridge.liquid):
+    - Origen estricto: solo se responde a mensajes cuyo e.origin === ALLOWED (el del iframe).
+    - postMessage SIEMPRE dirigido a ALLOWED, nunca '*'.
+    - El token es opaco para el tema; jamás se interpola customer.id/customer.email al DOM.
+
+  Params: section_id (string), embed_url (string)
+{%- endcomment -%}
+<script>
+  (function () {
+    var SECTION_ID = {{ section_id | json }};
+    var EMBED_URL = {{ embed_url | json }};
+    var ALLOWED;
+    try { ALLOWED = new URL(EMBED_URL, window.location.origin).origin; }
+    catch (e) { ALLOWED = "https://menu-frutiferia.com"; }
+
+    var PROXY_PATH = "/apps/fruti-identity";
+    var REQUEST = "frutimenu:request-identity";
+    var CUSTOMER = "frutimenu:customer";
+
+    function iframeEl() {
+      var sec = document.getElementById(SECTION_ID);
+      return sec ? sec.querySelector(".frutimenu-embed__frame") : null;
+    }
+
+    // Pide el token una sola vez y cachea la promesa; se responde a cada request con él.
+    // credentials:same-origin → viaja la cookie de sesión de Shopify (primera parte),
+    // de la que el App Proxy deriva logged_in_customer_id.
+    var tokenPromise = null;
+    function getToken() {
+      if (!tokenPromise) {
+        tokenPromise = fetch(PROXY_PATH, {
+          method: "GET",
+          headers: { Accept: "application/json" },
+          credentials: "same-origin",
+        })
+          .then(function (res) { return res.ok ? res.json() : null; })
+          .then(function (data) {
+            return data && data.authenticated && typeof data.token === "string" ? data.token : null;
+          })
+          .catch(function () { return null; });
+      }
+      return tokenPromise;
+    }
+
+    function sendCustomer() {
+      getToken().then(function (token) {
+        if (!token) return;
+        var f = iframeEl();
+        if (f && f.contentWindow) f.contentWindow.postMessage({ type: CUSTOMER, token: token }, ALLOWED);
+      });
+    }
+
+    // Precalienta el token en paralelo mientras el iframe carga (baja la latencia).
+    getToken();
+
+    // La app pide la identidad al montar su árbol → recién ahí su listener existe (evita
+    // la carrera de postMessear antes de que el iframe lazy esté listo).
+    window.addEventListener("message", function (e) {
+      if (e.origin !== ALLOWED) return;
+      if (e.data && e.data.type === REQUEST) sendCustomer();
+    });
+  })();
+</script>

@@ -90,6 +90,11 @@
 
       {%- comment -%} Puente carrito nativo: escucha el postMessage de la app y agrega al drawer (F1-5). {%- endcomment -%}
       {% render 'frutimenu-bridge', section_id: section.id, embed_url: embed_url %}
+
+      {%- comment -%} Handshake de identidad (FRUTI3-18): solo si hay cliente logueado. {%- endcomment -%}
+      {%- if customer -%}
+        {% render 'frutimenu-identity', section_id: section.id, embed_url: embed_url %}
+      {%- endif -%}
     </div>
 
   {%- unless section.settings.full_width -%}
