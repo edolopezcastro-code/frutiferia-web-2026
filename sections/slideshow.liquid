@@ -176,9 +176,17 @@
 
           {%- if img != blank -%}
             {%- liquid
+              # FRUTI3-16: antes solo se fijaba 'sizes' para height_mode=='screen'; en
+              # 'fixed'/'auto' quedaba sin atributo y el browser asumia el default 100vw
+              # implicito (snippets/image.liquid omite el atributo si 'sizes' llega blank).
+              # .image-banner es w-full/absolute dentro de .slideshow-section--full-width
+              # (sin max-width) en TODOS los height_mode, asi que 100vw es el valor real -
+              # se fija explicito para no depender del default implicito del browser.
               if section.settings.full_width
                 if section.settings.height_mode == 'screen'
                   assign sizes = '(max-aspect-ratio: 1/2) 50vh, 100vw'
+                else
+                  assign sizes = '100vw'
                 endif
               else
                 capture sizes
