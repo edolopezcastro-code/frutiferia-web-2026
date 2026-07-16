@@ -168,7 +168,7 @@
 {%- if image and src_width -%}
   {%- if mobile_srcset -%}
     <picture>
-      <source {% if lazy_load %}data-{% endif %}srcset="{{ mobile_srcset }}"
+      <source {% if lazy_load and is_native_lazy == false %}data-{% endif %}srcset="{{ mobile_srcset }}"
               media="(max-width: 600px)"
               width="{{ mobile_image_width }}"
               height="{{ mobile_image_width | divided_by: image.aspect_ratio | round }}">
