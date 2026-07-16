@@ -10,7 +10,12 @@
   - srcset_2x {Boolean} - Srcset should only be a 2x version of the src_width (optional, default is false).
   - src_placeholder {Boolean} - Add a blank src placeholder when image is lazy load (optional, default is false).
   - sizes {String} - Content for the 'sizes' attribute (optional).
-  - lazy_load {Boolean} - Image should be lazy load (optional, default is true).
+  - lazy_load {Boolean|String} - Image should be lazy load (optional, default is true). Pass the string
+      'native' to skip the data-src/main.js intersection-observer indirection (FRUTI3-16): emits real
+      src/srcset immediately with loading="lazy" so the browser's own native lazy loading handles the
+      fetch timing, instead of waiting for main.js (deferred, ~99KB) to parse and copy data-src -> src.
+      Use only where there is no JS-driven image swap (variant swatches / hover image) relying on the
+      data-src pipeline for that element.
   - fetchpriority {String} - low/high/nil, passed on to image_tag (optional, default is nil)
   - class {String} - Class name(s) for the 'class' attribute (optional).
   - attributes {String} - Additional attributes (optional).
@@ -131,14 +136,22 @@
   assign image_height = image_width | divided_by: image.aspect_ratio | round
   assign js_class = class
 
+  assign is_native_lazy = false
+  if lazy_load == 'native'
+    assign is_native_lazy = true
+    assign lazy_load = true
+  endif
+
   unless lazy_load == false or section_index == 1
     assign lazy_load = true
 
-    if class
-      assign js_class = class | append: ' no-js-hidden'
-    else
-      assign js_class = 'no-js-hidden'
-    endif
+    unless is_native_lazy
+      if class
+        assign js_class = class | append: ' no-js-hidden'
+      else
+        assign js_class = 'no-js-hidden'
+      endif
+    endunless
   endunless
 
   assign disable_focal_point = disable_focal_point | default: false
@@ -174,10 +187,10 @@
            alt="{{ alt_text | default: image.alt | escape }}"
            media="(max-width: 767px)">
     {%- else -%}
-      <img {% if srcset %}{% if lazy_load %}data-{% endif %}srcset="{{ srcset }}" {% endif -%}
+      <img {% if srcset %}{% if lazy_load and is_native_lazy == false %}data-{% endif %}srcset="{{ srcset }}" {% endif -%}
          {% if sizes and srcset %}sizes="{{ sizes }}" {% endif -%}
-         {% if lazy_load %}data-{% endif %}src="{{ image | image_url: width: src_width }}"
-         {% if lazy_load and src_placeholder %}src="{{ placeholder_image }}" {% endif -%}
+         {% if lazy_load and is_native_lazy == false %}data-{% endif %}src="{{ image | image_url: width: src_width }}"
+         {% if lazy_load and src_placeholder and is_native_lazy == false %}src="{{ placeholder_image }}" {% endif -%}
          {% if js_class %}class="{{ js_class }}" {% endif -%}
          {% if attributes %}{{ attributes }} {% endif -%}
          {% if disable_focal_point == false and image.presentation %}style="object-position: {{ image.presentation.focal_point }}" {% endif -%}
@@ -191,7 +204,7 @@
     </picture>
   {%- endif -%}
 
-  {%- if lazy_load -%}
+  {%- if lazy_load and is_native_lazy == false -%}
     <noscript>
       <img src="{{ image | image_url: width: src_width }}"
            loading="{% if lazy_load %}lazy{% else %}eager{% endif %}"
