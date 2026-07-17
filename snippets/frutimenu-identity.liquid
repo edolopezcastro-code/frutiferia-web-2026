@@ -29,7 +29,7 @@
     var EMBED_URL = {{ embed_url | json }};
     var ALLOWED;
     try { ALLOWED = new URL(EMBED_URL, window.location.origin).origin; }
-    catch (e) { ALLOWED = "https://menu-frutiferia.com"; }
+    catch (e) { ALLOWED = "https://menu.frutiferia.com"; }
 
     var PROXY_PATH = "/apps/fruti-identity";
     var REQUEST = "frutimenu:request-identity";

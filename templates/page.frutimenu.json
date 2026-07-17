@@ -146,7 +146,7 @@
     "frutimenu_app": {
       "type": "frutimenu-embed",
       "settings": {
-        "embed_url": "https://menu-frutiferia.com/?embed=1",
+        "embed_url": "https://menu.frutiferia.com/?embed=1",
         "heading": "",
         "height_desktop": 900,
         "height_mobile": 720,
