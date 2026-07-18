@@ -2633,6 +2633,17 @@
     "name": "Cart",
     "settings": [
       {
+        "type": "header",
+        "content": "Selector de día de reparto"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_delivery_picker",
+        "label": "Mostrar selector de día de reparto",
+        "info": "Selector nativo de día + zona (reemplaza la app IdentixWeb). Actívalo SOLO al desinstalar esa app, para no mostrar dos selectores.",
+        "default": false
+      },
+      {
         "type": "select",
         "id": "cart_icon",
         "label": "Cart icon",

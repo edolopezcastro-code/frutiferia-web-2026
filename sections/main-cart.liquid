@@ -8,6 +8,10 @@
 {%- if section.settings.show_order_note -%}
   <script src="{{ 'cart-note.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
+{%- if settings.show_delivery_picker -%}
+  <link rel="stylesheet" href="{{ 'delivery-picker.css' | asset_url }}">
+  <script src="{{ 'delivery-picker.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 <div class="container">
   <form class="cart form{% if cart != empty %} cart--with-items gap-theme heading--{{ section.settings.heading_align }}{% endif %}" id="cart" action="{{ routes.cart_url }}" method="post">
@@ -74,6 +78,10 @@
       <div class="cart__summary p-6 md:p-8" id="cart-summary" data-section="{{ section.id }}">
         {%- if cart != empty -%}
           <h2 class="h5">{{ 'cart.summary.title' | t }}</h2>
+
+          {%- if settings.show_delivery_picker -%}
+            {% render 'delivery-picker', form_id: 'cart' %}
+          {%- endif -%}
 
           {%- if section.settings.show_order_note -%}
             <details-disclosure class="block mt-6">

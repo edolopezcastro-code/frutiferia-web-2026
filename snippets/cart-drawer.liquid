@@ -29,6 +29,10 @@
 
 <link rel="stylesheet" href="{{ 'cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{%- if settings.show_delivery_picker -%}
+  <link rel="stylesheet" href="{{ 'delivery-picker.css' | asset_url }}">
+  <script src="{{ 'delivery-picker.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 {%- if section.settings.show_order_note -%}
   <script src="{{ 'cart-note.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
@@ -74,6 +78,10 @@
         <div>{{ 'cart.summary.subtotal' | t }}</div>
         <div class="font-bold">{% render 'price-as-money', price: cart.total_price, show_money_with_currency: true %}</div>
       </div>
+
+      {%- if settings.show_delivery_picker -%}
+        {% render 'delivery-picker', form_id: 'cart-drawer-form' %}
+      {%- endif -%}
 
       <div class="flex flex-wrap justify-between items-center cart-drawer_summary--non-stick">
         {%- if section.settings.show_order_note -%}
