@@ -1,0 +1,81 @@
+{%- comment -%}
+  delivery-picker — selector de día + zona de reparto a domicilio (B2C web).
+
+  Reemplazo nativo de la app IdentixWeb. Dos campos, igual que la app:
+    1. Día de reparto  → próximos miércoles/sábados (calculados en hora de Santiago).
+    2. Zona y horario  → la zona que ordena las rutas internas (Viña / Concón-Reñaca / etc.).
+
+  La elección se guarda como cart attributes:
+    'Fecha de Entrega' = ISO YYYY-MM-DD
+    'Horario'          = 'Zona [12:00-16:00]'
+  que al crear la orden pasan a note_attributes y OS ya parsea
+  (route_zone + delivery_window vía extractDeliveryInfo). BLOQUEA el checkout
+  hasta que haya día Y zona (igual que IdentixWeb).
+
+  Estado rehidratado desde {{ cart.attributes }} en cada re-render del drawer.
+  Opciones rellenadas por assets/delivery-picker.js desde la edge fn
+  delivery-availability.
+
+  Params:
+    form_id: id del form de checkout ('cart-drawer-form' en drawer, 'cart' en página)
+{%- endcomment -%}
+
+{%- liquid
+  assign dp_form = form_id | default: 'cart'
+  assign dp_date = cart.attributes['Fecha de Entrega']
+  assign dp_horario = cart.attributes['Horario']
+-%}
+
+<delivery-picker
+  class="delivery-picker block mb-4"
+  data-availability-url="https://ykvexpxvlivcqamqsafe.supabase.co/functions/v1/delivery-availability"
+  data-selected-date="{{ dp_date | escape }}"
+  data-selected-zone="{{ dp_horario | escape }}"
+  data-window="12:00-16:00"
+  data-form="{{ dp_form }}"
+>
+  <p class="delivery-picker__title h6 block regular-text font-normal mb-2">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+      <path d="M16 2v4M8 2v4M3 10h18"></path>
+    </svg>
+    <span>Selecciona un día de reparto</span>
+  </p>
+
+  <label class="visually-hidden" for="delivery-date-{{ dp_form }}">Día de reparto</label>
+  <select
+    class="input w-full mb-2 js-delivery-date"
+    id="delivery-date-{{ dp_form }}"
+    name="attributes[Fecha de Entrega]"
+    form="{{ dp_form }}"
+    autocomplete="off"
+  >
+    {%- if dp_date != blank -%}
+      <option value="{{ dp_date | escape }}" selected>{{ dp_date | escape }}</option>
+    {%- else -%}
+      <option value="">Cargando días…</option>
+    {%- endif -%}
+  </select>
+
+  <label class="visually-hidden" for="delivery-zone-{{ dp_form }}">Zona y horario de reparto</label>
+  <select
+    class="input w-full js-delivery-zone"
+    id="delivery-zone-{{ dp_form }}"
+    name="attributes[Horario]"
+    form="{{ dp_form }}"
+    autocomplete="off"
+  >
+    {%- if dp_horario != blank -%}
+      <option value="{{ dp_horario | escape }}" selected>{{ dp_horario | split: ' [' | first | escape }}</option>
+    {%- else -%}
+      <option value="">Zona y horario</option>
+    {%- endif -%}
+  </select>
+
+  <p class="delivery-picker__hint text-sm mt-2 js-delivery-hint">
+    <small>Entregamos a domicilio los <strong>miércoles</strong> y <strong>sábados</strong>, entre las 12:00 y 16:00 hrs.</small>
+  </p>
+  <p class="delivery-picker__error text-sm mt-2 js-delivery-error" role="alert" hidden>
+    <small>Selecciona el <strong>día</strong> y la <strong>zona</strong> de reparto para poder pagar.</small>
+  </p>
+</delivery-picker>

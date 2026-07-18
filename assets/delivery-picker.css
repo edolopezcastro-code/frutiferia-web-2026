@@ -1,0 +1,60 @@
+/* ============================================================================
+   delivery-picker.css — selector de día + zona de reparto a domicilio (FRUTI3-20).
+   Estilado con tokens de tokens-frutiferia.css (§5 del plan Web 3.0):
+   morado institucional como acento, surface-muted de fondo, foco visible,
+   targets ≥44px. Cero hex crudo.
+   ============================================================================ */
+
+.delivery-picker {
+  display: block;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  padding: var(--space-2);
+}
+
+.delivery-picker__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 var(--space-1);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.delivery-picker__title svg {
+  flex: none;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-primary);
+}
+
+/* Selects: heredan .input de Canopy; solo garantizamos target ≥44px (§5.14) y foco. */
+.delivery-picker .js-delivery-date,
+.delivery-picker .js-delivery-zone {
+  min-height: 44px;
+}
+
+.delivery-picker select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.delivery-picker__hint small {
+  color: var(--text-muted);
+}
+
+/* Instrucción (no catástrofe): morado institucional, no rojo estridente (§5.4). */
+.delivery-picker__error small {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* Botones de pago express (Shop Pay/Apple Pay/PayPal) neutralizados mientras
+   falte día/zona: pointer-events:none bloquea el clic aun sobre el iframe de
+   Shop Pay, de modo que el gate no sea decorativo. */
+.dynamic-cart-btns[data-delivery-blocked] {
+  opacity: 0.4;
+  pointer-events: none;
+}
