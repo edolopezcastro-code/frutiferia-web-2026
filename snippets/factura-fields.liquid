@@ -1,0 +1,102 @@
+{%- comment -%}
+  factura-fields — captura de datos de facturación B2B en el carrito.
+
+  Toggle "¿Compras para tu negocio?" que revela RUT Empresa / Razón Social /
+  Giro / Email Facturación (opcional) y setea attributes[Documento]='Factura'.
+  Mismo patrón que delivery-picker.liquid: se guarda como cart attributes que
+  al crear la orden pasan a note_attributes. NO bloquea el checkout — la
+  validación de RUT (módulo 11, en assets/factura-fields.js) solo marca el
+  campo en rojo si no calza.
+
+  Estado rehidratado desde {{ cart.attributes }} en cada re-render del drawer
+  (mismo patrón que delivery-picker.liquid:25-26). Toggle OFF limpia los 5
+  attributes vía /cart/update.js (ver assets/factura-fields.js).
+
+  Params:
+    form_id: id del form de checkout ('cart-drawer-form' en drawer, 'cart' en página)
+{%- endcomment -%}
+
+{%- liquid
+  assign ff_form = form_id | default: 'cart'
+  assign ff_rut = cart.attributes['RUT Empresa']
+  assign ff_razon = cart.attributes['Razón Social']
+  assign ff_giro = cart.attributes['Giro']
+  assign ff_email = cart.attributes['Email Facturación']
+  assign ff_checked = false
+  if ff_rut != blank or ff_razon != blank
+    assign ff_checked = true
+  endif
+-%}
+
+<factura-fields class="factura-fields block mb-4" data-form="{{ ff_form }}">
+  <label class="factura-fields__toggle flex items-center" for="factura-toggle-{{ ff_form }}">
+    <input
+      type="checkbox"
+      class="js-factura-toggle"
+      id="factura-toggle-{{ ff_form }}"
+      {% if ff_checked %}checked{% endif %}
+    >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M6 2h9l3 3v17H6z"></path>
+      <path d="M9 8h6M9 12h6M9 16h4"></path>
+    </svg>
+    <span>¿Compras para tu negocio? Te emitimos factura.</span>
+  </label>
+
+  <div class="factura-fields__panel mt-3" {% unless ff_checked %}hidden{% endunless %}>
+    <input type="hidden" class="js-factura-documento" name="attributes[Documento]" form="{{ ff_form }}" value="{% if ff_checked %}Factura{% endif %}">
+
+    <label class="visually-hidden" for="factura-rut-{{ ff_form }}">RUT Empresa</label>
+    <input
+      type="text"
+      class="input w-full mb-2 js-factura-rut"
+      id="factura-rut-{{ ff_form }}"
+      name="attributes[RUT Empresa]"
+      form="{{ ff_form }}"
+      placeholder="RUT Empresa (ej. 76123456-7)"
+      value="{{ ff_rut | escape }}"
+      autocomplete="off"
+      inputmode="text"
+      maxlength="10"
+    >
+    <p class="factura-fields__error text-sm mb-2 js-factura-rut-error" role="alert" hidden>
+      <small>Revisa el RUT, no parece válido.</small>
+    </p>
+
+    <label class="visually-hidden" for="factura-razon-{{ ff_form }}">Razón Social</label>
+    <input
+      type="text"
+      class="input w-full mb-2 js-factura-razon"
+      id="factura-razon-{{ ff_form }}"
+      name="attributes[Razón Social]"
+      form="{{ ff_form }}"
+      placeholder="Razón Social"
+      value="{{ ff_razon | escape }}"
+      autocomplete="organization"
+    >
+
+    <label class="visually-hidden" for="factura-giro-{{ ff_form }}">Giro</label>
+    <input
+      type="text"
+      class="input w-full mb-2 js-factura-giro"
+      id="factura-giro-{{ ff_form }}"
+      name="attributes[Giro]"
+      form="{{ ff_form }}"
+      placeholder="Giro"
+      value="{{ ff_giro | escape }}"
+      autocomplete="off"
+    >
+
+    <label class="visually-hidden" for="factura-email-{{ ff_form }}">Email Facturación (opcional)</label>
+    <input
+      type="email"
+      class="input w-full js-factura-email"
+      id="factura-email-{{ ff_form }}"
+      name="attributes[Email Facturación]"
+      form="{{ ff_form }}"
+      placeholder="Email Facturación (opcional)"
+      value="{{ ff_email | escape }}"
+      autocomplete="email"
+    >
+  </div>
+</factura-fields>

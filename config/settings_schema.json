@@ -2644,6 +2644,17 @@
         "default": false
       },
       {
+        "type": "header",
+        "content": "Datos de facturación"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_factura_fields",
+        "label": "Mostrar datos de facturación B2B",
+        "info": "Toggle en el carrito para capturar RUT Empresa, Razón Social, Giro y Email de Facturación (compra de empresa).",
+        "default": true
+      },
+      {
         "type": "select",
         "id": "cart_icon",
         "label": "Cart icon",

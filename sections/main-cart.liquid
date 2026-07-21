@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="{{ 'delivery-picker.css' | asset_url }}">
   <script src="{{ 'delivery-picker.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
+{%- if settings.show_factura_fields -%}
+  <link rel="stylesheet" href="{{ 'factura-fields.css' | asset_url }}">
+  <script src="{{ 'factura-fields.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 <div class="container">
   <form class="cart form{% if cart != empty %} cart--with-items gap-theme heading--{{ section.settings.heading_align }}{% endif %}" id="cart" action="{{ routes.cart_url }}" method="post">
@@ -81,6 +85,10 @@
 
           {%- if settings.show_delivery_picker -%}
             {% render 'delivery-picker', form_id: 'cart' %}
+          {%- endif -%}
+
+          {%- if settings.show_factura_fields -%}
+            {% render 'factura-fields', form_id: 'cart' %}
           {%- endif -%}
 
           {%- if section.settings.show_order_note -%}

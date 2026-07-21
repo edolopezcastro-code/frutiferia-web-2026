@@ -1,0 +1,59 @@
+/* ============================================================================
+   factura-fields.css — captura de datos de facturación B2B en el carrito.
+   Mismo sistema de tokens que delivery-picker.css: acento morado institucional
+   (--color-primary = --fru-morado-900 = #671D90), foco visible, targets ≥44px.
+   Cero hex crudo.
+   ============================================================================ */
+
+.factura-fields {
+  display: block;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  padding: var(--space-2);
+}
+
+.factura-fields__toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.factura-fields__toggle input[type='checkbox'] {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+}
+
+.factura-fields__toggle svg {
+  flex: none;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-primary);
+}
+
+.factura-fields__panel .js-factura-rut,
+.factura-fields__panel .js-factura-razon,
+.factura-fields__panel .js-factura-giro,
+.factura-fields__panel .js-factura-email {
+  min-height: 44px;
+}
+
+.factura-fields__panel input:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.factura-fields__panel input.is-invalid {
+  border-color: rgb(var(--error-text-color));
+}
+
+.factura-fields__error {
+  color: rgb(var(--error-text-color));
+  font-weight: 600;
+}
