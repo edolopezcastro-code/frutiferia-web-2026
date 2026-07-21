@@ -141,6 +141,7 @@
     "speech_icon_color": "#8c40da",
     "show_currency_code": false,
     "superscript_decimals": false,
+    "show_delivery_picker": true,
     "cart_icon": "cart",
     "cart_type": "drawer",
     "dock_cart_drawer": true,
