@@ -34,34 +34,43 @@
         "door_hogares": {
           "type": "door",
           "settings": {
-            "eyebrow": "Para tu casa",
-            "title": "Tu semana resuelta",
-            "text": "<p>Frutas y verduras frescas a tu puerta, y <strong>FrutiMenu</strong> que arma tu menú de 7 días y la lista de compra en un minuto.</p><p>🚚 <strong>Despacho gratis sobre $50.000</strong> · llegamos miércoles y sábado.</p>",
-            "cta_label": "Arma tu semana",
-            "cta_link": "shopify://pages/frutimenu",
-            "accent": "#2c9cdb"
+            "channel": "b2c",
+            "eyebrow": "Hogar",
+            "name": "Para mi casa",
+            "answer": "Tu feria de la semana, fresca y a tu puerta.",
+            "meta": "Miércoles y sábado · Despacho gratis sobre $50.000",
+            "proof": "",
+            "cta_label": "Comprar",
+            "cta_link": "/collections/all",
+            "lead": false
           }
         },
         "door_negocios": {
           "type": "door",
           "settings": {
-            "eyebrow": "Para tu negocio",
-            "title": "Abastecimiento sin quiebres",
-            "text": "<p>Restaurantes, hoteles y cafeterías: calidad pareja, despacho programado y factura al día. <strong>Cotización en menos de 24 h.</strong></p><p>🚚 Despachamos <strong>martes, miércoles, viernes y sábado</strong>.</p>",
-            "cta_label": "Cotiza ahora",
+            "channel": "b2b",
+            "eyebrow": "Cocinas",
+            "name": "Para mi negocio",
+            "answer": "Abastecimiento parejo para tu restaurante, hotel o cafetería.",
+            "meta": "Reparto 4 días a la semana · Con factura",
+            "proof": "Cotización en menos de 24 h",
+            "cta_label": "Cotizar",
             "cta_link": "https://cotiza.frutiferia.com",
-            "accent": "#671d90"
+            "lead": true
           }
         },
         "door_bienestar": {
           "type": "door",
           "settings": {
-            "eyebrow": "Para tu equipo",
-            "title": "Bienestar que se nota",
-            "text": "<p>Cajas de fruta para colaboradores, charlas de bienestar e informes para RRHH. Equipos más sanos, más presentes.</p><p>🚚 Entrega a la oficina lunes (AM) y miércoles.</p>",
-            "cta_label": "Fruta para tu equipo",
+            "channel": "wellness",
+            "eyebrow": "Empresas",
+            "name": "Para mi equipo",
+            "answer": "Fruta fresca en la oficina, sin que nadie salga a comprarla.",
+            "meta": "Cajas semanales o mensuales · Informe para RRHH",
+            "proof": "",
+            "cta_label": "Cotizar cajas",
             "cta_link": "shopify://pages/bienestar",
-            "accent": "#d6457d"
+            "lead": false
           }
         }
       },
@@ -71,10 +80,10 @@
         "door_bienestar"
       ],
       "settings": {
-        "subheading": "Frutiferia para cada quien",
-        "heading": "¿Cómo te abasteces con Frutiferia?",
-        "color_scheme": "1",
-        "full_width": true,
+        "eyebrow": "Empieza aquí",
+        "heading": "¿Para quién compras hoy?",
+        "support": "Una casa, una cocina y una oficina no compran igual.",
+        "band": true,
         "prevent_animation": false
       }
     },

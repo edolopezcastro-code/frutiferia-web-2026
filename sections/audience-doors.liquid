@@ -1,176 +1,386 @@
 {%- comment -%}
-  Frutiferia Web 4.0 — Selector de audiencia "3 puertas" (WS-3).
-  Tres tarjetas paralelas y simetricas (Hogares / Negocios / Bienestar laboral) con
-  color de canal (celeste / violeta / rose). Da, en el primer pantallazo, una ruta
-  clara a cada uno de los 3 publicos del negocio. Cada puerta es una tarjeta clickeable.
+  Frutiferia Web 4.0 — Selector de audiencia "3 puertas" — "Lista editorial".
+
+  Reemplaza la version de tarjetas (3 columnas simetricas con borde, sombra y filete de 4px).
+  Resultado de un panel de 4 variantes juzgadas por 3 lentes (marca / conversion / craft):
+  la ARQUITECTURA es una lista 1-D (no hay retícula que romper: agregar, quitar o reordenar
+  puertas desde el Theme Editor solo agrega, quita o reordena <li>), el ESTILO es editorial
+  (sin tarjeta, sin borde de caja, sin sombra, sin iconos de puerta) y la JERARQUIA la da
+  un solo boton solido, en menta, en la puerta marcada como destacada.
+
+  Decisiones que NO son cosmeticas — si las tocas, revisa el porque:
+  · El riel y los textos de canal usan --pill-*-ink, no --pill-* puro: el canal puro como
+    TEXTO reprueba WCAG AA (celeste #38BDF8 = 2,14:1 sobre blanco).
+  · El boton menta lleva texto y hairline en tinta: blanco sobre menta da 2,54:1, y el
+    relleno menta solo da 2,25:1 contra la banda lila (WCAG 1.4.11 pide 3:1 para identificar
+    un control), asi que el hairline es funcional, no decorativo.
+  · El verbo del CTA es visible en TODOS los anchos. Nada de flecha pelada en movil.
+  · Righteous aparece UNA sola vez (el eyebrow de seccion). La marca rinde por escasez.
 {%- endcomment -%}
 
 {%- liquid
-  assign color_scheme = section.settings.color_scheme
+  assign heading_id = section.id | append: '-q'
 -%}
 
 <style>
-  #{{ section.id }} .audience-doors__grid {
+  #{{ section.id }}.audience-doors {
+    background: {% if section.settings.band %}var(--surface-muted){% else %}var(--surface){% endif %};
+    padding: clamp(40px, 5.5vw, 72px) 0;
+    font-family: var(--font-body);
+    color: var(--text);
+  }
+  #{{ section.id }} *,
+  #{{ section.id }} *::before,
+  #{{ section.id }} *::after { box-sizing: border-box; }
+
+  #{{ section.id }} .audience-doors__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    gap: var(--space-4);
   }
-  @media (min-width: 750px) {
-    #{{ section.id }} .audience-doors__grid {
-      grid-template-columns: repeat({{ section.blocks.size | at_most: 4 | at_least: 1 }}, 1fr);
-      gap: 24px;
-    }
+
+  /* ---------- Enunciado ---------- */
+
+  #{{ section.id }} .audience-doors__eyebrow {
+    font-family: var(--font-brand);          /* Righteous: unica aparicion de la seccion */
+    font-size: var(--fs-marker);
+    line-height: 1;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--color-primary);             /* 8,66:1 sobre la banda */
+    margin: 0 0 14px;
   }
+  #{{ section.id }} .audience-doors__question {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(30px, 4.2vw, 44px);
+    line-height: var(--lh-tight);
+    letter-spacing: -.015em;
+    color: var(--text);
+    text-wrap: balance;
+  }
+  #{{ section.id }} .audience-doors__support {
+    margin: 12px 0 0;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-muted);                /* 6,62:1 sobre la banda */
+    max-width: 34ch;
+  }
+
+  /* ---------- La lista ---------- */
+
+  #{{ section.id }} .audience-doors__list { display: grid; margin: 0; padding: 0; list-style: none; }
+  #{{ section.id }} .audience-doors__item { margin: 0; }
+  #{{ section.id }} .audience-doors__item + .audience-doors__item { border-top: 1px solid var(--border); }
+
   #{{ section.id }} .audience-door {
-    --door-accent: var(--color-primary);
-    display: flex;
-    flex-direction: column;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-top: 4px solid var(--door-accent);
-    border-radius: var(--radius);
-    overflow: hidden;
+    position: relative;
+    display: grid;
+    gap: 6px;
+    padding: 20px 16px 20px 22px;
+    min-height: 96px;                        /* la fila ENTERA es el enlace */
+    align-content: center;
     text-decoration: none;
     color: inherit;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-    height: 100%;
+    background: transparent;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    transition: background-color var(--dur-micro) var(--ease-out);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "id"
+      "answer"
+      "meta"
+      "act";
   }
-  #{{ section.id }} .audience-door:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+
+  /* Riel de canal: siempre visible, nunca depende del hover. */
+  #{{ section.id }} .audience-door::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    border-radius: var(--radius-photo);
+    background: var(--door-ink);
+    transition: width var(--dur-micro) var(--ease-out);
   }
-  #{{ section.id }} .audience-door__media {
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: color-mix(in srgb, var(--door-accent) 10%, var(--surface));
-  }
-  #{{ section.id }} .audience-door__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  #{{ section.id }} .audience-door__body {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 34px 32px 36px;
-    flex: 1 1 auto;
-  }
+
+  #{{ section.id }} .audience-door__id { grid-area: id; }
   #{{ section.id }} .audience-door__eyebrow {
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
+    display: block;
+    font-family: var(--font-body);           /* Inter, no Righteous */
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: .14em;
     text-transform: uppercase;
-    font-weight: 700;
-    color: var(--door-accent);
-    color: color-mix(in srgb, var(--door-accent), var(--fru-tinta) 24%);
+    color: var(--door-ink);
+    margin-bottom: 7px;
+  }
+  #{{ section.id }} .audience-door__name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: var(--lh-snug);
+    letter-spacing: -.01em;
+    color: var(--text);
+  }
+  #{{ section.id }} .audience-door__answer {
+    grid-area: answer;
+    font-size: 15.5px;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+  #{{ section.id }} .audience-door__meta {
+    grid-area: meta;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-muted);                /* 6,62:1 — nunca --text-caption */
+    font-variant-numeric: tabular-nums;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3px 8px;
+  }
+  #{{ section.id }} .audience-door__sep { color: var(--text-muted); opacity: .55; }
+
+  /* La prueba que cierra el B2B: el TEXTO va en tinta (15,5:1) y el verde queda solo
+     en el glifo, que como elemento grafico califica con 3,63:1 > 3:1. */
+  #{{ section.id }} .audience-door__check {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  #{{ section.id }} .audience-door__check svg {
+    width: 13px; height: 13px; display: block;
+    color: var(--text-positive);
+    flex: 0 0 auto;
+  }
+
+  /* ---------- Accion ---------- */
+
+  #{{ section.id }} .audience-door__act {
+    grid-area: act;
+    margin-top: var(--space-1);
+    justify-self: start;
     display: inline-flex;
     align-items: center;
     gap: 9px;
-  }
-  #{{ section.id }} .audience-door__eyebrow::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: var(--radius-pill);
-    background: var(--door-accent);
-    flex: 0 0 auto;
-  }
-  #{{ section.id }} .audience-door__title {
-    margin: 0;
-    line-height: 1.12;
-    font-size: 1.75rem;
-  }
-  #{{ section.id }} .audience-door__text {
-    margin: 0;
-    color: var(--text-muted);
-    font-size: 1.08rem;
-    line-height: 1.55;
-    flex: 1 1 auto;
-  }
-  #{{ section.id }} .audience-door__cta {
-    margin-top: 18px;
-    align-self: flex-start;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--door-accent);
-    background: color-mix(in srgb, var(--door-accent), var(--fru-tinta) 24%);
-    color: var(--on-primary);
+    min-height: 44px;
+    font-size: 16px;
     font-weight: 600;
-    font-size: 1.05rem;
-    padding: 14px 26px;
+    color: var(--door-ink);
+    white-space: nowrap;
+  }
+  #{{ section.id }} .audience-door__act-label { position: relative; }
+  #{{ section.id }} .audience-door__act-label::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -3px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--dur-micro) var(--ease-out);
+  }
+  #{{ section.id }} .audience-door:hover .audience-door__act-label::after,
+  #{{ section.id }} .audience-door:focus-visible .audience-door__act-label::after { transform: scaleX(1); }
+
+  #{{ section.id }} .audience-door__arrow {
+    width: 18px; height: 18px; display: block;
+    flex: 0 0 auto;
+    transition: transform var(--dur-micro) var(--ease-out);
+  }
+  #{{ section.id }} .audience-door:hover .audience-door__arrow { transform: translateX(4px); }
+
+  /* ---------- La puerta destacada ---------- */
+
+  #{{ section.id }} .audience-door--lead::before { width: 6px; }
+  #{{ section.id }} .audience-door--lead .audience-door__name { font-size: 25px; }
+  #{{ section.id }} .audience-door--lead .audience-door__act {
+    min-height: 48px;
+    padding: 13px 24px;
+    background: var(--color-cta);
+    color: var(--on-cta);
+    border: 1px solid var(--on-cta);
     border-radius: var(--radius-pill);
-    transition: filter 0.18s ease, gap 0.18s ease;
+    transition: background-color var(--dur-micro) var(--ease-out);
   }
-  @media (max-width: 749px) {
-    #{{ section.id }} .audience-door__body { padding: 26px 24px 28px; gap: 12px; }
-    #{{ section.id }} .audience-door__title { font-size: 1.5rem; }
-    #{{ section.id }} .audience-door__text { font-size: 1rem; }
-    #{{ section.id }} .audience-door__cta {
-      width: 100%;
-      justify-content: center;
-      min-height: 52px;
-      padding: 16px 24px;
-      font-size: 1.08rem;
+  #{{ section.id }} .audience-door--lead .audience-door__act-label::after { display: none; }
+  #{{ section.id }} .audience-door--lead:hover .audience-door__act {
+    background: color-mix(in srgb, var(--fru-blanco) 14%, var(--color-cta));
+  }
+
+  /* ---------- Estados ---------- */
+
+  #{{ section.id }} .audience-door:hover {
+    background: color-mix(in srgb, var(--door-accent) 7%, var(--surface));
+  }
+  #{{ section.id }} .audience-door:hover::before { width: 8px; }
+  #{{ section.id }} .audience-door:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -3px;                    /* hacia adentro: las filas son adyacentes */
+  }
+
+  /* Tactil: ninguna afordancia existe solo en hover. */
+  @media (hover: none) {
+    #{{ section.id }} .audience-door__act-label::after { transform: scaleX(1); }
+    #{{ section.id }} .audience-door--lead .audience-door__act-label::after { display: none; }
+  }
+
+  /* Sin color-mix el lavado cae a blanco solido; el color de canal NO se pierde
+     porque --door-ink es un token con hex propio, no un color-mix. */
+  @supports not (color: color-mix(in srgb, #000, #fff)) {
+    #{{ section.id }} .audience-door:hover { background: var(--surface); }
+    #{{ section.id }} .audience-door--lead:hover .audience-door__act { background: var(--color-cta); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #{{ section.id }} .audience-door,
+    #{{ section.id }} .audience-door::before,
+    #{{ section.id }} .audience-door__arrow,
+    #{{ section.id }} .audience-door__act,
+    #{{ section.id }} .audience-door__act-label::after { transition: none; }
+    #{{ section.id }} .audience-door:hover .audience-door__arrow { transform: none; }
+  }
+
+  /* ---------- >=750px: la fila se vuelve horizontal ----------
+     `auto` en la columna de accion + `minmax(0,1fr)` en el texto: por larga que sea
+     la etiqueta que escriba el comerciante, la seccion nunca desborda. */
+  @media (min-width: 750px) {
+    #{{ section.id }} .audience-door {
+      grid-template-columns: minmax(180px, 240px) minmax(0, 1fr) auto;
+      grid-template-areas:
+        "id answer act"
+        "id meta   act";
+      align-items: center;
+      gap: 3px var(--space-3);
+      padding: 22px 20px 22px 26px;
+      min-height: 92px;
     }
+    #{{ section.id }} .audience-door__id { align-self: center; }
+    #{{ section.id }} .audience-door__act { align-self: center; margin-top: 0; justify-self: end; }
+    #{{ section.id }} .audience-door__answer { align-self: end; }
+    #{{ section.id }} .audience-door__meta { align-self: start; }
   }
-  #{{ section.id }} .audience-door:hover .audience-door__cta {
-    filter: brightness(0.92);
-    gap: 12px;
+
+  /* ---------- >=1100px: enunciado a la izquierda ----------
+     1100 y no 990: bajo 1100 la columna de texto de la fila se estrangula. */
+  @media (min-width: 1100px) {
+    #{{ section.id }} .audience-doors__inner {
+      grid-template-columns: minmax(200px, 240px) minmax(0, 1fr);
+      gap: var(--space-4);
+      align-items: center;
+      padding: 0 var(--space-3);
+    }
+    #{{ section.id }} .audience-doors__question { font-size: clamp(32px, 3vw, 40px); }
+    #{{ section.id }} .audience-door__name { font-size: 23px; }
+    #{{ section.id }} .audience-door--lead .audience-door__name { font-size: 27px; }
   }
 </style>
 
-<div
-  class="section section--padded{% if section.settings.full_width %} section--full-width{% endif %}{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}"
+<section
+  class="audience-doors"
   id="{{ section.id }}"
+  {% if section.settings.heading != blank %}aria-labelledby="{{ heading_id }}"{% endif %}
   {% if settings.animations_enabled != "disabled" and section.settings.prevent_animation == false %}data-cc-animate{% endif %}
 >
-  <div class="container">
-    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
-      <div class="section__header text-center" style="margin-bottom: 28px;">
-        {%- if section.settings.subheading != blank -%}
-          <p class="subheading" style="margin-bottom: 6px;">{{ section.settings.subheading }}</p>
-        {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="h3 mb-0">{{ section.settings.heading }}</h2>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
+  <div class="audience-doors__inner">
 
-    <div class="audience-doors__grid">
-      {%- for block in section.blocks -%}
-        <a
-          class="audience-door"
-          href="{{ block.settings.cta_link | default: '#' }}"
-          style="--door-accent: {{ block.settings.accent | default: 'var(--color-primary)' }};"
-          {{ block.shopify_attributes }}
-        >
-          {%- if block.settings.image != blank -%}
-            <div class="audience-door__media">
-              {{ block.settings.image | image_url: width: 720 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 33vw, 100vw', widths: '360, 540, 720, 1080' }}
-            </div>
-          {%- endif -%}
-          <div class="audience-door__body">
-            {%- if block.settings.eyebrow != blank -%}
-              <span class="audience-door__eyebrow">{{ block.settings.eyebrow }}</span>
-            {%- endif -%}
-            {%- if block.settings.title != blank -%}
-              <h3 class="audience-door__title h5">{{ block.settings.title }}</h3>
-            {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <div class="audience-door__text rte">{{ block.settings.text }}</div>
-            {%- endif -%}
-            {%- if block.settings.cta_label != blank -%}
-              <span class="audience-door__cta">{{ block.settings.cta_label }} <span aria-hidden="true">&rarr;</span></span>
-            {%- endif -%}
-          </div>
-        </a>
-      {%- endfor -%}
+    <div class="audience-doors__ask">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="audience-doors__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="audience-doors__question" id="{{ heading_id }}">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.support != blank -%}
+        <p class="audience-doors__support">{{ section.settings.support | escape }}</p>
+      {%- endif -%}
     </div>
+
+    <ul class="audience-doors__list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          case block.settings.channel
+            when 'b2b'
+              assign accent = 'var(--pill-b2b)'
+              assign ink = 'var(--pill-b2b-ink)'
+            when 'wellness'
+              assign accent = 'var(--pill-wellness)'
+              assign ink = 'var(--pill-wellness-ink)'
+            when 'b2g'
+              assign accent = 'var(--pill-b2g)'
+              assign ink = 'var(--pill-b2g-ink)'
+            else
+              assign accent = 'var(--pill-b2c)'
+              assign ink = 'var(--pill-b2c-ink)'
+          endcase
+        -%}
+        <li class="audience-doors__item" {{ block.shopify_attributes }}>
+          <a
+            class="audience-door{% if block.settings.lead %} audience-door--lead{% endif %}"
+            style="--door-accent: {{ accent }}; --door-ink: {{ ink }};"
+            href="{{ block.settings.cta_link | default: '#' }}"
+          >
+            <span class="audience-door__id">
+              {%- if block.settings.eyebrow != blank -%}
+                <span class="audience-door__eyebrow">{{ block.settings.eyebrow | escape }}</span>
+              {%- endif -%}
+              {%- if block.settings.name != blank -%}
+                <span class="audience-door__name">{{ block.settings.name | escape }}</span>
+              {%- endif -%}
+            </span>
+
+            {%- if block.settings.answer != blank -%}
+              <span class="audience-door__answer">{{ block.settings.answer | escape }}</span>
+            {%- endif -%}
+
+            {%- if block.settings.meta != blank or block.settings.proof != blank -%}
+              <span class="audience-door__meta">
+                {%- assign meta_parts = block.settings.meta | split: '·' -%}
+                {%- for part in meta_parts -%}
+                  {%- assign piece = part | strip -%}
+                  {%- if piece != blank -%}
+                    {%- unless forloop.first -%}
+                      <span class="audience-door__sep" aria-hidden="true">·</span>
+                    {%- endunless -%}
+                    <span>{{ piece | escape }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if block.settings.proof != blank -%}
+                  {%- if meta_parts.size > 0 -%}
+                    <span class="audience-door__sep" aria-hidden="true">·</span>
+                  {%- endif -%}
+                  <span class="audience-door__check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                      <path d="M4 12.6 9.2 17.8 20 6.8"/>
+                    </svg>
+                    {{ block.settings.proof | escape }}
+                  </span>
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+
+            {%- if block.settings.cta_label != blank -%}
+              <span class="audience-door__act">
+                <span class="audience-door__act-label">{{ block.settings.cta_label | escape }}</span>
+                <svg class="audience-door__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <path d="M4.5 12h13"/><path d="M12.4 6.9 17.5 12l-5.1 5.1"/>
+                </svg>
+              </span>
+            {%- endif -%}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
@@ -180,32 +390,28 @@
   "settings": [
     {
       "type": "text",
-      "id": "subheading",
-      "label": "Subtítulo",
-      "default": "Frutiferia para cada quien"
+      "id": "eyebrow",
+      "label": "Etiqueta superior",
+      "info": "Va en Righteous, la fuente de la marca. Es su única aparición en la sección: mantenla corta.",
+      "default": "Empieza aquí"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Título",
-      "default": "¿Cómo te abasteces con Frutiferia?"
+      "label": "Pregunta",
+      "default": "¿Para quién compras hoy?"
     },
     {
-      "type": "select",
-      "id": "color_scheme",
-      "label": "Esquema de color",
-      "options": [
-        { "value": "none", "label": "Ninguno (transparente)" },
-        { "value": "1", "label": "1" },
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" }
-      ],
-      "default": "none"
+      "type": "text",
+      "id": "support",
+      "label": "Bajada",
+      "default": "Una casa, una cocina y una oficina no compran igual."
     },
     {
       "type": "checkbox",
-      "id": "full_width",
-      "label": "Ancho completo",
+      "id": "band",
+      "label": "Fondo lila",
+      "info": "Separa la sección del resto de la portada. Sin él, queda sobre blanco.",
       "default": true
     },
     {
@@ -221,44 +427,70 @@
       "name": "Puerta",
       "settings": [
         {
+          "type": "select",
+          "id": "channel",
+          "label": "Canal",
+          "info": "Define el color del riel y de los textos de acento. Usa la paleta canónica del OS.",
+          "options": [
+            { "value": "b2c", "label": "Hogar (celeste)" },
+            { "value": "b2b", "label": "Negocio (violeta)" },
+            { "value": "wellness", "label": "Bienestar / equipo (rose)" },
+            { "value": "b2g", "label": "Instituciones (teal)" }
+          ],
+          "default": "b2c"
+        },
+        {
           "type": "text",
           "id": "eyebrow",
-          "label": "Etiqueta (eyebrow)",
-          "default": "Para tu casa"
+          "label": "Etiqueta",
+          "info": "Una palabra: Hogar, Cocinas, Empresas.",
+          "default": "Hogar"
         },
         {
           "type": "text",
-          "id": "title",
-          "label": "Título",
-          "default": "Tu semana resuelta"
+          "id": "name",
+          "label": "Respuesta",
+          "info": "Responde literalmente la pregunta de arriba: \"Para mi casa\".",
+          "default": "Para mi casa"
         },
         {
-          "type": "richtext",
-          "id": "text",
-          "label": "Texto",
-          "default": "<p>Frutas y verduras frescas a tu puerta, y FrutiMenu que arma tu menú de 7 días y la lista de compra en un minuto.</p>"
+          "type": "text",
+          "id": "answer",
+          "label": "Bajada",
+          "info": "Una línea. Si necesitas dos, sobra media.",
+          "default": "Tu feria de la semana, fresca y a tu puerta."
         },
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Imagen (opcional)"
+          "type": "text",
+          "id": "meta",
+          "label": "Datos",
+          "info": "Separa cada dato con el carácter · (punto medio).",
+          "default": "Miércoles y sábado · Despacho gratis sobre $50.000"
+        },
+        {
+          "type": "text",
+          "id": "proof",
+          "label": "Dato con visto",
+          "info": "Opcional. Va al final, con un visto verde. Úsalo para el dato que cierra la venta."
         },
         {
           "type": "text",
           "id": "cta_label",
-          "label": "Texto del botón",
-          "default": "Arma tu semana"
+          "label": "Verbo del botón",
+          "info": "Un verbo concreto: Comprar, Cotizar. Evita \"Ver opciones\", que no promete nada.",
+          "default": "Comprar"
         },
         {
           "type": "url",
           "id": "cta_link",
-          "label": "Enlace del botón"
+          "label": "Enlace"
         },
         {
-          "type": "color",
-          "id": "accent",
-          "label": "Color de canal",
-          "default": "#671D90"
+          "type": "checkbox",
+          "id": "lead",
+          "label": "Destacar esta puerta",
+          "info": "Riel más grueso, nombre más grande y el único botón sólido de la sección. Marca solo una.",
+          "default": false
         }
       ]
     }
@@ -271,34 +503,41 @@
         {
           "type": "door",
           "settings": {
-            "eyebrow": "Para tu casa",
-            "title": "Tu semana resuelta",
-            "text": "<p>Frutas y verduras frescas a tu puerta, y FrutiMenu que arma tu menú de 7 días y la lista de compra en un minuto.</p>",
-            "cta_label": "Arma tu semana",
-            "cta_link": "shopify://pages/frutimenu",
-            "accent": "#2C9CDB"
+            "channel": "b2c",
+            "eyebrow": "Hogar",
+            "name": "Para mi casa",
+            "answer": "Tu feria de la semana, fresca y a tu puerta.",
+            "meta": "Miércoles y sábado · Despacho gratis sobre $50.000",
+            "cta_label": "Comprar",
+            "cta_link": "/collections/all",
+            "lead": false
           }
         },
         {
           "type": "door",
           "settings": {
-            "eyebrow": "Para tu negocio",
-            "title": "Abastecimiento sin quiebres",
-            "text": "<p>Restaurantes, hoteles y cafeterías: calidad pareja, despacho programado y factura al día. Cotización en menos de 24 h.</p>",
-            "cta_label": "Cotiza para tu negocio",
-            "cta_link": "shopify://pages/venta-a-negocios",
-            "accent": "#671D90"
+            "channel": "b2b",
+            "eyebrow": "Cocinas",
+            "name": "Para mi negocio",
+            "answer": "Abastecimiento parejo para tu restaurante, hotel o cafetería.",
+            "meta": "Reparto 4 días a la semana · Con factura",
+            "proof": "Cotización en menos de 24 h",
+            "cta_label": "Cotizar",
+            "cta_link": "https://cotiza.frutiferia.com",
+            "lead": true
           }
         },
         {
           "type": "door",
           "settings": {
-            "eyebrow": "Para tu equipo",
-            "title": "Bienestar que se nota",
-            "text": "<p>Cajas de fruta para colaboradores, charlas de bienestar e informes para RRHH. Equipos más sanos, más presentes.</p>",
-            "cta_label": "Fruta para tu equipo",
+            "channel": "wellness",
+            "eyebrow": "Empresas",
+            "name": "Para mi equipo",
+            "answer": "Fruta fresca en la oficina, sin que nadie salga a comprarla.",
+            "meta": "Cajas semanales o mensuales · Informe para RRHH",
+            "cta_label": "Cotizar cajas",
             "cta_link": "shopify://pages/bienestar",
-            "accent": "#D6457D"
+            "lead": false
           }
         }
       ]

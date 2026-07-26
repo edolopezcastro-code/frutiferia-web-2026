@@ -33,7 +33,10 @@
   --surface-muted:   var(--fru-morado-050);
   --text:            var(--fru-tinta);
   --text-muted:      var(--fru-gris-700);
-  --text-caption:    var(--fru-gris-500);
+  /* #888 (--fru-gris-500) daba 3,54:1 sobre blanco y 3,15:1 sobre --surface-muted:
+     reprobaba WCAG AA en ambos. Este tono es el más claro que pasa en los dos fondos
+     (5,10:1 y 4,53:1). El primitivo --fru-gris-500 se mantiene para usos NO textuales. */
+  --text-caption:    #6E6E6E;
   --border:          rgba(103,29,144,.12);     /* morado a 12% — borde sutil, no gris genérico */
   --tag-muted-bg:    #E7DBEE;                   /* fondo de chip "antes"/apagado sobre claro */
   --on-primary-soft: #E9DCF2;                   /* texto suave sobre morado (footer/pie) */
@@ -44,6 +47,16 @@
   --pill-frutologia: #84CC16;  /* lima */
   --pill-b2g:        #14B8A6;  /* teal */
   --pill-wellness:   #D6457D;  /* rose — faltaba en Capa 3 (FRUTI3-9); ya vive hardcodeada en audience-doors y el plan */
+
+  /* Derivados TINTA de canal. Los de arriba son colores de RELLENO (pill, riel, punto):
+     como TEXTO reprueban AA — b2c 2,14:1 y b2g 2,49:1 sobre blanco, ni cerca del 4,5.
+     Estos son los mismos tonos oscurecidos hasta pasar sobre los dos fondos del tema.
+     Regla: relleno -> --pill-X · texto, borde o ícono que deba leerse -> --pill-X-ink.
+                              blanco   --surface-muted */
+  --pill-b2c-ink:      #0E6E9C;  /*  5,63      5,00 */
+  --pill-b2b-ink:      #6D28D9;  /*  7,10      6,31 */
+  --pill-wellness-ink: #B93465;  /*  5,61      4,99 */
+  --pill-b2g-ink:      #0B6E66;  /*  6,11      5,43 */
 
   /* --- Gradientes (escasos, con carácter — jamás morado→lila difuso de fondo) --- */
   --grad-cta:  linear-gradient(135deg, #2DB87F 0%, #248F57 100%);  /* SOLO botón/CTA */
