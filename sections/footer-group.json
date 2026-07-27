@@ -79,7 +79,6 @@
       ],
       "disabled": false,
       "settings": {
-        "hide_on_b2b": true,
         "heading": "",
         "heading_align": "text-start",
         "icon_size": 36,
