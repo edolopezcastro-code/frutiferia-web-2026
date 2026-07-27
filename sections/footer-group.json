@@ -79,6 +79,7 @@
       ],
       "disabled": false,
       "settings": {
+        "hide_on_b2b": true,
         "heading": "",
         "heading_align": "text-start",
         "icon_size": 36,
@@ -90,8 +91,7 @@
         "color_scheme": "none",
         "full_width": true,
         "dividers": "border-top",
-        "prevent_animation": false,
-        "hide_on_b2b": true
+        "prevent_animation": false
       }
     },
     "footer": {
