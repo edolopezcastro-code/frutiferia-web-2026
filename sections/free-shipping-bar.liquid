@@ -83,6 +83,13 @@
   if section.settings.homepage_only and request.page_type != 'index'
     assign do_render = false
   endif
+  # El umbral de $50.000 y los días miércoles/sábado son política B2C. En la
+  # landing B2B la frecuencia es martes, miércoles, viernes y sábado y no hay
+  # despacho gratis por monto: la barra ahí desinforma. Se filtra por
+  # template_suffix (no por handle) para sobrevivir cambios de URL.
+  if request.page_type == 'page' and page.template_suffix == 'b2b'
+    assign do_render = false
+  endif
 -%}
 
 {{ 'free-shipping-bar.css' | asset_url | stylesheet_tag }}

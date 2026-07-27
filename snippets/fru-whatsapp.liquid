@@ -1,15 +1,17 @@
 {%- comment -%}
   fru-whatsapp.liquid — FRUTI3-14.A: botón flotante de WhatsApp contextual.
   Mora (B2C, número por defecto) en toda la tienda; excepción de canal (regla
-  dura del proyecto: B2B/Wellness → Francisco) en /pages/venta-a-negocios y
-  /pages/bienestar. Mensaje pre-armado por contexto (PDP con el producto,
+  dura del proyecto: B2B/Wellness → Francisco) en la landing B2B (template
+  suffix `b2b`, hoy /pages/proveedor-restaurantes) y en /pages/bienestar.
+  El B2B se detecta por template_suffix, no por handle, para sobrevivir
+  cambios de URL. Mensaje pre-armado por contexto (PDP con el producto,
   carrito, genérico). Montado una sola vez, global, en layout/theme.liquid.
 {%- endcomment -%}
 <link rel="stylesheet" href="{{ 'fru-whatsapp.css' | asset_url }}">
 
 {%- liquid
   assign fru_wa_to_francisco = false
-  if request.page_type == 'page' and page.handle == 'venta-a-negocios'
+  if request.page_type == 'page' and page.template_suffix == 'b2b'
     assign fru_wa_to_francisco = true
     assign fru_wa_text = 'Hola Francisco, quiero cotizar para mi negocio'
   elsif request.page_type == 'page' and page.handle == 'bienestar'

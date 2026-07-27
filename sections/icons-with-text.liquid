@@ -1,4 +1,19 @@
-{%- if section.blocks.size > 0 -%}
+{%- liquid
+  # La banda de confianza del footer lleva copy de política B2C (umbral de
+  # $50.000 y el WhatsApp de Mora). En la landing B2B eso desinforma: ahí el
+  # reparto es martes/miércoles/viernes/sábado, no hay despacho gratis por
+  # monto y el contacto es Francisco. La instancia que marque `hide_on_b2b`
+  # no se renderiza en esa plantilla. Se filtra por template_suffix, no por
+  # handle, para sobrevivir cambios de URL.
+  assign fru_render_iwt = true
+  if section.blocks.size == 0
+    assign fru_render_iwt = false
+  endif
+  if section.settings.hide_on_b2b and request.page_type == 'page' and page.template_suffix == 'b2b'
+    assign fru_render_iwt = false
+  endif
+-%}
+{%- if fru_render_iwt -%}
   {%- if section.index > 2 and section.location != "header" -%}
     <link rel="stylesheet" href="{{ 'icons-with-text.css' | asset_url }}" media="print" onload="this.media='all'">
   {%- else -%}
@@ -327,6 +342,13 @@
       "id": "prevent_animation",
       "label": "Load the section without animation",
       "info": "If this section is visible when the page loads, enabling this setting can reduce CLS and may improve site speed scores. [Read more](https://cleancanvas.co.uk/support/canopy/performance-guide)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_b2b",
+      "label": "Ocultar en la landing B2B",
+      "info": "Para bandas globales con copy B2C (umbral de envío gratis, WhatsApp de Mora): no se muestran en páginas con plantilla b2b.",
       "default": false
     }
   ],

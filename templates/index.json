@@ -390,7 +390,7 @@
         "b2b_text": {
           "type": "text",
           "settings": {
-            "text": "<p>Restaurantes, hoteles, cafeterías y casinos: <strong>cero quiebres de stock</strong>, calidad pareja en cada entrega, <strong>despacho programado</strong> y factura al día. Tu cocina, siempre abastecida — cotización en menos de 24 h.</p>",
+            "text": "<p>Restaurantes, hoteles, cafeterías y casinos: <strong>cero quiebres de stock</strong>, calidad pareja en cada entrega, <strong>despacho programado</strong> y factura al día. Tu cocina, siempre abastecida — cotización en menos de 24 h. Mira <a href=\"/pages/proveedor-restaurantes\">cómo abastecemos restaurantes en Viña del Mar</a>.</p>",
             "enlarge_text": true
           }
         },

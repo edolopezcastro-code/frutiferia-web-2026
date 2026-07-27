@@ -24,15 +24,15 @@
         "heading_hero": {
           "type": "heading",
           "settings": {
-            "heading": "Abastece tu negocio con lo mejor",
-            "heading_size": "h0",
+            "heading": "Proveedor de frutas y verduras para restaurantes",
+            "heading_size": "h1",
             "heading_h1": true
           }
         },
         "text_hero": {
           "type": "text",
           "settings": {
-            "text": "<p>Frutas, verduras y despensa al por mayor para restaurantes, hoteles, cafeterías y oficinas de la Región de Valparaíso.</p>",
+            "text": "<p>Abastecemos cocinas de Viña del Mar, Valparaíso, Concón, Reñaca y Quilpué. Reparto martes, miércoles, viernes y sábado, con factura al día.</p>",
             "enlarge_text": true
           }
         },
@@ -335,7 +335,7 @@
       },
       "block_order": ["sector_rest", "sector_hotel", "sector_oficina", "sector_cafe"],
       "settings": {
-        "title": "Sectores que abastecemos",
+        "title": "Cocinas que abastecemos en la Región de Valparaíso",
         "heading_align": "text-center",
         "button_label": "",
         "button_link": "",
@@ -346,6 +346,35 @@
         "image_ratio": "1",
         "color_scheme": "3",
         "button_style": "btn btn--primary"
+      }
+    },
+    "detalle_b2b": {
+      "type": "rich-text",
+      "blocks": {
+        "detalle_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Abastecimiento para restaurantes en Viña del Mar y Valparaíso",
+            "heading_size": "h3",
+            "heading_h1": false
+          }
+        },
+        "detalle_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Cambiar de proveedor de frutas y verduras no es una decisión menor: si la entrega falla un martes, el problema no le llega a tu proveedor, le llega a tu carta. Esto es lo que conviene saber antes de pedir la primera cotización.</p><p><strong>Cuándo llega.</strong> Repartimos a negocios los martes, miércoles, viernes y sábado. Los días y la frecuencia se acuerdan contigo, para que la reposición calce con tu operación.</p><p><strong>Qué pasa si algo no cumple.</strong> Cada pedido se selecciona a mano. Si un producto no llega al estándar que necesita tu cocina, lo reponemos en la siguiente entrega.</p><p><strong>Cómo se pide.</strong> Tienes dos caminos: cargar productos y cantidades en el cotizador en línea, o escribirle directo a Francisco por WhatsApp. Respondemos con precios y calendario de despacho en menos de 24 horas.</p><p><strong>Mínimos y facturación.</strong> No exigimos un monto mínimo estricto; los precios por mayor aplican desde ciertos volúmenes y eso se conversa caso a caso. Emitimos boleta y factura electrónica, y aceptamos transferencia, tarjeta y Mercado Pago.</p><p>Llevamos más de siete años abasteciendo hogares y negocios de la Región de Valparaíso, con más de 20.000 pedidos entregados.</p>",
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": ["detalle_heading", "detalle_text"],
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-start",
+        "mob_center_text": false,
+        "color_scheme": "none",
+        "full_width": false,
+        "prevent_animation": false
       }
     },
     "testimonial_b2b": {
@@ -497,7 +526,7 @@
       },
       "block_order": ["cat_general", "q_minimo", "q_pago", "q_entrega", "q_calidad", "q_zonas"],
       "settings": {
-        "heading": "Preguntas frecuentes B2B",
+        "heading": "Preguntas frecuentes de restaurantes y cocinas",
         "heading_align": "text-center",
         "color_scheme": "none",
         "full_width": true
@@ -512,6 +541,7 @@
     "como_funciona_b2b",
     "productos_b2b",
     "sectores_b2b",
+    "detalle_b2b",
     "testimonial_b2b",
     "contacto_b2b",
     "faq_b2b"

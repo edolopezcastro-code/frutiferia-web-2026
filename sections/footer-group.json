@@ -90,7 +90,8 @@
         "color_scheme": "none",
         "full_width": true,
         "dividers": "border-top",
-        "prevent_animation": false
+        "prevent_animation": false,
+        "hide_on_b2b": true
       }
     },
     "footer": {
