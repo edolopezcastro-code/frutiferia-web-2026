@@ -1,0 +1,179 @@
+{%- comment -%}
+  catalogo-b2b.liquid — imán de leads B2B: el catálogo mayorista a cambio del correo.
+
+  El PDF trae ~300 productos con precio por formato, así que NO se publica abierto
+  (la competencia local lo leería y habría que mantenerlo al día por temporada).
+  A cambio, el chef deja nombre, correo y negocio, entra al CRM por la MISMA edge
+  function que ya usa el formulario de cotización (`b2b-lead-intake`) y recibe la
+  descarga al instante.
+
+  Etiquetas de los campos: el payload se arma por LABEL, no por `name`, porque así
+  las lee la edge function (`f["Nombre"]`, `f["Correo electrónico"]`,
+  `f["Nombre de tu negocio"]`, `f["Mensaje"]`). No renombrar sin tocar la función.
+
+  Fail-soft en dos direcciones: si no hay `catalog_url` la sección no se renderiza
+  (no se publica un botón roto), y si el POST al CRM falla igual se entrega el
+  catálogo — no se castiga al prospecto por un problema nuestro.
+{%- endcomment -%}
+
+{%- liquid
+  assign catalog_url = section.settings.catalog_url
+  assign has_catalog = false
+  if catalog_url != blank
+    assign has_catalog = true
+  endif
+-%}
+
+{%- if has_catalog -%}
+  {{ 'catalogo-b2b.css' | asset_url | stylesheet_tag }}
+
+  <div class="section {% if section.settings.full_width %}section--full-width{% endif %} color-scheme--{{ section.settings.color_scheme }}">
+    <div class="container">
+      <div class="fru-catalogo">
+        <div class="fru-catalogo__intro">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="fru-catalogo__heading h3">{{ section.settings.heading | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="fru-catalogo__text rte">{{ section.settings.text }}</div>
+          {%- endif -%}
+        </div>
+
+        <form class="fru-catalogo__form" id="fru-catalogo-form" novalidate>
+          <div class="fru-catalogo__row">
+            <div class="fru-catalogo__field">
+              <label class="label" for="fru-cat-nombre">Nombre</label>
+              <input class="input w-full" type="text" id="fru-cat-nombre" name="cat[nombre]" autocomplete="name" required>
+            </div>
+            <div class="fru-catalogo__field">
+              <label class="label" for="fru-cat-negocio">Nombre de tu negocio</label>
+              <input class="input w-full" type="text" id="fru-cat-negocio" name="cat[negocio]" autocomplete="organization" required>
+            </div>
+          </div>
+          <div class="fru-catalogo__field">
+            <label class="label" for="fru-cat-email">Correo electrónico</label>
+            <input class="input w-full" type="email" id="fru-cat-email" name="cat[email]" autocomplete="email" required>
+          </div>
+
+          {%- comment -%} Honeypot: mismo patrón que el form de cotización. {%- endcomment -%}
+          <div class="fru-catalogo__hp" aria-hidden="true">
+            <label for="fru-cat-hp">No completar</label>
+            <input type="text" id="fru-cat-hp" name="cat[hp]" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn btn--primary fru-catalogo__submit">
+            {{ section.settings.button_label | escape }}
+          </button>
+
+          <p class="fru-catalogo__legal">
+            {{ section.settings.legal | escape }}
+          </p>
+        </form>
+
+        <div class="fru-catalogo__done" id="fru-catalogo-done" role="status" aria-live="polite" hidden>
+          <p class="fru-catalogo__done-title"><strong>Listo, tu catálogo va en camino.</strong></p>
+          <p>Si la descarga no partió sola, ábrela acá:</p>
+          <a class="btn btn--primary" id="fru-catalogo-link" href="{{ catalog_url }}" download target="_blank" rel="noopener">
+            Descargar el catálogo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ 'catalogo-b2b.js' | asset_url }}" defer></script>
+  <script type="application/json" id="fru-catalogo-config">
+    {
+      "endpoint": {{ section.settings.crm_endpoint | json }},
+      "source": {{ section.settings.crm_source | json }},
+      "catalogUrl": {{ catalog_url | json }}
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Catálogo B2B (leads)",
+  "tag": "section",
+  "class": "cc-catalogo-b2b",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Entrega el catálogo mayorista a cambio del correo. Si no cargas el PDF, la sección no se muestra."
+    },
+    {
+      "type": "url",
+      "id": "catalog_url",
+      "label": "PDF del catálogo",
+      "info": "Súbelo en Contenido → Archivos y pega aquí su URL."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Descarga el catálogo mayorista"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texto",
+      "default": "<p>Más de 300 productos con precio por formato —kilo, caja y saco—, la línea HORECA de volumen y las condiciones comerciales completas. Te lo mandamos al correo y lo descargas al instante.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "Recibir el catálogo"
+    },
+    {
+      "type": "text",
+      "id": "legal",
+      "label": "Letra chica",
+      "default": "Precios de referencia, sujetos a variación por temporada y disponibilidad."
+    },
+    {
+      "type": "header",
+      "content": "CRM"
+    },
+    {
+      "type": "text",
+      "id": "crm_endpoint",
+      "label": "Endpoint del CRM",
+      "info": "La misma edge function del formulario de cotización (b2b-lead-intake)."
+    },
+    {
+      "type": "text",
+      "id": "crm_source",
+      "label": "Origen (source)",
+      "default": "web-b2b-catalogo"
+    },
+    {
+      "type": "header",
+      "content": "Estilo"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "options": [
+        { "value": "none", "label": "Por defecto" },
+        { "value": "1", "label": "Esquema 1" },
+        { "value": "2", "label": "Esquema 2" },
+        { "value": "3", "label": "Esquema 3" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Catálogo B2B (leads)"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,92 @@
+/*
+ * catalogo-b2b.css — imán de leads del catálogo mayorista.
+ * Dos columnas en escritorio (texto | formulario), una sola en móvil.
+ * Usa los tokens del tema; ningún hex crudo.
+ */
+
+.fru-catalogo {
+  display: grid;
+  gap: var(--spacing-6, 2rem);
+  align-items: start;
+  padding-block: var(--spacing-6, 2rem);
+}
+
+@media (min-width: 768px) {
+  .fru-catalogo {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-8, 3rem);
+    align-items: center;
+  }
+}
+
+.fru-catalogo__heading {
+  margin: 0 0 0.5em;
+}
+
+.fru-catalogo__text {
+  /* el texto largo se lee mejor con medida controlada */
+  max-width: 46ch;
+}
+
+.fru-catalogo__form {
+  display: grid;
+  gap: var(--spacing-3, 1rem);
+}
+
+.fru-catalogo__row {
+  display: grid;
+  gap: var(--spacing-3, 1rem);
+}
+
+@media (min-width: 480px) {
+  .fru-catalogo__row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* min-width:auto en el ITEM: sin esto los input desbordan la grilla en móvil */
+.fru-catalogo__field {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.fru-catalogo__submit {
+  justify-self: start;
+}
+
+@media (max-width: 479px) {
+  .fru-catalogo__submit {
+    justify-self: stretch;
+    text-align: center;
+  }
+}
+
+.fru-catalogo__legal {
+  margin: 0;
+  font-size: 0.8125rem;
+  opacity: 0.72;
+}
+
+/* honeypot: fuera de vista sin display:none, para que los bots lo llenen */
+.fru-catalogo__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.fru-catalogo__done {
+  display: grid;
+  gap: var(--spacing-3, 1rem);
+  justify-items: start;
+}
+
+.fru-catalogo__done-title {
+  margin: 0;
+}
+
+.fru-catalogo__done p {
+  margin: 0;
+}

@@ -32,7 +32,7 @@
         "text_hero": {
           "type": "text",
           "settings": {
-            "text": "<p>Abastecemos cocinas de Viña del Mar, Valparaíso, Concón, Reñaca y Quilpué. Reparto martes, miércoles, viernes y sábado, con factura al día.</p>",
+            "text": "<p>Abastecemos cocinas de Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Placilla y Curauma. Reparto martes, miércoles, viernes y sábado, con factura al día.</p>",
             "enlarge_text": true
           }
         },
@@ -225,8 +225,8 @@
           "settings": {
             "enable_media": false,
             "media_scale": 100,
-            "heading": "1. Cuéntanos qué necesitas",
-            "text": "<p>Escríbenos por WhatsApp o llena el formulario con los productos, cantidades y frecuencia de entrega que requieres.</p>",
+            "heading": "1. Cotiza o escríbenos",
+            "text": "<p>Carga tus productos y cantidades en el cotizador en línea, o escríbele directo a Francisco. Te respondemos con precios y calendario de despacho.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -236,8 +236,8 @@
           "settings": {
             "enable_media": false,
             "media_scale": 100,
-            "heading": "2. Recibe tu cotización",
-            "text": "<p>Te enviamos una propuesta con precios por mayor, calendario de despacho y condiciones de pago en menos de 24 horas.</p>",
+            "heading": "2. Creamos tu grupo",
+            "text": "<p>Armamos un grupo de WhatsApp con tu equipo de cocina. Sin planillas y sin llamadas: ahí se coordina todo.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -247,16 +247,27 @@
           "settings": {
             "enable_media": false,
             "media_scale": 100,
-            "heading": "3. Recibe en tu negocio",
-            "text": "<p>Despachamos en los días acordados. Productos frescos, seleccionados y listos para tu operación.</p>",
+            "heading": "3. Pides hasta las 22:00",
+            "text": "<p>Cada día te recordamos cuándo toca pedir. Escribes lo que necesitas en el grupo, hasta las 22:00 del día anterior al reparto, y nosotros lo ingresamos por ti.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "paso_4": {
+          "type": "column",
+          "settings": {
+            "enable_media": false,
+            "media_scale": 100,
+            "heading": "4. Lo despachamos",
+            "text": "<p>Preparamos y entregamos en la puerta de tu negocio los días de reparto. Fresco y listo para tu operación.</p>",
             "button_label": "",
             "button_link": ""
           }
         }
       },
-      "block_order": ["paso_1", "paso_2", "paso_3"],
+      "block_order": ["paso_1", "paso_2", "paso_3", "paso_4"],
       "settings": {
-        "title": "¿Cómo funciona?",
+        "title": "Cómo empezamos a abastecerte",
         "heading_align": "text-center",
         "button_label": "",
         "button_link": "",
@@ -282,6 +293,20 @@
         "products_to_show": 8,
         "color_scheme": "1",
         "card_contain": true,
+        "full_width": true
+      }
+    },
+    "catalogo_b2b": {
+      "type": "catalogo-b2b",
+      "settings": {
+        "catalog_url": "",
+        "heading": "Descarga el catálogo mayorista",
+        "text": "<p>Más de 300 productos con precio por formato —kilo, caja y saco—, la línea HORECA de volumen y las condiciones comerciales completas. Déjanos tu correo y lo descargas al instante.</p>",
+        "button_label": "Recibir el catálogo",
+        "legal": "Precios de referencia, sujetos a variación por temporada y disponibilidad.",
+        "crm_endpoint": "https://ykvexpxvlivcqamqsafe.supabase.co/functions/v1/b2b-lead-intake",
+        "crm_source": "web-b2b-catalogo",
+        "color_scheme": "1",
         "full_width": true
       }
     },
@@ -362,7 +387,7 @@
         "detalle_text": {
           "type": "text",
           "settings": {
-            "text": "<p>Cambiar de proveedor de frutas y verduras no es una decisión menor: si la entrega falla un martes, el problema no le llega a tu proveedor, le llega a tu carta. Esto es lo que conviene saber antes de pedir la primera cotización.</p><p><strong>Cuándo llega.</strong> Repartimos a negocios los martes, miércoles, viernes y sábado. Los días y la frecuencia se acuerdan contigo, para que la reposición calce con tu operación.</p><p><strong>Qué pasa si algo no cumple.</strong> Cada pedido se selecciona a mano. Si un producto no llega al estándar que necesita tu cocina, lo reponemos en la siguiente entrega.</p><p><strong>Cómo se pide.</strong> Tienes dos caminos: cargar productos y cantidades en el cotizador en línea, o escribirle directo a Francisco por WhatsApp. Respondemos con precios y calendario de despacho en menos de 24 horas.</p><p><strong>Mínimos y facturación.</strong> No exigimos un monto mínimo estricto; los precios por mayor aplican desde ciertos volúmenes y eso se conversa caso a caso. Emitimos boleta y factura electrónica, y aceptamos transferencia, tarjeta y Mercado Pago.</p><p>Llevamos más de siete años abasteciendo hogares y negocios de la Región de Valparaíso, con más de 20.000 pedidos entregados.</p>",
+            "text": "<p>Cambiar de proveedor de frutas y verduras no es una decisión menor: si la entrega falla un martes, el problema no le llega a tu proveedor, le llega a tu carta. Esto es lo que conviene saber antes del primer pedido.</p><p><strong>Cómo se pide.</strong> Armamos un grupo de WhatsApp con tu equipo de cocina. Ahí te recordamos cuándo toca pedir, escribes lo que necesitas y nosotros lo ingresamos por ti. Sin planillas y sin llamadas.</p><p><strong>Cuándo llega.</strong> Repartimos martes, miércoles, viernes y sábado, en la puerta de tu negocio. El corte es a las <strong>22:00 del día anterior</strong>: respetarlo es lo que nos permite comprar bien y asegurar que esté todo lo que pediste.</p><p><strong>Qué pasa si algo no cumple.</strong> Cada pedido se selecciona a mano. Si un producto no llega al estándar que necesita tu cocina, lo reponemos en la siguiente entrega.</p><p><strong>Qué encuentras y cómo se paga.</strong> Más de 300 productos —frutas, verduras, frutos secos, legumbres, huevos, microgreens y despensa natural— en formatos por kilo, caja y saco: mientras más grande el formato, más conveniente el kilo. Los lunes se pagan los pedidos de la semana anterior, con boleta o factura al día.</p><p>Llevamos más de siete años abasteciendo hogares y negocios de la Región de Valparaíso, con más de 20.000 pedidos entregados.</p>",
             "enlarge_text": false
           }
         }
@@ -403,7 +428,7 @@
       },
       "block_order": ["test_rest", "test_oficina"],
       "settings": {
-        "heading": "Negocios que confían en nosotros",
+        "heading": "Lo que nos dicen",
         "show_quotes": true,
         "testimonial_size": "h3",
         "testimonial_font": "heading",
@@ -417,6 +442,66 @@
         "color_scheme": "1",
         "star_color": "#f7c346",
         "full_width": true
+      }
+    },
+    "clientes_b2b": {
+      "type": "logo-list",
+      "blocks": {
+        "cli_enjoy": { "type": "logo", "settings": { "url": "", "logo_width": 190, "text": "Enjoy Viña del Mar" } },
+        "cli_h9": { "type": "logo", "settings": { "url": "", "logo_width": 190, "text": "Hotel H9" } },
+        "cli_tercer": { "type": "logo", "settings": { "url": "", "logo_width": 190, "text": "Bar 3º Tiempo" } },
+        "cli_plaggio": { "type": "logo", "settings": { "url": "", "logo_width": 190, "text": "Plaggio" } },
+        "cli_platon": { "type": "logo", "settings": { "url": "", "logo_width": 190, "text": "Platón" } },
+        "cli_ciudad": { "type": "logo", "settings": { "url": "", "logo_width": 190, "text": "Ciudad de Pie" } },
+        "cli_cestsibon": { "type": "logo", "settings": { "url": "", "logo_width": 190, "text": "C'est si Bon" } },
+        "cli_camille": { "type": "logo", "settings": { "url": "", "logo_width": 190, "text": "Camille" } },
+        "cli_xalad": { "type": "logo", "settings": { "url": "", "logo_width": 190, "text": "Xalad" } }
+      },
+      "block_order": ["cli_enjoy", "cli_h9", "cli_tercer", "cli_plaggio", "cli_platon", "cli_ciudad", "cli_cestsibon", "cli_camille", "cli_xalad"],
+      "settings": {
+        "title": "Ya trabajamos con",
+        "heading_align": "text-center",
+        "button_label": "",
+        "button_link": "",
+        "layout": "carousel",
+        "spacing": 56,
+        "logo_grid_align": "justify-center",
+        "image_opacity": 100,
+        "color_scheme": "none",
+        "full_width": true
+      }
+    },
+    "prueba_b2b": {
+      "type": "rich-text",
+      "blocks": {
+        "prueba_subheading": {
+          "type": "subheading",
+          "settings": { "text": "SI ES TU PRIMERA VEZ" }
+        },
+        "prueba_heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Prueba el servicio 14 días con 10% de descuento",
+            "heading_size": "h3",
+            "heading_h1": false
+          }
+        },
+        "prueba_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Haz todos los pedidos que quieras durante 14 días con 10% de descuento, para que midas por ti mismo el producto y el cumplimiento antes de comprometerte. El beneficio se mantiene mientras cumplas las condiciones de pago, y queda sujeto a aprobación del equipo según tu volumen de compra.</p>",
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": ["prueba_subheading", "prueba_heading", "prueba_text"],
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "color_scheme": "2",
+        "full_width": true,
+        "prevent_animation": false
       }
     },
     "contacto_b2b": {
@@ -488,23 +573,23 @@
           "settings": {
             "icon": "box",
             "heading": "¿Cuál es el pedido mínimo?",
-            "text": "<p>No tenemos un monto mínimo estricto, pero los precios por mayor aplican desde ciertos volúmenes. Contáctanos y te armamos una propuesta a tu medida.</p>"
+            "text": "<p>No tenemos un monto mínimo estricto. El envío es <strong>gratis desde $50.000</strong>; bajo ese monto se cobra según el rango de tu zona. Los precios por mayor mejoran con el formato: mientras más grande la malla, la caja o el saco, más conveniente queda el kilo.</p>"
           }
         },
         "q_pago": {
           "type": "question",
           "settings": {
             "icon": "credit_card",
-            "heading": "¿Qué formas de pago aceptan para empresas?",
-            "text": "<p>Transferencia bancaria, tarjeta de crédito/débito y Mercado Pago. Emitimos boleta y factura electrónica.</p>"
+            "heading": "¿Cómo y cuándo se paga?",
+            "text": "<p>Los <strong>lunes se pagan todos los pedidos de la semana anterior</strong>, en un solo bloque, para que tu contabilidad quede ordenada. Puede haber penalización por atrasos y, según tu volumen, conversamos condiciones a tu medida. Emitimos boleta o factura electrónica, con la documentación al día.</p>"
           }
         },
         "q_entrega": {
           "type": "question",
           "settings": {
             "icon": "truck",
-            "heading": "¿Con qué frecuencia pueden despachar?",
-            "text": "<p>Despachamos a negocios <strong>martes, miércoles, viernes y sábado</strong>. Podemos coordinar entregas semanales fijas según tu necesidad.</p>"
+            "heading": "¿Con qué frecuencia pueden despachar y hasta cuándo puedo pedir?",
+            "text": "<p>Despachamos a negocios <strong>martes, miércoles, viernes y sábado</strong>, y coordinamos entregas fijas según tu necesidad. El pedido se recibe <strong>hasta las 22:00 del día anterior al reparto</strong>: ese corte es lo que nos permite comprar bien y asegurar que esté todo lo que pediste. Después de esa hora entra como Pedido Express, con un costo adicional de $5.000.</p>"
           }
         },
         "q_calidad": {
@@ -520,7 +605,7 @@
           "settings": {
             "icon": "map_pin",
             "heading": "¿A qué zonas llegan con despacho B2B?",
-            "text": "<p>Cubrimos Viña del Mar, Concón, Reñaca, Quilpué, Valparaíso y alrededores. Para zonas especiales, consulta disponibilidad.</p>"
+            "text": "<p>Cubrimos siete comunas: <strong>Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Placilla y Curauma</strong>. Para zonas fuera de esa cobertura, consulta disponibilidad.</p>"
           }
         }
       },
@@ -540,9 +625,12 @@
     "beneficios_b2b",
     "como_funciona_b2b",
     "productos_b2b",
+    "catalogo_b2b",
     "sectores_b2b",
     "detalle_b2b",
+    "clientes_b2b",
     "testimonial_b2b",
+    "prueba_b2b",
     "contacto_b2b",
     "faq_b2b"
   ]
