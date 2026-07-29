@@ -40,9 +40,15 @@
       return sec ? sec.querySelector(".frutimenu-embed__frame") : null;
     }
 
-    // Pide el token una sola vez y cachea la promesa; se responde a cada request con él.
-    // credentials:same-origin → viaja la cookie de sesión de Shopify (primera parte),
-    // de la que el App Proxy deriva logged_in_customer_id.
+    // Pide un token y cachea la promesa MIENTRAS está en vuelo, para no disparar dos
+    // fetch simultáneos. credentials:same-origin → viaja la cookie de sesión de Shopify
+    // (primera parte), de la que el App Proxy deriva logged_in_customer_id.
+    //
+    // ⚠️ CTA-13.5: el token del OS es de UN SOLO USO (lleva un `jti` que se quema al
+    // canjearlo). Por eso la caché se invalida apenas se envía: si se reutilizara el
+    // mismo token en un segundo `frutimenu:request-identity` — un re-montaje del iframe,
+    // una navegación interna — el canje fallaría y el cliente logueado perdería el
+    // saludo por nombre. Cada request de identidad pide token fresco al App Proxy.
     var tokenPromise = null;
     function getToken() {
       if (!tokenPromise) {
@@ -61,7 +67,11 @@
     }
 
     function sendCustomer() {
-      getToken().then(function (token) {
+      var p = getToken();
+      // Se suelta la caché ANTES de resolver: el próximo request de identidad pide un
+      // token nuevo en vez de reenviar uno que quizá ya se canjeó (token de un solo uso).
+      tokenPromise = null;
+      p.then(function (token) {
         if (!token) return;
         var f = iframeEl();
         if (f && f.contentWindow) f.contentWindow.postMessage({ type: CUSTOMER, token: token }, ALLOWED);
