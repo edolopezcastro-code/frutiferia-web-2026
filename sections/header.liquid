@@ -163,15 +163,32 @@
             {%- endif -%}
           </shopify-account>
         {%- else -%}
+          {%- comment -%}
+            CTA-10A: la cuenta deja de ser un ícono mudo. El label visible
+            (desde md, 769px+) es aria-hidden porque el visually-hidden de
+            abajo ya cubre la accesibilidad en todos los anchos — evita que
+            un screen reader lea "Mi cuenta, Hola Juan" duplicado.
+          {%- endcomment -%}
           {%- if customer -%}
-            <a class="header__icon" href="{{ routes.account_url }}">
+            <a class="header__icon header__account" href="{{ routes.account_url }}">
               {% render 'icon-customer' %}
               <span class="visually-hidden">{{ 'sections.header.account' | t }}</span>
+              <span class="header__account-label hidden md:inline" aria-hidden="true">
+                {%- if customer.tags contains 'wellness' -%}
+                  <span class="header__channel-dot header__channel-dot--wellness"></span>
+                {%- elsif customer.tags contains 'b2g' -%}
+                  <span class="header__channel-dot header__channel-dot--b2g"></span>
+                {%- elsif customer.tags contains 'b2b' -%}
+                  <span class="header__channel-dot header__channel-dot--b2b"></span>
+                {%- endif -%}
+                Hola {{ customer.first_name }}
+              </span>
             </a>
           {%- else -%}
-            <a class="header__icon" href="{{ routes.account_login_url }}">
+            <a class="header__icon header__account" href="{{ routes.account_login_url }}">
               {% render 'icon-customer' %}
               <span class="visually-hidden">{{ 'sections.header.log_in' | t }}</span>
+              <span class="header__account-label hidden md:inline" aria-hidden="true">Iniciar sesión</span>
             </a>
           {%- endif -%}
         {%- endif -%}
