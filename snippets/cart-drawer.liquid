@@ -184,6 +184,18 @@
         </ul>
       {%- endif -%}
 
+      {%- comment -%}
+        CTA-10A: rescata el pitch de snippets/account-value-pitch.liquid, varado
+        en main-login/main-register (código muerto — el login vive en el
+        customer accounts nuevo de Shopify, no en esas secciones).
+      {%- endcomment -%}
+      {%- unless customer -%}
+        <div class="cart-drawer__account-pitch mb-4">
+          {% render 'account-value-pitch' %}
+          <a class="link block text-sm text-center mt-2" href="{{ routes.account_register_url }}">Crea tu cuenta y repite en 1 clic</a>
+        </div>
+      {%- endunless -%}
+
       <div class="cart-drawer__checkout-buttons">
         {%- if show_terms_and_conditions -%}
           <cart-terms class="block mt-2 mb-4 text-center">

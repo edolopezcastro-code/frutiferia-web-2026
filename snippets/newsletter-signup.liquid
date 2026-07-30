@@ -94,6 +94,18 @@
     <div class="alert bg-success-bg text-success-text" id="{{ id }}-success" tabindex="-1" autofocus>
       {{ 'newsletter.success' | t }}
     </div>
+    {%- comment -%}
+      CTA-10A: rescata el pitch de snippets/account-value-pitch.liquid.
+      Gate por id (no por tags, que es genérico "pop-up" para cualquier popup
+      futuro): hoy pop-up-welcome es el único popup vivo — 15% OFF primer
+      pedido, ya guest-only por section.settings.show_to_guests_only.
+    {%- endcomment -%}
+    {%- if id contains 'pop-up-welcome' -%}
+      <div class="newsletter-signup__account-pitch mt-4">
+        {% render 'account-value-pitch' %}
+        <a class="link block text-sm text-center mt-2" href="{{ routes.account_register_url }}">Crea tu cuenta y repite en 1 clic</a>
+      </div>
+    {%- endif -%}
   {%- endif -%}
 
   {%- if combined == false -%}

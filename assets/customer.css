@@ -16,31 +16,11 @@
   white-space: nowrap;
 }
 
-/* Pitch de valor de cuenta (login/register) — FRUTI3-9.C */
-.account-value-pitch {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  margin: 0 auto 32px;
-  max-width: 480px;
-}
-.account-value-pitch .account-benefit {
-  flex: 1 1 130px;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 6px;
-}
-.account-value-pitch .account-benefit svg {
-  color: var(--color-primary);
-  margin-top: 0;
-}
-.account-value-pitch .account-benefit__text {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
+/* Pitch de valor de cuenta (login/register) — FRUTI3-9.C.
+   CTA-10A: movido a assets/account-value-pitch.css, que el snippet
+   snippets/account-value-pitch.liquid ahora auto-carga; ese archivo también
+   se usa desde el drawer del carrito y el popup PRIMERA15, fuera de
+   request.page_type 'customers' (que es lo único que carga este css). */
 
 .account-nav {
   padding: calc(6 * var(--space-unit)) 0;

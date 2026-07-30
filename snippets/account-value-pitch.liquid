@@ -1,8 +1,12 @@
 {%- comment -%}
-  Pitch de valor para crear/usar la cuenta — FRUTI3-9.C. Compartido entre
-  main-login y main-register (antes ninguna de las dos comunicaba un motivo
-  para crear cuenta).
+  Pitch de valor para crear/usar la cuenta — FRUTI3-9.C. Antes solo vivía en
+  main-login/main-register (código muerto: el login corre por el customer
+  accounts nuevo de Shopify, esas secciones no se renderizan). CTA-10A lo
+  rescató en el drawer del carrito y el success del popup PRIMERA15 — de ahí
+  que el snippet se auto-cargue el CSS en vez de depender de customer.css
+  (que solo entra en request.page_type 'customers').
 {%- endcomment -%}
+<link rel="stylesheet" href="{{ 'account-value-pitch.css' | asset_url }}">
 <div class="account-value-pitch">
   <div class="account-benefit">
     {%- render 'icon', icon: 'return', width: 22, height: 22 -%}

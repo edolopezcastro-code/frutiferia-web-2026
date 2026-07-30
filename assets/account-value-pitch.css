@@ -1,0 +1,29 @@
+/* CTA-10A: extraído de customer.css (solo cargaba en páginas 'customers') para
+   que snippets/account-value-pitch.liquid pueda auto-cargar su estilo desde
+   CUALQUIER página (drawer del carrito, popup PRIMERA15) sin arrastrar el
+   resto de customer.css — que define .badge, una clase demasiado genérica
+   para cargar sitewide sin revisar colisiones. */
+.account-value-pitch {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin: 0 auto 32px;
+  max-width: 480px;
+}
+.account-value-pitch .account-benefit {
+  flex: 1 1 130px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+.account-value-pitch .account-benefit svg {
+  color: var(--color-primary);
+  margin-top: 0;
+}
+.account-value-pitch .account-benefit__text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
