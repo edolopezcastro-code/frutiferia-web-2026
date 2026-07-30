@@ -450,7 +450,16 @@
 
               <div class="fru-trust-row">
                 {% render 'icon', icon: 'truck', width: 20, height: 20 %}
-                <span>Despacho miércoles y sábado · gratis sobre $50.000</span>
+                {%- comment -%}
+                  CTA-10A: mismo mapping de canal que sections/main-account.liquid:51.
+                {%- endcomment -%}
+                {%- if customer.tags contains 'wellness' or customer.tags contains 'frutologia' -%}
+                  <span>Despacho lunes en la mañana y miércoles · gratis sobre $50.000</span>
+                {%- elsif customer.tags contains 'b2b' or customer.tags contains 'b2g' -%}
+                  <span>Despacho martes, miércoles, viernes y sábado · gratis sobre $50.000</span>
+                {%- else -%}
+                  <span>Despacho miércoles y sábado · gratis sobre $50.000</span>
+                {%- endif -%}
               </div>
 
               <div class="fru-b2b-nudge">

@@ -73,7 +73,18 @@
   </select>
 
   <p class="delivery-picker__hint text-sm mt-2 js-delivery-hint">
-    <small>Entregamos a domicilio los <strong>miércoles</strong> y <strong>sábados</strong>, entre las 12:00 y 16:00 hrs.</small>
+    {%- comment -%}
+      CTA-10A: mismo mapping de canal que sections/main-account.liquid:51 —
+      la fecha real la sigue calculando delivery-availability, esto es solo
+      el texto de contexto para no mentirle a un cliente logueado con tag.
+    {%- endcomment -%}
+    {%- if customer.tags contains 'wellness' or customer.tags contains 'frutologia' -%}
+      <small>Tu reparto llega los <strong>lunes en la mañana</strong> y <strong>miércoles</strong>, directo a tu oficina.</small>
+    {%- elsif customer.tags contains 'b2b' or customer.tags contains 'b2g' -%}
+      <small>Tu reparto llega los <strong>martes</strong>, <strong>miércoles</strong>, <strong>viernes</strong> y <strong>sábado</strong>, coordinado con tu pedido.</small>
+    {%- else -%}
+      <small>Entregamos a domicilio los <strong>miércoles</strong> y <strong>sábados</strong>, entre las 12:00 y 16:00 hrs.</small>
+    {%- endif -%}
   </p>
   <p class="delivery-picker__error text-sm mt-2 js-delivery-error" role="alert" hidden>
     <small>Selecciona el <strong>día</strong> y la <strong>zona</strong> de reparto para poder pagar.</small>

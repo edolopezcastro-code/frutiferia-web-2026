@@ -39,6 +39,14 @@
   endif
 
   assign days = section.settings.delivery_days
+  # CTA-10A: mismo mapping de canal que sections/main-account.liquid:51. El
+  # setting del editor queda como fallback para anónimos y para cualquier
+  # tag que no sea de canal.
+  if customer.tags contains 'wellness' or customer.tags contains 'frutologia'
+    assign days = 'Lun AM y Mié'
+  elsif customer.tags contains 'b2b' or customer.tags contains 'b2g'
+    assign days = 'Mar, Mié, Vie y Sáb'
+  endif
   assign threshold_money = threshold_cents | money
   assign falta_money = falta_cents | money
   assign total_money = total | money
