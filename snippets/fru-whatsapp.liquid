@@ -2,27 +2,41 @@
   fru-whatsapp.liquid — FRUTI3-14.A: botón flotante de WhatsApp contextual.
   Mora (B2C, número por defecto) en toda la tienda; excepción de canal (regla
   dura del proyecto: B2B/Wellness → Francisco) en la landing B2B (template
-  suffix `b2b`, hoy /pages/proveedor-restaurantes) y en /pages/bienestar.
-  El B2B se detecta por template_suffix, no por handle, para sobrevivir
-  cambios de URL. Mensaje pre-armado por contexto (PDP con el producto,
-  carrito, genérico). Montado una sola vez, global, en layout/theme.liquid.
+  suffix `b2b`, hoy /pages/proveedor-restaurantes), en /pages/bienestar y,
+  CTA-10A, en CUALQUIER página cuando el cliente logueado trae tag de canal
+  (mismo mapping que sections/main-account.liquid:51). El B2B por página se
+  detecta por template_suffix, no por handle, para sobrevivir cambios de URL.
+  Mensaje pre-armado por contexto (PDP con el producto, carrito, genérico).
+  Montado una sola vez, global, en layout/theme.liquid.
 {%- endcomment -%}
 <link rel="stylesheet" href="{{ 'fru-whatsapp.css' | asset_url }}">
 
 {%- liquid
   assign fru_wa_to_francisco = false
-  if request.page_type == 'page' and page.template_suffix == 'b2b'
+  if customer.tags contains 'b2b' or customer.tags contains 'b2g' or customer.tags contains 'wellness'
     assign fru_wa_to_francisco = true
-    assign fru_wa_text = 'Hola Francisco, quiero cotizar para mi negocio'
+  elsif request.page_type == 'page' and page.template_suffix == 'b2b'
+    assign fru_wa_to_francisco = true
   elsif request.page_type == 'page' and page.handle == 'bienestar'
     assign fru_wa_to_francisco = true
+  endif
+
+  if fru_wa_to_francisco
+    assign fru_wa_name = 'Francisco'
+  else
+    assign fru_wa_name = 'Mora'
+  endif
+
+  if request.page_type == 'page' and page.template_suffix == 'b2b'
+    assign fru_wa_text = 'Hola Francisco, quiero cotizar para mi negocio'
+  elsif request.page_type == 'page' and page.handle == 'bienestar'
     assign fru_wa_text = 'Hola Francisco, quiero cotizar para mi equipo'
   elsif request.page_type == 'product'
-    assign fru_wa_text = 'Hola Mora, vi ' | append: product.title | append: ' 🍓'
+    assign fru_wa_text = 'Hola ' | append: fru_wa_name | append: ', vi ' | append: product.title | append: ' 🍓'
   elsif request.page_type == 'cart'
-    assign fru_wa_text = 'Hola Mora, tengo una duda con mi pedido'
+    assign fru_wa_text = 'Hola ' | append: fru_wa_name | append: ', tengo una duda con mi pedido'
   else
-    assign fru_wa_text = 'Hola Mora 👋'
+    assign fru_wa_text = 'Hola ' | append: fru_wa_name | append: ' 👋'
   endif
 
   if fru_wa_to_francisco
