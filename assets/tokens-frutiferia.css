@@ -41,22 +41,33 @@
   --tag-muted-bg:    #E7DBEE;                   /* fondo de chip "antes"/apagado sobre claro */
   --on-primary-soft: #E9DCF2;                   /* texto suave sobre morado (footer/pie) */
 
-  /* --- Capa 3 · Canal (paleta canónica del OS — respetar, no redefinir) --- */
-  --pill-b2b:        #7C3AED;  /* violeta */
-  --pill-b2c:        #38BDF8;  /* celeste */
-  --pill-frutologia: #84CC16;  /* lima */
-  --pill-b2g:        #14B8A6;  /* teal */
-  --pill-wellness:   #D6457D;  /* rose — faltaba en Capa 3 (FRUTI3-9); ya vive hardcodeada en audience-doors y el plan */
+  /* --- Capa 3 · Canal (paleta canónica del OS — respetar, no redefinir) ---
+     Actualizada por el rebranding del OS (2026-08-01, docs/rebranding-2026-08.md
+     del repo `frutiferia-so`). Dos cambios, no cosméticos:
 
-  /* Derivados TINTA de canal. Los de arriba son colores de RELLENO (pill, riel, punto):
-     como TEXTO reprueban AA — b2c 2,14:1 y b2g 2,49:1 sobre blanco, ni cerca del 4,5.
-     Estos son los mismos tonos oscurecidos hasta pasar sobre los dos fondos del tema.
-     Regla: relleno -> --pill-X · texto, borde o ícono que deba leerse -> --pill-X-ink.
+     1. **B2B salió del violeta.** Era #7C3AED, a 1,04:1 del morado de la marca:
+        el mismo color en dos roles distintos, así que "morado" no significaba
+        nada. El morado quedó reservado a la marca; B2B es índigo.
+     2. **Bienestar salió del rosa.** #D6457D se confundía con el rojo de error.
+
+     Los otros tres conservan su familia y solo se oscurecieron para pasar AA:
+     los cuatro viejos reprobaban como texto (b2c 2,14 · frutología 1,98 ·
+     bienestar 3,67 · b2g 2,49). */
+  --pill-b2b:        #2525C1;  /* índigo  — era violeta #7C3AED */
+  --pill-b2c:        #097090;  /* cian    — era celeste #38BDF8 */
+  --pill-frutologia: #578217;  /* lima oscuro */
+  --pill-b2g:        #89521A;  /* ocre    — era teal #14B8A6 */
+  --pill-wellness:   #B82883;  /* magenta — era rosa #D6457D */
+
+  /* Derivados TINTA de canal. Los de arriba son de RELLENO (pill, riel, punto);
+     estos son para TEXTO, borde o ícono que deba leerse.
+     Regla: relleno -> --pill-X · algo que se lee -> --pill-X-ink.
                               blanco   --surface-muted */
-  --pill-b2c-ink:      #0E6E9C;  /*  5,63      5,00 */
-  --pill-b2b-ink:      #6D28D9;  /*  7,10      6,31 */
-  --pill-wellness-ink: #B93465;  /*  5,61      4,99 */
-  --pill-b2g-ink:      #0B6E66;  /*  6,11      5,43 */
+  --pill-b2b-ink:      #1616A2;  /* 12,57     11,17 */
+  --pill-b2c-ink:      #03546D;  /*  8,42      7,48 */
+  --pill-frutologia-ink: #41640C; /*  6,88      6,11 */
+  --pill-wellness-ink: #9A196A;  /*  7,72      6,86 */
+  --pill-b2g-ink:      #6C3D0F;  /*  9,08      8,07 */
 
   /* --- Gradientes (escasos, con carácter — jamás morado→lila difuso de fondo) --- */
   --grad-cta:  linear-gradient(135deg, #2DB87F 0%, #248F57 100%);  /* SOLO botón/CTA */
