@@ -159,6 +159,7 @@
     "free_shipping_color_scheme": "1",
     "animations_enabled": "mobile_desktop",
     "animation_speed": "fast",
+    "favicon": "shopify://shop_images/Favicon-Frutiferia.png",
     "image_quality": "1",
     "show_blur_messages": true,
     "blur_message_1": "Te guardamos el 15%: usa PRIMERA15 en tu primer pedido",
@@ -186,11 +187,6 @@
     "enable_breadcrumbs": true,
     "content_for_index": [],
     "blocks": {
-      "18171216174956455555": {
-        "type": "shopify://apps/order-delivery-date/blocks/odd-block/80605365-b4f4-42ba-9b84-3d39984a49dc",
-        "disabled": false,
-        "settings": {}
-      },
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
