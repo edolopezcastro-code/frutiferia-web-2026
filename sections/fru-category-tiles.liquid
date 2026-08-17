@@ -1,0 +1,257 @@
+{%- comment -%}
+  Frutiferia WUX-1 — Tiles de categoría.
+
+  El problema que resuelve: en la portada de hoy la primera categoría aparece a 3.747 px
+  de scroll en móvil y ninguna a la vista en escritorio. Esta sección es la portada real
+  de la tienda: seis puertas a producto, con foto, arriba del pliegue.
+
+  Foto (D-12): imagen de la colección; si no tiene, la del primer producto de la colección.
+  Las 29 colecciones vivas ya tienen imagen, así que el fallback es red de seguridad — y el
+  placeholder lila, red de la red. Cambiar una foto es un cambio de admin (Colecciones →
+  imagen), no de código: por eso no hay image_picker por bloque.
+
+  Estilo y contraste: ver el encabezado de assets/fru-category-tiles.css.
+{%- endcomment -%}
+
+{{ 'fru-category-tiles.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign color_scheme = section.settings.color_scheme
+  assign heading_id = section.id | append: '-heading'
+  assign all_link = section.settings.link_all | default: '/collections/catalogo-completo'
+  assign all_label = section.settings.link_all_label | default: 'Ver todo el catálogo'
+
+  # Ancla estable. OJO: dentro de una plantilla, section.id NO es la llave del JSON —
+  # es "template--21752355586213__fru_category_tiles", con un numero que cambia cada
+  # vez que Shopify regenera la plantilla. Un href a esa id nace muerto. Por eso el
+  # ancla es un ajuste propio: la tira de audiencia apunta a #tiles y sigue apuntando
+  # ahi pase lo que pase con la plantilla.
+  assign anchor_id = section.settings.anchor_id | default: 'tiles' | handleize
+-%}
+
+<div
+  class="fru-tiles{% if section.settings.full_width %} section--full-width{% endif %}{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}"
+  id="{{ anchor_id }}"
+>
+  <div class="container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="fru-tiles__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fru-tiles__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="fru-tiles__heading" id="{{ heading_id }}">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <div class="fru-tiles__sub rte">{{ section.settings.subheading }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ul
+      class="fru-tiles__grid"
+      {% if section.settings.heading != blank %}
+        aria-labelledby="{{ heading_id }}"
+      {% endif %}
+    >
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign tile_collection = collections[block.settings.collection]
+
+          assign tile_image = tile_collection.image
+          if tile_image == blank
+            assign tile_image = tile_collection.products.first.featured_image
+          endif
+
+          assign tile_title = block.settings.label | default: tile_collection.title
+          assign tile_count = tile_collection.all_products_count
+
+          # Las dos primeras fotos entran en el primer pliegue: se cargan de inmediato.
+          # El resto va con lazy nativo (sin el rodeo data-src -> main.js de FRUTI3-16:
+          # acá no hay swap de imagen por JS que dependa de esa cañería).
+          assign tile_lazy = 'native'
+          if forloop.index <= 2
+            assign tile_lazy = false
+          endif
+        -%}
+
+        {%- if tile_collection != blank and tile_collection.handle != blank -%}
+          <li class="fru-tiles__item" {{ block.shopify_attributes }}>
+            <a class="fru-tile" href="{{ tile_collection.url }}">
+              <span class="fru-tile__media">
+                {%- if tile_image != blank -%}
+                  {%- render 'image',
+                    image: tile_image,
+                    src_width: 640,
+                    widths: '280, 380, 480, 640, 860, 1000',
+                    sizes: '(min-width: 1100px) 440px, (min-width: 750px) 33vw, 50vw',
+                    lazy_load: tile_lazy,
+                    class: 'fru-tile__img'
+                  -%}
+                  {%- comment -%}
+                    Sin alt_text a proposito: el snippet cae a image.alt y, si la coleccion
+                    no tiene alt, sale alt="" — que es lo correcto aca. La foto es decorativa:
+                    el nombre de la categoria y el contador van como TEXTO dentro del mismo
+                    enlace. Poner alt="Frutas" haria que el lector de pantalla dijera
+                    "Frutas, Frutas, 21 productos".
+                  {%- endcomment -%}
+                {%- else -%}
+                  <span class="fru-tile__placeholder" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                      <path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"/><path d="M4.5 15.5h15"/><path d="m5 11 4-7"/><path d="m9 11 1 9"/>
+                    </svg>
+                  </span>
+                {%- endif -%}
+              </span>
+
+              <span class="fru-tile__body">
+                {%- if block.settings.eyebrow != blank -%}
+                  <span class="fru-tile__eyebrow">{{ block.settings.eyebrow | escape }}</span>
+                {%- endif -%}
+                <span class="fru-tile__title">{{ tile_title | escape }}</span>
+                {%- if tile_count > 0 -%}
+                  <span class="fru-tile__count">
+                    {%- if tile_count == 1 -%}1 producto{%- else -%}{{ tile_count }} productos{%- endif -%}
+                  </span>
+                {%- endif -%}
+              </span>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+
+    {%- if all_label != blank -%}
+      <a class="fru-tiles__all" href="{{ all_link }}">
+        {{- all_label | escape }}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M4.5 12h13"/><path d="M12.4 6.9 17.5 12l-5.1 5.1"/>
+        </svg>
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Tiles de categoría",
+  "tag": "section",
+  "class": "cc-fru-category-tiles",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Seis puertas a producto con foto. La foto sale de la imagen de cada colección (Productos → Colecciones → imagen); si no tiene, usa la del primer producto."
+    },
+    {
+      "type": "header",
+      "content": "Encabezado"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Etiqueta superior",
+      "info": "Opcional. Va en Righteous, la fuente de la marca. Déjala vacía si el selector de audiencia va justo arriba."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "¿Qué necesitas hoy?"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Bajada",
+      "default": "<p>Elige una categoría y arma tu pedido en un minuto.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Enlace al catálogo"
+    },
+    {
+      "type": "text",
+      "id": "link_all_label",
+      "label": "Texto del enlace",
+      "default": "Ver todo el catálogo"
+    },
+    {
+      "type": "url",
+      "id": "link_all",
+      "label": "Destino del enlace",
+      "info": "Si lo dejas vacío, apunta a /collections/catalogo-completo."
+    },
+    {
+      "type": "header",
+      "content": "Estilo"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Ancla de la sección",
+      "info": "La tira «Para mi casa» salta acá con #tiles. Si la cambias, cambia también ese enlace.",
+      "default": "tiles"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "options": [
+        { "value": "none", "label": "Ninguno (blanco)" },
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Nombre a mostrar",
+          "info": "Opcional. Si lo dejas vacío usa el nombre de la colección."
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Etiqueta del tile",
+          "info": "Opcional. Una palabra corta sobre el nombre."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Tiles de categoría",
+      "category": "Collections",
+      "blocks": [
+        { "type": "tile", "settings": { "collection": "frutas-deliciosas", "label": "Frutas" } },
+        { "type": "tile", "settings": { "collection": "verduras-frescas", "label": "Verduras" } },
+        { "type": "tile", "settings": { "collection": "despensa", "label": "Despensa" } },
+        { "type": "tile", "settings": { "collection": "snacks", "label": "Snacks" } },
+        { "type": "tile", "settings": { "collection": "frutipack", "label": "FrutiPack" } },
+        { "type": "tile", "settings": { "collection": "ofertas", "label": "Ofertas" } }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  }
+}
+{% endschema %}
