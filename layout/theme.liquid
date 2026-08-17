@@ -303,18 +303,28 @@
     emite `crossorigin="anonymous"` — obligatorio en fuentes aunque el origen
     sea el propio CDN de Shopify, si falta el navegador descarga el archivo dos
     veces — y es la forma que `theme check` acepta (un <link rel="preload"> a
-    mano suma una offense AssetPreload, como las dos que ya arrastran las
-    fuentes del editor aquí abajo).
+    mano suma una offense AssetPreload).
   {%- endcomment -%}
   {{ 'inter-variable.woff2' | asset_url | preload_tag: as: 'font' }}
 
-  {%- unless settings.body_font.system? -%}
-    <link rel="preload" href="{{ settings.body_font | font_url }}" as="font" type="font/woff2" crossorigin fetchpriority="high">
-  {%- endunless -%}
+  {%- comment -%}
+    Aquí Canopy precargaba las fuentes del editor (settings.body_font y
+    settings.heading_font). Se quitaron en WUX-4 y NO es un olvido:
 
-  {%- unless settings.heading_font.system? -%}
-    <link rel="preload" href="{{ settings.heading_font | font_url }}" as="font" type="font/woff2" crossorigin fetchpriority="high">
-  {%- endunless -%}
+    fru-brand.css pisa --body-font-family, --heading-font-family y
+    --navigation-font-family, así que esas fuentes ya no las usa ni un solo
+    carácter de la tienda. Un @font-face que nadie usa no se descarga — pero un
+    <link rel="preload"> SÍ fuerza la descarga. Medido en el preview: el HTML
+    precargaba `montserrat_n7` y `figtree_n5` y el navegador se los bajaba
+    enteros para no pintarlos nunca (~50 KB tirados en cada visita nueva).
+
+    Las declaraciones @font-face del bloque {% style %} de arriba se dejan
+    intactas: no cuestan nada mientras nadie las use, y son la red de seguridad
+    si algún día se quita fru-brand.css.
+
+    ⚠️ Si en el futuro se elimina la capa de marca, hay que devolver estos dos
+    preloads o la tipografía del editor entrará sin prioridad.
+  {%- endcomment -%}
 
   {%- if dock_cart_drawer -%}
     <link rel="stylesheet" href="{{ 'dockable-side-drawer.dynamic.css' | asset_url }}">
