@@ -63,6 +63,55 @@
   {% endif %}
   }
 
+  /* WUX-2 (D-2): header de una fila en escritorio. Canopy pone el menú en su
+     propia fila porque el header__grid envuelve (flex-wrap) cuando logo +
+     búsqueda + iconos ya llenan el ancho; con nowrap + reorden entra todo en
+     una sola fila (logo · menú · buscador · cuenta/carrito). */
+  @media (min-width: 769px) {
+    .header {
+      padding: calc(3 * var(--space-unit)) 0;
+    }
+    .header__grid {
+      flex-wrap: nowrap;
+      column-gap: calc(4 * var(--space-unit));
+    }
+    .header__logo {
+      order: 0;
+      flex: 0 0 auto;
+      margin-bottom: 0;
+      padding-inline-end: 0;
+    }
+    .main-menu {
+      order: 1;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .main-nav {
+      flex-wrap: nowrap;
+    }
+    .main-nav__item {
+      white-space: nowrap;
+    }
+    .header__search {
+      order: 2;
+      flex: 0 0 auto;
+      margin-bottom: 0;
+    }
+    /* Canopy sólo colapsa la búsqueda a ícono cuando el logo está centrado
+       (logo_position: top-center). Con logo a la izquierda, minimise_search_desktop
+       no tiene CSS propio: se oculta la barra completa y queda el ícono de
+       .header__icons (ya enlaza a routes.search_url) como entrada a /search. */
+    .header__search--collapsible-desktop {
+      display: none;
+    }
+    .header__icons {
+      order: 3;
+      flex: 0 0 auto;
+      margin-bottom: 0;
+      padding-inline-start: 0;
+    }
+  }
+
   .header__logo-svg svg {
     display: block;
     height: 38px;
@@ -70,6 +119,9 @@
   }
 
   @media (max-width: 768.98px) {
+    .header {
+      padding: calc(1 * var(--space-unit)) 0;
+    }
     .header__logo-svg svg {
       height: 30px;
     }

@@ -18,7 +18,7 @@
         "homepage_only": false,
         "threshold": 50000,
         "delivery_days": "Mié y Sáb",
-        "copy_empty": "Despacho GRATIS sobre {threshold} · Repartimos {days}",
+        "copy_empty": "Despacho gratis sobre {threshold} · 15% con PRIMERA15",
         "copy_progress": "Te faltan {falta} para tu despacho gratis",
         "copy_done": "¡Tienes despacho gratis! Tu pedido supera los {threshold}",
         "reparto_link": "shopify://pages/reparto",
@@ -30,7 +30,7 @@
       "settings": {
         "mobile_menu_position": "burger-left",
         "enable_sticky": true,
-        "hide_menu": true,
+        "hide_menu": false,
         "use_svg_logo": true,
         "logo_text": "",
         "logo_text_font": "nunito_sans_n7",
@@ -42,11 +42,11 @@
         "logo_position": "top-left",
         "enable_search": true,
         "minimise_search_mobile": false,
-        "minimise_search_desktop": false,
+        "minimise_search_desktop": true,
         "menu": "menu-frutiferia",
         "menu_center": false,
         "repeat_links": true,
-        "menu_featured_link": "Sale",
+        "menu_featured_link": "",
         "enable_customer_account_component": false,
         "customer_account_menu": "customer-account-main-menu",
         "cta_show": true,
@@ -64,52 +64,10 @@
         "mobile_menu_bg_color": "#ffffff",
         "mobile_menu_text_color": "#222222"
       }
-    },
-    "promo_strip_QLcH46": {
-      "type": "promo-strip",
-      "blocks": {
-        "heading_RAFRCV": {
-          "type": "heading",
-          "settings": {
-            "heading": "¿Primer pedido?",
-            "heading_size": "h5",
-            "show_on_mobile": true,
-            "show_on_desktop": true
-          }
-        },
-        "text_PwkiA7": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Prueba nuestro servicio con un<strong> 15% de descuento</strong></p>",
-            "enlarge_text": false,
-            "show_on_mobile": true,
-            "show_on_desktop": true
-          }
-        },
-        "discount_HztBeh": {
-          "type": "discount",
-          "settings": {
-            "discount_code": "PRIMERA15"
-          }
-        }
-      },
-      "block_order": [
-        "heading_RAFRCV",
-        "text_PwkiA7",
-        "discount_HztBeh"
-      ],
-      "settings": {
-        "section_height": "small",
-        "color_scheme": "1",
-        "full_width": true,
-        "dividers": "border-bottom",
-        "prevent_animation": false
-      }
     }
   },
   "order": [
     "free-shipping-bar",
-    "header",
-    "promo_strip_QLcH46"
+    "header"
   ]
 }
