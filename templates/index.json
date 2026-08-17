@@ -24,6 +24,7 @@
         "cta_link": "/discount/PRIMERA15?redirect=/collections/all",
         "cta2_label": "Arma tu semana gratis",
         "cta2_link": "shopify://pages/frutimenu",
+        "compact": true,
         "color_scheme": "none",
         "prevent_animation": false
       }
@@ -41,7 +42,7 @@
             "meta": "Miércoles y sábado · Despacho gratis sobre $50.000",
             "proof": "",
             "cta_label": "Comprar",
-            "cta_link": "/collections/all",
+            "cta_link": "#tiles",
             "lead": false
           }
         },
@@ -80,11 +81,77 @@
         "door_bienestar"
       ],
       "settings": {
+        "layout": "strip",
         "eyebrow": "Empieza aquí",
         "heading": "¿Para quién compras hoy?",
         "support": "Una casa, una cocina y una oficina no compran igual.",
-        "band": true,
+        "band": false,
         "prevent_animation": false
+      }
+    },
+    "fru_category_tiles": {
+      "type": "fru-category-tiles",
+      "blocks": {
+        "tile_frutas": {
+          "type": "tile",
+          "settings": {
+            "collection": "frutas-deliciosas",
+            "label": "Frutas"
+          }
+        },
+        "tile_verduras": {
+          "type": "tile",
+          "settings": {
+            "collection": "verduras-frescas",
+            "label": "Verduras"
+          }
+        },
+        "tile_despensa": {
+          "type": "tile",
+          "settings": {
+            "collection": "despensa",
+            "label": "Despensa"
+          }
+        },
+        "tile_snacks": {
+          "type": "tile",
+          "settings": {
+            "collection": "snacks",
+            "label": "Snacks"
+          }
+        },
+        "tile_frutipack": {
+          "type": "tile",
+          "settings": {
+            "collection": "frutipack",
+            "label": "FrutiPack"
+          }
+        },
+        "tile_ofertas": {
+          "type": "tile",
+          "settings": {
+            "collection": "ofertas",
+            "label": "Ofertas"
+          }
+        }
+      },
+      "block_order": [
+        "tile_frutas",
+        "tile_verduras",
+        "tile_despensa",
+        "tile_snacks",
+        "tile_frutipack",
+        "tile_ofertas"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "¿Qué necesitas hoy?",
+        "subheading": "",
+        "link_all_label": "Ver todo el catálogo",
+        "link_all": "/collections/catalogo-completo",
+        "anchor_id": "tiles",
+        "color_scheme": "none",
+        "full_width": true
       }
     },
     "business_logos": {
@@ -356,6 +423,7 @@
         "collection-990",
         "collection-ofertas"
       ],
+      "disabled": true,
       "settings": {
         "title": "¿Qué buscas?",
         "heading_align": "text-start",
@@ -749,19 +817,20 @@
   "order": [
     "fru_hero",
     "audience_doors",
-    "business_logos",
+    "fru_category_tiles",
+    "collection-list",
+    "featured-collection",
     "frutimenu_promo",
     "3721924b-630b-4a60-b724-521fef7aa78e",
-    "featured-collection",
-    "collection-list",
-    "b2b_band",
     "testimonials_JERNA6",
+    "b2b_band",
     "media_with_text_VAd4Hi",
     "featured_blog_recetas",
     "newsletter_WXJigB",
     "scrolling_banner_ArEtdk",
-    "video_9nrWpD",
     "recently_viewed_home",
+    "business_logos",
+    "video_9nrWpD",
     "slideshow"
   ]
 }
