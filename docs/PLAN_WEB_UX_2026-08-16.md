@@ -1,0 +1,584 @@
+# Plan — Web fácil y bonita: ruta corta al producto (WUX) · 2026-08-16
+
+> **Cómo se usa:** cada PROMPT del §4 se pega tal cual en una sesión nueva con el modelo
+> indicado. Los pasos de Eduardo (§5) toman minutos. Estado de los sprints en la tabla §3;
+> el siguiente sprint se propone en Sami. Este archivo vive en el repo del tema
+> (`~/Desktop/frutiferia-theme/docs/`, carpeta que Shopify ignora al desplegar) porque el
+> 60% del trabajo es del tema; los otros repos referencian este doc.
+
+---
+
+## 1. Contexto y origen
+
+Eduardo (2026-08-16): "la web no quedó fácil e intuitiva; si soy cliente B2C cuesta llegar
+a los productos; quiero que quede bonita, moderna, alineada con el OS; que para B2C, B2B y
+wellness sea súper fácil comprar, cotizar, armar el menú y entrar a su cuenta; todo conectado
+con Frutiferia-OS; plan acotado y con sprints en paralelo".
+
+**Lo que medimos en vivo (2026-08-16, `frutiferia.com`):**
+
+| Síntoma | Dato duro |
+|---|---|
+| Los productos están lejos | Móvil 375×812: primer producto a **3.169 px** de scroll (~4 pantallas); primeras categorías a **3.747 px**. Escritorio 1440×900: en `/collections/frutas-deliciosas` el primer producto parte en **y = 1.076 px** (bajo el pliegue). |
+| El escritorio se ve apretado | El carrito "dockeado" (`dock_cart_drawer: true`) ocupa el **25 % del ancho en TODAS las páginas** (contenido útil 1.080 px de 1.440). |
+| Demasiado chrome | Barra despacho 40 px + header **191 px** + tira "¿Primer pedido?" 75 px = **306 px** antes del contenido (en móvil la tira mide 180 px). |
+| Nadie sabe dónde está la tienda | 9 ítems de menú + botón. La entrada a productos se llama **"Vitrinea"**. "Por Mayor" duplica el catálogo B2B en Shopify compitiendo con el cotizador. |
+| El cupón grita 5 veces | PRIMERA15 en barra, tira, pill del hero, popup a los 10 s (encima del hero) y newsletter. |
+| No parece la misma marca | Tienda: Montserrat + logo viejo "FRUTIFERIA.COM" en mayúscula. Cotizador/Menú/Wellness: Georgia + Inter + logo 2026 minúscula. OS: Inter Tight. Tres CTAs distintos (`#2DB87F`, `#17845A`, gradiente); Bienestar en el magenta viejo `#D6457D` (canon `#B82883`); B2B en violeta muerto `#7C3AED` (canon `#2525C1`). Wellness es un callejón sin salida (0 links de vuelta, sin logo, sin móvil). |
+
+**Lo que YA existe y se aprovecha (no se reconstruye):** hero editorial `fru-hero`, `audience-doors`,
+`tokens-frutiferia.css` sincronizado con el rebranding del OS, quick-add en la grilla (`enable_quick_add`),
+búsqueda predictiva viva, mega menú de Canopy **construido y sin usar** (0 bloques), sticky ATC en la ficha,
+delivery-picker en carrito, cuenta Shopify + extensión de beneficios, cotizador maduro (COT-13),
+menú semanal con handoff al carrito e identidad firmada, edge fns de leads/wellness/menú, panel
+"Funnel Web 3.0" en el OS. Diagnóstico completo y referentes en §7.
+
+---
+
+## 2. Decisiones por defecto (veta aquí)
+
+Si no dices nada, se ejecuta la columna "Default". Cada prompt las lee de aquí.
+
+| # | Decisión | Default | Alternativa | Por qué |
+|---|---|---|---|---|
+| D-1 | **Tipografía pública única** | **Georgia (títulos) + Inter (texto)** en las 4 superficies. En la tienda se aplica por CSS (`fru-brand.css`, sin tocar el editor). | Mantener Montserrat en la tienda y llevar los satélites a Montserrat. | 3 de 4 superficies ya viven en Georgia+Inter (cotizador, menú, wellness); es el canon de `frutiferia-style` y lo que hace que `menu.frutiferia.com` se vea premium. ⚠️ Revierte tu decisión de junio ("se queda Montserrat"), que fue anterior a que los satélites tomaran este sistema. |
+| D-2 | **Menú de 5 entradas** | **Comprar ▾** (mega menú con fotos) · **Arma tu menú** · **Negocios** · **Oficinas** · **Recetas**. "Vitrinea", "Conócenos", "Blog" salen del header (van a footer / mega menú). | Mantener 9 ítems. | Un solo verbo para B2C ("Comprar") y una puerta por público. |
+| D-3 | **Carrito des-dockeado** | Drawer flotante normal (lo cambia Eduardo en el editor, 2 min). | Dejarlo dockeado. | Recupera el 25 % del ancho en escritorio. |
+| D-4 | **"Por Mayor" en Shopify** | Sale del header. Vive en la landing Negocios como "Catálogo mayorista (referencia)" + en el mega menú de Negocios. **No se borra nada.** El camino B2B es el cotizador (OS). | Mantener "Por Mayor" en el header. | Dos caminos B2B confunden y sólo uno llega al OS. |
+| D-5 | **Cupón PRIMERA15** | Se queda en: pill del hero + barra superior (copy unido: "Despacho gratis sobre $50.000 · 15 % en tu 1er pedido con PRIMERA15") + newsletter del footer. La **tira "¿Primer pedido?" se elimina** y el **popup pasa a exit-intent** (ya no salta a los 10 s sobre el hero). | Mantener tira y popup por tiempo. | 5 menciones → 3; el popup por tiempo tapaba el hero. |
+| D-6 | **Orden de la home** | Hero compacto → **selector "Compro para: mi casa · mi negocio · mi equipo"** (tira de 1 fila) → **6 tiles de categoría con foto** → Ofertas de la semana (quick-add) → FrutiMenu → confianza → testimonios → banda Negocios → 7 años → recetas → newsletter. | Orden actual. | Producto visible en la 1ª pantalla de escritorio y ≤ 2 pantallas en móvil. |
+| D-7 | **Logo** | Logo 2026 (isotipo + `frutiferia` minúscula, **sin ".com"**), UN solo SVG exportado del OS (`src/components/brand/`) y usado en tienda + cotizador + wellness + menú. | Mantener "frutiferia.com" en el wordmark. | Es el logo del rebranding; ".com" no aporta y desalinea. |
+| D-8 | **Bienestar mientras no haya DNS** | Todos los CTAs de Bienestar apuntan a `cotiza.frutiferia.com/bienestar` (portal vivo) y al formulario del tema. Cuando `wellness.frutiferia.com` resuelva (gate G-31), se cambian los 3 links listados en WUX-6. | Esperar el DNS para tocar Bienestar. | Hoy `wellness.frutiferia.com` da HTTP 000 (verificado 2026-08-16). |
+| D-9 | **"Comprar ahora" (dynamic checkout) en la ficha** | **Apagado.** | Encendido. | Salta el carrito → sin día de reparto (el delivery-picker bloquea el checkout sólo desde el carrito), sin upsell, sin barra de despacho gratis. Y son dos botones verdes iguales. |
+| D-10 | **Botón primario y CTA** | Botón primario sólido **verde `#17845A`** (AA 4,7:1 con texto blanco), hover `#248F57`. Gradiente `--grad-cta` (menta→verde) **sólo** en CTAs de hero (texto ≥ 18 px bold). Igual en las 4 superficies. | Menta plana `#2DB87F` en todo. | Menta plana + blanco da 2,5:1 (reprueba AA). El cotizador ya lo había corregido; el fix nunca se propagó. |
+| D-11 | **Colores de canal en satélites** | Bienestar `#B82883` (ink `#9A196A`) · B2B `#2525C1` (ink `#1616A2`) · B2C `#097090`, iguales al OS y al tema. | Dejarlos como están. | Hoy cotizador y wellness usan hex muertos. |
+| D-12 | **Fotos de tiles** | Se usan las imágenes de colección que ya tiene Shopify (las 29 tienen imagen); si alguna es "producto sobre blanco" y no luce, fallback a foto de producto de la colección. Eduardo puede reemplazar después desde el admin. | Esperar fotos nuevas. | No bloquear el sprint por fotos. |
+
+**Preguntas batcheadas (responde sólo si vetas):**
+1. ¿OK con Georgia+Inter en la tienda (D-1)? — *si dices "no", WUX-4 deja Montserrat y WUX-5 lleva los satélites a Montserrat.*
+2. ¿OK con sacar "Por Mayor" del header (D-4) y apagar "Comprar ahora" (D-9)?
+3. ¿Logo sin ".com" (D-7)?
+
+---
+
+## 3. Sprints
+
+Tres **carriles en paralelo** (repos/archivos distintos) + un cierre. Puedes abrir **3 sesiones hoy
+mismo: WUX-1, WUX-3 y WUX-5**. Cuando una termine, corre la siguiente de su carril.
+
+| Carril | Sprint | Modelo | Qué hace | Repos / archivos que TOCA | Estado |
+|---|---|---|---|---|---|
+| 🟣 A · Llegar al producto | **WUX-1** Home "ruta corta" | Opus | Nueva sección de **6 tiles de categoría con foto**, selector de público en 1 fila, hero compacto, reorden de la home (D-6). Métrica: tiles visibles sin scroll en escritorio; primer producto ≤ 1.600 px en móvil. | tema: `templates/index.json`, `sections/fru-hero.liquid`, `sections/audience-doors.liquid`, **nuevos** `sections/fru-category-tiles.liquid` + `assets/fru-category-tiles.css` | ⬜ |
+| 🟣 A | **WUX-2** Header de 1 fila + mega menú + menú de 5 | Sonnet | Header ≤ 120 px, logo SVG 2026, tira "¿Primer pedido?" fuera, barra superior con copy unido, **mega menú "Comprar" con fotos** (bloque `columns` de Canopy), menú de 5 en el admin (Claude por navegador). | tema: `sections/header-group.json`, `sections/header.liquid`, `sections/free-shipping-bar.liquid`, **nuevo** `assets/frutiferia-logo.svg`; admin Shopify → Navegación | ⬜ (tras WUX-1) |
+| 🟢 B · Comprar rápido | **WUX-3** Colección, ficha y carrito de compra rápida | Sonnet | Grilla arriba (banner sin foto, promo-tile fuera, descripción abajo), tarjeta limpia (sin "Frutiferia SPA" ni "1.0 kg", quick-add sólido), ficha sin "Comprar ahora" (D-9) + desvío B2B de 1 línea, drawer con link a carrito, popup a exit-intent (D-5), `/collections` como landing "Comprar". | tema: `templates/collection.json`, `templates/product.json`, `templates/cart.json`, `templates/list-collections.json`, `sections/overlay-group.json`, `snippets/product-card.liquid` (+ su css), `sections/main-collection-banner.liquid` sólo si hace falta | ⬜ |
+| 🟢 B | **WUX-4** Capa de marca del tema | Opus | `fru-brand.css` cargado DESPUÉS de `main.css`: Georgia+Inter (D-1) self-hosted, botón primario `#17845A` (D-10), radios/sombras/focus de tokens, footer con las 4 superficies + WhatsApp por canal, `es.json` a tuteo ("Tu carrito", "Agregar"), token `--fru-verde-800`. | tema: **nuevo** `assets/fru-brand.css`, `assets/inter-*.woff2`, `layout/theme.liquid`, `assets/tokens-frutiferia.css`, `sections/footer-group.json`, `locales/es.json` | ⬜ (tras WUX-3) |
+| 🔵 C · Satélites + OS | **WUX-5** Satélites alineados | Sonnet | Cotizador, Wellness y Menú con el mismo logo SVG, D-10, D-11, header/footer con cross-links a las 4 superficies, wellness con móvil, charts del menú con tokens del OS. | `frutiferia-cotizador`, `frutiferia-wellness`, `mi-menu-semanal` (3 repos, Vercel + Lovable) | ⬜ |
+| 🔵 C | **WUX-6** Puentes con el OS + línea base | Sonnet | Línea base de medición (funnel RPC + Shopify Analytics), smoke de los 6 puentes web→OS, landings B2B/Bienestar/FrutiMenu con CTAs correctos (D-4, D-8), 3 links a cambiar cuando haya DNS wellness. | `frutiferia-so` (lectura + panel), tema: `templates/page.b2b.json`, `page.bienestar.json`, `page.frutimenu.json` | ⬜ (tras WUX-5) |
+| ⚪ Cierre | **WUX-7** QA integral | Haiku | En prod: 12 rutas 200, medidas de scroll/header, matriz de cross-links, contraste AA, voseo (3 pasadas), PSI móvil. Entrega lista de fixes por carril. | ninguno (read-only) | ⬜ (tras A+B+C) |
+
+**Regla dura para las 2 sesiones del tema en paralelo (A y B):** cada una commitea **sólo los archivos
+de su fila** (`git add <archivo>`, nunca `-A`), hace `git pull --rebase` antes de cada push, y recuerda
+que **push = deploy en vivo**. Si el puerto 9292 de `theme dev` está ocupado, usa `--port 9293`.
+
+---
+
+## 4. Prompts listos para pegar
+
+### PROMPT WUX-1 — Home "ruta corta al producto" (Opus)
+
+```
+Sesión WUX-1 del plan ~/Desktop/frutiferia-theme/docs/PLAN_WEB_UX_2026-08-16.md, repo del tema
+Shopify frutiferia-web-2026 (clon local ~/Desktop/frutiferia-theme, rama main, repo-first:
+`git pull --rebase` antes de editar y antes de cada push; PUSH = DEPLOY EN VIVO).
+Activa las skills: edu-sprints, frutiferia-ux-ui, anthropic-skills:frutiferia-style, frontend-design.
+Lee §1, §2 (defaults D-1, D-5, D-6, D-12) y §7 del plan antes de tocar nada. Otra sesión (WUX-3)
+puede estar editando EN PARALELO templates/collection|product|cart|list-collections.json,
+overlay-group.json y snippets/product-card.liquid: NO toques esos archivos. Sólo commitea los tuyos.
+
+Objetivo: que un cliente B2C vea categorías y productos sin buscar. Hoy (medido 2026-08-16):
+móvil 375×812 → primer producto a 3.169 px, categorías a 3.747 px; escritorio 1440×900 → nada
+de producto en el primer pliegue. Meta: en escritorio los 6 tiles de categoría visibles sin
+scroll (top ≤ 850 px con el header actual de 191 px); en móvil primer tile ≤ 750 px y primer
+producto ≤ 1.600 px.
+
+Tareas:
+1. Nueva sección `sections/fru-category-tiles.liquid` + `assets/fru-category-tiles.css`
+   (cárgalo desde la sección con `{{ 'fru-category-tiles.css' | asset_url | stylesheet_tag }}`).
+   6 bloques `tile` (collection picker + label opcional + eyebrow opcional). Grilla 2 columnas
+   en móvil (tile ~172 px alto), 3×2 o 6×1 en escritorio (elige la que dé mejor con foto). Foto:
+   `block.settings.collection.image` con fallback a `collection.products.first.featured_image`
+   (D-12); imagen con `sizes`/`srcset` responsivos y `loading="lazy"` salvo los 2 primeros.
+   Título en `var(--font-display)` (D-1; si Eduardo veta D-1, cambia a `inherit`), tamaño 20-24 px,
+   contador "N productos" en `--text-caption`. Radio `--radius`, sombra `--shadow-md`, hover
+   translateY(-2px) + `--shadow-lg` con `--dur-micro`, respeta `prefers-reduced-motion`. Enlace
+   "Ver todo el catálogo →" bajo la grilla → /collections/catalogo-completo. Schema: heading
+   (default "¿Qué necesitas hoy?"), subheading, `color_scheme`, `full_width`; preset con las 6
+   colecciones: frutas-deliciosas, verduras-frescas, despensa, snacks, frutipack, ofertas.
+   Ojo Canopy: settings `type:"url"` NO aceptan `default`; labels ≤ 70 chars; richtext SIEMPRE
+   envuelto en <p>; un error de schema tumba el upload del tema ENTERO (theme dev lo nombra).
+2. `sections/audience-doors.liquid`: agrega un setting `layout` (select: `editorial` = lo actual,
+   `strip` = nuevo). En `strip`: UNA fila de 3 pastillas grandes ("Para mi casa" → #tiles /
+   "Para mi negocio" → https://cotiza.frutiferia.com / "Para mi equipo" → /pages/bienestar), altura
+   ≤ 72 px escritorio y ≤ 120 px móvil (3 pastillas en fila, texto 14-15 px), colores de canal por
+   `--pill-*` (relleno) y `--pill-*-ink` (texto), la de negocio en sólido (es la que trae caja).
+   No borres el layout editorial (rollback barato).
+3. `sections/fru-hero.liquid`: setting `compact` (checkbox). En compacto: min-height ≤ 60vh
+   escritorio, foto móvil ≤ 220 px, mismo H1/CTA. Mantén preload/fetchpriority/altura fija
+   (LCP y CLS ya están bien — no los rompas).
+4. `templates/index.json` (D-6): orden = fru_hero (compact:true) → audience_doors (layout:strip)
+   → fru_category_tiles (nuevo, id `fru_category_tiles`) → featured-collection (Ofertas, deja el
+   carousel y verifica que el quick-add "+ Carrito" se ve) → frutimenu_promo → icons
+   (3721924b-…) → testimonials_JERNA6 → b2b_band → media_with_text_VAd4Hi → featured_blog_recetas
+   → newsletter_WXJigB → scrolling_banner_ArEtdk → recently_viewed_home. `collection-list`
+   ("¿Qué buscas?") queda `disabled: true` (rollback), NO borrada. Recuerda el comentario `/* */`
+   al inicio del JSON: consérvalo.
+5. NO toques header-group.json (tira/promo strip = WUX-2) ni overlay-group.json (popup = WUX-3).
+
+Verificación (obligatoria antes de push):
+- `cd ~/Desktop/frutiferia-theme && shopify theme check` → 0 errores.
+- `cd ~/Desktop/frutiferia-theme && shopify theme dev --store=frutiferia-spa.myshopify.com`
+  (en background; NUNCA con `| head`; si 9292 está ocupado, `--port 9293`) → `curl -s -o /dev/null
+  -w "%{http_code}" http://127.0.0.1:9292/` = 200 y sin "Failed to Upload Theme Files".
+- Abre el preview del tema en el Browser pane (preview_start {url:"http://127.0.0.1:9292"}) a
+  375×812 y 1440×900 y mide con getBoundingClientRect (el pane está oculto: scroll por JS, no
+  por gesto; el layout SÍ se calcula) el `top` del primer tile y del primer `.card--product`.
+  Reporta las 4 cifras contra la meta. Screenshot de ambas vistas.
+- Contraste AA de los textos sobre las fotos/tiles (calcúlalo, no lo estimes).
+Cierre: commits self-contained (1: sección tiles, 2: doors strip + hero compact, 3: index.json)
++ `git pull --rebase` + push → verifica en https://frutiferia.com con curl (grep del id
+`fru_category_tiles`) → actualiza §3 (estado) y §6 (registro) de este plan → `tion_cerrar`/
+`tion_log_sesion` → cierra con "Lo que tienes que hacer tú" (QA en iPhone: cuántos scrolls hasta
+ver productos; y si algún tile se ve mal, qué colección necesita mejor foto).
+```
+
+### PROMPT WUX-2 — Header de una fila + mega menú "Comprar" + menú de 5 (Sonnet)
+
+```
+Sesión WUX-2 del plan ~/Desktop/frutiferia-theme/docs/PLAN_WEB_UX_2026-08-16.md, repo del tema
+Shopify frutiferia-web-2026 (clon ~/Desktop/frutiferia-theme, main, repo-first, `git pull --rebase`
+antes de editar/pushear; PUSH = DEPLOY). Corre DESPUÉS de WUX-1. Activa: edu-sprints,
+frutiferia-ux-ui, frutiferia-style. Lee §2 (D-2, D-4, D-5, D-7) y §7 del plan. Otra sesión (WUX-4)
+puede estar tocando theme.liquid, footer-group.json, es.json, tokens y fru-brand.css: NO los
+toques. Tus archivos: sections/header-group.json, sections/header.liquid,
+sections/free-shipping-bar.liquid, assets/frutiferia-logo.svg (nuevo).
+
+Hoy: header 191 px escritorio / 115 móvil, 9 ítems + botón, entrada a la tienda llamada
+"Vitrinea", tira "¿Primer pedido?" de 75/180 px, mega menú de Canopy construido y sin usar
+(0 bloques en header-group.json). Meta: header ≤ 120 px escritorio y ≤ 110 móvil, 5 entradas,
+mega menú "Comprar" con fotos, logo 2026.
+
+Tareas:
+1. Logo (D-7): exporta el logo del OS a SVG estático `assets/frutiferia-logo.svg` (isotipo +
+   wordmark minúscula, morado #671D90) desde
+   `Frutiferia/Sistemas/frutiferia-so/src/components/brand/{FrutiferiaMark,FrutiferiaWordmark}.tsx`
+   (viewBox 64×64 y 109.96×20; los brillos son huecos evenodd — consérvalos). Si el cotizador
+   ya tiene `public/brand/frutiferia-logo.svg` (lo crea WUX-5), copia ESE archivo byte a byte
+   para que sea el mismo en las 4 superficies. En `sections/header.liquid` agrega al schema un
+   checkbox `use_svg_logo` (default true) y, si está activo, renderiza el SVG inline
+   (`{{ 'frutiferia-logo.svg' | inline_asset_content }}`; si el filtro no existe en esta versión
+   de Liquid, `<img src="{{ 'frutiferia-logo.svg' | asset_url }}">`) con alto 36-40 px, en vez
+   del `logo` image_picker. Mantén el image_picker como fallback.
+2. Header de una fila: revisa el schema de `logo_position` y las variantes de layout de Canopy
+   7.2.2; elige la que deje logo + menú + buscador + cuenta + carrito en UNA fila en escritorio.
+   Si no existe variante inline, usa `minimise_search_desktop: true` y ajusta CSS mínimo en
+   header.liquid. Mantén `enable_sticky: true`; evalúa `hide_menu` (si el menú se esconde al
+   bajar y el header queda de 1 fila, déjalo). `menu_featured_link`: "Ofertas de la semana" si
+   queda como ítem de primer nivel, si no, vacío (hoy dice "Sale": muerto).
+3. header-group.json (D-5): elimina la sección `promo_strip_QLcH46` del grupo (rollback = git).
+   En `free-shipping-bar` cambia el copy a "🚚 Despacho gratis sobre $50.000 · Mié y Sáb · 15 %
+   en tu 1er pedido con PRIMERA15" (ajusta `copy_empty`; que quepa en 1 línea en móvil o
+   recorta a "Despacho gratis sobre $50.000 · 15 % con PRIMERA15").
+4. Menú de 5 (D-2, D-4) en el admin: Shopify → Contenido/Navegación → "Menú Frutiferia" (handle
+   `menu-frutiferia`). Hazlo tú por el navegador de Eduardo (Chrome MCP, precedente S1.1 del
+   plan web 2026: la página de Navegación SÍ es automatizable, el Theme Editor NO). Estructura:
+   - Comprar → /collections  · hijos: Frutas → /collections/frutas-deliciosas · Verduras →
+     /collections/verduras-frescas · Despensa → /collections/despensa · Snacks → /collections/snacks
+     · Proteínas vegetales → /collections/proteinas-vegetales-y-alimentos-veganos · Legumbres →
+     /collections/legumbres · Aceitunas y condimentos → /collections/aceitunas · Packs →
+     /collections/frutipack · Ofertas de la semana → /collections/ofertas · Efecto $990 →
+     /collections/990 · Todo el catálogo → /collections/catalogo-completo
+   - Arma tu menú → /pages/frutimenu
+   - Negocios → /pages/proveedor-restaurantes · hijos: Cotizar online → https://cotiza.frutiferia.com
+     · Catálogo mayorista → /collections/por-mayor · Hablar con Francisco →
+     https://wa.me/56993261147
+   - Oficinas → /pages/bienestar
+   - Recetas → /blogs/recetas
+   "Conócenos" y "Vida saludable" van al menú `footer-ayuda` (agrégalos ahí). Si el navegador no
+   te deja, entrega la lista EXACTA arriba en "Lo que tienes que hacer tú" (10 min de Eduardo).
+5. Mega menú: en header-group.json agrega un bloque `columns` para "Comprar" (lee en el schema
+   de header.liquid cómo se asocia el bloque al ítem — por título del link), con
+   `collection_images` "standard", promo1 = Ofertas de la semana (imagen de la colección
+   `ofertas`, link /collections/ofertas), promo2 = "Arma tu menú" (link /pages/frutimenu). Y un
+   bloque para "Negocios" con promo1 → cotizador. Sin badges. Un solo nivel de columnas.
+6. NO toques index.json, overlay-group.json, footer-group.json, theme.liquid, tokens, es.json.
+
+Verificación: `shopify theme check` 0 errores; `theme dev` + curl 200; en el Browser pane a
+1440×900 y 375×812 mide la altura del header (`.shopify-section` del header) y confirma ≤ 120/110;
+fuerza la clase abierta del mega menú por JS y screenshot; curl a https://frutiferia.com y grep de
+los 5 títulos del menú tras el cambio en admin (el menú es contenido admin: se ve en vivo al
+instante, no necesita push). Cierre: commits (1: logo, 2: header layout + strip, 3: mega menú)
++ push + verificación en prod + §3/§6 + Tion + "Lo que tienes que hacer tú".
+```
+
+### PROMPT WUX-3 — Colección, ficha y carrito de compra rápida (Sonnet)
+
+```
+Sesión WUX-3 del plan ~/Desktop/frutiferia-theme/docs/PLAN_WEB_UX_2026-08-16.md, repo del tema
+Shopify frutiferia-web-2026 (clon ~/Desktop/frutiferia-theme, main, repo-first, `git pull --rebase`
+antes de editar/pushear; PUSH = DEPLOY). Activa: edu-sprints, frutiferia-ux-ui, frutiferia-style.
+Lee §2 (D-3, D-5, D-9, D-10) y §7. Corre EN PARALELO con WUX-1 (que edita index.json, fru-hero,
+audience-doors y crea fru-category-tiles): NO toques esos archivos. Tus archivos:
+templates/collection.json, templates/product.json, templates/cart.json,
+templates/list-collections.json, sections/overlay-group.json, snippets/product-card.liquid (+ su
+css en assets/), sections/main-collection-banner.liquid SÓLO si hace falta.
+
+Hoy (medido): en /collections/frutas-deliciosas el primer producto parte en y=1.076 px (1440×900);
+la tarjeta muestra "Frutiferia SPA" y "1.0 kg" (ruido); un promo-tile "Ofertas especiales" ocupa
+la posición 1 de la grilla; la ficha tiene dos botones verdes iguales (Añadir + Comprar ahora); el
+popup salta a los 10 s sobre el hero. Meta: primer producto ≤ 620 px escritorio / ≤ 700 px móvil
+(con el header actual), tarjeta limpia, un solo botón primario.
+
+Tareas:
+1. `templates/collection.json`: `collection-banner` → `show_image: false`, `use_product_image:
+   false`; si el schema de main-collection-banner permite ocultar la descripción
+   (`show_description`/similar), ocúltala y agrega al final del template una sección `rich-text`
+   o `collapsible` que muestre `collection.description` (SEO intacto); si no permite, deja la
+   descripción pero recórtala visualmente con CSS `line-clamp: 2` + "leer más". Saca el bloque
+   `image_promotion_kqxbRA` de `collection-products` (rollback = git). `products_per_page: 36`,
+   `card_size` "medium" en escritorio y "small" en móvil, `filters_open_lg: false` (los filtros
+   como botón/drawer, la grilla usa todo el ancho), `frutimenu_cta_collection` pasa DEBAJO de la
+   grilla. Mantén filtros/orden.
+2. `snippets/product-card.liquid`: (a) vendor: no mostrarlo si `product.vendor == shop.name`
+   (hoy sale "Frutiferia SPA"); (b) peso: no mostrar la línea de peso en la tarjeta (el título ya
+   dice el formato "(kg)"/"(5 kg)"); (c) el quick-add "+ Carrito" hereda `.btn--primary` sólido
+   (D-10: color = `--fru-verde-800` `#17845A` si el token ya existe en tokens-frutiferia.css — lo
+   agrega WUX-4 —, si no, usa `#17845A` literal con comentario `/* TODO token */`), altura ≥ 40 px,
+   texto "Agregar"; (d) precio con `tabular-nums`. NO toques el swap de imagen por variante ni el
+   lazy nativo (FRUTI3-16).
+3. `templates/product.json`: bloque `buy-buttons` → `enable_dynamic_checkout: false` (D-9);
+   `msg_envio` → colores del bloque a tokens (fondo `#F4F0F7`, texto `#248F57`) en vez de
+   #e8f5e9/#2e7d32; agrega un bloque `richtext` justo después de `buy-buttons`: "<p>¿Compras
+   para un negocio? <a href="https://cotiza.frutiferia.com">Cotiza por mayor →</a></p>" (1 línea,
+   14 px, `--text-muted`). Sticky ATC ya está on: no lo toques.
+4. `sections/overlay-group.json`: `cart-drawer` → `show_cart_page_link: true`; `pop-up-welcome`
+   → `trigger: "exit"` (D-5), mantiene guests-only y `dismiss_days: 30`. NO cambies los promoted
+   products.
+5. `templates/list-collections.json`: título "Comprar" (H1 "Toda la tienda"), `card_size:
+   "large"`, descripción `<p>Elige una categoría o busca arriba.</p>` (richtext SIEMPRE en <p>).
+   Esta página es el destino del ítem "Comprar" del menú (WUX-2).
+6. `templates/cart.json`: nada estructural; sólo verifica que `frutimenu_cta_cart` y
+   `upsell_ofertas` sigan y que el delivery-picker se renderice (setting `show_delivery_picker`
+   está true).
+7. Gate para Eduardo (D-3): `dock_cart_drawer` vive en config/settings_data.json (editor-owned,
+   NO sincroniza por git). Anótalo en "Lo que tienes que hacer tú" con la ruta exacta del editor.
+
+Verificación: `shopify theme check` 0 errores; `theme dev` + curl 200 en /collections/frutas-
+deliciosas, /products/platanos, /cart, /collections; Browser pane: mide `top` del primer
+`.card--product` en 1440×900 y 375×812; clic en "Agregar" de una tarjeta y confirma con
+`fetch('/cart.js')` que `item_count` subió; en la ficha confirma que NO hay botón dynamic checkout
+y sí el link "Cotiza por mayor"; screenshot de colección y ficha. Cierre: commits (1: colección +
+tarjeta, 2: ficha, 3: overlays + list-collections) + `git pull --rebase` + push + prod check + §3/§6
++ Tion + "Lo que tienes que hacer tú" (des-dockear carrito: Tienda online → Temas →
+frutiferia-web-2026/main → Personalizar → Configuración del tema → Carrito → desmarcar "anclar/dock
+cart drawer" → Guardar; 2 min).
+```
+
+### PROMPT WUX-4 — Capa de marca del tema (Opus)
+
+```
+Sesión WUX-4 del plan ~/Desktop/frutiferia-theme/docs/PLAN_WEB_UX_2026-08-16.md, repo del tema
+Shopify frutiferia-web-2026 (clon ~/Desktop/frutiferia-theme, main, repo-first, `git pull --rebase`
+antes de editar/pushear; PUSH = DEPLOY). Corre DESPUÉS de WUX-3. Activa: edu-sprints,
+frutiferia-ux-ui, frutiferia-style, frontend-design. Lee §2 (D-1, D-5, D-7, D-10) y §7. WUX-2 puede
+estar tocando header-group.json/header.liquid/free-shipping-bar: NO los toques. Tus archivos:
+assets/fru-brand.css (nuevo), assets/inter-*.woff2 (nuevos), layout/theme.liquid,
+assets/tokens-frutiferia.css, sections/footer-group.json, locales/es.json.
+
+Contexto: la tienda renderiza Montserrat/Avenir (settings del editor, editor-owned) mientras
+cotizador/menú/wellness ya viven en Georgia + Inter; el botón primario es menta plana (2,5:1);
+el footer no enlaza a las otras superficies; los strings heredados de Canopy tratan de usted
+("Su carrito esta vacío") mientras las secciones propias tutean.
+
+Tareas:
+1. `assets/tokens-frutiferia.css`: agrega `--fru-verde-800: #17845A` y `--color-cta-solid:
+   var(--fru-verde-800)`; `--on-cta` sigue blanco. No cambies nada más de la Capa 3 (canal).
+2. `assets/fru-brand.css` (nuevo), cargado en `layout/theme.liquid` INMEDIATAMENTE DESPUÉS de
+   `main.css` (hoy tokens va antes y pierde). Contenido: (a) `@font-face` Inter 400/500/600/700
+   self-hosted (copia los woff2 de `Frutiferia/Sistemas/frutiferia-cotizador/src/fonts/`) +
+   preload del 400 y 600 en theme.liquid; (b) D-1: `body, .rte, .btn, input, select {font-family:
+   var(--font-body)}` y `h1,h2,h3,.h0,.h1,.h2,.h3,.section__heading,.card__title? — revisa los
+   selectores reales de Canopy — {font-family: var(--font-display); letter-spacing: -0.01em}`;
+   títulos de tarjeta de producto y navegación quedan en Inter (legibilidad chica); (c) D-10:
+   `.btn--primary` fondo `--color-cta-solid`, hover `#248F57`, radio `--radius-pill` en botones
+   de acción, focus visible 2 px `--color-primary`; el `--grad-cta` sólo lo usan hero/CTAs
+   grandes (no lo pises); (d) tarjetas/paneles: `--radius`, `--shadow-md`, borde `--border`;
+   (e) enlaces `--color-primary` con subrayado en hover. Prueba que el override NO rompa el
+   header sticky ni el drawer. Si Eduardo vetó D-1 (mira §2), omite (b) y deja el resto.
+3. `sections/footer-group.json`: columna "Comprar" (menú `footer-comprar`, ya existe) · columna
+   "Frutiferia para…" con 4 links: Hogares → /collections · Negocios (cotizador) →
+   https://cotiza.frutiferia.com · Menú semanal → /pages/frutimenu · Oficinas → /pages/bienestar ·
+   columna "Ayuda" (`footer-ayuda`) · bloque de contacto: "Hogares: WhatsApp Mora +56 9 6609 3891
+   · Negocios y oficinas: Francisco +56 9 9326 1147" (links wa.me). Newsletter del footer se queda
+   (es la 3ª y última mención de PRIMERA15, D-5). Verifica que la banda de confianza siga
+   oculta en la landing B2B (`hide_on_b2b`).
+4. `locales/es.json`: tuteo consistente — "Su carrito"→"Tu carrito", "Su carrito esta vacío"→"Tu
+   carrito está vacío", "Añadir al carrito"→"Agregar al carrito", "+ Carrito"→"Agregar",
+   "Inténtelo nuevamente"→"Inténtalo de nuevo", y barre TODAS las formas de usted (grep de
+   "Su ", "usted", "Inténtelo", "puede " en el archivo, mínimo 3 pasadas — el grep BSD calla con
+   bytes raros). NO toques claves que sean placeholders de Shopify checkout.
+5. Entrega en "Lo que tienes que hacer tú" el checklist OPCIONAL del editor (3 min): si quiere
+   dejar el editor coherente con el CSS: Tipografía → Encabezados: Georgia; Cuerpo: Inter
+   (ambos están en la librería de Shopify); Tarjetas de producto → ocultar proveedor y peso.
+
+Verificación: `shopify theme check` 0; `theme dev` + curl 200 en /, /collections/frutas-
+deliciosas, /products/platanos, /cart, /pages/proveedor-restaurantes; Browser pane: confirma
+`getComputedStyle` de un h2 (Georgia) y del body (Inter), del `.btn--primary` (#17845A) y screenshot
+home+ficha en escritorio y móvil; contraste calculado botón/tinta ≥ 4,5:1. Cierre: commits (1:
+tokens+fru-brand.css+fuentes, 2: footer, 3: es.json) + `git pull --rebase` + push + prod check
+(curl grep de `fru-brand.css` en el HTML de https://frutiferia.com) + §3/§6 + Tion + "Lo que tienes
+que hacer tú".
+```
+
+### PROMPT WUX-5 — Satélites alineados: cotizador, wellness, menú (Sonnet)
+
+```
+Sesión WUX-5 del plan ~/Desktop/frutiferia-theme/docs/PLAN_WEB_UX_2026-08-16.md. Tres repos:
+- frutiferia-cotizador: Mi unidad/Frutiferia/Sistemas/frutiferia-cotizador (Vercel autodeploy en push a main)
+- frutiferia-wellness: Mi unidad/Frutiferia/Sistemas/frutiferia-wellness (Vercel; DNS wellness.frutiferia.com AÚN NO resuelve)
+- mi-menu-semanal: ~/Desktop/mi-menu-semanal (Lovable: push NO despliega, Eduardo aprieta Publish)
+Repo-first en los tres: `git pull --rebase` antes de editar; `git add` por archivo (los repos
+viven en Drive: NUNCA `-A`). Activa: edu-sprints, frutiferia-ux-ui, frutiferia-style, frutimenu
+(para el menú). Lee §2 (D-1, D-7, D-10, D-11) y §7. Ninguna otra sesión toca estos repos.
+
+Hallazgos (matriz §7.C): wellness usa Bienestar `#D6457D` y CTA menta 2,5:1; cotizador y wellness
+tienen `b2b: #7C3AED` (violeta muerto); tres CTAs distintos; wellness sin logo, sin link a la
+tienda, sin móvil; menú con `--chart-*` de shadcn; logos PNG distintos por repo.
+
+Tareas (mismo orden en los 3 repos donde aplique):
+1. Logo (D-7): exporta UNA vez el SVG del OS
+   (`Frutiferia/Sistemas/frutiferia-so/src/components/brand/{FrutiferiaMark,FrutiferiaWordmark}.tsx`
+   → `frutiferia-logo.svg` isotipo + wordmark minúscula #671D90, y `frutiferia-logo-blanco.svg`)
+   a `frutiferia-cotizador/public/brand/`; copia byte a byte a `frutiferia-wellness/public/brand/`
+   y `mi-menu-semanal/public/brand/`. Reemplaza los PNG del header en los 3 (`Header.tsx` del
+   cotizador y wellness, `Logo.tsx` del menú). Alto 32-36 px, alt "Frutiferia".
+2. Tokens (D-10, D-11): en `tailwind.config.ts` de cotizador y wellness: `rosa` → 900 `#9A196A`
+   / 500 `#B82883` / 050 `#F8E7F1`; `b2b` → `#2525C1`; `cta` → `#17845A` (wellness) — el
+   cotizador ya lo tiene; agrega `verde: {800:'#17845A', 700:'#248F57'}`. En wellness también
+   `index.html` theme-color y `src/index.css` (hex en duro). En el menú (`src/styles.css`, Tailwind
+   v4): `--chart-1..4` = `#7B22AA / #0E79A0 / #A06D0E / #1D865A` (OS), `--radius: 1rem` (16 px como
+   tema y cotizador; revisa que las escalas calc no rompan chips), CTA de botones chicos →
+   `#17845A` sólido; el gradiente se queda SOLO en el hero. NO toques lógica ni motor.
+3. Chrome común: header con logo → https://frutiferia.com; footer en los 3 con la misma línea:
+   "Frutiferia · Tienda (frutiferia.com) · Cotizador B2B (cotiza.frutiferia.com) · Menú semanal
+   (menu.frutiferia.com) · Bienestar (/pages/bienestar de la tienda mientras no haya DNS, D-8) ·
+   WhatsApp: Mora +56 9 6609 3891 (hogares) / Francisco +56 9 9326 1147 (negocios y oficinas)".
+   Wellness: `Header.tsx` con logo + link "Tienda", `Footer.tsx` con la nav, y en móvil una barra
+   inferior sticky con el CTA "Cotiza tu programa" (safe-area). Cotizador: la ruta `/bienestar`
+   toma los nuevos hex de rosa. Menú: el footer sólo cuando NO está embebido (ya se oculta con
+   `data-app-chrome`).
+4. NO cambies textos de negocio, precios ni el motor de ninguno.
+
+Verificación por repo: `npx tsc --noEmit` + tests (`npx vitest run` en cotizador ≥ 106/106; wellness
+los que tenga; menú `bun run` o `npm run` según package.json) + build; preview local en el Browser
+pane a 375 y 1440 con screenshot de header/footer/hero de cada uno; grep de que ya no queda
+`#D6457D`, `#7C3AED`, `#2DB87F` como fondo de botón (salvo gradiente de hero) en `src/`. Cierre:
+1 commit por repo (o 2 si el menú se separa en tokens vs chrome) + push; cotizador/wellness:
+verifica el deploy de Vercel con curl al bundle (grep del hex nuevo); menú: **Publish en Lovable =
+gate de Eduardo** (deja el marcador a grepear en el bundle de prod). §3/§6 + Tion + "Lo que tienes
+que hacer tú" (Publish Lovable 1 min; DNS wellness G-31 5 min si quiere que Bienestar tenga casa).
+```
+
+### PROMPT WUX-6 — Puentes con el OS + línea base de medición (Sonnet)
+
+```
+Sesión WUX-6 del plan ~/Desktop/frutiferia-theme/docs/PLAN_WEB_UX_2026-08-16.md. Repos:
+frutiferia-so (Mi unidad/Frutiferia/Sistemas/frutiferia-so O ~/Desktop/frutiferia-so — usa el clon
+que esté en `main` y limpio; si ambos están en otra rama con cambios ajenos, NO cambies de rama:
+`git worktree add ~/Desktop/frutiferia-so-wux main`) y el tema (~/Desktop/frutiferia-theme, main;
+tus únicos archivos ahí: templates/page.b2b.json, page.bienestar.json, page.frutimenu.json).
+Activa: edu-sprints, frutiferia-os, frutiferia-ux-ui. Lee §2 (D-4, D-8) y §7. Corre después de
+WUX-5 (o en paralelo si no vas a tocar los satélites).
+
+Objetivo: que "todo conectado con el OS" sea verificado, no supuesto, y dejar una línea base para
+medir el rediseño.
+
+Tareas:
+1. Línea base (registra en §8 de este plan, con fecha): (a) `select get_web3_funnel_metrics(30)`
+   en prod (por Mgmt API si tienes, si no SQL inline para Eduardo); (b) Shopify Analytics últimos
+   30 días: sesiones, tasa de conversión, % sesiones con "agregar al carrito", % que llegan al
+   checkout, ticket promedio (léelo por el navegador de Eduardo en admin.shopify.com/store/
+   frutiferia-spa/analytics o pídeselo en "Lo que tienes que hacer tú"). Estas cifras se comparan
+   30 días después de que A y B estén en vivo.
+2. Smoke de los 6 puentes web→OS (sin crear datos falsos: usa preflight/deny-path):
+   `b2b-lead-intake` (OPTIONS 200 + POST vacío 400), `b2c-welcome-intake` (idem),
+   `cotizador-api` action catalog (200, 362±), `delivery-availability` (200 con `dates` no vacío),
+   `https://frutiferia.com/apps/fruti-identity` (200 `{"authenticated":false}`),
+   `menu-subscriber-intake` (401/503 sin secret = fail-closed). Lo que esté muerto, arréglalo y
+   redeploya (`npx supabase functions deploy <fn> --project-ref ykvexpxvlivcqamqsafe`).
+3. Landings del tema (D-4, D-8): `page.b2b.json` — CTA primario a https://cotiza.frutiferia.com,
+   sección `productos_b2b` (colección `por-mayor`) etiquetada "Catálogo mayorista de referencia —
+   los precios finales van en tu cotización"; el form `contacto_b2b` sigue con `crm_source`
+   correcto (edge fn b2b-lead-intake). `page.bienestar.json` — CTA "Cotiza tu programa" →
+   https://cotiza.frutiferia.com/bienestar y "Ya tengo programa" al mismo portal; el form
+   `contacto_wellness` con `crm_endpoint` de `b2b-lead-intake` y `crm_source='web-wellness'`
+   (verifica que exista; si no, cabléalo igual que en page.b2b.json). Deja en el §8 del plan la
+   lista de los 3 links exactos que cambian a `https://wellness.frutiferia.com` cuando G-31 cierre.
+   `page.frutimenu.json` — confirma `embed_url` https://menu.frutiferia.com/?embed=1 y
+   `height_mobile` ≥ 720.
+4. OS: en `/crm` el `Web3FunnelCard` debe seguir pintando tras cualquier cambio; si el RPC falla,
+   arréglalo. NO agregues métricas nuevas salvo que sean gratis (una fila).
+5. Extensión de cuenta (`frutiferia-account-extension`, sólo lectura): confirma que
+   `BenefitsPanel.jsx` enlaza a tienda + cotizador + menú; si falta Bienestar, agrégalo apuntando
+   a /pages/bienestar (D-8) y deploya con `shopify app deploy` SÓLO si la CLI ya está autenticada;
+   si no, déjalo como gate.
+
+Verificación: curls con códigos esperados (tabla en el registro); `shopify theme check` 0 + `theme
+dev` + curl 200 de las 3 landings; tsc/build del OS si tocaste código. Cierre: commits por repo +
+push (tema = deploy; OS = push a main o a la rama que corresponda si el clon estaba en feature —
+dilo explícito) + §3/§6/§8 + Tion + "Lo que tienes que hacer tú".
+```
+
+### PROMPT WUX-7 — QA integral en producción (Haiku)
+
+```
+Sesión WUX-7 del plan ~/Desktop/frutiferia-theme/docs/PLAN_WEB_UX_2026-08-16.md. Read-only:
+NO edites ningún repo. Corre cuando WUX-1..6 estén ✅ en §3. Activa: edu-sprints.
+
+1. Rutas 200 (curl -s -o /dev/null -w "%{http_code} %{time_total}"): https://frutiferia.com/,
+   /collections, /collections/frutas-deliciosas, /products/platanos, /cart, /pages/frutimenu,
+   /pages/proveedor-restaurantes, /pages/bienestar, /blogs/recetas, https://cotiza.frutiferia.com,
+   https://menu.frutiferia.com, https://cotiza.frutiferia.com/bienestar, https://wellness.frutiferia.com
+   (puede seguir en 000 si G-31 no cerró: repórtalo).
+2. Medidas en el Browser pane (prod), 375×812 y 1440×900, con getBoundingClientRect: altura del
+   header, `top` del primer tile de categoría, `top` del primer `.card--product` en home y en
+   /collections/frutas-deliciosas, ¿existe `body.cart-drawer-docked`? Compara con las metas de
+   §1/§3 (móvil ≤ 750 / ≤ 1.600; escritorio tiles ≤ 850, producto colección ≤ 620; header ≤ 120).
+3. Matriz de cross-links: para cada superficie (tienda, cotizador, menú, wellness/portal) lista
+   a cuáles de las otras enlaza (grep del HTML servido). Meta: cada una enlaza a la tienda y la
+   tienda a las 3.
+4. Contraste AA calculado (no estimado) de: botón primario, texto de tiles sobre foto/overlay,
+   pills de canal (`--pill-*-ink` sobre fondo), links del footer.
+5. Voseo/usted: 3 pasadas de grep distintas (`vos `, `tenés`, `podés`, `usted`, `Su carrito`,
+   `Inténtelo`) sobre el HTML de home, colección, ficha, carrito y las 3 landings.
+6. PSI móvil de la home (API de PageSpeed; si da 429, dilo y usa Lighthouse del Browser si existe).
+7. Consola: `read_console_messages` con errores en home, colección, ficha, carrito.
+Entrega: tabla PASA/FALLA por ítem + lista de fixes priorizada y asignada a un carril (A/B/C) con
+el archivo probable. Actualiza §3/§6 del plan (una línea) y cierra con "Lo que tienes que hacer tú"
+(QA en iPhone real: 5 min, qué mirar).
+```
+
+---
+
+## 5. Pasos de Eduardo (gates humanos) — ordenados por impacto
+
+| # | Paso | Tiempo | Por qué importa | Cuándo |
+|---|---|---|---|---|
+| G-1 | **Des-dockear el carrito** en el editor: Tienda online → Temas → `frutiferia-web-2026/main` → Personalizar → Configuración del tema → Carrito → desmarcar "anclar/dock cart drawer" → Guardar. | 2 min | Devuelve el 25 % del ancho en TODAS las páginas de escritorio. Es lo más barato y visible del plan. | **Hoy**, no depende de nada. |
+| G-2 | Leer §2 y vetar lo que no te guste (D-1 tipografía, D-4 Por Mayor, D-7 logo sin .com, D-9 Comprar ahora). | 5 min | Sin veto, se ejecuta el default. | Antes de abrir WUX-1/3/5. |
+| G-3 | Menú de navegación: **sólo si Claude no logra editarlo por el navegador en WUX-2**, cargar la lista exacta del prompt WUX-2 en Contenido → Navegación → "Menú Frutiferia". | 10 min | Es lo que hace visible el "Comprar" y el mega menú. | Cuando WUX-2 lo pida. |
+| G-4 | Publish en Lovable (menú semanal) tras WUX-5. | 1 min | En ese repo push ≠ deploy. | Tras WUX-5. |
+| G-5 | DNS `wellness.frutiferia.com` (GoDaddy: CNAME `wellness` → `cname.vercel-dns.com`) + agregar el dominio al proyecto `frutiferia-wellness` en Vercel (G-31 del plan wellness). | 5 min | Bienestar deja de vivir "prestado" en el cotizador. No bloquea nada. | Cuando puedas. |
+| G-6 | QA en iPhone real después de cada carril: abrir frutiferia.com, contar scrolls hasta ver productos, tocar "Agregar" en una tarjeta, abrir el carrito, entrar a Comprar → Frutas. Mandar 1 mensaje con lo que se vea raro. | 5 min ×3 | Lo que no se ve en el preview oculto de Claude. | Tras WUX-2, WUX-4, WUX-5. |
+| G-7 | (Opcional) Editor → Tipografía: Encabezados Georgia / Cuerpo Inter; Tarjetas de producto: ocultar proveedor y peso. El CSS ya lo fuerza; esto sólo deja el editor coherente. | 3 min | Higiene. | Cuando quieras. |
+| G-8 | (Opcional) Si algún tile de categoría luce mal (foto de producto sobre blanco), cambiar la imagen de esa colección en el admin (Productos → Colecciones → imagen). | 2 min c/u | Los tiles son la portada nueva. | Tras WUX-1, mirando la home. |
+
+---
+
+## 6. Registro
+
+| Fecha | Sesión | Qué quedó | Commits |
+|---|---|---|---|
+| 2026-08-16 | Fable 5 (plan) | Auditoría en vivo (medidas de scroll/header/dock), inventario del tema (Canopy 7.2.2), matriz de consistencia de las 5 superficies, brief de referentes, plan WUX-1..7 con prompts. Sin código. | — |
+
+---
+
+## 7. Diagnóstico y referentes (para las sesiones)
+
+### 7.A Cómo está armada la home hoy (`templates/index.json`, keys exactas)
+`fru_hero` (600 px) → `audience_doors` (548 px; bloques `door_hogares`/`door_negocios`/`door_bienestar`)
+→ `business_logos` [disabled] → `frutimenu_promo` (674 px, `media-with-text`) → `3721924b-…` (icons)
+→ `featured-collection` (Ofertas, 12, carousel) → `collection-list` ("¿Qué buscas?", 6 círculos)
+→ `b2b_band` → `testimonials_JERNA6` → `media_with_text_VAd4Hi` → `featured_blog_recetas` →
+`newsletter_WXJigB` → `scrolling_banner_ArEtdk` → `video_9nrWpD` [disabled] → `recently_viewed_home`
+→ `slideshow` [disabled]. Header-group: `free-shipping-bar` → `header` → `promo_strip_QLcH46`.
+Header hoy: `menu: menu-frutiferia`, `enable_sticky: true`, `hide_menu: true`, `logo_position:
+top-left`, `logo_width: 230`, `enable_search: true` (no minimizado), CTA "Conversemos" (Mora),
+`menu_featured_link: "Sale"` (muerto), **0 bloques de mega menú** (Canopy trae `columns` y
+`sidebar` con 3 promos + 3 badges cada uno).
+Ajustes editor-owned (NO sincronizan por git; gate Eduardo): `config/settings_data.json` →
+`dock_cart_drawer: true`, `heading_font: montserrat_n7`, `body_font: avenir_next_n5`,
+`enable_quick_add: true`, `card_show_vendor/weight`, colores.
+Colección: `collection-banner` con imagen + descripción larga → primer producto a 1.076 px;
+bloque `image_promotion_kqxbRA` en posición 1; `card_size: small`; filtros abiertos en escritorio.
+Ficha: sticky ATC on, `enable_dynamic_checkout: true`, `msg_envio` verde fuera de tokens.
+Overlays: `cart-drawer` (`show_cart_page_link: false`, promoted products), `pop-up-welcome`
+(`trigger: delay` 10 s; existe `exit`).
+Colecciones vivas con imagen (29): frutas-deliciosas 50 · verduras-frescas 117 · despensa 43 ·
+snacks 43 · proteinas-vegetales… 53 · legumbres 12 · aceitunas 8 · condimentos 14 · frutipack 9 ·
+ofertas **102** · 990 24 · mercado-pyme 9 · por-mayor 147 (+7 "-por-mayor") · catalogo-completo 431.
+
+### 7.B Referentes (2026-08-16/17)
+
+**Qué significa "moderna y bonita" hoy en fresco/grocery (dirección para WUX-1/3/4):**
+1. **La foto manda, el chrome desaparece.** Header de una fila, mucho blanco, la fruta como color
+   (no fondos morados grandes; el morado va en tipografía, líneas y pastillas). Overlay ≤ 45 %
+   y direccional (regla del hero actual).
+2. **Producto en la primera pantalla.** Tiles de categoría grandes con foto (no círculos chicos)
+   y una fila de productos con quick-add antes de cualquier storytelling.
+3. **Tipografía grande y editorial** para títulos + sans limpia para todo lo demás; tarjetas sin
+   ruido (sin vendor, sin peso, precio con formato claro).
+4. **Compra en 1 gesto** desde la grilla: botón sólido "Agregar" o stepper +/- en la tarjeta,
+   barra sticky del carrito en móvil, drawer flotante (no dockeado).
+5. **Un solo camino por público** y visible arriba: hogar → comprar; negocio → cotizar; oficina →
+   programa. Los tres accesibles en el primer pliegue, sin marear al B2C.
+6. **Motion sutil**: hover translateY(-2 px)/sombra, reveal 90 ms; nada que retrase el LCP.
+7. **Recompra fácil**: "lo de siempre" / "comprar de nuevo" a un clic desde cuenta y correo.
+
+**Patrones observados en sitios reales durante esta sesión (verificados por fetch):**
+- Ricardo Valdés (`ricardovaldes.cl`, B2B/B2C V Región): **stepper +/- y "Agregar al carro" en la
+  tarjeta**, unidad explícita "(Kg)/(Unidad)" — sencillo y rápido; débil en filtros y jerarquía.
+- Santiago Natural (`santiagonatural.cl`, Shopify): 3 columnas, badges Oferta/Agotado, ratings en
+  tarjeta, foto colorida sobre neutro; **sin stepper ni "por kg" explícito** (antipatrón a evitar).
+- Abel & Cole (`abelandcole.co.uk`): cajas con **precio + porciones + rating en la tarjeta** y un
+  solo botón "Add" (aplica a FrutiPack/Bienestar).
+- Oddbox (`oddbox.co.uk`): flujo de 3 pasos, tipografía grande, mucho aire, skip/pausa desde la
+  cuenta (aplica al menú semanal/recurrencia).
+- REKKI (`rekki.com`): pedido B2B "sin formularios de cuenta", chat con el proveedor, precios al
+  pedir, "lo que otros chefs piden" (nuestro cotizador ya tiene portada por lo más pedido; falta
+  el chat = botón Francisco).
+- Jumbo/Uber Eats bloquean el fetch (403/JS-only); Fruna sin certificado válido — no evaluados.
+
+**Antipatrones a evitar (vistos en la propia tienda y en locales):** carrito dockeado que roba
+ancho · cupón repetido 5 veces · popup por tiempo sobre el hero · descripción SEO larga ANTES de la
+grilla · vendor/peso en la tarjeta · "por mayor" y "cotizador" como dos caminos B2B en el mismo menú.
+
+_(Este bloque se amplía con el brief completo de referentes internacionales — Picnic, Crisp,
+Rohlik, Good Eggs, Misfits, Jow, Graza/Omsom — cuando el agente de investigación termine; su
+resultado se pega aquí tal cual, con URLs.)_
+
+### 7.C Matriz de consistencia (2026-08-16)
+
+| Superficie | Primario | CTA | Canal B2B / Bienestar | Fuente | Radio | Header | Cross-links |
+|---|---|---|---|---|---|---|---|
+| OS (norte) | `#681D91` | = primario | `#2525C1` / `#B82883` | Inter Tight + Inter | 6/10 px | riel oscuro | n/a |
+| Tienda | `#671D90` | menta `#2DB87F` + `--grad-cta` | pills OK (`#2525C1`/`#B82883`) | **Montserrat/Avenir** (editor) | 16/8 | 2 filas, 191 px | hub |
+| Cotizador | `#671D90` | **`#17845A`** | **`#7C3AED`** / **`#D6457D`** (viejos) | Georgia + Inter | 16/8/20 | 1 fila h-16, logo PNG | → tienda |
+| Wellness | `#671D90` (sin uso) | **`#2DB87F`** | `#7C3AED` / `#D6457D` | Georgia + Inter | 16/8/20 | sin logo, 2 links | **ninguno** |
+| Menú | `#671D90` (oklch) | gradiente | — (charts shadcn) | Georgia + Inter | **12 px** | logo PNG, 0 links | → tienda |
+| Ext. cuenta | Polaris | Polaris | tone enum | Shopify | Shopify | n/a | → tienda + cotizador + menú |
+
+Gaps completos y file:line en la sesión de origen (memoria `project_web_ux_2026_08`).
+
+---
+
+## 8. Línea base y medición (la llena WUX-6)
+
+| Métrica | Antes (fecha) | Después (+30 d) |
+|---|---|---|
+| Móvil: y del primer producto en home | 3.169 px (2026-08-16) | |
+| Móvil: y de la primera categoría | 3.747 px (2026-08-16) | |
+| Escritorio: y del primer producto en colección | 1.076 px (2026-08-16) | |
+| Header (escritorio / móvil) | 191 / 115 px | |
+| Shopify Analytics: conversión · % ATC · % checkout · ticket | | |
+| `get_web3_funnel_metrics(30)`: leads web por canal · cotizaciones portal · reorder | | |
+| Links a cambiar a `wellness.frutiferia.com` cuando resuelva | | |
