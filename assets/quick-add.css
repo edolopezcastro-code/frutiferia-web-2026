@@ -9,12 +9,16 @@
   padding: calc(2 * var(--space-unit));
 }
 
-/* D-10 (WUX-3): quick-add sólido verde institucional. --fru-verde-800 (#17845A) aún no
-   existe en tokens-frutiferia.css -- lo agrega WUX-4 -- así que va literal por ahora. */
+/* D-10: quick-add sólido verde institucional.
+   WUX-4 (2026-08-17): los literales de WUX-3 ya no hacen falta. Esta regla es
+   más específica que la de fru-brand.css (.card__quick-add .btn--atc vence a
+   .btn--primary) y además quick-add.css carga DESPUÉS, así que si se dejaba
+   como estaba el quick-add se quedaba con el hover viejo #248F57 — el único
+   botón de la tienda fuera del canon, y encima a 4,08:1 (reprueba AA). */
 .card__quick-add .btn--atc {
-  --btn-bg-color: 23, 132, 90;
-  --btn-bg-hover-color: 36, 143, 87;
-  --btn-text-color: 255, 255, 255;
+  --btn-bg-color: 23 132 90; /* --fru-verde-800 #17845A */
+  --btn-bg-hover-color: 19 110 75; /* --fru-verde-900 #136E4B */
+  --btn-text-color: 255 255 255;
   display: flex;
   align-items: center;
   justify-content: center;

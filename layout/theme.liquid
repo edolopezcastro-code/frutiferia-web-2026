@@ -287,7 +287,26 @@
 
   <link rel="stylesheet" href="{{ 'tokens-frutiferia.css' | asset_url }}">
   <link rel="stylesheet" href="{{ 'main.css' | asset_url }}">
+  {%- comment -%}
+    fru-brand.css va DESPUÉS de main.css a propósito (WUX-4). tokens-* va antes
+    porque sólo aporta variables; esta capa pisa reglas de Canopy (tipografía,
+    botón primario, foco) y a igual especificidad gana la última que carga.
+    Mover esta línea arriba de main.css deja el tema en Montserrat otra vez.
+  {%- endcomment -%}
+  <link rel="stylesheet" href="{{ 'fru-brand.css' | asset_url }}">
   <script src="{{ 'main.js' | asset_url }}" defer="defer"></script>
+
+  {%- comment -%}
+    Inter variable self-hosted (eje wght 100–900): un solo archivo cubre 400/500/
+    600/700, así que basta UN preload.
+    Va por el filtro `preload_tag` y no por un <link> a mano por dos razones:
+    emite `crossorigin="anonymous"` — obligatorio en fuentes aunque el origen
+    sea el propio CDN de Shopify, si falta el navegador descarga el archivo dos
+    veces — y es la forma que `theme check` acepta (un <link rel="preload"> a
+    mano suma una offense AssetPreload, como las dos que ya arrastran las
+    fuentes del editor aquí abajo).
+  {%- endcomment -%}
+  {{ 'inter-variable.woff2' | asset_url | preload_tag: as: 'font' }}
 
   {%- unless settings.body_font.system? -%}
     <link rel="preload" href="{{ settings.body_font | font_url }}" as="font" type="font/woff2" crossorigin fetchpriority="high">

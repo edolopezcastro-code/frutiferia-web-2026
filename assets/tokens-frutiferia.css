@@ -14,6 +14,14 @@
   --fru-morado-050: #F4F0F7;  /* fondo pálido / surface muted */
   --fru-menta-500:  #2DB87F;  /* ACENTO AFILADO: dato positivo / CTA */
   --fru-verde-700:  #248F57;  /* verde como texto sobre claro / validación */
+  --fru-verde-800:  #17845A;  /* RELLENO de botón sólido: 4,68:1 con blanco (AA ✓).
+                                 La menta #2DB87F da 2,54:1 y reprueba: sirve de acento,
+                                 no de fondo de botón. */
+  --fru-verde-900:  #136E4B;  /* HOVER del botón sólido: 6,25:1 con blanco.
+                                 ⚠️ D-10 pedía hover #248F57 (= --fru-verde-700), pero ese
+                                 valor ACLARA el botón y cae a 4,08:1 — reprueba AA en hover.
+                                 Se oscurece en su lugar (convención universal del botón
+                                 sólido) y el contraste MEJORA al pasar el mouse. */
   --fru-ambar-500:  #E0A83E;  /* ÚNICO color de alerta (data-viz / estados). Sobrio, no rojo estridente. */
   --fru-tinta:      #1A1A1A;  /* cuerpo de texto */
   --fru-gris-700:   #555555;  /* texto secundario */
@@ -25,6 +33,10 @@
   --on-primary:      var(--fru-blanco);
   --color-accent:    var(--fru-morado-500);    /* realce decorativo, NO acción */
   --color-cta:       var(--fru-menta-500);     /* acción positiva */
+  --color-cta-solid: var(--fru-verde-800);     /* RELLENO del botón primario (D-10).
+                                                  --color-cta (menta) queda para acentos,
+                                                  bordes y datos; como fondo reprueba AA. */
+  --color-cta-solid-hover: var(--fru-verde-900);
   --on-cta:          var(--fru-blanco);
   --data-positive:   var(--fru-menta-500);     /* dato-héroe grande */
   --text-positive:   var(--fru-verde-700);     /* verde como TEXTO sobre claro */
@@ -135,11 +147,13 @@
 }
 
 /* Canopy autogenera el hover de --btn-bg-color mezclándolo hacia --btn-text-color
-   (blanco), es decir ACLARA en vez de oscurecer — con menta como btn_bg eso hace el
+   (blanco), es decir ACLARA en vez de oscurecer — con menta como btn_bg eso hacía el
    AA aún peor. No existe un setting de hover en el Theme Editor (§5C del plan), así
-   que se fija aquí al verde institucional --fru-verde-700 (#248F57), el mismo valor
-   que pide la checklist de settings. Solo pisa botones fuera de un .color-scheme--N
-   (main :root); los esquemas de color siguen su propia fórmula, sin tocar. */
+   que se fija aquí a mano. Solo pisa botones fuera de un .color-scheme--N (main :root);
+   los esquemas de color siguen su propia fórmula, sin tocar.
+   2026-08-17 (WUX-4): era 36 143 87 (#248F57), elegido cuando el fondo del botón era
+   menta #2DB87F y oscurecer mejoraba. Ahora el fondo es --fru-verde-800 #17845A y ese
+   mismo valor pasó a ser un ACLARADO que cae a 4,08:1. Se mueve a --fru-verde-900. */
 :root {
-  --btn-bg-hover-color: 36 143 87;
+  --btn-bg-hover-color: 19 110 75;
 }

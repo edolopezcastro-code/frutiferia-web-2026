@@ -1,0 +1,366 @@
+/* ============================================================================
+   FRU-BRAND.CSS — Capa de marca del tema (WUX-4 · D-1 + D-10)
+
+   Se carga en layout/theme.liquid INMEDIATAMENTE DESPUÉS de main.css. El orden
+   importa: tokens-frutiferia.css va ANTES de main.css, así que aporta las
+   variables pero PIERDE cualquier choque a igual especificidad. Este archivo es
+   el que gana. Aquí no se inventan valores: todo sale de var(--token).
+
+   Por qué existe: la tienda renderizaba Montserrat en títulos y la fuente del
+   editor en el cuerpo, mientras cotizador, menú semanal y wellness ya viven en
+   Georgia + Inter. Tres de cuatro superficies contra una. D-1 unifica por CSS
+   para no depender de que alguien entre al Theme Editor.
+
+   ⚠️ ES UN .css.liquid, NO un .css. Motivo en el bloque (a). Consecuencia:
+   `theme check` lo parsea como Liquid+HTML, así que en los COMENTARIOS no
+   puede aparecer nada con forma de etiqueta HTML (se cierra el parser y tira
+   LiquidHTMLSyntaxError). Por eso abajo se escribe "el elemento p", no la
+   etiqueta entre signos de menor/mayor.
+
+   ⚠️ Este archivo NO toca el Theme Editor. Si Eduardo cambia la tipografía allá
+   (gate G-7), este CSS sigue mandando y el resultado no cambia.
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   (a) Inter — self-hosted, VARIABLE
+   El cotizador sirve un solo woff2 con eje wght 100–900 (mismo archivo, mismo
+   sha256: se copió tal cual para que las 4 superficies rendericen idéntico).
+   Una fuente variable cubre 400/500/600/700 con UN request de 47 KB en vez de
+   cuatro estáticas. Por eso hay un solo @font-face y un solo preload.
+   Georgia no se declara: es de sistema, no se descarga, y por eso los títulos
+   pintan en el primer frame sin FOUT.
+
+   ⚠️ Por esto el archivo es .css.liquid: el src TIENE que salir del mismo
+   filtro asset_url que el preload de theme.liquid. Con ruta relativa el
+   navegador resolvía la URL SIN el ?v=… del CDN, distinta a la del preload, y
+   descargaba la fuente DOS VECES (medido: 2 × 48 KB, ambas 200). Mismo filtro
+   = misma URL = un solo request y un preload que sí sirve.
+---------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Inter';
+  src: url('{{ "inter-variable.woff2" | asset_url }}') format('woff2');
+  font-weight: 100 900; /* rango del eje wght — NO cuatro declaraciones */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ----------------------------------------------------------------------------
+   Variables propias de esta capa.
+
+   Existen porque el tema tiene un esquema de color OSCURO (color-scheme--2:
+   fondo morado #671D90, tinta crema) que se usa en la home, en la landing B2B,
+   en FrutiMenu y en dos plantillas de colección. Pintar foco y enlaces de
+   morado fijo los deja morado-sobre-morado: 1:1, invisibles. Con una variable,
+   cada esquema dice de qué color se ve.
+---------------------------------------------------------------------------- */
+:root {
+  --fru-focus: var(--color-primary);
+  --fru-link: var(--color-primary);
+}
+
+.color-scheme--2 {
+  --fru-focus: var(--fru-blanco);
+  --fru-link: currentColor;
+}
+
+/* ----------------------------------------------------------------------------
+   (b) D-1 · Tipografía pública única — Georgia (títulos) + Inter (texto)
+
+   Canopy embudea TODA la tipografía por tres custom properties (verificado:
+   sólo 3 usos de --heading-font-family y 4 de --body-font-family en main.css).
+   Se pisan las tres y con eso cambia el tema entero, sin pelear selector a
+   selector y sin !important:
+     --heading-font-family    -> .h0…h6, .h1…h6, .font-heading, .subheading
+     --body-font-family       -> body, .font-body
+     --navigation-font-family -> .main-menu
+   La navegación se queda en Inter a propósito: a 14–15 px la serif pierde
+   legibilidad y el menú es lo que más se escanea.
+---------------------------------------------------------------------------- */
+:root {
+  --heading-font-family: var(--font-display);
+  --body-font-family: var(--font-body);
+  --navigation-font-family: var(--font-body);
+}
+
+/* Georgia es más ancha y más suelta que Montserrat: a tamaño de titular
+   necesita cerrar el tracking para no verse desarmada. En cuerpo NO se toca. */
+.h0,
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6,
+.font-heading {
+  letter-spacing: -0.01em;
+}
+
+/* Títulos de tarjeta y de navegación: Inter, no Georgia.
+   .card__title es un párrafo (no un h-tag), así que ya hereda del body — la
+   regla queda explícita a propósito, para que un futuro cambio a .h5 no lo
+   mueva sin que nadie se dé cuenta. Texto chico y repetido: manda legibilidad. */
+.card__title,
+.card__title-text,
+.main-menu,
+.main-nav__item,
+.mega-menu__heading,
+.grandchild-nav__item {
+  font-family: var(--font-body);
+  letter-spacing: normal;
+}
+
+/* ----------------------------------------------------------------------------
+   (c) D-10 · Botón primario sólido
+
+   ⚠️ TRAMPA DE CANOPY, no obvia: .btn--primary NO usa background-color. Usa
+   un degradado de 300% de ancho que se DESLIZA en el hover. En reposo se ve el
+   tramo de --btn-bg-color; en hover entra en diagonal --btn-bg-hover-color.
+   Consecuencias:
+   1. Pisar `background` mataría la animación. Se pisan SÓLO las dos variables.
+   2. getComputedStyle(btn).backgroundColor devuelve el color de HOVER (es la
+      capa base), NO lo que se ve en reposo. Para verificar hay que leer
+      --btn-bg-color o mirar píxeles. Vale para cualquier QA futuro.
+
+   Se declaran sobre el propio botón, no en :root: las custom properties se
+   resuelven por PROXIMIDAD en el árbol, y cada sección vive dentro de un
+   .color-scheme--N que redefine --btn-bg-color. Puesta en el elemento, gana
+   siempre — ni !important en :root lo lograría.
+
+   El grupo replica el de main.css COMPLETO, incluido el botón de pago
+   acelerado: si se deja fuera, la ficha muestra "Agregar" en verde y justo
+   debajo el botón de pago en la menta vieja (2,54:1). */
+.btn--primary,
+.spr-button-primary,
+.shopify-payment-button .shopify-payment-button__button--unbranded,
+.shopify-challenge__button {
+  --btn-bg-color: 23 132 90; /* --fru-verde-800 #17845A · 4,68:1 con blanco */
+  --btn-bg-hover-color: 19 110 75; /* --fru-verde-900 #136E4B · 6,25:1 */
+  --btn-text-color: 255 255 255;
+}
+
+/* EXCEPCIÓN color-scheme--2 (banda morada): ahí el botón está diseñado BLANCO
+   con tinta #333. Blanco sobre morado da 9,74:1; el verde daría 2,08:1 y el
+   botón casi desaparecería contra la banda (reprueba WCAG 1.4.11). No es un
+   color fuera de canon: es el contraste correcto para ese fondo. */
+.color-scheme--2 .btn--primary,
+.color-scheme--2 .spr-button-primary,
+.color-scheme--2 .shopify-challenge__button {
+  --btn-bg-color: 255 255 255;
+  --btn-bg-hover-color: 233 220 242; /* --on-primary-soft #E9DCF2 */
+  --btn-text-color: 51 51 51;
+}
+
+/* Radio pastilla en los botones de ACCIÓN (--btn-border-radius del editor es
+   4 px). NO se toca la variable --btn-border-radius: main.css la mete en
+   `calc((--input-border-radius + --btn-border-radius) * -1)` para solapar el
+   input con su botón, y con 9999px ese margen se va a -10.003 px y revienta el
+   buscador y el newsletter. Se pinta el radio directo y se excluye a mano lo
+   que no debe ser pastilla. */
+.btn--primary:not(.slider-nav__btn),
+.btn--secondary:not(.slider-nav__btn),
+.spr-button-primary,
+.shopify-challenge__button {
+  border-radius: var(--radius-pill);
+}
+
+/* …y se devuelve el radio compuesto a los botones pegados a un input (buscador,
+   newsletter): ahí Canopy cuadra el lado que toca el campo, y mi atajo
+   `border-radius` pisaba las cuatro esquinas. Va DESPUÉS a propósito. */
+.input-with-button > .btn--primary,
+.input-with-button > .btn--secondary {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  border-start-end-radius: var(--btn-border-radius, 0);
+  border-end-end-radius: var(--btn-border-radius, 0);
+}
+
+/* Foco visible propio. Canopy deja el anillo por defecto del navegador
+   (`outline: auto`), que en Chrome es azul sistema y no se parece a la marca;
+   y .btn--primary se pinta su outline verde, que sobre el propio botón verde
+   casi no se ve. */
+:focus-visible,
+.focus-label:focus-visible + label,
+.focus-label-before:focus-visible + label::before {
+  outline: 2px solid var(--fru-focus);
+  outline-offset: 2px;
+}
+
+.btn--primary:focus-visible,
+.spr-button-primary:focus-visible,
+.shopify-challenge__button:focus-visible {
+  outline: 2px solid var(--fru-focus);
+  outline-offset: 3px;
+}
+
+/* Los campos de formulario necesitan regla propia: main.css trae
+   `.input:focus { outline: 0 }` con especificidad (0,2,0), que le gana a un
+   `:focus-visible` pelado (0,1,0). Sin esto, buscador, newsletter, login y
+   direcciones se quedaban sin anillo — la mitad de los controles del sitio. */
+.input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.custom-select__btn:focus-visible {
+  outline: 2px solid var(--fru-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* ----------------------------------------------------------------------------
+   (d) Tarjetas y paneles — radio, sombra y borde de tokens
+
+   Deliberadamente contenido: WUX-3 dejó la tarjeta de producto "limpia" y
+   ponerle borde a cada una la vuelve a llenar de ruido. Así que la tarjeta sólo
+   gana esquinas suaves y un levante sutil al hover (§7.B punto 6).
+---------------------------------------------------------------------------- */
+
+/* :not(--circle) es obligatorio: el ajuste `coll_card_image_ratio` está en
+   `circle`, y main.css redondea esas tarjetas al 50% con la misma
+   especificidad (0,1,0) que esta regla. Como este archivo carga después,
+   sin la exclusión los círculos de categoría de la home se volvían cuadrados. */
+.card__media:not(.card__media--circle) {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.card--product {
+  transition: transform var(--dur-micro) var(--ease-out),
+              box-shadow var(--dur-micro) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .card--product:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* Se respeta a quien pidió menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  .card--product {
+    transition: none;
+  }
+  .card--product:hover {
+    transform: none;
+  }
+}
+
+/* Campos de formulario: esquina suave. --input-border-radius NO se toca por la
+   misma cuenta de solape del bloque (c). */
+.input,
+.select,
+select,
+textarea,
+input[type='text'],
+input[type='email'],
+input[type='search'],
+input[type='tel'],
+input[type='number'],
+input[type='password'] {
+  border-radius: var(--radius-sm);
+}
+
+/* ----------------------------------------------------------------------------
+   (e) Enlaces de contenido — morado, subrayado al pasar
+
+   Sólo dentro de .rte (texto editorial). Fuera de ahí Canopy usa enlaces para
+   tarjetas enteras, ítems de menú y botones: pintarlos todos de morado y
+   subrayarlos rompería el header y la grilla.
+   El color va por --fru-link para que en la banda morada herede la tinta crema
+   en vez de quedar morado sobre morado.
+---------------------------------------------------------------------------- */
+.rte a:not(.btn) {
+  color: var(--fru-link);
+  text-decoration: none;
+  text-underline-offset: 0.15em;
+}
+
+.rte a:not(.btn):hover,
+.rte a:not(.btn):focus-visible {
+  text-decoration: underline;
+}
+
+/* El footer es tinta oscura (#1a1a1a): ahí el morado tampoco se lee. */
+.footer .rte a:not(.btn) {
+  color: currentColor;
+}
+
+/* ----------------------------------------------------------------------------
+   (f) Footer · columna "Frutiferia para…"
+
+   Canopy sólo tiene 3 tipos de bloque de footer y el de lista de enlaces
+   (link_list) exige un MENÚ del admin — no se puede definir desde el repo.
+   Para no dejar el footer dependiendo de un menú creado a mano, la columna de
+   las 4 superficies va como bloque `text` con su propia lista, y aquí se le da
+   el aspecto de las columnas de enlaces.
+   Diferencia real que queda: en móvil las columnas link_list colapsan en
+   acordeón y ésta no. Se deja abierta a propósito — son los 4 accesos que más
+   queremos visibles, y un acordeón cerrado los esconde.
+
+   ⚠️ Se selecciona por ESTRUCTURA (la lista), no por clase. El validador de
+   richtext de Shopify RECHAZA el upload entero si el HTML del setting trae
+   cualquier atributo que no sea href: probado, un class= en un párrafo tumba
+   el archivo con «No se permite el atributo». Es la misma familia del hallazgo
+   de WUX-3 con style=, pero más amplia: NO son sólo los estilos inline, es
+   cualquier atributo.
+---------------------------------------------------------------------------- */
+.footer .footer-col--text .footer-block__text ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer .footer-col--text .footer-block__text ul > li {
+  margin-bottom: 1.2rem;
+}
+
+/* `list-style: none` NO basta: main.css dibuja la viñeta con
+   `.rte ul li::before`, un círculo de 0.5em con background-color. Es un
+   pseudo-elemento, no un marker, así que hay que apagarlo aparte o la columna
+   sale con puntos y las demás no. */
+.footer .footer-col--text .footer-block__text ul > li::before {
+  display: none;
+}
+
+.footer .footer-col--text .footer-block__text ul > li:last-child {
+  margin-bottom: 1rem;
+}
+
+/* Mismos valores que `.footer .footer-col--links a` de footer.css para que las
+   dos clases de columna subrayen igual al pasar el mouse. */
+.footer .footer-col--text .footer-block__text ul a {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2.5px;
+  transition: text-decoration-color var(--dur-micro) var(--ease-out);
+}
+
+.footer .footer-col--text .footer-block__text ul a:hover,
+.footer .footer-col--text .footer-block__text ul a:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+/* Sin esto la columna hereda el ancho del bloque de marca (flex 1 1 350px,
+   max 460px) y una lista de 4 enlaces ocupa lo mismo que el texto de la
+   empresa. Hay que ganarle a `body:not(.cart-drawer-docked) .footer-col--text
+   :not(.footer-col--text-full-width)` de footer.css, que es (0,3,1) y carga
+   después: por eso se agrega .footer__main y queda (0,4,1). */
+@media (min-width: 1024px) {
+  body:not(.cart-drawer-docked) .footer__main .footer-col--text:has(.footer-block__text ul) {
+    flex: 0 1 auto;
+    min-width: 130px;
+    max-width: 25%;
+  }
+}
+
+/* Bloque de contacto: el 2º párrafo de la columna de marca. */
+.footer .footer-col--text .footer-block__text p + p {
+  margin-top: 1em;
+  line-height: 1.7;
+}
+
+.footer .footer-col--text .footer-block__text p + p a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
