@@ -68,8 +68,8 @@ mismo: WUX-1, WUX-3 y WUX-5**. Cuando una termine, corre la siguiente de su carr
 
 | Carril | Sprint | Modelo | Qué hace | Repos / archivos que TOCA | Estado |
 |---|---|---|---|---|---|
-| 🟣 A · Llegar al producto | **WUX-1** Home "ruta corta" | Opus | Nueva sección de **6 tiles de categoría con foto**, selector de público en 1 fila, hero compacto, reorden de la home (D-6). Métrica: tiles visibles sin scroll en escritorio; primer producto ≤ 1.600 px en móvil. | tema: `templates/index.json`, `sections/fru-hero.liquid`, `sections/audience-doors.liquid`, **nuevos** `sections/fru-category-tiles.liquid` + `assets/fru-category-tiles.css` | ⬜ |
-| 🟣 A | **WUX-2** Header de 1 fila + mega menú + menú de 5 | Sonnet | Header ≤ 120 px, logo SVG 2026, tira "¿Primer pedido?" fuera, barra superior con copy unido, **mega menú "Comprar" con fotos** (bloque `columns` de Canopy), menú de 5 en el admin (Claude por navegador). | tema: `sections/header-group.json`, `sections/header.liquid`, `sections/free-shipping-bar.liquid`, **nuevo** `assets/frutiferia-logo.svg`; admin Shopify → Navegación | ⬜ (tras WUX-1) |
+| 🟣 A · Llegar al producto | **WUX-1** Home "ruta corta" | Opus | Nueva sección de **6 tiles de categoría con foto**, selector de público en 1 fila, hero compacto, reorden de la home (D-6). Métrica: tiles visibles sin scroll en escritorio; primer producto ≤ 1.600 px en móvil. | tema: `templates/index.json`, `sections/fru-hero.liquid`, `sections/audience-doors.liquid`, **nuevos** `sections/fru-category-tiles.liquid` + `assets/fru-category-tiles.css` | ✅ (2026-08-17, en vivo) · escritorio 849 px ✓; móvil 929 px → **749 px cuando WUX-2 borre la tira de 180 px** |
+| 🟣 A | **WUX-2** Header de 1 fila + mega menú + menú de 5 | Sonnet | Header ≤ 120 px, logo SVG 2026, tira "¿Primer pedido?" fuera, barra superior con copy unido, **mega menú "Comprar" con fotos** (bloque `columns` de Canopy), menú de 5 en el admin (Claude por navegador). | tema: `sections/header-group.json`, `sections/header.liquid`, `sections/free-shipping-bar.liquid`, **nuevo** `assets/frutiferia-logo.svg`; admin Shopify → Navegación | ⬜ **listo para correr** (WUX-1 ✅). ⚠️ Ahora también carga las 2 metas de MÓVIL: borrar la tira `promo_strip_QLcH46` (180 px en móvil) baja el primer tile a 749 px y el primer producto a 1.481 px. Ver §7.E. |
 | 🟢 B · Comprar rápido | **WUX-3** Colección, ficha y carrito de compra rápida | Sonnet | Grilla arriba (banner sin foto, promo-tile fuera, descripción abajo), tarjeta limpia (sin "Frutiferia SPA" ni "1.0 kg", quick-add sólido), ficha sin "Comprar ahora" (D-9) + desvío B2B de 1 línea, drawer con link a carrito, popup a exit-intent (D-5), `/collections` como landing "Comprar". | tema: `templates/collection.json`, `templates/product.json`, `templates/cart.json`, `templates/list-collections.json`, `sections/overlay-group.json`, `snippets/product-card.liquid` (+ su css), `sections/main-collection-banner.liquid` sólo si hace falta | ⬜ |
 | 🟢 B | **WUX-4** Capa de marca del tema | Opus | `fru-brand.css` cargado DESPUÉS de `main.css`: Georgia+Inter (D-1) self-hosted, botón primario `#17845A` (D-10), radios/sombras/focus de tokens, footer con las 4 superficies + WhatsApp por canal, `es.json` a tuteo ("Tu carrito", "Agregar"), token `--fru-verde-800`. | tema: **nuevo** `assets/fru-brand.css`, `assets/inter-*.woff2`, `layout/theme.liquid`, `assets/tokens-frutiferia.css`, `sections/footer-group.json`, `locales/es.json` | ⬜ (tras WUX-3) |
 | 🔵 C · Satélites + OS | **WUX-5** Satélites alineados | Sonnet | Cotizador, Wellness y Menú con el mismo logo SVG, D-10, D-11, header/footer con cross-links a las 4 superficies, wellness con móvil, charts del menú con tokens del OS. | `frutiferia-cotizador`, `frutiferia-wellness`, `mi-menu-semanal` (3 repos, Vercel + Lovable) | ⬜ |
@@ -492,6 +492,7 @@ el archivo probable. Actualiza §3/§6 del plan (una línea) y cierra con "Lo qu
 |---|---|---|---|
 | 2026-08-16 | Fable 5 (plan) | Auditoría en vivo (medidas de scroll/header/dock), inventario del tema (Canopy 7.2.2), matriz de consistencia de las 5 superficies, brief de referentes, plan WUX-1..7 con prompts. Sin código. | `e7ca051` |
 | 2026-08-17 | Fable 5 | **G-1 cerrado sin gate humano:** `dock_cart_drawer` → `false`. Descubrimiento que cambia el plan: **`config/settings_data.json` SÍ se despliega por git push** (§7.D) — el gate manual del editor no era necesario. Verificado en vivo: `main` 1.080→1.440 px, colección 4→5 columnas, drawer flotante con overlay + scroll-lock OK, 0 desborde horizontal, 9 rutas en 200. | `77dc0e7` |
+| 2026-08-17 | Opus 5 (**WUX-1**) | Sección nueva `fru-category-tiles` (6 tiles con foto, contador y salida al catálogo), ajuste `layout: strip` en `audience-doors` (3 pastillas en 1 fila, 70/82 px) y checkbox `compact` en `fru-hero` (384 px escritorio / foto móvil 170 px). Home reordenada (D-6); `collection-list` queda `disabled` justo detrás de los tiles (rollback de 2 toggles). Medido con getBoundingClientRect — **escritorio 1440×900: primer tile 849 px (meta ≤850 ✓), primer producto 1.496 px · móvil 375×812: primer tile 929 px, primer producto 1.661 px**. `theme check` sin offenses nuevas (48/33/10 errores, idénticas a la base: los 10 son `LiquidHTMLSyntaxError` de archivos Canopy de stock). Verificado en vivo en frutiferia.com. **3 hallazgos**: (a) `section.id` dentro de una plantilla NO es la llave del JSON sino `template--<n>__<key>` con un número que Shopify regenera → cualquier ancla a `#<key>` nace muerta; se resolvió con un ajuste `anchor_id` propio (`#tiles`). (b) Fijar el `min-height` del grid del hero no lo encoge: con `height:auto` manda la FOTO, que se dibuja a su proporción natural (400 px). (c) El texto sobre la foto con degradado morado pasaba AA pero teñía la comida — se movió a placa blanca (ver §7.E). | `28f8b42`, `06123df`, `1dc1ad9` |
 
 ---
 
@@ -595,6 +596,43 @@ Lo que sí sigue siendo cierto y hay que respetar:
 **Corolario para el plan:** varios "gates de Eduardo" heredados de planes anteriores
 (pase de colores, tarjetas de producto, tipografía del editor) probablemente tampoco lo son.
 Antes de escribir "esto lo hace Eduardo a mano", **intenta el push y verifica con curl**.
+
+### 7.E 📏 Presupuesto de píxeles de la home (medido 2026-08-17, tras WUX-1)
+
+Lo que ocupa cada cosa antes del primer producto. Sirve para saber a quién cobrarle
+los píxeles que falten, en vez de adivinar.
+
+| Bloque | Escritorio 1440×900 | Móvil 375×812 | Dueño |
+|---|---|---|---|
+| Barra de despacho | 40 px | 34 px | WUX-2 |
+| Header | 191 px | 115 px | WUX-2 (meta ≤120/110) |
+| **Tira "¿Primer pedido?"** | **75 px** | **180 px** | **WUX-2 (se borra, D-5)** |
+| Hero compacto | 384 px | 458 px | WUX-1 ✅ |
+| Tira de público | 70 px | 82 px | WUX-1 ✅ |
+| Título "¿Qué necesitas hoy?" | 89 px | 60 px | WUX-1 ✅ |
+| **→ primer tile** | **849 px** (meta ≤850 ✓) | **929 px** (meta ≤750) | |
+| Grilla de tiles + "ver todo" | 542 px (2 filas) | 732 px (3 filas) | WUX-1 ✅ |
+| **→ primer producto** | **1.496 px** | **1.661 px** (meta ≤1.600) | |
+
+**Las dos metas de móvil las cierra WUX-2, no WUX-1.** La tira "¿Primer pedido?" pesa
+180 px de los 329 px de chrome móvil. Descontándola: primer tile **749 px** (meta ≤750 ✓)
+y primer producto **1.481 px** (meta ≤1.600 ✓). El hero ya se recortó todo lo que se podía
+sin romper los targets táctiles (CTA 48 px, enlace 44 px). Si tras WUX-2 la medida no da,
+el siguiente recorte disponible es el alto del tile móvil (172 → 150 px, −66 px).
+
+### 7.F 🍎 El texto NO va encima de la foto de comida
+
+WUX-1 construyó primero los tiles con el texto sobre la foto y un degradado morado de
+scrim. **Pasaba AA con holgura** (blanco sobre el peor fondo posible daba 6,95:1) y aun
+así estaba mal: el morado teñía la frutilla, el repollo y los frutos secos. Es el mismo
+error del carrusel de junio 2026 y contradice la dirección de marca — *"el morado va en
+tipografía, líneas y pastillas; no fondos morados grandes"* (§7.B, punto 1).
+
+**Regla para WUX-3/4/5 y para cualquier pieza futura:** sobre foto de comida no va scrim
+morado. El texto va en placa blanca (o fuera de la foto) y el morado se queda en la
+tipografía. Beneficio lateral que vale por sí solo: el contraste deja de depender de qué
+foto suba Eduardo. Título `#671D90` sobre blanco = 9,74:1; contador `#6E6E6E` = 5,10:1,
+pase lo que pase con la imagen de la colección.
 
 ---
 
