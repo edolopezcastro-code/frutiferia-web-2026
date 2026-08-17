@@ -144,7 +144,7 @@
     "show_delivery_picker": true,
     "cart_icon": "cart",
     "cart_type": "drawer",
-    "dock_cart_drawer": true,
+    "dock_cart_drawer": false,
     "after_add_to_cart": "drawer",
     "cart_show_weight": true,
     "cart_show_savings": true,
