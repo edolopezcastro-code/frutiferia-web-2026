@@ -20,7 +20,7 @@ con Frutiferia-OS; plan acotado y con sprints en paralelo".
 | Síntoma | Dato duro |
 |---|---|
 | Los productos están lejos | Móvil 375×812: primer producto a **3.169 px** de scroll (~4 pantallas); primeras categorías a **3.747 px**. Escritorio 1440×900: en `/collections/frutas-deliciosas` el primer producto parte en **y = 1.076 px** (bajo el pliegue). |
-| El escritorio se ve apretado | El carrito "dockeado" (`dock_cart_drawer: true`) ocupa el **25 % del ancho en TODAS las páginas** (contenido útil 1.080 px de 1.440). |
+| ~~El escritorio se ve apretado~~ **✅ RESUELTO 2026-08-17** | El carrito "dockeado" ocupaba el **25 % del ancho en TODAS las páginas** (contenido útil 1.080 px de 1.440). `dock_cart_drawer: false` pusheado (`77dc0e7`) y **verificado en vivo**: `main` 1.080 → **1.440 px**, la grilla de colección pasó de 4 a 5 columnas, el drawer abre como panel flotante con overlay. |
 | Demasiado chrome | Barra despacho 40 px + header **191 px** + tira "¿Primer pedido?" 75 px = **306 px** antes del contenido (en móvil la tira mide 180 px). |
 | Nadie sabe dónde está la tienda | 9 ítems de menú + botón. La entrada a productos se llama **"Vitrinea"**. "Por Mayor" duplica el catálogo B2B en Shopify compitiendo con el cotizador. |
 | El cupón grita 5 veces | PRIMERA15 en barra, tira, pill del hero, popup a los 10 s (encima del hero) y newsletter. |
@@ -43,7 +43,7 @@ Si no dices nada, se ejecuta la columna "Default". Cada prompt las lee de aquí.
 |---|---|---|---|---|
 | D-1 | **Tipografía pública única** | **Georgia (títulos) + Inter (texto)** en las 4 superficies. En la tienda se aplica por CSS (`fru-brand.css`, sin tocar el editor). | Mantener Montserrat en la tienda y llevar los satélites a Montserrat. | 3 de 4 superficies ya viven en Georgia+Inter (cotizador, menú, wellness); es el canon de `frutiferia-style` y lo que hace que `menu.frutiferia.com` se vea premium. ⚠️ Revierte tu decisión de junio ("se queda Montserrat"), que fue anterior a que los satélites tomaran este sistema. |
 | D-2 | **Menú de 5 entradas** | **Comprar ▾** (mega menú con fotos) · **Arma tu menú** · **Negocios** · **Oficinas** · **Recetas**. "Vitrinea", "Conócenos", "Blog" salen del header (van a footer / mega menú). | Mantener 9 ítems. | Un solo verbo para B2C ("Comprar") y una puerta por público. |
-| D-3 | **Carrito des-dockeado** | Drawer flotante normal (lo cambia Eduardo en el editor, 2 min). | Dejarlo dockeado. | Recupera el 25 % del ancho en escritorio. |
+| D-3 | ~~**Carrito des-dockeado**~~ **✅ HECHO 2026-08-17 (`77dc0e7`)** | Drawer flotante normal. **NO era gate humano**: `config/settings_data.json` SÍ se despliega por git push (ver §7.D). | — | Recuperó el 25 % del ancho en escritorio. |
 | D-4 | **"Por Mayor" en Shopify** | Sale del header. Vive en la landing Negocios como "Catálogo mayorista (referencia)" + en el mega menú de Negocios. **No se borra nada.** El camino B2B es el cotizador (OS). | Mantener "Por Mayor" en el header. | Dos caminos B2B confunden y sólo uno llega al OS. |
 | D-5 | **Cupón PRIMERA15** | Se queda en: pill del hero + barra superior (copy unido: "Despacho gratis sobre $50.000 · 15 % en tu 1er pedido con PRIMERA15") + newsletter del footer. La **tira "¿Primer pedido?" se elimina** y el **popup pasa a exit-intent** (ya no salta a los 10 s sobre el hero). | Mantener tira y popup por tiempo. | 5 menciones → 3; el popup por tiempo tapaba el hero. |
 | D-6 | **Orden de la home** | Hero compacto → **selector "Compro para: mi casa · mi negocio · mi equipo"** (tira de 1 fila) → **6 tiles de categoría con foto** → Ofertas de la semana (quick-add) → FrutiMenu → confianza → testimonios → banda Negocios → 7 años → recetas → newsletter. | Orden actual. | Producto visible en la 1ª pantalla de escritorio y ≤ 2 pantallas en móvil. |
@@ -269,8 +269,10 @@ Tareas:
 6. `templates/cart.json`: nada estructural; sólo verifica que `frutimenu_cta_cart` y
    `upsell_ofertas` sigan y que el delivery-picker se renderice (setting `show_delivery_picker`
    está true).
-7. Gate para Eduardo (D-3): `dock_cart_drawer` vive en config/settings_data.json (editor-owned,
-   NO sincroniza por git). Anótalo en "Lo que tienes que hacer tú" con la ruta exacta del editor.
+7. (D-3 ya está hecho: el carrito se des-ancló el 2026-08-17 en `77dc0e7`. NO lo pidas como gate
+   y NO toques `config/settings_data.json` — si necesitas cambiar un ajuste ahí, lee §7.D primero.)
+   Sí conviene que revises si con el ancho nuevo (1.440 px, 5 columnas de 184 px) las tarjetas
+   quedaron chicas: `card_size` "medium" en escritorio es parte de tu tarea 1.
 
 Verificación: `shopify theme check` 0 errores; `theme dev` + curl 200 en /collections/frutas-
 deliciosas, /products/platanos, /cart, /collections; Browser pane: mide `top` del primer
@@ -473,7 +475,7 @@ el archivo probable. Actualiza §3/§6 del plan (una línea) y cierra con "Lo qu
 
 | # | Paso | Tiempo | Por qué importa | Cuándo |
 |---|---|---|---|---|
-| G-1 | **Des-dockear el carrito** en el editor: Tienda online → Temas → `frutiferia-web-2026/main` → Personalizar → Configuración del tema → Carrito → desmarcar "anclar/dock cart drawer" → Guardar. | 2 min | Devuelve el 25 % del ancho en TODAS las páginas de escritorio. Es lo más barato y visible del plan. | **Hoy**, no depende de nada. |
+| ~~G-1~~ | ~~Des-dockear el carrito en el editor~~ **✅ HECHO por Claude el 2026-08-17** (commit `77dc0e7`, verificado en vivo). No requiere nada de Eduardo. | — | Devolvió el 25 % del ancho en escritorio. | ✅ |
 | G-2 | Leer §2 y vetar lo que no te guste (D-1 tipografía, D-4 Por Mayor, D-7 logo sin .com, D-9 Comprar ahora). | 5 min | Sin veto, se ejecuta el default. | Antes de abrir WUX-1/3/5. |
 | G-3 | Menú de navegación: **sólo si Claude no logra editarlo por el navegador en WUX-2**, cargar la lista exacta del prompt WUX-2 en Contenido → Navegación → "Menú Frutiferia". | 10 min | Es lo que hace visible el "Comprar" y el mega menú. | Cuando WUX-2 lo pida. |
 | G-4 | Publish en Lovable (menú semanal) tras WUX-5. | 1 min | En ese repo push ≠ deploy. | Tras WUX-5. |
@@ -488,7 +490,8 @@ el archivo probable. Actualiza §3/§6 del plan (una línea) y cierra con "Lo qu
 
 | Fecha | Sesión | Qué quedó | Commits |
 |---|---|---|---|
-| 2026-08-16 | Fable 5 (plan) | Auditoría en vivo (medidas de scroll/header/dock), inventario del tema (Canopy 7.2.2), matriz de consistencia de las 5 superficies, brief de referentes, plan WUX-1..7 con prompts. Sin código. | — |
+| 2026-08-16 | Fable 5 (plan) | Auditoría en vivo (medidas de scroll/header/dock), inventario del tema (Canopy 7.2.2), matriz de consistencia de las 5 superficies, brief de referentes, plan WUX-1..7 con prompts. Sin código. | `e7ca051` |
+| 2026-08-17 | Fable 5 | **G-1 cerrado sin gate humano:** `dock_cart_drawer` → `false`. Descubrimiento que cambia el plan: **`config/settings_data.json` SÍ se despliega por git push** (§7.D) — el gate manual del editor no era necesario. Verificado en vivo: `main` 1.080→1.440 px, colección 4→5 columnas, drawer flotante con overlay + scroll-lock OK, 0 desborde horizontal, 9 rutas en 200. | `77dc0e7` |
 
 ---
 
@@ -569,6 +572,30 @@ resultado se pega aquí tal cual, con URLs.)_
 
 Gaps completos y file:line en la sesión de origen (memoria `project_web_ux_2026_08`).
 
+### 7.D 🔑 `config/settings_data.json` SÍ se despliega por git push (verificado 2026-08-17)
+
+La creencia heredada era: *"`settings_data.json` es editor-owned y NO sincroniza por git push;
+todo ajuste de tema es gate manual de Eduardo"* (venía de FRUTI3-7, donde un push de colores no
+se aplicó). **Es falsa como regla general.** Prueba de esta sesión: se cambió UNA línea
+(`current.dock_cart_drawer` true→false), `git push origin main` a las 11:00:29Z, y **en menos de
+20 s** el HTML de `https://frutiferia.com` ya no traía la clase `cart-drawer-docked`.
+
+Lo que sí sigue siendo cierto y hay que respetar:
+- **El Theme Editor NO es automatizable** (panel de settings en skeleton permanente). Eso no
+  cambió; lo que cambia es que **no hace falta el editor**: se edita el JSON y se pushea.
+- **El editor escribe de vuelta al repo** (commits "Update from Shopify for theme
+  frutiferia-web-2026/main"). ⇒ **`git pull --rebase` SIEMPRE antes de tocar el archivo**, o
+  revertirás ajustes que Eduardo hizo a mano.
+- Editar **sólo la clave dentro de `current`**. Las mismas claves aparecen en `presets`
+  (`Canopy`/`Cedar`/`Willow`): tocarlas no hace nada y ensucia el diff.
+- **No reformatear el archivo** (nada de round-trip con `json.dumps`): editar la línea exacta y
+  conservar el comentario `/* … */` de la cabecera. Diff de una línea = reversible con `git revert`.
+- Verificar SIEMPRE en el HTML público con `curl` (no en el preview del editor).
+
+**Corolario para el plan:** varios "gates de Eduardo" heredados de planes anteriores
+(pase de colores, tarjetas de producto, tipografía del editor) probablemente tampoco lo son.
+Antes de escribir "esto lo hace Eduardo a mano", **intenta el push y verifica con curl**.
+
 ---
 
 ## 8. Línea base y medición (la llena WUX-6)
@@ -577,7 +604,9 @@ Gaps completos y file:line en la sesión de origen (memoria `project_web_ux_2026
 |---|---|---|
 | Móvil: y del primer producto en home | 3.169 px (2026-08-16) | |
 | Móvil: y de la primera categoría | 3.747 px (2026-08-16) | |
-| Escritorio: y del primer producto en colección | 1.076 px (2026-08-16) | |
+| Escritorio: y del primer producto en colección | 1.076 px (2026-08-16) | 1.028 px (2026-08-17, tras des-anclar) |
+| Escritorio: ancho útil de contenido | 1.080 px de 1.440 (2026-08-16) | **1.440 px** ✅ (2026-08-17) |
+| Escritorio: columnas y ancho de tarjeta en colección | 4 × 224 px | 5 × 184 px ⚠️ *revisar en WUX-3: `card_size` medium* |
 | Header (escritorio / móvil) | 191 / 115 px | |
 | Shopify Analytics: conversión · % ATC · % checkout · ticket | | |
 | `get_web3_funnel_metrics(30)`: leads web por canal · cotizaciones portal · reorder | | |
