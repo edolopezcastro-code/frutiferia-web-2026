@@ -62,6 +62,18 @@
     --shake-delay: 4s;
   {% endif %}
   }
+
+  .header__logo-svg svg {
+    display: block;
+    height: 38px;
+    width: auto;
+  }
+
+  @media (max-width: 768.98px) {
+    .header__logo-svg svg {
+      height: 30px;
+    }
+  }
 {%- endstyle -%}
 
 <store-header class="header bg-theme-bg text-theme-text{% if section.settings.enable_sticky or search_is_minimised %} has-motion{% endif %}{% if search_is_minimised %} search-is-collapsed{% endif %}"
@@ -75,7 +87,17 @@
         <h1 class="logo__h1 m-0">
       {%- endif -%}
         <a class="logo__link inline-block" href="{{ routes.root_url }}">
-          {%- if section.settings.logo != blank -%}
+          {%- if section.settings.use_svg_logo -%}
+            {%- comment -%} WUX-2 / D-7: logo 2026 (isotipo + wordmark), un solo SVG compartido con cotizador/wellness/menú. {%- endcomment -%}
+            <span class="header__logo-svg flex items-center">
+              {%- assign svg_logo_inline = 'frutiferia-logo.svg' | inline_asset_content -%}
+              {%- if svg_logo_inline != blank -%}
+                {{ svg_logo_inline }}
+              {%- else -%}
+                <img src="{{ 'frutiferia-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="178" height="38" loading="eager">
+              {%- endif -%}
+            </span>
+          {%- elsif section.settings.logo != blank -%}
             {%- liquid
               assign logo_width = section.settings.logo_width
               if section.settings.logo.width < logo_width
@@ -772,6 +794,13 @@
     {
       "type": "header",
       "content": "Logo"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_svg_logo",
+      "label": "Usar el logo SVG 2026 (isotipo + wordmark)",
+      "info": "assets/frutiferia-logo.svg, morado #671D90. Es el mismo archivo que cotizador, wellness y menú. Si lo apagas, se usa la imagen de abajo.",
+      "default": true
     },
     {
       "type": "text",

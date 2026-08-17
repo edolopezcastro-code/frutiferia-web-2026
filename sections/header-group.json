@@ -31,6 +31,7 @@
         "mobile_menu_position": "burger-left",
         "enable_sticky": true,
         "hide_menu": true,
+        "use_svg_logo": true,
         "logo_text": "",
         "logo_text_font": "nunito_sans_n7",
         "logo_type_scale": "1.5",
