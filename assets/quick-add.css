@@ -8,6 +8,22 @@
   flex-shrink: 0;
   padding: calc(2 * var(--space-unit));
 }
+
+/* D-10 (WUX-3): quick-add sólido verde institucional. --fru-verde-800 (#17845A) aún no
+   existe en tokens-frutiferia.css -- lo agrega WUX-4 -- así que va literal por ahora. */
+.card__quick-add .btn--atc {
+  --btn-bg-color: 23, 132, 90;
+  --btn-bg-hover-color: 36, 143, 87;
+  --btn-text-color: 255, 255, 255;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+}
+
+.product-card__price {
+  font-variant-numeric: tabular-nums;
+}
 .card:focus-within .card__quick-add {
   opacity: 1;
   pointer-events: initial;

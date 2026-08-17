@@ -14,13 +14,13 @@
       "settings": {
         "show_collection_title": true,
         "show_product_count": true,
-        "show_collection_description": true,
+        "show_collection_description": false,
         "collection_title_size": "h1",
         "text_width": "wide",
         "text_align": "text-center",
         "text_position": "justify-center items-center",
-        "show_image": true,
-        "use_product_image": true,
+        "show_image": false,
+        "use_product_image": false,
         "collection_image": "fill",
         "color_scheme": "default"
       }
@@ -42,37 +42,13 @@
     },
     "collection-products": {
       "type": "main-collection-products",
-      "blocks": {
-        "image_promotion_kqxbRA": {
-          "type": "image-promotion",
-          "settings": {
-            "position": 1,
-            "view": "grid_list",
-            "hide_on_filter": true,
-            "min_height": 150,
-            "link_url": "",
-            "content": "<h6>Ofertas especiales</h6>",
-            "text_type_scale": "1em",
-            "text_width": 400,
-            "text_alignment": "justify-center items-center text-center",
-            "button_label": "",
-            "button_style": "link",
-            "text_color": "#ffffff",
-            "tint_color": "#000000",
-            "tint_opacity": 20
-          }
-        }
-      },
-      "block_order": [
-        "image_promotion_kqxbRA"
-      ],
       "settings": {
-        "products_per_page": 24,
+        "products_per_page": 36,
         "card_size_mobile": "small",
-        "card_size": "small",
+        "card_size": "medium",
         "show_layout_toggle": true,
         "enable_filtering": true,
-        "filters_open_lg": true,
+        "filters_open_lg": false,
         "stick_on_scroll": true,
         "show_filter_counts": true,
         "expand_filters": true,
@@ -208,14 +184,25 @@
         "dividers": "none",
         "prevent_animation": false
       }
+    },
+    "collection_description_seo": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{%- if collection.description != blank -%}<details class=\"rte\" style=\"margin-top:24px;padding-top:16px;border-top:1px solid rgba(0,0,0,.08);\"><summary style=\"cursor:pointer;font-weight:700;\">Sobre esta categoría</summary><div style=\"margin-top:8px;\">{{ collection.description }}</div></details>{%- endif -%}",
+        "section_height": "tight",
+        "full_width": false,
+        "dividers": "none",
+        "prevent_animation": true
+      }
     }
   },
   "order": [
     "collection-banner",
-    "frutimenu_cta_collection",
     "collection-products",
+    "frutimenu_cta_collection",
     "trust_collection",
     "featured_collection_Nzeq8M",
-    "collection_list_9gEhfq"
+    "collection_list_9gEhfq",
+    "collection_description_seo"
   ]
 }

@@ -251,7 +251,7 @@
             {%- endfor -%}
           {%- endif -%}
 
-          {%- if settings.card_show_vendor -%}
+          {%- if settings.card_show_vendor and product.vendor != shop.name -%}
             <p class="card__vendor mb-0 text-sm text-theme-light">
               {{- product.vendor -}}
             </p>
@@ -262,12 +262,6 @@
               {{- product.title | escape -}}
             </a>
           </p>
-
-          {%- if settings.card_show_weight -%}
-            <p class="card__weight text-theme-light text-sm mb-1 mt-1">
-              {%- render 'product-weight', product: product -%}
-            </p>
-          {%- endif -%}
 
           {%- if settings.card_show_subtitle and product.metafields.descriptors.subtitle != blank -%}
             <p class="card__subtitle text-sm text-current mb-1 mt-1">
