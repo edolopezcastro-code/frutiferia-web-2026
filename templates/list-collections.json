@@ -3,15 +3,15 @@
     "main": {
       "type": "main-list-collections",
       "settings": {
-        "title": "Compra por categoría",
+        "title": "Toda la tienda",
         "heading_size": "h1",
-        "description": "<p>Frutas, verduras, despensa y packs frescos — todo lo que tu semana necesita, seleccionado a mano.</p>",
+        "description": "<p>Elige una categoría o busca arriba.</p>",
         "enlarge_description": false,
         "text_align": "items-center text-center",
         "display_type": "all",
         "selected_collections": [],
         "collections_per_page": 12,
-        "card_size": "medium",
+        "card_size": "large",
         "use_product_image": false
       }
     },
