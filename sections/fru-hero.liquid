@@ -29,6 +29,11 @@
   if settings.animations_enabled == 'disabled' or section.settings.prevent_animation
     assign hero_static = true
   endif
+
+  # Compacto (WUX-1): mismo H1, mismo badge, mismos CTA — solo baja la altura para que
+  # las categorias y el primer producto suban al primer pliegue. No toca el preload, ni
+  # fetchpriority, ni las alturas fijas del <img>: LCP y CLS ya estaban bien.
+  assign hero_compact = section.settings.compact
 -%}
 
 {%- comment -%}
@@ -235,10 +240,65 @@
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: none; }
   }
+
+  /* ==========================================================================
+     Compacto (WUX-1). Va al final: misma especificidad que las reglas base, gana
+     el orden. La foto de movil queda en 220px (tope del sprint) y el alto minimo
+     de escritorio en 440px, muy por debajo del techo de 60vh.
+     ========================================================================== */
+
+  #{{ section.id }}.fru-hero--compact {
+    /* Una sola fuente para el alto de escritorio: la usan el grid Y la foto. Si solo
+       se fija el min-height del grid, la FOTO manda: con height:auto se dibuja a su
+       proporcion natural (600px de ancho / 3:2 = 400px) y el hero nunca baja de ahi. */
+    --fru-hero-compact-h: clamp(330px, 28vw, 384px);
+  }
+  #{{ section.id }}.fru-hero--compact .fru-hero__text {
+    gap: 10px;
+    padding: var(--space-3, 24px) var(--gutter, 20px) 20px;
+  }
+  #{{ section.id }}.fru-hero--compact .fru-hero__media {
+    height: clamp(170px, 44vw, 220px);
+  }
+  #{{ section.id }}.fru-hero--compact .fru-hero__sub {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+  #{{ section.id }}.fru-hero--compact .fru-hero__cta {
+    min-height: 48px;
+    padding: 13px 24px;
+  }
+
+  /* En movil el CTA va a 100% y el enlace secundario cae a su propia fila: esas dos
+     filas son el bloque mas alto del hero. Bajar el gap de 16 a 10 es lo unico que
+     se puede recortar ahi sin tocar los targets tactiles (48px y 44px se respetan). */
+  @media (max-width: 767px) {
+    #{{ section.id }}.fru-hero--compact .fru-hero__actions { gap: 10px; }
+    #{{ section.id }}.fru-hero--compact .fru-hero__badge {
+      padding: 6px 13px;
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    #{{ section.id }}.fru-hero--compact .fru-hero__grid {
+      min-height: var(--fru-hero-compact-h);
+    }
+    #{{ section.id }}.fru-hero--compact .fru-hero__text {
+      gap: 10px;
+      padding-block: var(--space-3, 24px);
+    }
+    #{{ section.id }}.fru-hero--compact .fru-hero__media {
+      height: var(--fru-hero-compact-h);
+    }
+    #{{ section.id }}.fru-hero--compact .fru-hero__title {
+      font-size: clamp(2.1rem, 4.4vw, 3.1rem);
+    }
+  }
 </style>
 
 <div
-  class="fru-hero section--full-width{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}{% if hero_static %} fru-hero--static{% endif %}"
+  class="fru-hero section--full-width{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}{% if hero_static %} fru-hero--static{% endif %}{% if hero_compact %} fru-hero--compact{% endif %}"
   id="{{ section.id }}"
 >
   <div class="fru-hero__grid">
@@ -405,6 +465,13 @@
     {
       "type": "header",
       "content": "Estilo"
+    },
+    {
+      "type": "checkbox",
+      "id": "compact",
+      "label": "Hero compacto",
+      "info": "Baja la altura del hero para que las categorías y el primer producto entren en la primera pantalla. Mismo titular, mismo badge, mismos botones.",
+      "default": false
     },
     {
       "type": "select",

@@ -18,6 +18,13 @@
     un control), asi que el hairline es funcional, no decorativo.
   · El verbo del CTA es visible en TODOS los anchos. Nada de flecha pelada en movil.
   · Righteous aparece UNA sola vez (el eyebrow de seccion). La marca rinde por escasez.
+
+  WUX-1 (2026-08-17) agrega un segundo layout, "tira", sin borrar el editorial:
+  UNA fila de 3 pastillas (<=72px escritorio / <=120px movil) para que el selector deje
+  de costar 548px de scroll antes de ver producto. El editorial se queda entero: volver
+  atras es cambiar un select en el Theme Editor, no revertir un commit.
+  En "tira" NO se rinden el eyebrow, la pregunta ni la bajada — son justamente los que
+  hacian alta la seccion, y las tres pastillas ya se explican solas.
 {%- endcomment -%}
 
 {%- liquid
@@ -284,7 +291,136 @@
     #{{ section.id }} .audience-door__name { font-size: 23px; }
     #{{ section.id }} .audience-door--lead .audience-door__name { font-size: 27px; }
   }
+
+  /* ==========================================================================
+     Layout "tira" — una sola fila de pastillas.
+     Va DESPUES del editorial a proposito: misma especificidad (#id + clase), gana
+     el orden de aparicion. Contraste calculado contra blanco:
+       relleno suave = canal al 14% sobre --surface; texto = --pill-*-ink
+       hogar   #03546D sobre #DCEBEF -> 6,90:1 (en hover, al 20%: 6,30:1)
+       equipo  #9A196A sobre #F5E1EE -> 6,20:1 (en hover, al 20%: 5,62:1)
+       negocio (solida) blanco sobre #2525C1 -> 9,94:1
+     ========================================================================== */
+
+  #{{ section.id }}.audience-doors--strip {
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  #{{ section.id }} .audience-strip {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    list-style: none;
+  }
+  #{{ section.id }} .audience-strip__item { margin: 0; min-width: 0; }
+
+  #{{ section.id }} .audience-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 64px;
+    padding: 10px 10px;
+    border: 1px solid color-mix(in srgb, var(--door-accent) 32%, transparent);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--door-accent) 14%, var(--surface));
+    color: var(--door-ink);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    text-wrap: balance;
+    transition:
+      background-color var(--dur-micro) var(--ease-out),
+      transform var(--dur-micro) var(--ease-out);
+  }
+  #{{ section.id }} .audience-pill:hover {
+    background: color-mix(in srgb, var(--door-accent) 20%, var(--surface));
+    transform: translateY(-1px);
+  }
+  #{{ section.id }} .audience-pill:active { transform: translateY(0); }
+  #{{ section.id }} .audience-pill:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* La que trae caja va solida: es la unica jerarquia de la tira. */
+  #{{ section.id }} .audience-pill--lead {
+    background: var(--door-accent);
+    border-color: transparent;
+    color: var(--fru-blanco);
+  }
+  #{{ section.id }} .audience-pill--lead:hover {
+    background: color-mix(in srgb, var(--fru-blanco) 12%, var(--door-accent));
+  }
+
+  @supports not (color: color-mix(in srgb, #000, #fff)) {
+    #{{ section.id }} .audience-pill { background: var(--surface-muted); }
+    #{{ section.id }} .audience-pill:hover { background: var(--surface-muted); }
+    #{{ section.id }} .audience-pill--lead,
+    #{{ section.id }} .audience-pill--lead:hover { background: var(--door-accent); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #{{ section.id }} .audience-pill { transition: none; }
+    #{{ section.id }} .audience-pill:hover { transform: none; }
+  }
+
+  @media (min-width: 750px) {
+    #{{ section.id }} .audience-strip { gap: 12px; }
+    #{{ section.id }} .audience-pill {
+      min-height: 52px;
+      padding: 8px 16px;
+      font-size: 15px;
+    }
+  }
 </style>
+
+{%- if section.settings.layout == 'strip' -%}
+
+<section
+  class="audience-doors audience-doors--strip"
+  id="{{ section.id }}"
+  aria-label="{{ section.settings.heading | default: 'Compro para' | escape }}"
+>
+  <ul class="audience-strip">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        case block.settings.channel
+          when 'b2b'
+            assign accent = 'var(--pill-b2b)'
+            assign ink = 'var(--pill-b2b-ink)'
+          when 'wellness'
+            assign accent = 'var(--pill-wellness)'
+            assign ink = 'var(--pill-wellness-ink)'
+          when 'b2g'
+            assign accent = 'var(--pill-b2g)'
+            assign ink = 'var(--pill-b2g-ink)'
+          else
+            assign accent = 'var(--pill-b2c)'
+            assign ink = 'var(--pill-b2c-ink)'
+        endcase
+      -%}
+      <li class="audience-strip__item" {{ block.shopify_attributes }}>
+        <a
+          class="audience-pill{% if block.settings.lead %} audience-pill--lead{% endif %}"
+          style="--door-accent: {{ accent }}; --door-ink: {{ ink }};"
+          href="{{ block.settings.cta_link | default: '#' }}"
+        >{{ block.settings.name | escape }}</a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{%- else -%}
 
 <section
   class="audience-doors"
@@ -384,12 +520,25 @@
   </div>
 </section>
 
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Selector de audiencia",
   "tag": "section",
   "class": "cc-audience-doors",
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Formato",
+      "info": "En «Tira» solo se ven las tres pastillas: el título y la bajada no se muestran.",
+      "options": [
+        { "value": "editorial", "label": "Editorial (lista con bajadas)" },
+        { "value": "strip", "label": "Tira (una fila de pastillas)" }
+      ],
+      "default": "editorial"
+    },
     {
       "type": "text",
       "id": "eyebrow",
