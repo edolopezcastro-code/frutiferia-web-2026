@@ -57,3 +57,28 @@
   color: rgb(var(--error-text-color));
   font-weight: 600;
 }
+
+.factura-fields__nudge {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: var(--space-2) 0 0;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.factura-fields__nudge svg {
+  flex: none;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-primary);
+  margin-top: 1px;
+}
+
+.factura-fields__nudge a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}

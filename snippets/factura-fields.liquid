@@ -98,5 +98,14 @@
       value="{{ ff_email | escape }}"
       autocomplete="email"
     >
+
+    <p class="factura-fields__nudge">
+      {% render 'icon', icon: 'briefcase', width: 18, height: 18 %}
+      <span>
+        ¿Compras para tu negocio cada semana? En nuestro
+        <a href="https://cotiza.frutiferia.com?utm_source=cart&amp;utm_medium=factura_toggle" target="_blank" rel="noopener">cotizador</a>
+        tienes precios por volumen y factura directa.
+      </span>
+    </p>
   </div>
 </factura-fields>
