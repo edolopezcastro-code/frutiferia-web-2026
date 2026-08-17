@@ -101,7 +101,7 @@
           "settings": {
             "image_width": 150,
             "heading": "Frutiferia",
-            "text": "<p>Frutas y verduras frescas a domicilio. Más de 7 años al servicio de hogares y negocios en la V Región. 6 1/2 oriente, Viña del Mar.</p><p><strong>Hogares:</strong> WhatsApp Mora <a href=\"https://api.whatsapp.com/send?phone=+56966093891&amp;text=Hola%20FrutiEquipo!\">+56 9 6609 3891</a><br><strong>Negocios y oficinas:</strong> Francisco <a href=\"https://api.whatsapp.com/send?phone=+56993261147&amp;text=Hola%20Francisco!\">+56 9 9326 1147</a></p>",
+            "text": "<p>Frutas y verduras frescas a domicilio. Más de 7 años al servicio de hogares y negocios en la V Región. 6 1/2 Oriente 212, Viña del Mar.</p><p><strong>Hogares:</strong> WhatsApp Mora <a href=\"https://api.whatsapp.com/send?phone=+56966093891&amp;text=Hola%20FrutiEquipo!\">+56 9 6609 3891</a><br><strong>Negocios y oficinas:</strong> Francisco <a href=\"https://api.whatsapp.com/send?phone=+56993261147&amp;text=Hola%20Francisco!\">+56 9 9326 1147</a></p>",
             "enable_follow_on_shop": true,
             "show_social": true,
             "text_align": "text-start"

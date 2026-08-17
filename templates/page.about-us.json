@@ -323,7 +323,7 @@
         "text_jmezFw": {
           "type": "text",
           "settings": {
-            "text": "<p>Visítanos en Maravillar 2017, Viña del Mar. Encuentra productos frescos, snacks saludables y más. ¡Te esperamos!</p>",
+            "text": "<p>Visítanos en 6 1/2 Oriente 212, Viña del Mar. Encuentra productos frescos, snacks saludables y más. ¡Te esperamos!</p>",
             "enlarge_text": false
           }
         },
@@ -331,7 +331,7 @@
           "type": "button",
           "settings": {
             "button_label": "Cómo llegar",
-            "button_link": "https://maps.google.com/?q=Maravillar+2017+Viña+del+Mar",
+            "button_link": "https://maps.google.com/?q=6+1%2F2+Oriente+212%2C+Vi%C3%B1a+del+Mar",
             "button_style": "btn btn--primary"
           }
         }
