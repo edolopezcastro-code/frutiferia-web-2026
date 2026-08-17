@@ -55,8 +55,8 @@
             "close": "once",
             "show_over_media": false,
             "visibility_duration": 7,
-            "bg_color": "#e8f5e9",
-            "text_color": "#2e7d32"
+            "bg_color": "#F4F0F7",
+            "text_color": "#248F57"
           }
         },
         "divider-0": {
@@ -80,9 +80,16 @@
           "type": "buy-buttons",
           "settings": {
             "show_qty_selector": true,
-            "enable_dynamic_checkout": true,
+            "enable_dynamic_checkout": false,
             "show_pickup_availability": true,
             "show_gift_card_recipient": false
+          }
+        },
+        "cotiza_por_mayor": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<p style=\"font-size:14px;color:var(--text-muted);\">¿Compras para un negocio? <a href=\"https://cotiza.frutiferia.com\">Cotiza por mayor →</a></p>",
+            "variant_content": false
           }
         },
         "complementary": {
@@ -156,6 +163,7 @@
         "divider-0",
         "variant-picker",
         "buy-buttons",
+        "cotiza_por_mayor",
         "complementary",
         "divider-1",
         "1cc6422d-211f-4764-af07-884ee26ed3d7",
