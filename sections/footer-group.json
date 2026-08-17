@@ -101,7 +101,7 @@
           "settings": {
             "image_width": 150,
             "heading": "Frutiferia",
-            "text": "<p>Frutas y verduras frescas a domicilio. Más de 7 años al servicio de hogares y negocios en la V Región. 6 1/2 oriente, Viña del Mar.</p>",
+            "text": "<p>Frutas y verduras frescas a domicilio. Más de 7 años al servicio de hogares y negocios en la V Región. 6 1/2 oriente, Viña del Mar.</p><p><strong>Hogares:</strong> WhatsApp Mora <a href=\"https://api.whatsapp.com/send?phone=+56966093891&amp;text=Hola%20FrutiEquipo!\">+56 9 6609 3891</a><br><strong>Negocios y oficinas:</strong> Francisco <a href=\"https://api.whatsapp.com/send?phone=+56993261147&amp;text=Hola%20Francisco!\">+56 9 9326 1147</a></p>",
             "enable_follow_on_shop": true,
             "show_social": true,
             "text_align": "text-start"
@@ -112,6 +112,17 @@
           "settings": {
             "heading": "Comprar",
             "menu": "footer-comprar"
+          }
+        },
+        "superficies": {
+          "type": "text",
+          "settings": {
+            "image_width": 150,
+            "heading": "Frutiferia para…",
+            "text": "<ul><li><a href=\"/collections\">Hogares</a></li><li><a href=\"https://cotiza.frutiferia.com\">Negocios (cotizador)</a></li><li><a href=\"/pages/frutimenu\">Menú semanal</a></li><li><a href=\"/pages/bienestar\">Oficinas</a></li></ul>",
+            "enable_follow_on_shop": false,
+            "show_social": false,
+            "text_align": "text-start"
           }
         },
         "link-list-2": {
@@ -133,6 +144,7 @@
       "block_order": [
         "text",
         "link-list-1",
+        "superficies",
         "link-list-2",
         "newsletter"
       ],
