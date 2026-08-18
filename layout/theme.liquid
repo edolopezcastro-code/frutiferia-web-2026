@@ -306,6 +306,7 @@
     mano suma una offense AssetPreload).
   {%- endcomment -%}
   {{ 'inter-variable.woff2' | asset_url | preload_tag: as: 'font' }}
+  {{ 'inter-tight-variable.woff2' | asset_url | preload_tag: as: 'font' }}
 
   {%- comment -%}
     Aquí Canopy precargaba las fuentes del editor (settings.body_font y

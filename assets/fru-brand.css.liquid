@@ -7,9 +7,14 @@
    el que gana. Aquí no se inventan valores: todo sale de var(--token).
 
    Por qué existe: la tienda renderizaba Montserrat en títulos y la fuente del
-   editor en el cuerpo, mientras cotizador, menú semanal y wellness ya viven en
-   Georgia + Inter. Tres de cuatro superficies contra una. D-1 unifica por CSS
-   para no depender de que alguien entre al Theme Editor.
+   editor en el cuerpo. Se unifica por CSS para no depender de que alguien entre
+   al Theme Editor.
+
+   ⚠️ D-1 CAMBIÓ el 2026-08-17 (Eduardo, viendo la home en su iPhone): el plan
+   pedía Georgia + Inter, copiando a los satélites. Se probó y la serif hacía
+   ver la tienda vieja y desalineada del OS. Ahora la web sigue el canon del
+   PRODUCTO: Inter Tight + Inter, igual que frutiferia-so. Georgia se queda
+   donde sí funciona: las piezas editoriales de la skill frutiferia-style.
 
    ⚠️ ES UN .css.liquid, NO un .css. Motivo en el bloque (a). Consecuencia:
    `theme check` lo parsea como Liquid+HTML, así que en los COMENTARIOS no
@@ -27,8 +32,6 @@
    sha256: se copió tal cual para que las 4 superficies rendericen idéntico).
    Una fuente variable cubre 400/500/600/700 con UN request de 47 KB en vez de
    cuatro estáticas. Por eso hay un solo @font-face y un solo preload.
-   Georgia no se declara: es de sistema, no se descarga, y por eso los títulos
-   pintan en el primer frame sin FOUT.
 
    ⚠️ Por esto el archivo es .css.liquid: el src TIENE que salir del mismo
    filtro asset_url que el preload de theme.liquid. Con ruta relativa el
@@ -40,6 +43,17 @@
   font-family: 'Inter';
   src: url('{{ "inter-variable.woff2" | asset_url }}') format('woff2');
   font-weight: 100 900; /* rango del eje wght — NO cuatro declaraciones */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Inter Tight — la MISMA fuente de títulos que el OS (`--font-display` de
+   frutiferia-so/src/index.css). También variable, también un solo archivo.
+   Comparte diseño y métricas con Inter, así que conviven sin saltos. */
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('{{ "inter-tight-variable.woff2" | asset_url }}') format('woff2');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -64,7 +78,8 @@
 }
 
 /* ----------------------------------------------------------------------------
-   (b) D-1 · Tipografía pública única — Georgia (títulos) + Inter (texto)
+   (b) D-1 · Tipografía pública única — Inter Tight (títulos) + Inter (texto),
+   el mismo par que el OS.
 
    Canopy embudea TODA la tipografía por tres custom properties (verificado:
    sólo 3 usos de --heading-font-family y 4 de --body-font-family en main.css).
@@ -73,17 +88,28 @@
      --heading-font-family    -> .h0…h6, .h1…h6, .font-heading, .subheading
      --body-font-family       -> body, .font-body
      --navigation-font-family -> .main-menu
-   La navegación se queda en Inter a propósito: a 14–15 px la serif pierde
-   legibilidad y el menú es lo que más se escanea.
+   La navegación y los títulos de tarjeta se quedan en Inter (no Inter Tight):
+   a 14–15 px la versión estrecha aprieta de más y el menú es lo que más se
+   escanea. Es el mismo reparto que hace el OS.
 ---------------------------------------------------------------------------- */
 :root {
+  /* ⚠️ Se PISA --font-display, que tokens-frutiferia.css trae en Georgia.
+     Georgia sigue siendo el canon de la skill `frutiferia-style` para piezas
+     EDITORIALES (carruseles, PPT, documentos), y ahí está bien. Pero la web
+     es producto, no papel: tiene que verse como el OS, y el OS usa Inter
+     Tight — que además reemplazó a Space Grotesk allá justamente "para sacar
+     el tell de época". La serif hacía ver la tienda vieja al lado del OS.
+     Las secciones propias (fru-hero, audience-doors, fru-category-tiles) leen
+     var(--font-display), así que con pisarlo acá cambian todas de una. */
+  --font-display: 'Inter Tight', 'Inter', system-ui, sans-serif;
+
   --heading-font-family: var(--font-display);
   --body-font-family: var(--font-body);
   --navigation-font-family: var(--font-body);
 }
 
-/* Georgia es más ancha y más suelta que Montserrat: a tamaño de titular
-   necesita cerrar el tracking para no verse desarmada. En cuerpo NO se toca. */
+/* Mismo tracking que el OS (`h1..h6 { letter-spacing: -0.018em }` en
+   frutiferia-so/src/index.css). En cuerpo NO se toca. */
 .h0,
 h1, .h1,
 h2, .h2,
@@ -92,10 +118,10 @@ h4, .h4,
 h5, .h5,
 h6, .h6,
 .font-heading {
-  letter-spacing: -0.01em;
+  letter-spacing: -0.018em;
 }
 
-/* Títulos de tarjeta y de navegación: Inter, no Georgia.
+/* Títulos de tarjeta y de navegación: Inter, no Inter Tight.
    .card__title es un párrafo (no un h-tag), así que ya hereda del body — la
    regla queda explícita a propósito, para que un futuro cambio a .h5 no lo
    mueva sin que nadie se dé cuenta. Texto chico y repetido: manda legibilidad. */
