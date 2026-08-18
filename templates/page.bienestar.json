@@ -30,8 +30,8 @@
         "button_hero": {
           "type": "button",
           "settings": {
-            "button_1_label": "Suma fruta a tu oficina",
-            "button_1_link": "https://api.whatsapp.com/send?phone=+56993261147&text=Hola,%20me%20interesa%20el%20programa%20de%20bienestar%20con%20fruta%20para%20mi%20equipo",
+            "button_1_label": "Cotiza tu programa",
+            "button_1_link": "https://cotiza.frutiferia.com/bienestar",
             "button_1_style": "btn btn--primary",
             "button_2_label": "Ya tengo programa, entrar",
             "button_2_link": "https://cotiza.frutiferia.com/bienestar",

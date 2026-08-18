@@ -283,7 +283,7 @@
     "productos_b2b": {
       "type": "featured-collection",
       "settings": {
-        "title": "Productos disponibles por mayor",
+        "title": "Catálogo mayorista de referencia — los precios finales van en tu cotización",
         "heading_align": "text-start",
         "show_view_all": true,
         "collection": "por-mayor",
