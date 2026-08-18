@@ -41,7 +41,7 @@ Si no dices nada, se ejecuta la columna "Default". Cada prompt las lee de aquí.
 
 | # | Decisión | Default | Alternativa | Por qué |
 |---|---|---|---|---|
-| D-1 | **Tipografía pública única** | **Georgia (títulos) + Inter (texto)** en las 4 superficies. En la tienda se aplica por CSS (`fru-brand.css`, sin tocar el editor). | Mantener Montserrat en la tienda y llevar los satélites a Montserrat. | 3 de 4 superficies ya viven en Georgia+Inter (cotizador, menú, wellness); es el canon de `frutiferia-style` y lo que hace que `menu.frutiferia.com` se vea premium. ⚠️ Revierte tu decisión de junio ("se queda Montserrat"), que fue anterior a que los satélites tomaran este sistema. |
+| D-1 | ~~**Tipografía pública única · Georgia + Inter**~~ → **REVOCADA 2026-08-17 por Eduardo.** Ahora: **Inter Tight (títulos) + Inter (texto)**, el par exacto del OS (`frutiferia-so/src/index.css`: `--font-display: 'Inter Tight'`, `h1..h6 { letter-spacing: -0.018em }`). Ambas self-hosted y variables. | Georgia + Inter (lo que decía este plan). | El default original copiaba a los **satélites**; Eduardo, viendo la home en su iPhone: *"las letras no son bonitas, modernas, difieren de lo que hemos estado construyendo en Frutiferia-OS"*. El patrón a copiar era el **producto**, no los satélites: la serif hacía ver la tienda de otra época al lado del OS — que ya había sacado Space Grotesk por ese mismo motivo. Georgia sigue vigente en la skill `frutiferia-style` para piezas EDITORIALES (carruseles, PPT, documentos): es otro medio. ⚠️ **Deuda abierta**: WUX-5 alineó cotizador, wellness y menú a Georgia; hay que decidir si se mueven a Inter Tight (ver §5 G-9). |
 | D-2 | **Menú de 5 entradas** | **Comprar ▾** (mega menú con fotos) · **Arma tu menú** · **Negocios** · **Oficinas** · **Recetas**. "Vitrinea", "Conócenos", "Blog" salen del header (van a footer / mega menú). | Mantener 9 ítems. | Un solo verbo para B2C ("Comprar") y una puerta por público. |
 | D-3 | ~~**Carrito des-dockeado**~~ **✅ HECHO 2026-08-17 (`77dc0e7`)** | Drawer flotante normal. **NO era gate humano**: `config/settings_data.json` SÍ se despliega por git push (ver §7.D). | — | Recuperó el 25 % del ancho en escritorio. |
 | D-4 | **"Por Mayor" en Shopify** | Sale del header. Vive en la landing Negocios como "Catálogo mayorista (referencia)" + en el mega menú de Negocios. **No se borra nada.** El camino B2B es el cotizador (OS). | Mantener "Por Mayor" en el header. | Dos caminos B2B confunden y sólo uno llega al OS. |
@@ -483,6 +483,7 @@ el archivo probable. Actualiza §3/§6 del plan (una línea) y cierra con "Lo qu
 | G-6 | QA en iPhone real después de cada carril: abrir frutiferia.com, contar scrolls hasta ver productos, tocar "Agregar" en una tarjeta, abrir el carrito, entrar a Comprar → Frutas. Mandar 1 mensaje con lo que se vea raro. | 5 min ×3 | Lo que no se ve en el preview oculto de Claude. | Tras WUX-2, WUX-4, WUX-5. |
 | ~~G-7~~ | ~~(Opcional) Editor → Tipografía + Tarjetas de producto~~ **✅ CERRADO 2026-08-17 por Claude, sin gate humano** (commit `2fa6c74`). Proveedor y peso ocultos por `settings_data.json`. La parte de tipografía **no se podía hacer**: Georgia no existe en la librería de fuentes de Shopify (`georgia_n4`/`georgia_n7` tumban el upload) y poner Inter duplicaba la fuente (77 KB de más). En cambio se quitaron los preloads de las fuentes del editor, que se descargaban sin usarse. | — | — | ✅ |
 | ~~G-8~~ | ~~(Opcional) Si algún tile de categoría luce mal, cambiar la imagen de esa colección en el admin.~~ **✅ CERRADO 2026-08-17 por Claude, sin gate humano** (la página de Colecciones del admin SÍ es automatizable, igual que Navegación): `Ofertas de la Semana` → `72418.jpg` (mezcla de fruta) y `Packs`/`frutipack` → `364.jpg` (mezcla densa fruta+verdura). Las 6 quedaron parejas. | — | — | Hecho. |
+| G-9 | **Decidir la tipografía de los 3 satélites.** La tienda y el OS quedaron en Inter Tight; cotizador, wellness y menú siguen en Georgia (los alineó WUX-5 con el D-1 viejo). Son 3 repos y un cambio de 2 líneas de CSS cada uno. | 1 min (decidir) | Hoy la marca habla con dos voces tipográficas. | Antes de WUX-7. |
 | G-8b | **Fotografiar una canasta FrutiPack de verdad** (una armada, sobre mesa, luz natural) y subirla como imagen de la colección `frutipack`. | 15 min | Los 9 productos de FrutiPack **no tienen foto**: son banners gráficos con el nombre y el precio ("CANASTA GRANDIOSA $23.990"). Hoy el tile usa una mezcla de fruta y verdura — honesta, pero genérica. Una foto de la canasta real vende el producto, no la categoría. | Cuando armes una. |
 
 ---
@@ -695,6 +696,24 @@ HTML cacheado por Shopify varios minutos (ya pasó en WUX-2). Las rutas internas
 (`/cart`, `/products/…`, `/collections`) se actualizan al instante. La prueba **autoritativa**
 no es el curl a la home sino `shopify theme pull --theme <id vivo> --only <archivo>` y
 comparar con el commit.
+
+### 7.H 🍎 Dos trampas del logo SVG (WUX-4, 2026-08-17)
+
+**1. `fill-rule="evenodd"` NO perfora entre paths hermanos.** El isotipo son dos piezas:
+el cuerpo y los dos brillos. En el componente del OS van en UN solo path
+(`<path d={BODY + SPARKS} />`) y por eso los brillos son HUECOS: el isotipo funciona
+sobre cualquier fondo sin saber cuál es. WUX-2 los separó en dos `<path>` dentro de un
+`<g fill-rule="evenodd">` — y ahí `evenodd` ya no hace nada entre ellos: los brillos se
+pintan como manchas moradas sólidas sobre un cuerpo morado, invisibles, y la manzana
+queda **plana**. Lo cazó Eduardo mirando la home en su teléfono. Regla: el isotipo va
+siempre en un solo path.
+
+**2. Un comentario XML dentro del .svg rompe `inline_asset_content`.** El filtro devuelve
+**vacío** y —lo peor— el logo desaparece entero del header: no hay error, no salta el
+fallback a `<img>`, no aparece nada en `theme check` ni en los logs de `theme dev`.
+Probado A/B en el preview: con el comentario, `logo__link` sale **0** veces en el HTML;
+sin él, **1**. ⇒ Los SVG que se inyecten con `inline_asset_content` van **sin comentarios**;
+la explicación se pone en el `.liquid` que los llama o en el commit.
 
 ---
 
