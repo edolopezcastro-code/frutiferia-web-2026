@@ -74,7 +74,7 @@ mismo: WUX-1, WUX-3 y WUX-5**. Cuando una termine, corre la siguiente de su carr
 | 🟢 B | **WUX-4** Capa de marca del tema | Opus | `fru-brand.css` cargado DESPUÉS de `main.css`: Georgia+Inter (D-1) self-hosted, botón primario `#17845A` (D-10), radios/sombras/focus de tokens, footer con las 4 superficies + WhatsApp por canal, `es.json` a tuteo ("Tu carrito", "Agregar"), token `--fru-verde-800`. | tema: **nuevo** `assets/fru-brand.css.liquid`, `assets/inter-variable.woff2`, `layout/theme.liquid`, `assets/tokens-frutiferia.css`, `assets/quick-add.css`, `sections/footer-group.json`, `sections/footer.liquid`, `locales/es.json` | ✅ (2026-08-17, en vivo) · h2 Georgia + body/nav/tarjeta Inter ✓; `.btn--primary` `#17845A` en los 3 esquemas de color, pastilla, **4,68:1** ✓; hover corregido a `#136E4B` (**6,25:1**) porque el `#248F57` de D-10 aclaraba y caía a 4,08:1; footer con 5 columnas y las 4 superficies; **61** strings de `es.json` a tuteo, 0 formas de usted en 5 pasadas. `theme check` 48/33/10 = base exacta. |
 | 🔵 C · Satélites + OS | **WUX-5** Satélites alineados | Sonnet | Cotizador, Wellness y Menú con el mismo logo SVG, D-10, D-11, header/footer con cross-links a las 4 superficies, wellness con móvil, charts del menú con tokens del OS. | `frutiferia-cotizador`, `frutiferia-wellness`, `mi-menu-semanal` (3 repos, Vercel + Lovable) | ✅ (2026-08-17, cotizador/wellness en vivo — menú a la espera de Publish en Lovable) |
 | 🔵 C | **WUX-6** Puentes con el OS + línea base | Sonnet | Línea base de medición (funnel RPC + Shopify Analytics), smoke de los 6 puentes web→OS, landings B2B/Bienestar/FrutiMenu con CTAs correctos (D-4, D-8), 3 links a cambiar cuando haya DNS wellness. | `frutiferia-so` (lectura + panel), tema: `templates/page.b2b.json`, `page.bienestar.json`, `page.frutimenu.json` | ✅ (2026-08-17, en vivo) · 6/6 puentes vivos, línea base cargada en §8, `Web3FunnelCard` confirmado sano, link a Bienestar agregado y deployado en la extensión de cuenta |
-| ⚪ Cierre | **WUX-7** QA integral | Haiku | En prod: 12 rutas 200, medidas de scroll/header, matriz de cross-links, contraste AA, voseo (3 pasadas), PSI móvil. Entrega lista de fixes por carril. | ninguno (read-only) | ⬜ (tras A+B+C) |
+| ⚪ Cierre | **WUX-7** QA integral | Sonnet | En prod: 12 rutas 200, medidas de scroll/header, matriz de cross-links, contraste AA, voseo (3 pasadas), PSI móvil. Entrega lista de fixes por carril. | ninguno (read-only) | ⬜ (tras A+B+C) |
 
 **Regla dura para las 2 sesiones del tema en paralelo (A y B):** cada una commitea **sólo los archivos
 de su fila** (`git add <archivo>`, nunca `-A`), hace `git pull --rebase` antes de cada push, y recuerda
@@ -440,33 +440,101 @@ push (tema = deploy; OS = push a main o a la rama que corresponda si el clon est
 dilo explícito) + §3/§6/§8 + Tion + "Lo que tienes que hacer tú".
 ```
 
-### PROMPT WUX-7 — QA integral en producción (Haiku)
+### PROMPT WUX-7 — QA integral en producción (Sonnet)
 
 ```
-Sesión WUX-7 del plan ~/Desktop/frutiferia-theme/docs/PLAN_WEB_UX_2026-08-16.md. Read-only:
-NO edites ningún repo. Corre cuando WUX-1..6 estén ✅ en §3. Activa: edu-sprints.
+Sesión WUX-7 del plan ~/Desktop/frutiferia-theme/docs/PLAN_WEB_UX_2026-08-16.md — QA integral en
+producción. READ-ONLY: no edites ningún repo, no pushees nada. WUX-1..6 están ✅ en §3.
+Activa: edu-sprints. Lee §2 (decisiones vigentes), §3, §6 y sobre todo §7.G y §7.H (trampas).
 
-1. Rutas 200 (curl -s -o /dev/null -w "%{http_code} %{time_total}"): https://frutiferia.com/,
-   /collections, /collections/frutas-deliciosas, /products/platanos, /cart, /pages/frutimenu,
-   /pages/proveedor-restaurantes, /pages/bienestar, /blogs/recetas, https://cotiza.frutiferia.com,
-   https://menu.frutiferia.com, https://cotiza.frutiferia.com/bienestar, https://wellness.frutiferia.com
-   (puede seguir en 000 si G-31 no cerró: repórtalo).
-2. Medidas en el Browser pane (prod), 375×812 y 1440×900, con getBoundingClientRect: altura del
-   header, `top` del primer tile de categoría, `top` del primer `.card--product` en home y en
-   /collections/frutas-deliciosas, ¿existe `body.cart-drawer-docked`? Compara con las metas de
-   §1/§3 (móvil ≤ 750 / ≤ 1.600; escritorio tiles ≤ 850, producto colección ≤ 620; header ≤ 120).
-3. Matriz de cross-links: para cada superficie (tienda, cotizador, menú, wellness/portal) lista
-   a cuáles de las otras enlaza (grep del HTML servido). Meta: cada una enlaza a la tienda y la
-   tienda a las 3.
-4. Contraste AA calculado (no estimado) de: botón primario, texto de tiles sobre foto/overlay,
-   pills de canal (`--pill-*-ink` sobre fondo), links del footer.
-5. Voseo/usted: 3 pasadas de grep distintas (`vos `, `tenés`, `podés`, `usted`, `Su carrito`,
-   `Inténtelo`) sobre el HTML de home, colección, ficha, carrito y las 3 landings.
-6. PSI móvil de la home (API de PageSpeed; si da 429, dilo y usa Lighthouse del Browser si existe).
-7. Consola: `read_console_messages` con errores en home, colección, ficha, carrito.
-Entrega: tabla PASA/FALLA por ítem + lista de fixes priorizada y asignada a un carril (A/B/C) con
-el archivo probable. Actualiza §3/§6 del plan (una línea) y cierra con "Lo que tienes que hacer tú"
-(QA en iPhone real: 5 min, qué mirar).
+⚠️ DOS TRAMPAS QUE INVALIDAN EL QA SI NO LAS RESPETAS — léelas antes de medir nada:
+
+  1. `curl` PELADO A frutiferia.com/ TE MIENTE. Shopify cachea SOLO la home y sirve una
+     variante VIEJA según el User-Agent: con el UA por defecto de curl salió HTML pre-WUX-2
+     el 100% de las veces; con UA de Chrome, el nuevo el 100%. Las demás rutas no tienen ese
+     problema. ⇒ SIEMPRE manda UA de navegador:
+       curl -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+     Mejor aún: mide en el Browser pane con getComputedStyle / document.fonts, no por HTML.
+     NUNCA concluyas "el deploy no llegó" desde un curl pelado.
+  2. EL GREP DE BSD SE CALLA. Varios de estos HTML/CSS los trata como binarios y `grep -o`
+     devuelve VACÍO sin avisar (pasó con el CSS de menu.frutiferia.com). Para contar o buscar
+     en HTML/CSS/JSON usa python3 con encoding utf-8, no grep.
+
+QUÉ CAMBIÓ DESPUÉS DE QUE SE ESCRIBIÓ ESTE PLAN (verifica contra esto, no contra el texto viejo):
+  · D-1 REVOCADA. Las 5 superficies van en Inter Tight (títulos) + Inter (texto), tracking
+    -0.018em, ambas self-hosted y variables. Georgia quedó SOLO para correos y PDF.
+  · D-10: botón primario #17845A en reposo, hover #136E4B (NO #248F57: ese aclaraba y caía a
+    4,08:1). En la banda morada (color-scheme--2) el botón es BLANCO por diseño.
+  · Dirección: 6 1/2 Oriente 212, Viña del Mar. geo -33.021603, -71.542363.
+
+1. RUTAS (con UA de navegador, reporta código y tiempo): https://frutiferia.com/ , /collections,
+   /collections/frutas-deliciosas, /products/platanos, /cart, /pages/frutimenu,
+   /pages/proveedor-restaurantes, /pages/bienestar, /blogs/recetas, /pages/conocenos,
+   /pages/conversemos, https://cotiza.frutiferia.com, https://cotiza.frutiferia.com/bienestar,
+   https://menu.frutiferia.com, https://wellness.frutiferia.com (puede dar 000: G-5 abierto, sólo
+   repórtalo). Ojo: cotiza.frutiferia.com da 403 a curl (protección de Vercel) — mídelo por navegador.
+
+2. TIPOGRAFÍA — la meta es que las 5 se vean iguales. En el Browser pane, por superficie:
+   document.fonts cargadas + getComputedStyle de un h1/h2 y del body.
+   PASA si: títulos "Inter Tight", cuerpo "Inter", letter-spacing ≈ -0.018em, y NINGUNA
+   superficie carga Georgia ni Montserrat ni Figtree. En la tienda deben bajar EXACTAMENTE 2
+   archivos de fuente (inter-variable + inter-tight-variable): si aparece un tercero, es una
+   regresión (se quitaron los preloads muertos que bajaban 58 KB sin usarse).
+   Excepción legítima, NO la reportes como falla: los correos del menú semanal y su exportación
+   a PDF siguen en Georgia a propósito.
+
+3. LOGO — es lo que más ojo necesita. En las 4 superficies públicas: el isotipo tiene que tener
+   sus DOS BRILLOS visibles (son huecos, no manchas). Chequeo duro: el path del isotipo mide
+   3.029 caracteres (cuerpo 1.722 + brillos 1.307) y el wordmark 7.386, y van en UN SOLO <path>.
+   Si ves dos paths de 1.722 y 1.307 separados, la manzana está PLANA (bug de WUX-2, ya corregido
+   en el tema: verifica que no reapareció). Compara los 4 archivos entre sí: deben ser idénticos.
+
+4. MEDIDAS (Browser pane, prod, 375×812 y 1440×900, getBoundingClientRect): alto del header,
+   `top` del primer tile de categoría y del primer .card--product en home y en
+   /collections/frutas-deliciosas; ¿existe body.cart-drawer-docked? Compara con las metas de §3
+   (móvil: tile ≤750, producto ≤1.600 · escritorio: tile ≤850, producto en colección ≤620,
+   header ≤120). Reporta el delta, no sólo pasa/falla.
+
+5. CONTRASTE AA calculado (no estimado), con la fórmula WCAG:
+   · botón primario en reposo (#17845A sobre blanco, esperado 4,68) y en hover (#136E4B, 6,25)
+   · el botón DENTRO de la banda morada: blanco sobre #671D90 (esperado 9,74) — y el borde del
+     botón contra la banda, mínimo 3:1 (WCAG 1.4.11)
+   · anillo de foco: en fondo claro debe ser morado; dentro de la banda morada debe ser BLANCO
+     (si sale morado sobre morado = 1:1, es falla grave de accesibilidad)
+   · pills de canal (--pill-*-ink sobre su fondo) y enlaces del footer
+   ⚠️ getComputedStyle(btn).backgroundColor NO sirve para el botón: Canopy lo pinta con un
+   degradado que se desliza y esa propiedad devuelve el color de HOVER. Lee --btn-bg-color.
+
+6. TARJETAS: en /collections las tarjetas de colección deben seguir siendo CÍRCULOS (border-radius
+   50%); si salen cuadradas es regresión. En la grilla de producto: sin proveedor y sin línea de
+   peso, y el quick-add en #17845A.
+
+7. TEXTOS — tuteo. Con python3 (no grep), sobre el HTML servido de home, colección, ficha, carrito
+   y las 3 landings: busca usted, Su carrito, Inténtelo, Añadir, Recogida, Cesta, Provincia,
+   y formas verbales de 3ª persona (Seleccione, Corrija, Introduzca, Tenga, Cree, Ha olvidado).
+   Esperado: CERO. Además: 3 pasadas distintas por voseo argentino (vos, tenés, podés, querés).
+
+8. DIRECCIÓN Y FICHA DE NEGOCIO: que "Maravillar" no aparezca en NINGUNA superficie, que la
+   dirección diga 6 1/2 Oriente 212 en footer, Conócenos y Contacto, y que el JSON-LD de
+   LocalBusiness de la home traiga streetAddress correcto y geo -33.021603 / -71.542363.
+
+9. FOOTER: 5 columnas (Frutiferia con contacto · Comprar · Frutiferia para… · Ayuda · Newsletter),
+   los 4 links de superficies vivos (uno de ellos externo al cotizador), los 2 WhatsApp correctos
+   (Mora +56 9 6609 3891 hogares · Francisco +56 9 9326 1147 negocios), y la banda de confianza
+   OCULTA en /pages/proveedor-restaurantes y visible en el resto.
+
+10. CROSS-LINKS: matriz de qué superficie enlaza a cuál. Meta: cada satélite enlaza a la tienda y
+    la tienda a los 3.
+
+11. PSI móvil de la home (API de PageSpeed; si da 429 dilo y usa Lighthouse del Browser).
+    Reporta LCP/CLS y si alguna fuente bloquea el render.
+
+12. CONSOLA: read_console_messages con errores en home, colección, ficha y carrito.
+
+ENTREGA: tabla PASA/FALLA por ítem con el valor MEDIDO (no "ok"), lista de fixes priorizada,
+cada uno con carril (A/B/C) y archivo probable. Distingue REGRESIÓN (algo que funcionaba y se
+rompió) de PENDIENTE conocido (G-5 DNS wellness). Actualiza §3/§6 del plan con una línea y cierra
+con "Lo que tienes que hacer tú" en fácil, sin jerga: qué mirar en el iPhone en 5 minutos.
 ```
 
 ---
