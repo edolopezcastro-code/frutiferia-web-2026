@@ -47,7 +47,7 @@ Si no dices nada, se ejecuta la columna "Default". Cada prompt las lee de aquí.
 | D-4 | **"Por Mayor" en Shopify** | Sale del header. Vive en la landing Negocios como "Catálogo mayorista (referencia)" + en el mega menú de Negocios. **No se borra nada.** El camino B2B es el cotizador (OS). | Mantener "Por Mayor" en el header. | Dos caminos B2B confunden y sólo uno llega al OS. |
 | D-5 | **Cupón PRIMERA15** | Se queda en: pill del hero + barra superior (copy unido: "Despacho gratis sobre $50.000 · 15 % en tu 1er pedido con PRIMERA15") + newsletter del footer. La **tira "¿Primer pedido?" se elimina** y el **popup pasa a exit-intent** (ya no salta a los 10 s sobre el hero). | Mantener tira y popup por tiempo. | 5 menciones → 3; el popup por tiempo tapaba el hero. |
 | D-6 | **Orden de la home** | Hero compacto → **selector "Compro para: mi casa · mi negocio · mi equipo"** (tira de 1 fila) → **6 tiles de categoría con foto** → Ofertas de la semana (quick-add) → FrutiMenu → confianza → testimonios → banda Negocios → 7 años → recetas → newsletter. | Orden actual. | Producto visible en la 1ª pantalla de escritorio y ≤ 2 pantallas en móvil. |
-| D-7 | **Logo** | Logo 2026 (isotipo + `frutiferia` minúscula, **sin ".com"**), UN solo SVG exportado del OS (`src/components/brand/`) y usado en tienda + cotizador + wellness + menú. | Mantener "frutiferia.com" en el wordmark. | Es el logo del rebranding; ".com" no aporta y desalinea. |
+| D-7 | ~~**Logo** del OS sin ".com"~~ **🔴 REVOCADA 2026-08-19 por Eduardo** ("el logo NO ES EL OFICIAL, está raro") | El logo es el **arte oficial del Drive** `4.6 BRANDING Y PLANTILLAS/Logo 2026/Logo-Horizontal-Morado.png` vectorizado 1:1: isotipo + **`frutiferia.com`**, morado oficial **`#A531EB`**, **sin barra divisoria**. Mismo archivo byte a byte en las 4 superficies. | — | El default original salió mal por partida triple (ver §7.I). |
 | D-8 | **Bienestar mientras no haya DNS** | Todos los CTAs de Bienestar apuntan a `cotiza.frutiferia.com/bienestar` (portal vivo) y al formulario del tema. Cuando `wellness.frutiferia.com` resuelva (gate G-31), se cambian los 3 links listados en WUX-6. | Esperar el DNS para tocar Bienestar. | Hoy `wellness.frutiferia.com` da HTTP 000 (verificado 2026-08-16). |
 | D-9 | **"Comprar ahora" (dynamic checkout) en la ficha** | **Apagado.** | Encendido. | Salta el carrito → sin día de reparto (el delivery-picker bloquea el checkout sólo desde el carrito), sin upsell, sin barra de despacho gratis. Y son dos botones verdes iguales. |
 | D-10 | **Botón primario y CTA** | Botón primario sólido **verde `#17845A`** (AA 4,7:1 con texto blanco), hover `#248F57`. Gradiente `--grad-cta` (menta→verde) **sólo** en CTAs de hero (texto ≥ 18 px bold). Igual en las 4 superficies. | Menta plana `#2DB87F` en todo. | Menta plana + blanco da 2,5:1 (reprueba AA). El cotizador ya lo había corregido; el fix nunca se propagó. |
@@ -573,6 +573,7 @@ con "Lo que tienes que hacer tú" en fácil, sin jerga: qué mirar en el iPhone 
 | 2026-08-17 | Opus 5 (**WUX-4**, cierre) | **G-7 cerrado y dirección unificada.** (1) Tarjetas de producto: `card_show_vendor` y `card_show_weight` a `false` por `settings_data.json` (diff de 2 líneas dentro de `current`, presets intactos) — la mitad del gate que sí se podía hacer. (2) **Georgia NO existe en la librería de fuentes de Shopify**: `georgia_n7` y `georgia_n4` devuelven `'…' is not a valid font handle` y **tumban el upload entero**. El gate G-7 daba por supuesto que estaba; no está. Inter sí existe (`inter_n4/n5/n6` válidos) pero ponerla en el editor es **contraproducente**: Shopify sirve su propia Inter con el mismo nombre de familia que la self-hosted y el navegador baja las dos — medido, `inter_n5` (38 KB) + `inter_n6` (38 KB) **encima** de `inter-variable` (47 KB). Se dejaron los 3 handles como estaban. (3) **Hallazgo que sí valió**: como `fru-brand.css` pisa las tres familias, las fuentes del editor no las usa ni un carácter — pero los dos `<link rel="preload">` de `theme.liquid` **forzaban igual la descarga**. El navegador se bajaba `montserrat_n7` (19 KB) y `figtree_n5` (39 KB) para no pintarlos nunca. Preloads eliminados ⇒ la tienda carga **UNA sola fuente** (verificado: `document.fonts` sólo trae `Inter 100 900`) y `theme check` baja a **46/33/10, dos advertencias MENOS que la base**. (4) **Dirección unificada**: la tienda decía dos direcciones distintas — 4 sitios con "Maravillar 2017" (incluido el `streetAddress` de LocalBusiness que lee Google) y el footer con "6 1/2 oriente" sin número. Eduardo confirmó **6 1/2 Oriente 212, Viña del Mar** (que es lo que ya decía la ficha de la tienda en Shopify). Corregidos los 5 lugares. ⚠️ **Pendiente**: las coordenadas `geo` del schema (`-33.0245, -71.5518`) apuntan a la dirección vieja y **no se tocaron** — hay que verificarlas en Maps. | `f8d3f91`, `2fa6c74` |
 
 | 2026-08-17 | Opus 5 (**WUX-4/5b**, cierre por feedback de Eduardo) | **Las 5 superficies quedan con la misma cara.** Dos correcciones que salieron de que Eduardo abriera la home en su iPhone. **(1) El logo estaba plano.** Los 3 paths ya eran byte a byte los oficiales del OS, pero WUX-2 los armó como dos `<path>` hermanos dentro de un `<g fill-rule="evenodd">`. `evenodd` perfora entre subpaths del MISMO path, no entre paths hermanos: los dos brillos se pintaban morado sólido sobre cuerpo morado y desaparecían. Ahora va en un solo path, idéntico a los 3 satélites (verificado: isotipo 3.029 chars, wordmark 7.386, byte a byte contra `public/brand/` del cotizador). ⚠️ **Trampa nueva y muda**: un comentario XML dentro del `.svg` hace que `inline_asset_content` devuelva VACÍO y el logo desaparezca entero del header — sin error, sin fallback al `<img>`, sin nada en `theme check` ni en los logs. Probado A/B (§7.H). **(2) D-1 revocada**: la web pasa de Georgia a **Inter Tight**, el canon del OS, con su mismo tracking (`-0.018em`). Se pisa `--font-display` y no sólo `--heading-font-family`, porque las secciones propias leen ese token directo. Inter Tight self-hosted y variable (44 KB) en las 4 superficies. **Los 3 satélites también** (WUX-5b): Georgia desaparece del CSS compilado en los tres builds (0 ocurrencias). NO se tocaron los dos lugares donde Georgia sí corresponde: las plantillas de correo del menú (en un correo no se carga fuente propia) y su exportación a PDF. `theme check` 46/33/10, sin offenses nuevas. **Estado en vivo**: tienda ✓, cotizador ✓, Bienestar ✓; el menú semanal quedó publicado por Eduardo el 2026-08-18 (G-4 ✅, verificado en vivo) y wellness.frutiferia.com sigue sin DNS (G-5, se ve en otra sesión). | `0980219`, `b681b2c`, `154eaa9` + `794dde1`/`d1cee38`/`69df8b1` en los satélites |
+| 2026-08-19 | Fable 5 (feedback de Eduardo) | **El logo no era el oficial** — y la causa era la premisa de §7.H: el wordmark del OS es un derivado, no el logo de marca. Se reemplazó por el arte del Drive vectorizado 1:1 (IoU 99,52 % supermuestreado), morado oficial `#A531EB`, sin la barra divisoria inventada, con `.com`. **Las 4 superficies quedan byte a byte iguales** (`shasum` verificado). Vivo y verificado en frutiferia.com (15 s) y cotiza.frutiferia.com. D-7 revocada, §7.I nueva. | tema `59552aa` · cotizador `7c11dff` · wellness `8f0bf7e` · menú `6a04ed9` |
 ---
 
 ## 7. Diagnóstico y referentes (para las sesiones)
@@ -785,6 +786,44 @@ sin él, **1**. ⇒ Los SVG que se inyecten con `inline_asset_content` van **sin
 la explicación se pone en el `.liquid` que los llama o en el commit.
 
 ---
+
+### 7.I 🔴 El logo del OS NO es el logo oficial (2026-08-19, lo cazó Eduardo otra vez)
+
+7.H arregló el ARMADO del SVG, pero el arte de partida ya estaba mal. Eduardo:
+*"el logo de la web NO ES EL OFICIAL, está raro"*. Comparado contra el arte del Drive,
+lo que estaba en vivo tenía **tres** diferencias, no una:
+
+| | Estaba | Oficial |
+|---|---|---|
+| Barra divisoria `\|` entre isotipo y palabra | **sí** (`<rect x="38" y="4" width="1" height="20">`) | **no existe** — la inventó WUX-2 |
+| Wordmark | otra tipografía, mucho más pesada, **sin `.com`** | geométrica ligera, **`frutiferia.com`** |
+| Color | `#671D90` (morado institucional del OS) | **`#A531EB`** (el arte no tiene otro color) |
+
+**La causa raíz es una premisa falsa que 7.H daba por buena:** *"la fuente de verdad son
+`frutiferia-so/src/components/brand/*.tsx`"*. **No lo es.** El `FrutiferiaMark` (la manzana)
+sí coincide con el oficial, pero el `FrutiferiaWordmark` del OS es un **derivado**: otra
+letra y sin `.com`. Un logo institucional para la UI interna no es el logo de la marca.
+
+**La fuente de verdad es el arte del Drive:**
+`Frutiferia/4. MARKETING Y COMUNICACIONES/4.6 BRANDING Y PLANTILLAS/Logo 2026/`
+(`Logo-Horizontal-Morado.png` = lockup · `-Blanco` = negativo · `Logo-Manzana-*` = isotipo ·
+`Logo-Horizontal-Letras-*` = sólo wordmark). **No hay variante sin `.com`.**
+
+**Cómo se regenera** (no hay potrace ni ImageMagick en este Mac; el script vive en el
+scratchpad de la sesión y se puede rehacer con numpy+PIL): marching squares sobre el canal
+alpha → RDP con `eps=0.8` → **un solo path** `fill-rule="evenodd"`. Los brillos salen solos
+como contornos interiores porque **en el arte oficial son transparentes** (el PNG no tiene
+un solo píxel blanco — eso confirma la regla de 7.H desde el origen).
+**Verificación obligatoria: rasterizar el resultado con supermuestreo ×4 y medir IoU contra
+la máscara original.** Sin supermuestreo el número miente (da ~98,4 % por el borde de un
+píxel del rasterizador, no por el trazo). Resultado aceptado: **99,52 %** (637 puntos,
+8,7 KB — más liviano que el SVG malo que reemplaza).
+
+**Tamaño:** el lockup oficial es **5,86:1** (el falso era 4,7:1), así que a la misma altura
+es ~25 % más ancho. Verificado sin desborde ni recortes a 375 / 1200 / 1440 px; en el header
+va a 38 px de alto (223 px de ancho ≈ los 230 px que el logo original ocupaba antes de WUX-2).
+Los 3 satélites lo dimensionan con `h-8/h-9 w-auto`, así que el cambio de proporción es
+inocuo ahí.
 
 ## 8. Línea base y medición (la llena WUX-6)
 
