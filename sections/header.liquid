@@ -140,13 +140,13 @@
       {%- endif -%}
         <a class="logo__link inline-block" href="{{ routes.root_url }}">
           {%- if section.settings.use_svg_logo -%}
-            {%- comment -%} WUX-2 / D-7: logo 2026 (isotipo + wordmark), un solo SVG compartido con cotizador/wellness/menú. {%- endcomment -%}
+            {%- comment -%} Logo oficial 2026 (Logo 2026/Logo-Horizontal-Morado.png del Drive), vectorizado 1:1: isotipo + "frutiferia.com", morado oficial #A531EB, sin barra divisoria. UN solo path evenodd (los brillos son huecos) y el .svg NO puede llevar comentarios XML o inline_asset_content devuelve vacío. {%- endcomment -%}
             <span class="header__logo-svg flex items-center">
               {%- assign svg_logo_inline = 'frutiferia-logo.svg' | inline_asset_content -%}
               {%- if svg_logo_inline != blank -%}
                 {{ svg_logo_inline }}
               {%- else -%}
-                <img src="{{ 'frutiferia-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="178" height="38" loading="eager">
+                <img src="{{ 'frutiferia-logo.svg' | asset_url }}" alt="{{ shop.name }}" width="176" height="30" loading="eager">
               {%- endif -%}
             </span>
           {%- elsif section.settings.logo != blank -%}
@@ -851,7 +851,7 @@
       "type": "checkbox",
       "id": "use_svg_logo",
       "label": "Usar el logo SVG 2026 (isotipo + wordmark)",
-      "info": "assets/frutiferia-logo.svg, morado #671D90. Es el mismo archivo que cotizador, wellness y menú. Si lo apagas, se usa la imagen de abajo.",
+      "info": "assets/frutiferia-logo.svg — logo oficial 2026 vectorizado del arte del Drive, morado oficial #A531EB. Mismo archivo que cotizador, wellness y menú. Si lo apagas, se usa la imagen de abajo.",
       "default": true
     },
     {
