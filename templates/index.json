@@ -608,7 +608,7 @@
         "title": "Recetas y tips frescos",
         "heading_align": "text-start",
         "show_view_all": true,
-        "blog": "news",
+        "blog": "recetas",
         "layout": "carousel",
         "posts_to_show": 6,
         "show_featured_image": true,
