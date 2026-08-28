@@ -19,7 +19,17 @@
     assign is_cart = false
   endunless
 
-  if is_cart and is_quick_order != true
+  comment
+    BELLA-6 · ids UNICOS en la grilla.
+    Con is_quick_order (tarjeta de coleccion y quick-order-list) el id era
+    'quantity-' + section.id para TODAS las tarjetas: las 29 de /collections
+    compartian el mismo id y la misma pareja label-for / aria-controls, asi
+    que tocar la etiqueta de cualquier tarjeta enfocaba el input de la
+    primera. Se le agrega el variant_id, que es unico por tarjeta.
+  endcomment
+  if is_quick_order and variant_id != blank
+    assign id = 'quantity-' | append: section.id | append: '-' | append: variant_id
+  elsif is_cart and is_quick_order != true
     assign id = item.index | plus: 1 | prepend: 'quantity-'
   else
     assign id = 'quantity-' | append: section.id

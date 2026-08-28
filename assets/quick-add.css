@@ -22,7 +22,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  /* BELLA-6: 40 -> 44. WCAG 2.5.8 (Target Size Minimum) pide 24 CSS px; 44 es
+     el minimo de Apple/Material y el que usa el resto de esta tarjeta. */
+  min-height: 44px;
 }
 
 .product-card__price {

@@ -390,3 +390,58 @@ input[type='password'] {
   text-decoration: underline;
   text-underline-offset: 0.15em;
 }
+
+/* ----------------------------------------------------------------------------
+   (g) BELLA-6 · La cantidad se LEE (bug alto de la auditoría)
+
+   main.css:3865 pinta el número del stepper con `--btn-alt-text-color`, que en
+   `current` vale #ffffff (`button_alt_text_color`). El fondo del input es
+   `--input-bg-color`, o sea el fondo del tema: BLANCO SOBRE BLANCO. El número
+   existe, se puede seleccionar, y no se ve. Pasa en la ficha, en el carrito y
+   en la tarjeta de colección porque las tres piden `layout_style: 'combined'`.
+
+   Se arregla a MISMA especificidad (0,3,0) y sin !important: fru-brand.css
+   carga inmediatamente después de main.css, así que a empate gana el orden.
+   `--text-color` en Canopy es una tripleta RGB suelta ("26 26 26"), por eso va
+   envuelta en rgb() — sin el envoltorio la declaración es inválida y se
+   descarta en silencio, que es exactamente cómo nace este tipo de bug.
+---------------------------------------------------------------------------- */
+.js .qty-input--combined .qty-input__input {
+  color: rgb(var(--text-color));
+}
+
+/* ----------------------------------------------------------------------------
+   (h) BELLA-6 · Tap targets del stepper ≥ 44 × 44 px (WCAG 2.5.8)
+
+   Los botones – / + miden hoy ~39 px porque main.css:3958 fija
+   `width: calc(var(--padding) * 2.5 + 1.4rem) !important` y `height: 100%
+   !important`, y en la tarjeta main.css:3985 los baja aún más con
+   `height: var(--size) !important`.
+
+   El truco para no entrar en una guerra de !important: `min-width`/`min-height`
+   NO compiten con `width`/`height` en la cascada — se aplican DESPUÉS, en el
+   layout, y el resultado es max(width, min-width). Así que 44 px gana sin
+   pisar nada y sin un solo !important.
+
+   La caja sutil (`--border`, morado a 12%) es lo que hace que el objetivo se
+   VEA tocable: hoy los signos flotan sin borde y nadie sabe dónde termina el
+   botón. El input se estira igual para que la pastilla quede pareja.
+---------------------------------------------------------------------------- */
+.js .qty-input--combined .qty-input__btn {
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--btn-border-radius, 6px);
+}
+
+.js .qty-input--combined .qty-input__input {
+  min-height: 44px;
+}
+
+/* El "Agregar al carrito" de la ficha medía 42 px (Chrome, 375): bajo el
+   mínimo, y desde este sprint también más bajo que el stepper de 50 px que
+   tiene al lado, lo que se nota como un escalón. Mismo criterio que el "+"
+   de la tarjeta. */
+.product-info__add-to-cart .btn {
+  min-height: 44px;
+}
