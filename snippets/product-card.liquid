@@ -107,6 +107,74 @@
   if card_contain == nil
     assign card_contain = settings.card_contain
   endif
+
+  comment
+    BELLA-6 · FORMATO HONESTO.
+    El catalogo real escribe el formato en el propio titulo, entre parentesis:
+    "Palta Hass (kg)", "Platano (u)", "Cebolla (5 kg)", "Aceitunas (Frasco 225 gr)".
+    Medido sobre /products.json de produccion (250 productos): 67 dicen (kg),
+    23 (5 kg), 22 (u), 16 (10 u), 8 (100 gr)... y 37 no traen parentesis.
+
+    Se saca del titulo y se muestra abajo como linea propia, legible. NO se
+    inventa el envase ("malla", "caja", "bandeja"): solo se expande la
+    abreviatura, que es un dato que ya esta en el titulo. Donde no hay
+    parentesis no se escribe nada.
+
+    Solo se parte cuando hay UN par de parentesis (split de tamano 2); con dos
+    o mas el titulo se deja intacto, que es el fallback seguro.
+  endcomment
+  assign card_title = product.title
+  assign format_raw = ''
+  if product.title contains '('
+    assign title_parts = product.title | split: '('
+    if title_parts.size == 2
+      assign tail = title_parts[1]
+      if tail contains ')'
+        assign card_title = title_parts[0] | strip
+        assign format_raw = tail | split: ')' | first | strip
+      endif
+    endif
+  endif
+
+  assign format_label = ''
+  if format_raw != blank
+    assign format_low = format_raw | downcase
+    if format_low == 'kg'
+      assign format_label = 'Por kilo'
+    elsif format_low == 'u'
+      assign format_label = 'La unidad'
+    elsif format_low == 'pqte'
+      assign format_label = 'El paquete'
+    elsif format_low == 'pack'
+      assign format_label = 'El pack'
+    else
+      comment
+        Caso "N unidad": la ultima palabra es la unidad, lo de antes se conserva
+        tal cual (asi "Frasco 225 gr" queda "Frasco 225 gramos" y no se pierde
+        el "Frasco", que es dato del vendedor y no invento nuestro).
+      endcomment
+      assign format_words = format_raw | split: ' '
+      assign format_unit = format_words | last | downcase
+      assign format_head = ''
+      for word in format_words
+        unless forloop.last
+          assign format_head = format_head | append: word | append: ' '
+        endunless
+      endfor
+      if format_unit == 'kg'
+        assign format_unit_long = 'kilos'
+      elsif format_unit == 'u'
+        assign format_unit_long = 'unidades'
+      elsif format_unit == 'gr' or format_unit == 'g'
+        assign format_unit_long = 'gramos'
+      elsif format_unit == 'pqte'
+        assign format_unit_long = 'paquetes'
+      else
+        assign format_unit_long = format_words | last
+      endif
+      assign format_label = format_head | append: format_unit_long | strip
+    endif
+  endif
 -%}
 
 {%- if product and product != empty -%}
@@ -259,9 +327,16 @@
 
           <p class="card__title font-bold mt-1 mb-0">
             <a href="{{ product_url }}" class="card-link text-current js-prod-link">
-              {{- product.title | escape -}}
+              {{- card_title | escape -}}
+              {%- if format_label != blank -%}
+                <span class="visually-hidden"> ({{ format_raw | escape }})</span>
+              {%- endif -%}
             </a>
           </p>
+
+          {%- if format_label != blank -%}
+            <p class="card__format text-sm text-theme-light mt-0 mb-0">{{ format_label | escape }}</p>
+          {%- endif -%}
 
           {%- if settings.card_show_subtitle and product.metafields.descriptors.subtitle != blank -%}
             <p class="card__subtitle text-sm text-current mb-1 mt-1">

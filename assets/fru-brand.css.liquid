@@ -445,3 +445,110 @@ input[type='password'] {
 .product-info__add-to-cart .btn {
   min-height: 44px;
 }
+
+/* ----------------------------------------------------------------------------
+   (i) BELLA-6 · Viñetas check en la sección de FrutiMenu
+
+   El texto vive en un setting `richtext`. El validador de Shopify rechaza el
+   archivo entero si el HTML del setting trae cualquier atributo que no sea
+   href (hallazgo del bloque (f)), así que el check NO se puede meter en el
+   contenido: va por CSS, y en CSS un data-URI SVG sí se puede.
+
+   Reproduce el trazo de `.audience-door__check` de sections/audience-doors.liquid
+   (mismo path, mismo stroke-width 2.6, mismos remates redondos) para que la
+   home tenga UN solo dibujo de check y no dos parecidos.
+
+   main.css:2303 dibuja la viñeta con `.rte ul li::before` — un círculo de
+   0.5em con background-color, no un ::marker. Por eso se repinta el mismo
+   pseudo-elemento en vez de tocar list-style, que aquí no haría nada.
+   Scoped por el id de la sección: `[id$="__frutimenu_promo"]` da (0,2,2)
+   contra los (0,1,2) de main.css y no toca ninguna otra lista del tema.
+---------------------------------------------------------------------------- */
+[id$="__frutimenu_promo"] .rte ul li::before {
+  width: 1.05em;
+  height: 1.05em;
+  margin-top: -0.15em;
+  margin-inline-start: -1.5em;
+  margin-inline-end: 0.45em;
+  border-radius: 0;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23671D90' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.6 9.2 17.8 20 6.8'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+/* ----------------------------------------------------------------------------
+   (j) BELLA-6 · Foto de FrutiMenu en móvil (huérfano de BELLA-3)
+
+   Confirmado en BELLA-3: el schema de sections/media-with-text.liquid sólo
+   expone `image_fit`, `media_width` y `media_scale`, y los tres dicen "on large
+   screens". No hay setting de móvil: esto SÍ es regla CSS obligada.
+
+   La sección pinta el alto con un `style="padding-top: N%"` INLINE calculado
+   del aspect ratio de la foto, y la img es `.img-fit` (position:absolute,
+   height:100%). O sea: limitar la img sola no sirve de nada, el hueco lo manda
+   el padding-top del contenedor. Hay que apagar ese padding — y como es un
+   estilo inline, ahí el !important es la única herramienta que existe — y
+   devolver la img al flujo para que su propio aspect-ratio mande.
+
+   Scoped a la sección de FrutiMenu: la otra media-with-text de la home
+   ("Más de 7 años", `media_with_text_VAd4Hi`) usa image_fit: contain con el
+   logo y queda INTACTA.
+---------------------------------------------------------------------------- */
+@media (max-width: 768.98px) {
+  [id$="__frutimenu_promo"] .media-with-text__media .media {
+    height: auto;
+    padding-top: 0 !important;
+  }
+
+  [id$="__frutimenu_promo"] .media-with-text__media .media img {
+    position: static;
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   (k) BELLA-6 · Banda B2B — lo que faltó de D-4 (huérfano de BELLA-3)
+
+   BELLA-3 dejó el fondo lila (color_scheme 2 → 1, cuyo bg #F4F0F7 ES
+   `--fru-morado-050`) y el titular en h1. Lo que NO se puede poner desde
+   templates/index.json es el color: sections/rich-text.liquid no expone ningún
+   setting de tinta de titular, de riel ni de botón — sólo `color_scheme`.
+   Por eso el resto de D-4 va por CSS scoped al id de la sección.
+
+   Además arregla un daño colateral de BELLA-3 que estaba a la vista: el botón
+   "Cotiza por WhatsApp" es `.btn--secondary`, que se pinta con
+   `--btn-alt-text-color` = #ffffff — blanco sobre el lila nuevo. Aquí ese
+   token pasa a índigo de canal y el botón vuelve a leerse.
+
+   Contrastes ya calculados en BELLA-3 sobre el lila #F4F0F7 (no hace falta
+   recalcularlos): `--fru-morado-900` 11,61:1 · `--pill-b2b-ink` 11,17:1.
+   Los dos son AAA.
+---------------------------------------------------------------------------- */
+.section[id$="__b2b_band"] {
+  border-top: 3px solid var(--pill-b2b-ink);
+}
+
+.section[id$="__b2b_band"] .section__block--heading {
+  color: var(--fru-morado-900);
+}
+
+.section[id$="__b2b_band"] .section__block--subheading {
+  color: var(--pill-b2b-ink);
+  letter-spacing: 0.08em;
+}
+
+.section[id$="__b2b_band"] .btn--secondary {
+  /* `--btn-border-width` vale 0 en el tema, asi que sin esta linea el
+     "Cotiza por WhatsApp" queda como un enlace suelto y no como el CTA de
+     canal que pide D-4. Medido en Chrome: borderTopWidth 0px antes, 2px ahora. */
+  --btn-border-width: 2px;
+  --btn-alt-bg-color: 244 240 247; /* el propio lila --fru-morado-050 */
+  --btn-alt-bg-alpha: 1;
+  --btn-alt-text-color: 22 22 162; /* --pill-b2b-ink #1616A2 */
+}
