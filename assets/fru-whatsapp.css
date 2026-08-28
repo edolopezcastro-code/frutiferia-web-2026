@@ -52,3 +52,12 @@
     transition: none;
   }
 }
+
+/* BELLA-5: /cart móvil estrena la barra fija de pago (.fru-cart-bar, ~70px +
+   safe-area). El FAB se sube por encima de ella; en escritorio esa barra no
+   existe, así que la regla vive dentro de la media query. */
+@media (max-width: 768.98px) {
+  .fru-whatsapp-fab--clear-cart-bar {
+    bottom: calc(92px + env(safe-area-inset-bottom));
+  }
+}

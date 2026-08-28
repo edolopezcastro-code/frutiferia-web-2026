@@ -55,11 +55,19 @@
   if request.page_type == 'product'
     assign fru_wa_clear_dock = true
   endif
+
+  # BELLA-5: /cart estrena barra fija de pago (sólo móvil, .fru-cart-bar) —
+  # el FAB tiene que subirse o la tapa. Clase aparte de --clear-dock porque
+  # esa barra NO existe en escritorio: allá el FAB se queda abajo.
+  assign fru_wa_clear_cart_bar = false
+  if request.page_type == 'cart'
+    assign fru_wa_clear_cart_bar = true
+  endif
 -%}
 
 <a
   href="https://wa.me/{{ fru_wa_phone }}?text={{ fru_wa_text | url_encode }}"
-  class="fru-whatsapp-fab{% if fru_wa_clear_dock %} fru-whatsapp-fab--clear-dock{% endif %}"
+  class="fru-whatsapp-fab{% if fru_wa_clear_dock %} fru-whatsapp-fab--clear-dock{% endif %}{% if fru_wa_clear_cart_bar %} fru-whatsapp-fab--clear-cart-bar{% endif %}"
   target="_blank"
   rel="noopener noreferrer"
   aria-label="{{ fru_wa_aria }}"

@@ -3,6 +3,7 @@
 
 {%- if cart != empty -%}
   <link rel="stylesheet" id="cart-summary-css" href="{{ 'cart-summary.css' | asset_url }}">
+  <link rel="stylesheet" href="{{ 'fru-cart-bar.css' | asset_url }}">
 {%- endif -%}
 
 {%- if section.settings.show_order_note -%}
@@ -225,6 +226,25 @@
     {%- endif -%}
   </form>
 </div>
+
+{%- comment -%}
+  BELLA-5 — barra fija de pago, sólo móvil (CSS en fru-cart-bar.css). En /cart
+  el botón "Pagar" vivía al final del resumen, fuera del pliegue: había que
+  scrollear toda la lista para encontrarlo. Vive FUERA del <form> y se ata a él
+  con form="cart", así que el submit arrastra los <select> del delivery-picker
+  igual que el botón del resumen, y el gate de delivery-picker.js lo cubre.
+  Con cart_terms_page configurado no se muestra: el check de términos vive en
+  el resumen y saltárselo sería aceptar por el cliente.
+{%- endcomment -%}
+{%- if cart != empty and section.settings.cart_terms_page == blank -%}
+  <div class="fru-cart-bar" role="group" aria-label="{{ 'cart.summary.title' | t }}">
+    <span class="fru-cart-bar__total">
+      <span class="fru-cart-bar__label">{{ 'cart.summary.subtotal' | t }}</span>
+      <span class="fru-cart-bar__amount">{%- render 'price-as-money', price: cart.total_price, show_money_with_currency: true -%}</span>
+    </span>
+    <button type="submit" class="fru-cart-bar__btn" name="checkout" form="cart">Ir a pagar</button>
+  </div>
+{%- endif -%}
 
 {%- if section.settings.cart_terms_page != blank -%}
   <script src="{{ 'cart-terms.js' | asset_url }}" defer="defer"></script>

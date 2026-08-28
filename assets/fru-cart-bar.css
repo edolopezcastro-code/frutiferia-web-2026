@@ -1,0 +1,86 @@
+/* ============================================================================
+   fru-cart-bar.css — BELLA-5: barra fija de pago en /cart, sólo móvil.
+
+   El dato: 76% de las sesiones son móviles y en /cart el botón "Pagar" vivía
+   bajo el resumen, fuera del pliegue — había que scrollear TODA la lista de
+   productos para encontrarlo. La barra repite subtotal + "Ir a pagar" pegada
+   al borde inferior, visible desde el primer ítem.
+
+   El botón es un <button name="checkout" form="cart">: hace submit del MISMO
+   form que el botón del resumen, así que arrastra los <select> del
+   delivery-picker y el gate de delivery-picker.js lo cubre igual (gate()
+   recorre todos los botones name="checkout" del form).
+
+   z-index 34: bajo el FAB de WhatsApp (35, que en /cart sube a clear-dock) y
+   muy por debajo de .drawer (40), para que el carrito lateral la tape entera.
+   ============================================================================ */
+
+.fru-cart-bar {
+  display: none;
+}
+
+@media (max-width: 768.98px) {
+  .fru-cart-bar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 34;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    border-top: 1px solid var(--border, rgba(103, 29, 144, 0.12));
+    padding: 10px max(12px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+    background: #fff;
+    box-shadow: 0 -2px 12px rgba(103, 29, 144, 0.1);
+  }
+
+  .fru-cart-bar__total {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.2;
+  }
+
+  .fru-cart-bar__label {
+    color: var(--text-muted, #5b5b5b);
+    font-size: 1.2rem;
+  }
+
+  .fru-cart-bar__amount {
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+
+  /* Relleno #17845A — 4,68:1 con texto blanco, el único verde de la paleta que
+     pasa AA (el degradado --grad-cta da 2,54:1 y reprueba). */
+  .fru-cart-bar__btn {
+    flex: 0 0 auto;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: 0;
+    border-radius: var(--radius-pill, 9999px);
+    background: var(--color-cta-solid, #17845A);
+    color: #fff;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .fru-cart-bar__btn:hover,
+  .fru-cart-bar__btn:focus-visible {
+    background: var(--color-cta-solid-hover, #136E4B);
+  }
+
+  .fru-cart-bar__btn[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* Aire al final de la página para que la barra no tape el último producto
+     ni el botón del resumen. */
+  .cc-main-cart {
+    padding-bottom: calc(92px + env(safe-area-inset-bottom));
+  }
+}
