@@ -16,6 +16,11 @@
   Opciones rellenadas por assets/delivery-picker.js desde la edge fn
   delivery-availability.
 
+  BELLA-5: el JS preselecciona el día y (si la recuerda) la zona, y colapsa el
+  bloque a la línea .js-delivery-summary — los campos siguen en el DOM, sólo
+  ocultos, así que el submit del form sigue enviándolos. El mensaje de error vive
+  FUERA del contenedor colapsable para que nunca quede escondido.
+
   Params:
     form_id: id del form de checkout ('cart-drawer-form' en drawer, 'cart' en página)
 {%- endcomment -%}
@@ -24,6 +29,10 @@
   assign dp_form = form_id | default: 'cart'
   assign dp_date = cart.attributes['Fecha de Entrega']
   assign dp_horario = cart.attributes['Horario']
+  assign dp_city = ''
+  if customer.default_address.city != blank
+    assign dp_city = customer.default_address.city
+  endif
 -%}
 
 <delivery-picker
@@ -31,61 +40,81 @@
   data-availability-url="https://ykvexpxvlivcqamqsafe.supabase.co/functions/v1/delivery-availability"
   data-selected-date="{{ dp_date | escape }}"
   data-selected-zone="{{ dp_horario | escape }}"
+  data-customer-city="{{ dp_city | escape }}"
   data-window="12:00-16:00"
   data-form="{{ dp_form }}"
 >
-  <p class="delivery-picker__title h6 block regular-text font-normal mb-2">
+  <button
+    type="button"
+    class="delivery-picker__summary js-delivery-summary"
+    id="delivery-summary-{{ dp_form }}"
+    aria-controls="delivery-fields-{{ dp_form }}"
+    aria-expanded="false"
+    hidden
+  >
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
       <rect x="3" y="4" width="18" height="18" rx="2"></rect>
       <path d="M16 2v4M8 2v4M3 10h18"></path>
     </svg>
-    <span>Selecciona un día de reparto</span>
-  </p>
+    <span class="delivery-picker__summary-text js-delivery-summary-text"></span>
+    <span class="delivery-picker__change">cambiar</span>
+  </button>
 
-  <label class="visually-hidden" for="delivery-date-{{ dp_form }}">Día de reparto</label>
-  <select
-    class="input w-full mb-2 js-delivery-date"
-    id="delivery-date-{{ dp_form }}"
-    name="attributes[Fecha de Entrega]"
-    form="{{ dp_form }}"
-    autocomplete="off"
-  >
-    {%- if dp_date != blank -%}
-      <option value="{{ dp_date | escape }}" selected>{{ dp_date | escape }}</option>
-    {%- else -%}
-      <option value="">Cargando días…</option>
-    {%- endif -%}
-  </select>
+  <div class="delivery-picker__fields js-delivery-fields" id="delivery-fields-{{ dp_form }}">
+    <p class="delivery-picker__title h6 block regular-text font-normal mb-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+        <path d="M16 2v4M8 2v4M3 10h18"></path>
+      </svg>
+      <span>Selecciona un día de reparto</span>
+    </p>
 
-  <label class="visually-hidden" for="delivery-zone-{{ dp_form }}">Zona y horario de reparto</label>
-  <select
-    class="input w-full js-delivery-zone"
-    id="delivery-zone-{{ dp_form }}"
-    name="attributes[Horario]"
-    form="{{ dp_form }}"
-    autocomplete="off"
-  >
-    {%- if dp_horario != blank -%}
-      <option value="{{ dp_horario | escape }}" selected>{{ dp_horario | split: ' [' | first | escape }}</option>
-    {%- else -%}
-      <option value="">Zona y horario</option>
-    {%- endif -%}
-  </select>
+    <label class="visually-hidden" for="delivery-date-{{ dp_form }}">Día de reparto</label>
+    <select
+      class="input w-full mb-2 js-delivery-date"
+      id="delivery-date-{{ dp_form }}"
+      name="attributes[Fecha de Entrega]"
+      form="{{ dp_form }}"
+      autocomplete="off"
+    >
+      {%- if dp_date != blank -%}
+        <option value="{{ dp_date | escape }}" selected>{{ dp_date | escape }}</option>
+      {%- else -%}
+        <option value="">Cargando días…</option>
+      {%- endif -%}
+    </select>
 
-  <p class="delivery-picker__hint text-sm mt-2 js-delivery-hint">
-    {%- comment -%}
-      CTA-10A: mismo mapping de canal que sections/main-account.liquid:51 —
-      la fecha real la sigue calculando delivery-availability, esto es solo
-      el texto de contexto para no mentirle a un cliente logueado con tag.
-    {%- endcomment -%}
-    {%- if customer.tags contains 'wellness' or customer.tags contains 'frutologia' -%}
-      <small>Tu reparto llega los <strong>lunes en la mañana</strong> y <strong>miércoles</strong>, directo a tu oficina.</small>
-    {%- elsif customer.tags contains 'b2b' or customer.tags contains 'b2g' -%}
-      <small>Tu reparto llega los <strong>martes</strong>, <strong>miércoles</strong>, <strong>viernes</strong> y <strong>sábado</strong>, coordinado con tu pedido.</small>
-    {%- else -%}
-      <small>Entregamos a domicilio los <strong>miércoles</strong> y <strong>sábados</strong>, entre las 12:00 y 16:00 hrs.</small>
-    {%- endif -%}
-  </p>
+    <label class="visually-hidden" for="delivery-zone-{{ dp_form }}">Zona y horario de reparto</label>
+    <select
+      class="input w-full js-delivery-zone"
+      id="delivery-zone-{{ dp_form }}"
+      name="attributes[Horario]"
+      form="{{ dp_form }}"
+      autocomplete="off"
+    >
+      {%- if dp_horario != blank -%}
+        <option value="{{ dp_horario | escape }}" selected>{{ dp_horario | split: ' [' | first | escape }}</option>
+      {%- else -%}
+        <option value="">Zona y horario</option>
+      {%- endif -%}
+    </select>
+
+    <p class="delivery-picker__hint text-sm mt-2 js-delivery-hint">
+      {%- comment -%}
+        CTA-10A: mismo mapping de canal que sections/main-account.liquid:51 —
+        la fecha real la sigue calculando delivery-availability, esto es solo
+        el texto de contexto para no mentirle a un cliente logueado con tag.
+      {%- endcomment -%}
+      {%- if customer.tags contains 'wellness' or customer.tags contains 'frutologia' -%}
+        <small>Tu reparto llega los <strong>lunes en la mañana</strong> y <strong>miércoles</strong>, directo a tu oficina.</small>
+      {%- elsif customer.tags contains 'b2b' or customer.tags contains 'b2g' -%}
+        <small>Tu reparto llega los <strong>martes</strong>, <strong>miércoles</strong>, <strong>viernes</strong> y <strong>sábado</strong>, coordinado con tu pedido.</small>
+      {%- else -%}
+        <small>Entregamos a domicilio los <strong>miércoles</strong> y <strong>sábados</strong>, entre las 12:00 y 16:00 hrs.</small>
+      {%- endif -%}
+    </p>
+  </div>
+
   <p class="delivery-picker__error text-sm mt-2 js-delivery-error" role="alert" hidden>
     <small>Selecciona el <strong>día</strong> y la <strong>zona</strong> de reparto para poder pagar.</small>
   </p>
