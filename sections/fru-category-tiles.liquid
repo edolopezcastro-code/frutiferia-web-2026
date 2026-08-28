@@ -64,6 +64,7 @@
           endif
 
           assign tile_title = block.settings.label | default: tile_collection.title
+          assign tile_subtitle = block.settings.subtitle
           assign tile_count = tile_collection.all_products_count
 
           # Las dos primeras fotos entran en el primer pliegue: se cargan de inmediato.
@@ -109,8 +110,10 @@
                   <span class="fru-tile__eyebrow">{{ block.settings.eyebrow | escape }}</span>
                 {%- endif -%}
                 <span class="fru-tile__title">{{ tile_title | escape }}</span>
-                {%- if tile_count > 0 -%}
-                  <span class="fru-tile__count">
+                {%- if tile_subtitle != blank -%}
+                  <span class="fru-tile__meta">{{ tile_subtitle | escape }}</span>
+                {%- elsif tile_count > 0 -%}
+                  <span class="fru-tile__meta fru-tile__meta--count">
                     {%- if tile_count == 1 -%}1 producto{%- else -%}{{ tile_count }} productos{%- endif -%}
                   </span>
                 {%- endif -%}
@@ -231,6 +234,12 @@
           "id": "eyebrow",
           "label": "Etiqueta del tile",
           "info": "Opcional. Una palabra corta sobre el nombre."
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "info": "Opcional. Reemplaza al contador de productos cuando lo llenas. Ej: «Palta, plátano, frutilla y más»."
         }
       ]
     }
@@ -241,12 +250,12 @@
       "name": "Tiles de categoría",
       "category": "Collections",
       "blocks": [
-        { "type": "tile", "settings": { "collection": "frutas-deliciosas", "label": "Frutas" } },
-        { "type": "tile", "settings": { "collection": "verduras-frescas", "label": "Verduras" } },
-        { "type": "tile", "settings": { "collection": "despensa", "label": "Despensa" } },
-        { "type": "tile", "settings": { "collection": "snacks", "label": "Snacks" } },
-        { "type": "tile", "settings": { "collection": "frutipack", "label": "FrutiPack" } },
-        { "type": "tile", "settings": { "collection": "ofertas", "label": "Ofertas" } }
+        { "type": "tile", "settings": { "collection": "frutas-deliciosas", "label": "Frutas", "subtitle": "Plátano, manzana y fruta de estación" } },
+        { "type": "tile", "settings": { "collection": "verduras-frescas", "label": "Verduras", "subtitle": "Tomate, papa y verdura fresca del día" } },
+        { "type": "tile", "settings": { "collection": "despensa", "label": "Despensa", "subtitle": "Huevos, legumbres y básicos de la casa" } },
+        { "type": "tile", "settings": { "collection": "snacks", "label": "Snacks", "subtitle": "Maní, frutos secos y algo para picar" } },
+        { "type": "tile", "settings": { "collection": "frutipack", "label": "FrutiPack", "subtitle": "Canastas armadas, listas para pedir" } },
+        { "type": "tile", "settings": { "collection": "ofertas", "label": "Ofertas", "subtitle": "Plátano, tomate y más a precio rebajado" } }
       ]
     }
   ],

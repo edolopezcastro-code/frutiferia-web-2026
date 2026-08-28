@@ -103,42 +103,48 @@
           "type": "tile",
           "settings": {
             "collection": "frutas-deliciosas",
-            "label": "Frutas"
+            "label": "Frutas",
+            "subtitle": "Plátano, manzana y fruta de estación"
           }
         },
         "tile_verduras": {
           "type": "tile",
           "settings": {
             "collection": "verduras-frescas",
-            "label": "Verduras"
+            "label": "Verduras",
+            "subtitle": "Tomate, papa y verdura fresca del día"
           }
         },
         "tile_despensa": {
           "type": "tile",
           "settings": {
             "collection": "despensa",
-            "label": "Despensa"
+            "label": "Despensa",
+            "subtitle": "Huevos, legumbres y básicos de la casa"
           }
         },
         "tile_snacks": {
           "type": "tile",
           "settings": {
             "collection": "snacks",
-            "label": "Snacks"
+            "label": "Snacks",
+            "subtitle": "Maní, frutos secos y algo para picar"
           }
         },
         "tile_frutipack": {
           "type": "tile",
           "settings": {
             "collection": "frutipack",
-            "label": "FrutiPack"
+            "label": "FrutiPack",
+            "subtitle": "Canastas armadas, listas para pedir"
           }
         },
         "tile_ofertas": {
           "type": "tile",
           "settings": {
             "collection": "ofertas",
-            "label": "Ofertas"
+            "label": "Ofertas",
+            "subtitle": "Plátano, tomate y más a precio rebajado"
           }
         }
       },
