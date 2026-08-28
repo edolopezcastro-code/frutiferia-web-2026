@@ -47,7 +47,8 @@
             "proof": "",
             "cta_label": "Comprar",
             "cta_link": "#tiles",
-            "lead": false
+            "lead": true,
+            "name_short": "Mi casa"
           }
         },
         "door_negocios": {
@@ -61,7 +62,8 @@
             "proof": "Cotización en menos de 24 h",
             "cta_label": "Cotizar",
             "cta_link": "https://cotiza.frutiferia.com",
-            "lead": true
+            "lead": false,
+            "name_short": "Mi negocio"
           }
         },
         "door_bienestar": {
@@ -75,7 +77,8 @@
             "proof": "",
             "cta_label": "Cotizar cajas",
             "cta_link": "shopify://pages/bienestar",
-            "lead": false
+            "lead": false,
+            "name_short": "Mi equipo"
           }
         }
       },
@@ -246,7 +249,7 @@
         "fm_text": {
           "type": "text",
           "settings": {
-            "text": "<p>Deja de improvisar a última hora. <strong>FrutiMenu</strong> arma tu plan de 7 días con recetas chilenas saludables y te entrega la lista de compras lista para pedir en Frutiferia.</p><ul><li>🥗 Recetas ricas y balanceadas para la mesa chilena</li><li>🔥 Con las calorías y proteína de cada plato</li><li>🛒 Tu lista de ingredientes lista para pedir fresca</li></ul><p><strong>Gratis, sin registro y en 1 minuto.</strong></p>",
+            "text": "<p>Deja de improvisar a última hora. <strong>FrutiMenu</strong> arma tu semana con recetas chilenas y te deja la compra lista para pedir.</p><ul><li>Recetas balanceadas, con calorías y proteína por plato</li><li>Los ingredientes caen armados a tu carrito</li><li>Gratis, sin registro y en 1 minuto</li></ul>",
             "enlarge_text": false
           }
         },
@@ -278,91 +281,10 @@
         "only_content_color_scheme": false
       }
     },
-    "3721924b-630b-4a60-b724-521fef7aa78e": {
-      "type": "icons-with-text",
-      "blocks": {
-        "template--16154615972040__3721924b-630b-4a60-b724-521fef7aa78e-item-1": {
-          "type": "item",
-          "settings": {
-            "icon": "box",
-            "use_custom_icon_color": false,
-            "icon_color": "#000000",
-            "heading": "Envío Gratis",
-            "text": "<p>Sobre $50.000</p>",
-            "link": "shopify://pages/reparto"
-          }
-        },
-        "template--16154615972040__3721924b-630b-4a60-b724-521fef7aa78e-item-2": {
-          "type": "item",
-          "settings": {
-            "icon": "chat_bubble",
-            "use_custom_icon_color": false,
-            "icon_color": "#000000",
-            "heading": "¿Hablemos?",
-            "text": "<p>¡Despejemos tus dudas!</p>",
-            "link": "https://api.whatsapp.com/send?phone=+56966093891&text=Hola%20FrutiEquipo,%20necesito%20de%20su%20ayuda!"
-          }
-        },
-        "item_8hDrkT": {
-          "type": "item",
-          "settings": {
-            "icon": "leaf",
-            "use_custom_icon_color": false,
-            "icon_color": "#000000",
-            "heading": "Reduce el plástico",
-            "text": "<p>Minimicemos el uso de plástico innecesario</p>",
-            "link": ""
-          }
-        },
-        "item_7zJ3Lp": {
-          "type": "item",
-          "settings": {
-            "icon": "check_mark_in_circle",
-            "use_custom_icon_color": false,
-            "icon_color": "#000000",
-            "heading": "7 Años de Experiencia",
-            "text": "<p>Más de 20.000 pedidos entregados a hogares y negocios de la región</p>",
-            "link": ""
-          }
-        },
-        "item_BF9fk4": {
-          "type": "item",
-          "settings": {
-            "icon": "credit_card",
-            "use_custom_icon_color": false,
-            "icon_color": "#000000",
-            "heading": "Paga como quieras",
-            "text": "<p>Tenemos diversos medios de pago</p>",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "template--16154615972040__3721924b-630b-4a60-b724-521fef7aa78e-item-1",
-        "template--16154615972040__3721924b-630b-4a60-b724-521fef7aa78e-item-2",
-        "item_8hDrkT",
-        "item_7zJ3Lp",
-        "item_BF9fk4"
-      ],
-      "settings": {
-        "heading": "",
-        "heading_align": "text-start",
-        "icon_size": 44,
-        "title_type_scale": "medium",
-        "text_type_scale": "medium",
-        "icon_position": "beside",
-        "mobile_stack": false,
-        "section_height": "small",
-        "color_scheme": "none",
-        "full_width": true,
-        "dividers": "none",
-        "prevent_animation": false
-      }
-    },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Ofertas de la semana 🔥",
+        "title": "Ofertas de la semana",
         "heading_align": "text-start",
         "show_view_all": true,
         "collection": "ofertas",
@@ -455,14 +377,14 @@
           "type": "heading",
           "settings": {
             "heading": "¿Tienes un negocio?",
-            "heading_size": "h2",
+            "heading_size": "h1",
             "heading_h1": false
           }
         },
         "b2b_text": {
           "type": "text",
           "settings": {
-            "text": "<p>Restaurantes, hoteles, cafeterías y casinos: <strong>cero quiebres de stock</strong>, calidad pareja en cada entrega, <strong>despacho programado</strong> y factura al día. Tu cocina, siempre abastecida — cotización en menos de 24 h. Mira <a href=\"/pages/proveedor-restaurantes\">cómo abastecemos restaurantes en Viña del Mar</a>.</p>",
+            "text": "<p>Restaurantes, hoteles, cafeterías y casinos: <strong>cero quiebres de stock</strong>, calidad pareja en cada entrega, <strong>despacho programado</strong> y factura al día. Tu cocina, siempre abastecida — cotización en menos de 24 h. Mira <a href=\"/pages/proveedor-restaurantes\">cómo abastecemos restaurantes en Viña del Mar</a>.</p><p><em>“Abastecemos toda la cocina del restaurante con Frutiferia. Despacho programado, factura al día y producto parejo todas las semanas. Nos sacó un peso de encima.”</em><br>— Jefe de cocina, restaurante de Viña del Mar</p>",
             "enlarge_text": true
           }
         },
@@ -488,7 +410,7 @@
         "text_position": "justify-center",
         "text_align": "text-center",
         "mob_center_text": true,
-        "color_scheme": "2",
+        "color_scheme": "1",
         "full_width": true,
         "prevent_animation": false
       }
@@ -496,68 +418,117 @@
     "testimonials_JERNA6": {
       "type": "testimonials",
       "blocks": {
-        "testimonial_7McUUW": {
+        "review_carolina": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "<p>Llevo más de 2 años pidiendo en Frutiferia y la calidad siempre es excelente. Las frutas llegan frescas y el servicio es muy puntual.</p>",
-            "author": "Carolina M.",
-            "author_info": "Clienta desde 2024 - Viña del Mar",
+            "testimonial": "<p>Excelente experiencia. Productos frescos, que duran. Muy fácil para elegir, pagar y solicitar reparto. 10/10.</p>",
+            "author": "Carolina Espíndola Patterson",
+            "author_info": "Reseña de Google",
             "show_star_rating": true,
             "star_rating": 5
           }
         },
-        "testimonial_3eypfh": {
+        "review_magdalena": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "<p>Pedimos FrutiPacks para la oficina todas las semanas. Excelente relación calidad-precio y nos encanta que sean conscientes con el packaging.</p>",
-            "author": "Rodrigo P.",
-            "author_info": "Cliente empresa - Concón",
+            "testimonial": "<p>Me encanta Frutiferia!! Es el único lugar donde escogen las frutas y verduras como si uno fuera a la feria o al súper. Excelente calidad siempre, precios convenientes y con un sello de amor por el trabajo maravillosooo. Me encantan y los recomiendo a miiil!!!</p>",
+            "author": "Magdalena López",
+            "author_info": "Reseña de Google",
             "show_star_rating": true,
             "star_rating": 5
           }
         },
-        "testimonial_TCn6Rg": {
+        "review_beatriz": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "<p>Me encanta poder pedir por WhatsApp y que me llegue todo a la puerta. Las verduras siempre están frescas y el equipo es muy amable.</p>",
-            "author": "Macarena S.",
-            "author_info": "Clienta frecuente - Reñaca",
+            "testimonial": "<p>Siempre pido la fruta y verdura a Frutiferia por la comodidad de que llegue a tu casa, exactamente lo que pediste y en el horario convenido, me gusta también que siempre venga todo ordenado y protegido, se mueren además lo rico que es todo, especialmente las frutillas, que es mi fruta favorita!!!</p>",
+            "author": "Beatriz Barry",
+            "author_info": "Reseña de Google",
             "show_star_rating": true,
             "star_rating": 5
           }
         },
-        "testimonial_b2b_resto": {
+        "review_washington": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "<p>Abastecemos toda la cocina del restaurante con Frutiferia. Despacho programado, factura al día y producto parejo todas las semanas. Nos sacó un peso de encima.</p>",
-            "author": "Jefe de cocina",
-            "author_info": "Restaurante - Viña del Mar",
+            "testimonial": "<p>Frutiferia es eso que jamás pensé que iba a tener en una frutería, calidad, precio y buenísima experiencia al cliente. Los conocí hace unos años y son mis mejores amigos hoy, aunque no nos conocemos.</p>",
+            "author": "Washington Maturana C.",
+            "author_info": "Reseña de Google",
+            "show_star_rating": true,
+            "star_rating": 5
+          }
+        },
+        "review_rocio": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "<p>Estupendo todo! la atención, la calidad de las frutas y verduras, excelentes los productos de pymes (como la mantequilla de maní!!) súper recomendado</p>",
+            "author": "Rocío Álvarez Tapia",
+            "author_info": "Reseña de Google",
+            "show_star_rating": true,
+            "star_rating": 5
+          }
+        },
+        "review_paula": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "<p>La fruta y verdura fresca y exquisita! El servicio excelente. 10/10. 100% recomendado</p>",
+            "author": "Paula Arismendi",
+            "author_info": "Reseña de Google",
+            "show_star_rating": true,
+            "star_rating": 5
+          }
+        },
+        "review_solange": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "<p>Excelentes productos, sin duda volveré a pedir mis frutas y verduras con ellos</p>",
+            "author": "Solange Paola Ramírez Valenzuela",
+            "author_info": "Reseña de Google",
+            "show_star_rating": true,
+            "star_rating": 5
+          }
+        },
+        "review_luz": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "<p>Excelente lugar atendido por sus dueños. Las verduras y frutas son de excelente calidad. Somos clientes por muchos años.</p>",
+            "author": "Luz Castro",
+            "author_info": "Reseña de Google",
             "show_star_rating": true,
             "star_rating": 5
           }
         }
       },
       "block_order": [
-        "testimonial_7McUUW",
-        "testimonial_3eypfh",
-        "testimonial_TCn6Rg",
-        "testimonial_b2b_resto"
+        "review_carolina",
+        "review_magdalena",
+        "review_beatriz",
+        "review_washington",
+        "review_rocio",
+        "review_paula",
+        "review_solange",
+        "review_luz"
       ],
       "settings": {
-        "heading": "Lo que dicen nuestros clientes",
+        "heading": "Lo que dicen nuestras clientas en Google",
         "show_quotes": false,
         "testimonial_size": "h3",
-        "testimonial_font": "heading",
+        "testimonial_font": "body",
         "text_position": "justify-center",
-        "text_align": "text-center justify-center",
+        "text_align": "text-start justify-start",
         "nav_style": "slideshow_nav_dots",
         "transition": "slide-fade",
-        "autoplay": true,
+        "autoplay": false,
         "slider_pause": false,
         "autoplay_speed": 5,
         "color_scheme": "1",
-        "star_color": "#f7c346",
-        "full_width": true
+        "star_color": "#B87A05",
+        "full_width": true,
+        "layout": "grid",
+        "grid_limit": 3,
+        "source_label": "Reseña de Google",
+        "reviews_link": "https://www.google.com/maps/search/?api=1&query=Frutiferia+Vi%C3%B1a+del+Mar",
+        "reviews_link_label": "Lee nuestras reseñas en Google →"
       }
     },
     "media_with_text_VAd4Hi": {
@@ -660,59 +631,6 @@
         "transparent_content_color": "#ffffff",
         "tint_color": "#000000",
         "tint_opacity": 20
-      }
-    },
-    "scrolling_banner_ArEtdk": {
-      "type": "scrolling-banner",
-      "blocks": {
-        "text_TznU3D": {
-          "type": "text",
-          "settings": {
-            "text": "7 Años de Experiencia",
-            "link": "",
-            "font": "heading",
-            "heading_size": "h1"
-          }
-        },
-        "icon_yNWEkf": {
-          "type": "icon",
-          "settings": {
-            "icon": "award",
-            "icon_size": 44
-          }
-        },
-        "text_Ppd7a7": {
-          "type": "text",
-          "settings": {
-            "text": "Más de 20.000 Pedidos Entregados",
-            "link": "",
-            "font": "body",
-            "heading_size": "h1"
-          }
-        },
-        "icon_HCkhVj": {
-          "type": "icon",
-          "settings": {
-            "icon": "box",
-            "icon_size": 64
-          }
-        }
-      },
-      "block_order": [
-        "text_TznU3D",
-        "icon_yNWEkf",
-        "text_Ppd7a7",
-        "icon_HCkhVj"
-      ],
-      "settings": {
-        "section_height": "medium",
-        "spacing": 32,
-        "speed": 15,
-        "direction": "normal",
-        "pausable": true,
-        "color_scheme": "1",
-        "dividers": "none",
-        "prevent_animation": false
       }
     },
     "video_9nrWpD": {
@@ -825,13 +743,11 @@
     "collection-list",
     "featured-collection",
     "frutimenu_promo",
-    "3721924b-630b-4a60-b724-521fef7aa78e",
     "testimonials_JERNA6",
     "b2b_band",
     "media_with_text_VAd4Hi",
     "featured_blog_recetas",
     "newsletter_WXJigB",
-    "scrolling_banner_ArEtdk",
     "recently_viewed_home",
     "business_logos",
     "video_9nrWpD",
