@@ -55,23 +55,22 @@ Evidencia completa: hallazgos por dimensión con veredicto en el registro de la 
 | # | Decisión | Default | Alternativa | Por qué |
 |---|---|---|---|---|
 | D-1 | **Tras "Agregar al carrito"** | `after_add_to_cart: "nothing"` — el botón confirma (is-success 1,4s) y el contador sube; el drawer solo se abre al tocar el carrito | `drawer_desktop` (drawer solo escritorio) | Hoy CADA agregar abre el drawer completo también en móvil: 2 gestos extra × ítem. El stepper en tarjeta ya existe. |
-| D-2 | **Pastilla líder del selector de público** | NINGUNA sólida: 3 píldoras hairline con tinta de canal. ⚠️ Revierte la decisión de jul-2026 ("B2B sólida porque trae caja") — en la HOME B2C con ventas cayendo, el foco vuelve al hogar; Negocios sigue primero en visibilidad de landing y menú | Mantener "Para mi negocio" sólida · o "Para mi casa" sólida | La única pastilla sólida (índigo #2525C1) se roba el foco de la home B2C y parece "opción seleccionada". |
-| D-3 | **Copy del hero** | H1 "Fruta y verdura elegida a mano," + highlight morado "en tu puerta miércoles y sábado" · sub "Repartimos en Viña, Valparaíso, Concón, Reñaca y Quilpué. Despacho gratis sobre $50.000." | Dejar el actual | El actual promete on-demand que la operación contradice, y el diferencial real (elegida a mano) no se dice NUNCA en la home. |
+| D-2 | **Pastilla líder del selector de público** | ✅ **RESUELTA por Eduardo (2026-08-27): se destaca la de HOGARES** — `door_hogares lead:true` (sólida, color de canal B2C con contraste AA verificado), negocios y equipo hairline con tinta de canal. | — | "Destaquemos algo para los clientes domiciliarios" (Eduardo). La B2B sólida se robaba el foco de la home B2C. |
+| D-3 | **Copy del hero** | ✅ **RESUELTA: copy textual de Eduardo (2026-08-27)** — H1 **"Fruta y verdura seleccionada que llega directamente a tu hogar"** (partido como heading "Fruta y verdura seleccionada" + highlight morado "que llega directamente a tu hogar") · debajo, en chico: "Repartos a domicilio miércoles y sábados" · el sub conserva zonas y despacho: "Viña, Valparaíso, Concón, Reñaca y Quilpué · Despacho gratis sobre $50.000". | — | Es su frase; corrige la promesa on-demand y dice el diferencial (seleccionada). |
 | D-4 | **Banda B2B** | Se re-viste: fondo lila `--fru-morado-050`, morado como TINTA (titular grande), riel índigo de canal, misma altura ~200-250px | Dejar el bloque morado sólido | Canon escrito en el propio repo: morado en tipografía/líneas/pastillas, NO fondos grandes. |
-| D-5 | **Retiro en tienda en la ficha** | `show_pickup_availability: false` (fuera el bloque "listo en 2 a 4 días") | Corregir el plazo en admin a "24 horas" si el retiro es real (G-7) | "2 a 4 días" al lado de "Agregar" contradice la frescura y el "miércoles y sábado" contiguo. |
+| D-5 | **Retiro en tienda en la ficha** | ✅ **RESUELTA: el retiro SÍ existe** (Eduardo 2026-08-27): miércoles y sábado 10:00–15:00, pidiendo hasta las 22:00 del día anterior. NO se apaga: el plazo del admin pasa a "24 horas" (BELLA-9) y la ficha muestra el horario real (BELLA-4). | — | "2 a 4 días" al lado de "Agregar" contradecía la frescura; el dato real es mejor argumento de venta. |
 | D-6 | **Botón "Vaciar carrito"** | OFF (drawer y página) | Degradarlo a link de texto chico | Acción destructiva a ancho completo pegada a "Pagar". |
 | D-7 | **Buscador móvil** | Se queda visible pero limpio: fuera el selector "Tod…" y el micrófono (CSS <600px); input de borde a borde | `minimise_search_mobile: true` (header ~64px, lupa expande) | 3 controles apretados roban ~114px al input; los tiles ya cumplen el rol del selector de tipo. |
 | D-8 | **Formatos B2B en la búsqueda** | Ocultar 5/20 kg del storefront search con metafield `seo.hidden=1` (verificando antes que ningún flujo web B2B dependa de esa búsqueda — el cotizador usa su propia API) | Dejarlos | "palta" sugiere formatos de $79.990-$109.990 entre 6 resultados B2C. |
-| D-9 | **Cupón de 2ª compra** | Proponer VUELVE10 (10%, 14 días) entregado POST-compra vía correo de confirmación — decisión comercial de Eduardo (G-4), no del tema | No hacer | Todo el incentivo está en la 1ª compra; el hábito se decide en la 2ª-4ª (patrón Gousto). Conecta con p/checkout_gracias_extension. |
-| D-10 | **Fotos nuevas** | Mientras no haya foto propia (G-2): Claude elige del banco de imágenes de marca la mejor candidata editorial (UN sujeto, aire, luz natural) y baja el overlay a 0-10 | Esperar la foto real | No bloquear el sprint por fotos; la foto de operación real llega después y se cambia en 2 min por admin. |
+| D-9 | **Cupón de 2ª compra** | ✅ **APROBADA por Eduardo (2026-08-27)**: VUELVE10 (10%, 14 días) post-compra vía correo de confirmación — BELLA-9 lo crea y lo deja ACTIVO. | — | Todo el incentivo estaba en la 1ª compra; el hábito se decide en la 2ª-4ª (patrón Gousto). Conecta con p/checkout_gracias_extension. |
+| D-10 | **Fotos nuevas** | ✅ Confirmada por Eduardo (2026-08-27): "tengo hartas en el banco de imágenes" — Claude elige del banco la mejor candidata editorial (UN sujeto, aire, luz natural) y baja el overlay a 0-10. Las fotos propias (G-2) las hará él, sin fecha. | — | No bloquear el sprint por fotos; la foto real se cambia en 2 min por admin. Bonus: la reseña de Paula Arismendi (§8) trae una foto REAL de una caja entregada. |
 | D-11 | **Fondo de ambiente** | `color_scheme_1_bg` → lila pálido `#F4F0F7` (una línea). El scheme 2 (banda morada) y 3 NO se tocan sin auditar qué otras plantillas los usan | Crema cálido | La alternancia blanco/lila tiñe la home de marca sin agregar un solo elemento — la mejor razón belleza/esfuerzo de la lista. |
 | D-12 | **Prueba social** | UNA tira (la del footer-group, reescrita con el diferencial real) + la sección "Más de 7 años" como único momento de historia. Fuera el ticker y la tira mid-page. Sin ratings inventados: estrellas solo cuando salgan de Judge.me | Dejar las 5 repeticiones | "20.000 pedidos / 7 años" ×5 pierde fuerza; lo que convence (elegido a mano, garantía de reposición, WhatsApp con personas) hoy solo se dice en el carrito. |
 
-**Preguntas batcheadas (responde solo si vetas):**
-1. ¿OK con que ninguna pastilla vaya sólida (D-2, revierte lo de julio)?
-2. ¿OK con el copy nuevo del hero (D-3)?
-3. ¿El retiro en tienda existe de verdad? (decide D-5 vs G-7)
-4. ¿Apruebas VUELVE10 2ª compra (D-9)?
+**✅ Las 4 preguntas fueron respondidas por Eduardo el 2026-08-27 (G-1 cerrado):**
+1) se destaca la pastilla de HOGARES · 2) el copy del hero es el suyo (ver D-3) · 3) el
+retiro existe: mié y sáb 10:00–15:00, pedido hasta las 22:00 del día anterior · 4) VUELVE10
+aprobado. Las respuestas ya están integradas en D-2, D-3, D-5 y D-9 y en los prompts.
 
 ## 3. Sprints
 
@@ -82,13 +81,13 @@ Cada sprint es dueño EXCLUSIVO de sus archivos. PUSH = DEPLOY EN VIVO.
 |---|---|---|---|---|
 | **BELLA-1** Interruptores de conversión | Sonnet | Todos los cambios de `config/settings_data.json` en un solo commit: `after_add_to_cart` (D-1), `enable_compare:false`, `color_scheme_1_bg` (D-11), `input_button_border_width:1`, colores de badge de oferta a canon, `predictive_search_show_vendor:false` | `config/settings_data.json` | ⬜ |
 | **BELLA-2** Hero editorial | Opus | Escala tipográfica en px (H1 48/34), preload responsivo del LCP, copy D-3, micro-línea de prueba social, CTA por tipo de cliente, foto móvil tratada, overlay 0-10 | `sections/fru-hero.liquid`, `templates/index.json` (solo settings de `fru_hero`) | ⬜ |
-| **BELLA-3** Home sin ruido y con marca | Opus | Fuera ticker + tira mid-page (D-12), footer-tira con diferenciales, pastillas sin lead (D-2), banda B2B re-vestida (D-4), emojis fuera, bullets FrutiMenu, testimonios en grid con atribución, barra superior sin 🚚 y sin truncar | `templates/index.json` (secciones no-hero), `sections/footer-group.json`, `sections/free-shipping-bar.liquid`, `assets/free-shipping-bar.css`, `sections/testimonials.liquid`, `sections/audience-doors.liquid` | ⬜ |
-| **BELLA-4** Ficha limpia | Sonnet | Borrar duplicados de `templates/product.json` (descripción ×2, aviso B2B ×2, estrellas ×2, msg_envio), matar pestaña Reseñas vacía y subir Judge.me, pickup off (D-5), trust-bar apilada en móvil, breadcrumb con categoría | `templates/product.json`, `snippets/breadcrumbs.liquid` | ⬜ |
+| **BELLA-3** Home sin ruido y con marca | Opus | Fuera ticker + tira mid-page (D-12), footer-tira con diferenciales, pastilla Hogares destacada (D-2), banda B2B re-vestida (D-4), emojis fuera, bullets FrutiMenu, testimonios reales de Google (§8) en grid, barra superior sin 🚚 y sin truncar | `templates/index.json` (secciones no-hero), `sections/footer-group.json`, `sections/free-shipping-bar.liquid`, `assets/free-shipping-bar.css`, `sections/testimonials.liquid`, `sections/audience-doors.liquid` | ⬜ |
+| **BELLA-4** Ficha limpia | Sonnet | Borrar duplicados de `templates/product.json` (descripción ×2, aviso B2B ×2, estrellas ×2, msg_envio), matar pestaña Reseñas vacía y subir Judge.me, horario real de retiro (D-5), trust-bar apilada en móvil, breadcrumb con categoría | `templates/product.json`, `snippets/breadcrumbs.liquid` | ⬜ |
 | **BELLA-5** Carrito y drawer que no estorban | Opus | Picker con día preseleccionado ("Pagar" nace activo), resumen del drawer abajo, pitch de cuenta después de Pagar, vaciar-carrito off (D-6), calculadora off, promoted solo carro vacío, sticky "Ir a pagar" en /cart móvil, FAB WhatsApp clear-dock en cart, línea "Pide antes del X → llega el Y" | `assets/delivery-picker.js`, `snippets/delivery-picker.liquid`, `snippets/cart-drawer.liquid`, `sections/overlay-group.json`, `sections/main-cart.liquid`, `snippets/fru-whatsapp.liquid`, `assets/fru-whatsapp.css` | ⬜ |
 | **BELLA-6** Tarjeta de feria | Opus | Cantidad visible (fix rgb), tap targets ≥44px, quick-add compacto ("+" que expande al stepper), ids únicos de cantidad, viñetas check por CSS, formato/`$ x kg` en tarjeta donde el dato exista | `snippets/product-card.liquid`, `assets/quick-add.css`, `assets/fru-brand.css.liquid`, `snippets/quantity-input.liquid` | ⬜ |
 | **BELLA-7** Recompra y búsqueda | Sonnet | Banda "Repite tu última caja" en home para clientes, reorder en drawer vacío y menú, búsqueda sin formatos B2B (D-8), quick-add en resultados, Verduras a 50/página | `sections/` (nueva `fru-reorder-band.liquid`), `templates/index.json` (solo esa sección), `snippets/predictive-search-tab-panel.liquid`, `templates/collection.json`, admin (metafields seo.hidden) | ⬜ |
 | **BELLA-8** Fotos y tiles premium | Sonnet | Tiles con altura real (4:3 escritorio) y títulos 24-26px, re-export de las 6 fotos de colección (≤1200px, q80, −250KB móvil), curaduría: 6 sujetos DISTINTOS del banco, packshots normalizados, subtítulo por tile | `assets/fru-category-tiles.css`, `sections/fru-category-tiles.liquid`, admin de colecciones (fotos, trampa `?v=`) | ⬜ |
-| **BELLA-9** Admin, SEO y apps | Sonnet | Título "Frutiferia" sin duplicar + meta desc 152c, product_type es-CL (Paltas/Papas/…), retiro 24h o off (G-7), Judge.me a dieta, propuesta VUELVE10 lista para G-4, guía desinstalar Smile (G-5) | Admin de Shopify vía navegador (nada del repo) | ⬜ |
+| **BELLA-9** Admin, SEO y apps | Sonnet | Título "Frutiferia" sin duplicar + meta desc 152c, product_type es-CL (Paltas/Papas/…), retiro a "24 horas" con horario real (D-5), Judge.me a dieta, VUELVE10 creado y ACTIVO (aprobado), guía desinstalar Smile (G-5) | Admin de Shopify vía navegador (nada del repo) | ⬜ |
 | **BELLA-10** QA integral + medición | Sonnet | Absorbe WUX-7: 12 rutas, medidas, contraste AA, tuteo, PSI, consola + línea base nueva de Shopify Analytics 30d vs §8 WUX. Entrega lista de fixes por sprint | ninguno (read-only) | ⬜ (tras 1-8) |
 
 ## 4. Prompts listos para pegar
@@ -149,9 +148,12 @@ Tareas:
    imagesrcset/imagesizes IDÉNTICOS al <source> móvil (480/640/900/1200w, sizes 100vw,
    media max-width:767px) y al <img> desktop (640-1920w, sizes "(min-width:768px) 42vw,
    100vw"), fetchpriority="high". El preload y el <picture> deben elegir SIEMPRE la misma URL.
-3. Copy D-3 en templates/index.json (settings de fru_hero): heading "Fruta y verdura elegida
-   a mano," heading_highlight "en tu puerta miércoles y sábado", subheading con zonas +
-   despacho gratis. `overlay_opacity` 45 → 10; baja también el default del schema (45 → 10).
+3. Copy D-3 (textual de Eduardo, no lo "mejores") en templates/index.json (settings de
+   fru_hero): heading "Fruta y verdura seleccionada" + heading_highlight "que llega
+   directamente a tu hogar"; debajo del H1, EN CHICO, la línea "Repartos a domicilio
+   miércoles y sábados"; el subheading conserva zonas + despacho ("Viña, Valparaíso,
+   Concón, Reñaca y Quilpué · Despacho gratis sobre $50.000"). `overlay_opacity` 45 → 10;
+   baja también el default del schema (45 → 10).
 4. Foto (D-10): elige del banco de imágenes de marca (Frutiferia/4. MARKETING…/banco de
    imágenes; ver memoria p/banco_imagenes_stock_frutiferia y f/banco_fotos_datos_clientes_legibles)
    la mejor candidata editorial: UN sujeto, aire, luz natural, sin datos de clientes legibles.
@@ -201,17 +203,21 @@ Tareas:
    Mora te responde al +56 9 6609 3891" · "Garantía simple — si algo llega mal, lo
    reponemos" · "+20.000 pedidos en 7 años". (Los WhatsApp: Mora hogares, Francisco
    +56 9 9326 1147 negocios — no los mezcles.)
-3. Pastillas (D-2): en templates/index.json pon lead:false en door_negocios (ninguna sólida).
-   En sections/audience-doors.liquid afina el estado sin lead: hairline + tinta de canal
-   legible (contraste AA calculado). En <400px labels cortos "Mi casa / Mi negocio / Mi
-   equipo" o font 13px, min-height 64px se mantiene.
+3. Pastillas (D-2, resuelta: la destacada es HOGARES): en templates/index.json pon
+   lead:true en door_hogares y lead:false en door_negocios. La sólida es "Para mi casa"
+   con el color de canal B2C — CALCULA el contraste AA del texto sobre ese relleno; si el
+   token B2C no pasa 4,5:1 con blanco, usa el ink oscuro del canal como fondo. Negocios y
+   equipo quedan hairline + tinta de canal. En <400px labels cortos "Mi casa / Mi negocio /
+   Mi equipo" o font 13px, min-height 64px se mantiene.
 4. Banda B2B (D-4): re-vestir b2b_band SIN borrarla — color_scheme al esquema claro, fondo
    lila --fru-morado-050, titular grande con tinta morada, riel/CTA índigo de canal. La
    quote del "Jefe de cocina" de testimonios se MUEVE aquí (habla al público correcto).
-5. Testimonios: grid de 3 simultáneas en escritorio (apiladas en móvil), cada una con
-   inicial en círculo (fondo #F4EFE9), nombre + comuna. SIN sello "verificado" ni ratings
-   mientras no haya fuente real (G-3: Eduardo confirma quotes y permisos). autoplay puede
-   quedarse en móvil.
+5. Testimonios (G-3 resuelto: reseñas REALES de Google, transcritas en §8 de este plan):
+   grid de 3 simultáneas en escritorio (apiladas en móvil), cada una con inicial en círculo
+   (fondo #F4EFE9), nombre + "Reseña de Google" + ★★★★★ (sin fecha en el sitio). Usa las 3
+   marcadas TOP en §8 y deja el resto en la rotación; la quote del "Jefe de cocina" se va a
+   la banda B2B. Los textos van VERBATIM — no retoques palabras de clientas. Cierra la
+   sección con el link "Lee nuestras reseñas en Google →" (ficha de Google de Frutiferia).
 6. Emojis y bullets: fuera "🔥" del título de featured-collection; el richtext de fm_text
    (FrutiMenu) queda sin emojis y sin el doble "lista…lista": "<p>Deja de improvisar a
    última hora. <strong>FrutiMenu</strong> arma tu semana con recetas chilenas y te deja la
@@ -258,7 +264,10 @@ En templates/product.json (verifica cada id con Read antes de borrar; conserva e
    MUERTO Shopify Product Reviews). En el array 'order' del template mueve la sección
    '1780585006ec95da1b' (widget Judge.me) INMEDIATAMENTE después de 'details' — las 3
    reseñas reales dejan de estar enterradas bajo dos carruseles.
-6. `show_pickup_availability: false` (D-5).
+6. Retiro (D-5 resuelta — el retiro SÍ existe): show_pickup_availability se QUEDA en true.
+   Agrega junto al bloque de despacho una línea con el horario real (sección custom-liquid,
+   NO richtext): "Retiro gratis en tienda: miércoles y sábado de 10:00 a 15:00 — pide hasta
+   las 22:00 del día anterior." (El plazo genérico "2 a 4 días" lo corrige BELLA-9 en admin.)
 7. Sección trust_bar_product: mobile_stack:true (las 4 señales visibles apiladas; el
    carrusel de a 1 se va).
 En snippets/breadcrumbs.liquid (rama product): fallback cuando no hay collection en la URL —
@@ -303,7 +312,8 @@ Tareas:
    respuesta de la edge fn delivery-availability que delivery-picker.js YA consume (tiene
    santiagoToday(); expón el próximo día+cutoff como JSON/evento compartido). NUNCA
    calcules la fecha con Date local a secas: f/fecha_servidor_utc_vs_santiago (20:00-23:59
-   CLT ya es "mañana" en UTC).
+   CLT ya es "mañana" en UTC). Dato de negocio (Eduardo 2026-08-27): el corte real es
+   22:00 del día anterior — si la API dice otra cosa, manda la API y reporta la diferencia.
 3. Menos ruido en overlay-group.json: `enable_empty_cart` y `enable_empty_cart_mobile` OFF
    (D-6) · `show_shipping_calculator` false · `promoted_products_visibility` "empty-cart" ·
    `show_media_promotion` false (config muerta que hoy no renderiza — se apaga para que
@@ -485,14 +495,17 @@ Tareas:
    colecciones automáticas o filtros de Search & Discovery dependen de esos valores
    (Products → filtrar por tipo te da el conteo; si una colección automática usa el tipo,
    actualiza su regla EN EL MISMO momento).
-4. Retiro en tienda (si Eduardo NO vetó D-5, la ficha ya no lo muestra; esto limpia el
-   checkout): Configuración → Envío → Retiro: plazo "24 horas" o desactivar (G-7 decide).
+4. Retiro en tienda (D-5 resuelta: existe — mié y sáb 10:00–15:00, corte 22:00 del día
+   anterior): Configuración → Envío → Retiro: plazo esperado "24 horas" (la opción más
+   cercana al corte real) y, si hay campo de instrucciones de retiro, pega el horario
+   textual. Verifica cómo queda el copy en la ficha y en el checkout.
 5. Judge.me a dieta: en la app, desactiva widgets no usados (Q&A, medals, carousel) —
    jdgmSettings inline pesa 34KB en CADA página; pide a soporte la carga asíncrona del CSS.
-6. VUELVE10 (D-9): deja CREADO EN BORRADOR el descuento (10%, un uso por cliente, 14 días
-   desde emisión, solo clientes con ≥1 pedido) y el texto del correo post-compra listo
-   para pegar — pero NO lo actives: G-4 es de Eduardo. (La creación de códigos por edge fn
-   requiere scopes price_rules que la app no tiene: ver plan web 2026 §backlog.)
+6. VUELVE10 (D-9 APROBADA por Eduardo el 2026-08-27): crea el descuento (10%, un uso por
+   cliente, 14 días, solo clientes con ≥1 pedido) y DÉJALO ACTIVO. Prepara el texto del
+   correo post-compra listo para pegar y muéstraselo a Eduardo en el cierre. (La creación
+   de códigos por edge fn requiere scopes price_rules que la app no tiene: ver plan web
+   2026 §backlog.)
 7. Smile: NO desinstales tú. Verifica en Apps si Smile está instalada y sin uso, y deja el
    paso exacto para Eduardo (G-5): Apps → Smile → Delete. Su script muerto pesa ~12KB/página.
 
@@ -545,13 +558,13 @@ iPhone que valen oro + qué números mirar el 27-sep).
 
 | # | Paso | Tiempo | Por qué importa | Cuándo |
 |---|---|---|---|---|
-| G-1 | Leer §2 y vetar (las 4 preguntas batcheadas están al final del §2). | 5 min | Sin veto, se ejecuta el default — incluida D-2 que revierte una decisión tuya de julio. | Antes de BELLA-1. |
-| G-2 | **Sesión de fotos de 1 hora** (celular bien usado o fotógrafo): (a) el mesón/cajas de la operación real con luz de mañana para el hero; (b) una canasta FrutiPack armada de verdad (G-8b del plan WUX, sigue abierto); (c) ustedes dos en el local con producto, sin globos, para "Más de 7 años". | 1 h | Es LA palanca de "hermosa": hoy 5 fotos de stock casi idénticas. Mientras tanto corre D-10 (banco de imágenes). | Esta semana si se puede. |
-| G-3 | Confirmar que las 4 quotes de testimonios son de clientes reales con permiso (Carolina M., Rodrigo P., Macarena S., el jefe de cocina). Si alguna no, mandar 2-3 reales de WhatsApp. | 10 min | Prueba social no verificable es un pasivo; con nombre+comuna real convence. | Antes de BELLA-3. |
-| G-4 | Activar VUELVE10 (BELLA-9 lo deja creado en borrador + correo listo). | 5 min | La retención se decide en la 2ª compra; hoy todo el incentivo está en la 1ª. | Tras BELLA-9. |
+| ~~G-1~~ | ~~Leer §2 y vetar~~ **✅ RESPONDIDO por Eduardo el 2026-08-27** — las 4 respuestas están integradas en D-2, D-3, D-5 y D-9 y en los prompts. | — | — | ✅ |
+| G-2 | **Sesión de fotos de 1 hora** (celular bien usado o fotógrafo): (a) el mesón/cajas de la operación real con luz de mañana para el hero; (b) una canasta FrutiPack armada de verdad (G-8b del plan WUX, sigue abierto); (c) ustedes dos en el local con producto, sin globos, para "Más de 7 años". Eduardo (2026-08-27): *"lo haré a mano por mientras"* — mientras tanto corre D-10 (banco de imágenes) y la foto real de la reseña de Paula Arismendi (§8) sirve de puente. | 1 h | Es LA palanca de "hermosa": hoy 5 fotos de stock casi idénticas. | Cuando pueda. |
+| ~~G-3~~ | ~~Confirmar testimonios~~ **✅ RESUELTO (2026-08-27): son reales, y Eduardo entregó 8 reseñas de Google** — transcritas VERBATIM en §8 para BELLA-3. | — | — | ✅ |
+| ~~G-4~~ | ~~Activar VUELVE10~~ **✅ APROBADO de antemano (2026-08-27)** — BELLA-9 lo crea y lo deja ACTIVO; Eduardo solo revisa el correo post-compra en el cierre de ese sprint. | — | — | ✅ |
 | G-5 | Desinstalar Smile (Apps → Smile → Delete) si BELLA-9 confirma que está sin uso. | 2 min | 12KB muertos en cada página. | Tras BELLA-9. |
 | G-6 | QA en iPhone tras BELLA-2, BELLA-5 y BELLA-6: abrir frutiferia.com, agregar 3 productos desde la grilla, abrir carrito, llegar al checkout. 1 mensaje con lo raro. | 5 min ×3 | Lo que ningún preview headless ve. | Tras cada uno. |
-| G-7 | Decidir si el retiro en tienda existe de verdad (pregunta 3 del §2). Si sí: corregir el plazo a 24h en Configuración → Envío → Retiro. | 2 min | "Listo en 2 a 4 días" al lado de "Agregar" espanta. | Cuando puedas. |
+| ~~G-7~~ | ~~Decidir si el retiro existe~~ **✅ RESPONDIDO (2026-08-27): existe — mié y sáb 10:00–15:00, pedido hasta las 22:00 del día anterior.** El plazo del admin lo corrige BELLA-9. | — | — | ✅ |
 | G-9 | (Opcional, para "$/kg" en tarjetas) Poblar precio por unidad de medida en los productos kg — BELLA-6 deja la guía de 3 pasos. | 20 min | El comprador de feria compara por kilo; Jumbo lo muestra en cada tarjeta. | Cuando quieras. |
 
 ## 6. Registro
@@ -559,6 +572,7 @@ iPhone que valen oro + qué números mirar el 27-sep).
 | Fecha | Sesión | Qué quedó | Commits |
 |---|---|---|---|
 | 2026-08-27 | Fable 5 (plan) | Auditoría en vivo multi-agente (14 agentes: 7 dimensiones × verificación adversarial; 72 hallazgos vivos, 1 refutado — "carrito sin días de reparto" era artefacto del carro vacío). Evidencia: screenshots full-page desktop/móvil de home/colección/ficha/carrito + HTML servido con UA Chrome + código del tema + 6 referentes fetcheados (crisp.nl, oddbox, gousto, misfits, goodeggs, jumbo.cl). Hallazgos mayores: H1 31px por rems base-16 en tema base-10; preload del hero desperdicia hasta 358KB del LCP; cantidad blanca sobre blanco en la ficha; "Pagar" nace deshabilitado; descripción duplicada en ficha; pestaña Reseñas vacía (app muerta); prueba social ×5; PRIMERA15 ×5 (decisión era 3); "Comparar" en tarjetas de fruta; recompra ya construida (main-account) pero invisible. Plan BELLA-1..10 escrito con prompts. Números de arranque (§8 WUX, 18-jul→17-ago): 2,39% conv · 9,36% ATC · 3,52% checkout · $55.454. Sin código. | (este doc) |
+| 2026-08-27 | Eduardo (G-1) | **Respondió las 4 preguntas del §2:** (1) destacar la pastilla de HOGARES (D-2) · (2) copy del hero propio: "Fruta y verdura seleccionada que llega directamente a tu hogar" + en chico "repartos a domicilio miércoles y sábados" (D-3) · (3) el retiro EXISTE: mié y sáb 10:00–15:00, corte 22:00 del día anterior (D-5) · (4) VUELVE10 aprobado (D-9). Además: hará las fotos G-2 él mismo ("por mientras Ladeto hace cosas"), confirmó que los testimonios son reales y entregó 8 reseñas de Google — transcritas en §8 (la de Paula Arismendi trae una foto real de una caja entregada). G-1, G-3, G-4 y G-7 cerrados; D-2/D-3/D-5/D-9/D-10 resueltas; prompts BELLA-2/3/4/5/9 actualizados. | (este doc) |
 
 ## 7. Línea base y medición (la llena BELLA-10)
 
@@ -571,3 +585,24 @@ iPhone que valen oro + qué números mirar el 27-sep).
 | Gestos para canasta de 10 (medido) | ~28-30 | | meta ~14 |
 | H1 hero escritorio / móvil | 31px / 22,5px | | |
 | Peso LCP móvil (preload+imagen) | hasta 358KB (doble descarga) | | |
+
+## 8. Reseñas reales de Google (entregadas por Eduardo el 2026-08-27, transcritas)
+
+Material para BELLA-3 (testimonios) y la banda B2B. Los textos van VERBATIM — no retocar
+palabras de clientas. En el sitio: nombre + "Reseña de Google" + ★★★★★, sin fecha. TOP =
+las 3 del grid de escritorio; el resto queda en la rotación.
+
+| | Autor/a | Fecha | Texto |
+|---|---|---|---|
+| TOP | Carolina Espíndola Patterson | 6 may 2025 | "Excelente experiencia. Productos frescos, que duran. Muy fácil para elegir, pagar y solicitar reparto. 10/10." |
+| TOP | Magdalena López | 18 ago 2025 | "Me encanta Frutiferia!! Es el único lugar donde escogen las frutas y verduras como si uno fuera a la feria o al súper. Excelente calidad siempre, precios convenientes y con un sello de amor por el trabajo maravillosooo. Me encantan y los recomiendo a miiil!!!" |
+| TOP | Beatriz Barry | 3 may 2025 | "Siempre pido la fruta y verdura a Frutiferia por la comodidad de que llegue a tu casa, exactamente lo que pediste y en el horario convenido, me gusta también que siempre venga todo ordenado y protegido, se mueren además lo rico que es todo, especialmente las frutillas, que es mi fruta favorita!!!" |
+| | Washington Maturana C. (Local Guide, 134 opiniones) | 2 may 2025 | "Frutiferia es eso que jamás pensé que iba a tener en una frutería, calidad, precio y buenísima experiencia al cliente. Los conocí hace unos años y son mis mejores amigos hoy, aunque no nos conocemos." |
+| | Rocío Álvarez Tapia | 2 may 2025 | "Estupendo todo! la atención, la calidad de las frutas y verduras, excelentes los productos de pymes (como la mantequilla de maní!!) súper recomendado" |
+| | Paula Arismendi | 2 may 2025 | "La fruta y verdura fresca y exquisita! El servicio excelente. 10/10. 100% recomendado" — ⭐ su reseña trae una FOTO REAL de una caja entregada (brócoli, plátanos, albahaca): candidata de puente mientras no haya fotos propias (G-2/D-10). |
+| | Solange Paola Ramírez Valenzuela | 24 may 2025 | "Excelentes productos, sin duda volveré a pedir mis frutas y verduras con ellos" |
+| | Luz Castro | 16 may 2025 | "Excelente lugar atendido por sus dueños. Las verduras y frutas son de excelente calidad. Somos clientes por muchos años." |
+
+Criterio del TOP: tres ángulos que venden distinto — la facilidad del funnel (Carolina),
+la selección a mano (Magdalena) y la confiabilidad de la entrega (Beatriz). Washington
+(Local Guide con 134 reseñas) es el mejor cuarto si el grid crece.
