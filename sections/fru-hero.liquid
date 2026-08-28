@@ -34,6 +34,18 @@
   # las categorias y el primer producto suban al primer pliegue. No toca el preload, ni
   # fetchpriority, ni las alturas fijas del <img>: LCP y CLS ya estaban bien.
   assign hero_compact = section.settings.compact
+
+  # CTA por tipo de cliente (BELLA-2 §7): el cupon de primera compra no se le ofrece a
+  # quien ya tiene cuenta. `customer` solo existe con sesion iniciada; el badge PRIMERA15
+  # se oculta con el mismo criterio para no prometerle un descuento que no le aplica.
+  assign cta_label = section.settings.cta_label
+  assign cta_link = section.settings.cta_link | default: '/collections/all'
+  assign show_badge = true
+  if customer
+    assign cta_label = section.settings.cta_label_customer | default: 'Haz tu pedido'
+    assign cta_link = section.settings.cta_link_customer | default: '#tiles'
+    assign show_badge = false
+  endif
 -%}
 
 {%- comment -%}
@@ -42,11 +54,71 @@
   Al ser la primera seccion del home, el link va aqui: el preload scanner lo ve antes
   de cualquier otro recurso del body. Se preescanean desktop/movil por media-query para
   no descargar las dos.
+
+  BELLA-2: el srcset se calcula UNA sola vez aqui y lo usan tanto el <link rel=preload>
+  como el <picture> de mas abajo. Antes el preload pedia dos URLs fijas (1600 y 900) que
+  el <picture> nunca elegia: el navegador bajaba el LCP DOS veces (hasta 358KB en movil).
+  Al compartir imagesrcset/imagesizes con el <source>/<img>, el preload scanner y el
+  selector de <picture> resuelven SIEMPRE la misma URL. La formula replica la de
+  snippets/image.liquid (rama `widths`): corta los anchos mayores que la imagen y
+  multiplica el ancho de la URL por settings.image_quality, dejando el descriptor `w`
+  en el ancho pedido — por eso el <picture> se emite aqui a mano y no via `render 'image'`.
 {%- endcomment -%}
-{%- if img_d != blank -%}
-  <link rel="preload" as="image" href="{{ img_d | image_url: width: 1600 }}" fetchpriority="high"{% if img_m != blank %} media="(min-width: 768px)"{% endif %}>
+{%- liquid
+  assign hero_sizes_d = '(min-width: 768px) 42vw, 100vw'
+  assign hero_sizes_m = '100vw'
+  assign hero_iq = settings.image_quality | default: 1
+-%}
+{%- capture hero_srcset_d -%}
+  {%- if img_d != blank -%}
+    {%- assign hero_widths_d = '640,960,1280,1600,1920' | split: ',' -%}
+    {%- for w in hero_widths_d -%}
+      {%- assign w_int = w | times: 1 -%}
+      {%- if img_d.width < w_int -%}
+        {%- if forloop.first -%}
+          {%- assign hero_last_d = img_d.width -%}
+          {{- img_d | image_url: width: img_d.width }} {{ img_d.width }}w
+        {%- endif -%}
+        {%- break -%}
+      {%- endif -%}
+      {%- unless forloop.first %}, {% endunless -%}
+      {%- assign hero_url_w_d = w_int | times: hero_iq -%}
+      {%- assign hero_last_d = hero_url_w_d -%}
+      {{- img_d | image_url: width: hero_url_w_d }} {{ w }}w
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture hero_srcset_m -%}
   {%- if img_m != blank -%}
-    <link rel="preload" as="image" href="{{ img_m | image_url: width: 900 }}" fetchpriority="high" media="(max-width: 767px)">
+    {%- assign hero_widths_m = '480,640,900,1200' | split: ',' -%}
+    {%- for w in hero_widths_m -%}
+      {%- assign w_int = w | times: 1 -%}
+      {%- if img_m.width < w_int -%}
+        {%- if forloop.first -%}
+          {%- assign hero_last_m = img_m.width -%}
+          {{- img_m | image_url: width: img_m.width }} {{ img_m.width }}w
+        {%- endif -%}
+        {%- break -%}
+      {%- endif -%}
+      {%- unless forloop.first %}, {% endunless -%}
+      {%- assign hero_url_w_m = w_int | times: hero_iq -%}
+      {%- assign hero_last_m = hero_url_w_m -%}
+      {{- img_m | image_url: width: hero_url_w_m }} {{ w }}w
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- liquid
+  assign hero_srcset_d = hero_srcset_d | strip
+  assign hero_srcset_m = hero_srcset_m | strip
+  assign hero_h_d = hero_last_d | divided_by: img_d.aspect_ratio | round
+  if img_m != blank
+    assign hero_h_m = hero_last_m | divided_by: img_m.aspect_ratio | round
+  endif
+-%}
+{%- if img_d != blank -%}
+  <link rel="preload" as="image" href="{{ img_d | image_url: width: 1600 }}" imagesrcset="{{ hero_srcset_d }}" imagesizes="{{ hero_sizes_d }}" fetchpriority="high"{% if img_m != blank %} media="(min-width: 768px)"{% endif %}>
+  {%- if img_m != blank -%}
+    <link rel="preload" as="image" href="{{ img_m | image_url: width: 900 }}" imagesrcset="{{ hero_srcset_m }}" imagesizes="{{ hero_sizes_m }}" fetchpriority="high" media="(max-width: 767px)">
   {%- endif -%}
 {%- endif -%}
 
@@ -60,7 +132,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-2, 16px);
-    max-width: 40rem;
+    max-width: 640px;
     padding: var(--space-6, 48px) var(--gutter, 20px) var(--space-4, 32px);
   }
   #{{ section.id }} .fru-hero__badge {
@@ -69,7 +141,7 @@
     gap: 8px;
     margin: 0;
     padding: 8px 15px;
-    font-size: 0.8rem;
+    font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -89,8 +161,8 @@
   #{{ section.id }} .fru-hero__title {
     margin: 0;
     color: var(--text);
-    font-size: clamp(2.2rem, 6vw, 3.75rem);
-    line-height: 1.05;
+    font-size: clamp(28px, 9vw, 60px);
+    line-height: 1.06;
     letter-spacing: -0.015em;
   }
   #{{ section.id }} .fru-hero__hl {
@@ -99,12 +171,27 @@
   }
   #{{ section.id }} .fru-hero__sub {
     margin: 0;
-    max-width: 34rem;
+    max-width: 480px;
     color: var(--text-muted);
-    font-size: 1.12rem;
+    font-size: 17px;
     line-height: 1.55;
   }
   #{{ section.id }} .fru-hero__sub p { margin: 0; }
+  /* Linea chica bajo el H1 (D-3): dice el dia real de reparto sin robarle peso al titular. */
+  #{{ section.id }} .fru-hero__kicker {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  /* Prueba social bajo el CTA. Sin estrellas ni ratings: no hay dato que los respalde. */
+  #{{ section.id }} .fru-hero__social {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.4;
+  }
   #{{ section.id }} .fru-hero__actions {
     display: flex;
     flex-wrap: wrap;
@@ -119,17 +206,17 @@
     box-sizing: border-box;
     min-height: 52px;
     padding: 15px 28px;
-    font-size: 1.05rem;
+    font-size: 16px;
     font-weight: 700;
     text-decoration: none;
     color: var(--on-cta);
-    background: var(--grad-cta);
+    background: var(--color-cta-solid, #17845A);
     border-radius: var(--radius-pill);
     box-shadow: var(--shadow-md);
     transition: transform var(--dur-micro, 200ms) var(--ease-out), box-shadow var(--dur-micro, 200ms) var(--ease-out), background var(--dur-micro, 200ms) var(--ease-out);
   }
   #{{ section.id }} .fru-hero__cta:hover {
-    background: var(--fru-verde-700);
+    background: var(--color-cta-solid-hover, #136E4B);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
   }
@@ -145,7 +232,7 @@
     min-height: 44px;
     color: var(--color-primary);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 16px;
     text-decoration: none;
   }
   #{{ section.id }} .fru-hero__link .fru-hero__arrow {
@@ -261,7 +348,7 @@
     height: clamp(170px, 44vw, 220px);
   }
   #{{ section.id }}.fru-hero--compact .fru-hero__sub {
-    font-size: 1.05rem;
+    font-size: 16px;
     line-height: 1.5;
   }
   #{{ section.id }}.fru-hero--compact .fru-hero__cta {
@@ -276,7 +363,7 @@
     #{{ section.id }}.fru-hero--compact .fru-hero__actions { gap: 10px; }
     #{{ section.id }}.fru-hero--compact .fru-hero__badge {
       padding: 6px 13px;
-      font-size: 0.75rem;
+      font-size: 11.5px;
     }
   }
 
@@ -292,8 +379,85 @@
       height: var(--fru-hero-compact-h);
     }
     #{{ section.id }}.fru-hero--compact .fru-hero__title {
-      font-size: clamp(2.1rem, 4.4vw, 3.1rem);
+      /* Piso 38px (no 34): a 34 el H1 quedaba por DEBAJO del H2 de los tiles
+         (36px) entre 768 y 1000px de ancho — justo el bug que este sprint corrige. */
+      font-size: clamp(38px, 3.6vw, 48px);
     }
+  }
+
+  /* ==========================================================================
+     Movil y tablet vertical (BELLA-2). La foto NO puede comerse el primer pliegue:
+     pasa a CABECERA BAJA arriba del texto (grid-row) y la columna de texto sube
+     sobre ella en placa blanca con radius. Los selectores llevan `#id.fru-hero`
+     (1 id + 2 clases) para empatar la especificidad del bloque compacto de arriba
+     y ganar por orden, este o no activo el modo compacto.
+     ========================================================================== */
+  @media (max-width: 767px) {
+    #{{ section.id }}.fru-hero .fru-hero__grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+    }
+    #{{ section.id }}.fru-hero .fru-hero__media {
+      grid-row: 1;
+      height: clamp(118px, 24vw, 180px);
+    }
+    #{{ section.id }}.fru-hero .fru-hero__text {
+      grid-row: 2;
+      position: relative;
+      z-index: 1;
+      max-width: none;
+      margin-top: -38px;
+      padding: 14px var(--gutter, 20px) 16px;
+      gap: 6px;
+      background: var(--surface, #fff);
+      border-radius: 20px 20px 0 0;
+    }
+    /* Tope del titular: sin el, el clamp base (9vw) llega a 60px en tablets
+       verticales y el hero se dispara por encima de los 1000px. 44px mantiene
+       la jerarquia H1 > titulos de seccion (36px). */
+    #{{ section.id }}.fru-hero .fru-hero__title {
+      font-size: clamp(28px, 7.4vw, 44px);
+      line-height: 1.04;
+    }
+    /* El CTA deja de ocupar una fila entera: el enlace secundario entra a su lado
+       y el hero se ahorra ~54px (fila de 44px + gap). Ambos targets siguen >=44px. */
+    #{{ section.id }}.fru-hero .fru-hero__actions {
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    #{{ section.id }}.fru-hero .fru-hero__cta {
+      width: auto;
+      flex: 1 1 auto;
+      justify-content: center;
+      padding: 10px 12px;
+      line-height: 1.18;
+      text-align: center;
+    }
+    #{{ section.id }}.fru-hero .fru-hero__link {
+      flex: 0 0 auto;
+      font-size: 15px;
+      line-height: 1.15;
+      max-width: 40%;
+    }
+  }
+
+  /* Telefono angosto: el titular baja al piso de la escala (28px, minimo del
+     sprint). A 9vw rendia 33,75px y se comia 5 lineas del pliegue; 7,4vw da
+     27,75 -> el clamp lo sube a 28px en 375 y crece hasta 34px camino a 560. */
+  @media (max-width: 559px) {
+    #{{ section.id }}.fru-hero .fru-hero__title {
+      font-size: clamp(28px, 7.4vw, 34px);
+    }
+    #{{ section.id }}.fru-hero .fru-hero__media { height: 118px; }
+    #{{ section.id }}.fru-hero .fru-hero__text {
+      padding: 12px var(--gutter, 20px) 14px;
+      gap: 5px;
+    }
+    #{{ section.id }}.fru-hero .fru-hero__badge { padding: 5px 12px; font-size: 11px; }
+    #{{ section.id }}.fru-hero .fru-hero__kicker { font-size: 14px; }
+    #{{ section.id }}.fru-hero .fru-hero__social { font-size: 13px; }
   }
 </style>
 
@@ -303,7 +467,7 @@
 >
   <div class="fru-hero__grid">
     <div class="fru-hero__text">
-      {%- if section.settings.badge_text != blank -%}
+      {%- if show_badge and section.settings.badge_text != blank -%}
         <p class="fru-hero__badge fru-hero__reveal fru-hero__reveal--1">{{ section.settings.badge_text | escape }}</p>
       {%- endif -%}
 
@@ -314,14 +478,18 @@
         </h1>
       {%- endif -%}
 
+      {%- if section.settings.kicker != blank -%}
+        <p class="fru-hero__kicker fru-hero__reveal fru-hero__reveal--2">{{ section.settings.kicker | escape }}</p>
+      {%- endif -%}
+
       {%- if section.settings.subheading != blank -%}
         <div class="fru-hero__sub rte fru-hero__reveal fru-hero__reveal--3">{{ section.settings.subheading }}</div>
       {%- endif -%}
 
-      {%- if section.settings.cta_label != blank or section.settings.cta2_label != blank -%}
+      {%- if cta_label != blank or section.settings.cta2_label != blank -%}
         <div class="fru-hero__actions fru-hero__reveal fru-hero__reveal--4">
-          {%- if section.settings.cta_label != blank -%}
-            <a class="fru-hero__cta" href="{{ section.settings.cta_link | default: '/collections/all' }}">{{ section.settings.cta_label | escape }}</a>
+          {%- if cta_label != blank -%}
+            <a class="fru-hero__cta" href="{{ cta_link }}">{{ cta_label | escape }}</a>
           {%- endif -%}
           {%- if section.settings.cta2_label != blank -%}
             <a class="fru-hero__link" href="{{ section.settings.cta2_link | default: '/pages/frutimenu' }}">
@@ -330,32 +498,37 @@
           {%- endif -%}
         </div>
       {%- endif -%}
+
+      {%- if section.settings.social_proof != blank -%}
+        <p class="fru-hero__social fru-hero__reveal fru-hero__reveal--4">{{ section.settings.social_proof | escape }}</p>
+      {%- endif -%}
     </div>
 
     <div class="fru-hero__media" style="--fru-hero-ov: {{ ov_a }}; --fru-hero-ov-soft: {{ ov_soft }};">
       {%- if img_d != blank -%}
+        {%- comment -%}theme-check-disable ImgLazyLoading{%- endcomment -%}
         <picture class="fru-hero__picture">
           {%- if img_m != blank -%}
-            {%- render 'image',
-              image: img_m,
-              src_width: 900,
-              widths: '480, 640, 900, 1200',
-              lazy_load: false,
-              sizes: '100vw',
-              alt_text: alt_text,
-              as_mobile_source: true
-            -%}
+            <source
+              srcset="{{ hero_srcset_m }}"
+              sizes="{{ hero_sizes_m }}"
+              media="(max-width: 767px)"
+              width="{{ hero_last_m }}"
+              height="{{ hero_h_m }}">
           {%- endif -%}
-          {%- render 'image',
-            image: img_d,
-            src_width: 1600,
-            widths: '640, 960, 1280, 1600, 1920',
-            lazy_load: false,
-            sizes: '(min-width: 768px) 42vw, 100vw',
-            alt_text: alt_text,
-            attributes: 'fetchpriority="high"'
-          -%}
+          <img
+            src="{{ img_d | image_url: width: 1600 }}"
+            srcset="{{ hero_srcset_d }}"
+            sizes="{{ hero_sizes_d }}"
+            {% if img_d.presentation %}style="object-position: {{ img_d.presentation.focal_point }}" {% endif -%}
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+            width="{{ hero_last_d }}"
+            height="{{ hero_h_d }}"
+            alt="{{ alt_text | escape }}">
         </picture>
+        {%- comment -%}theme-check-enable ImgLazyLoading{%- endcomment -%}
       {%- else -%}
         {%- comment -%} GATE fotografico: sin foto real aun. Placeholder neutro morado, jamas IA como producto. {%- endcomment -%}
         <div class="fru-hero__placeholder" role="img" aria-label="{{ alt_text | escape }}">
@@ -403,7 +576,7 @@
       "max": 70,
       "step": 5,
       "unit": "%",
-      "default": 45,
+      "default": 10,
       "info": "Tinta morada sobre el borde de la foto (nunca negro). Bajala cuando entre la foto real para no apagar el color de la fruta."
     },
     {
@@ -429,10 +602,23 @@
       "default": "cuando dijimos"
     },
     {
+      "type": "text",
+      "id": "kicker",
+      "label": "Linea chica bajo el titular",
+      "default": "Repartos a domicilio miércoles y sábados"
+    },
+    {
       "type": "richtext",
       "id": "subheading",
       "label": "Subtitulo",
       "default": "<p>Reparto a domicilio miercoles y sabado en Vina, Valparaiso, Concon, Renaca y Quilpue. Despacho gratis sobre $50.000.</p>"
+    },
+    {
+      "type": "text",
+      "id": "social_proof",
+      "label": "Micro-línea de prueba social (bajo el CTA)",
+      "default": "+20.000 pedidos entregados en la V Región · 7 años",
+      "info": "Sin estrellas ni puntuaciones: solo datos que se puedan respaldar."
     },
     {
       "type": "header",
@@ -449,6 +635,19 @@
       "id": "cta_link",
       "label": "Enlace del CTA principal",
       "info": "Ej. /discount/PRIMERA15?redirect=/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "cta_label_customer",
+      "label": "CTA principal para clientes con cuenta",
+      "default": "Haz tu pedido",
+      "info": "Reemplaza al CTA de primera compra cuando la visita tiene sesión iniciada."
+    },
+    {
+      "type": "url",
+      "id": "cta_link_customer",
+      "label": "Enlace del CTA para clientes con cuenta",
+      "info": "Ej. #tiles"
     },
     {
       "type": "text",
