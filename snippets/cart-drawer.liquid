@@ -184,18 +184,6 @@
         </ul>
       {%- endif -%}
 
-      {%- comment -%}
-        CTA-10A: rescata el pitch de snippets/account-value-pitch.liquid, varado
-        en main-login/main-register (código muerto — el login vive en el
-        customer accounts nuevo de Shopify, no en esas secciones).
-      {%- endcomment -%}
-      {%- unless customer -%}
-        <div class="cart-drawer__account-pitch mb-4">
-          {% render 'account-value-pitch' %}
-          <a class="link block text-sm text-center mt-2" href="{{ routes.account_register_url }}">Crea tu cuenta y repite en 1 clic</a>
-        </div>
-      {%- endunless -%}
-
       <div class="cart-drawer__checkout-buttons">
         {%- if show_terms_and_conditions -%}
           <cart-terms class="block mt-2 mb-4 text-center">
@@ -226,12 +214,27 @@
           </div>
         {%- endif -%}
       </div>
+
+      {%- comment -%}
+        CTA-10A: rescata el pitch de snippets/account-value-pitch.liquid, varado
+        en main-login/main-register (código muerto — el login vive en el
+        customer accounts nuevo de Shopify, no en esas secciones).
+        BELLA-5: va DEBAJO del botón Pagar. Antes se metía entre el subtotal y
+        el checkout, empujando el botón fuera del pliegue en móvil; el resumen
+        queda con subtotal + día de reparto + despacho + Pagar, nada más.
+      {%- endcomment -%}
+      {%- unless customer -%}
+        <div class="cart-drawer__account-pitch mt-4">
+          {% render 'account-value-pitch' %}
+          <a class="link block text-sm text-center mt-2" href="{{ routes.account_register_url }}">Crea tu cuenta y repite en 1 clic</a>
+        </div>
+      {%- endunless -%}
     {%- endif -%}
   </div>
 {%- endcapture -%}
 
 <cart-drawer class="drawer drawer--cart fixed top-0 right-0 flex flex-col w-full has-motion" data-name="cart-drawer" id="cart-drawer" role="dialog" aria-label="{{ 'cart.general.title' | t }}" aria-modal="true" aria-hidden="true" tabindex="-1" data-shipping-calculator="{{ section.settings.show_shipping_calculator }}"{% if section.settings.position_cart_summary == 'top' %} data-css-var-height=".cart-drawer__checkout-buttons,.cart-drawer__summary"{% endif %}>
-  <header class="drawer__header flex justify-between items-center">
+  <header class="drawer__header flex flex-wrap justify-between items-center">
     <h2 class="h6 mb-0">{{ 'cart.general.title' | t }}</h2>
     <div class="flex items-center gap-x-theme">
       {%- if cart != empty and section.settings.show_cart_page_link == true -%}
@@ -242,6 +245,15 @@
         {% render 'icon-close' %}
       </button>
     </div>
+    {%- comment -%}
+      BELLA-5: próxima entrega en la cabecera ("Pide antes del viernes a las
+      22:00 → llega el sábado 29 de agosto"). La rellena delivery-picker.js con
+      las fechas de la edge fn delivery-availability, calculadas en hora de
+      Santiago; nace hidden y sólo aparece cuando hay una fecha alcanzable.
+    {%- endcomment -%}
+    {%- if cart != empty and settings.show_delivery_picker -%}
+      <p class="cart-drawer__next-delivery js-next-delivery" hidden></p>
+    {%- endif -%}
   </header>
 
   <div class="drawer__content {% if cart == empty %}drawer__content--flex {% endif %}flex-auto{% if section.settings.stick_footer == false and section.settings.stick_footer_mobile == false %} shrink-0{% elsif section.settings.stick_footer == true and section.settings.stick_footer_mobile == false %} xs:shrink-0{% elsif section.settings.stick_footer == false and section.settings.stick_footer_mobile == true %} md:shrink-0{% endif %} items-center{% if cart == empty %} drawer__empty{% endif %}{% if cart == empty and section.settings.promoted_products_list != blank and show_promoted_products %} drawer__empty-with-promotions{% endif %}">
