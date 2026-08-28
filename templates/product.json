@@ -26,10 +26,6 @@
             "show_weight": false
           }
         },
-        "3f73b6ee-a6b2-40ae-8379-a02a42756d8d": {
-          "type": "rating",
-          "settings": {}
-        },
         "price": {
           "type": "price",
           "settings": {
@@ -45,18 +41,6 @@
             "text_normal": "",
             "text_no_stock": "<p>Agotado temporalmente</p>",
             "text_no_stock_backordered": "<p>Disponible por encargo</p>"
-          }
-        },
-        "msg_envio": {
-          "type": "message",
-          "settings": {
-            "icon": "truck",
-            "title": "<p>Envío gratis en pedidos sobre $50.000</p>",
-            "close": "once",
-            "show_over_media": false,
-            "visibility_duration": 7,
-            "bg_color": "#F4F0F7",
-            "text_color": "#248F57"
           }
         },
         "divider-0": {
@@ -85,13 +69,6 @@
             "show_gift_card_recipient": false
           }
         },
-        "cotiza_por_mayor": {
-          "type": "custom-liquid",
-          "settings": {
-            "custom_liquid": "<p style=\"font-size:14px;color:var(--text-muted);\">¿Compras para un negocio? <a href=\"https://cotiza.frutiferia.com\">Cotiza por mayor →</a></p>",
-            "variant_content": false
-          }
-        },
         "complementary": {
           "type": "complementary",
           "settings": {
@@ -106,14 +83,6 @@
             "show_line": true
           }
         },
-        "1cc6422d-211f-4764-af07-884ee26ed3d7": {
-          "type": "description",
-          "settings": {
-            "show_as_collapsible_content": false,
-            "icon": "none",
-            "open": false
-          }
-        },
         "collapsible_envio": {
           "type": "collapsible-content",
           "settings": {
@@ -122,6 +91,13 @@
             "text": "<p>Despacho a domicilio los <strong>miércoles y sábado</strong> en Viña del Mar, Reñaca, Concón, Quilpué y Valparaíso. ¿Tienes un negocio? También despachamos martes, miércoles, viernes y sábado. <strong>Despacho gratis sobre $50.000.</strong></p>",
             "page": "",
             "open": false
+          }
+        },
+        "retiro_horario": {
+          "type": "custom-liquid",
+          "settings": {
+            "custom_liquid": "<p style=\"font-size:14px;color:var(--text-muted);\">Retiro gratis en tienda: <strong>miércoles y sábado de 10:00 a 15:00</strong> — pide hasta las 22:00 del día anterior.</p>",
+            "variant_content": false
           }
         },
         "collapsible_pago": {
@@ -156,22 +132,19 @@
       "block_order": [
         "613a93aa-8edd-4bb9-b8f1-df3133990e99",
         "title",
-        "3f73b6ee-a6b2-40ae-8379-a02a42756d8d",
+        "judge_me_reviews_preview_badge_PT87gQ",
         "price",
         "inventory_status",
-        "msg_envio",
         "divider-0",
         "variant-picker",
         "buy-buttons",
-        "cotiza_por_mayor",
         "complementary",
         "divider-1",
-        "1cc6422d-211f-4764-af07-884ee26ed3d7",
         "collapsible_envio",
+        "retiro_horario",
         "collapsible_pago",
         "collapsible_garantia",
-        "share",
-        "judge_me_reviews_preview_badge_PT87gQ"
+        "share"
       ],
       "settings": {
         "stick_on_scroll": true,
@@ -262,7 +235,7 @@
         "title_type_scale": "small",
         "text_type_scale": "small",
         "icon_position": "beside",
-        "mobile_stack": false,
+        "mobile_stack": true,
         "section_height": "xsmall",
         "color_scheme": "3",
         "full_width": true,
@@ -279,8 +252,8 @@
             "style": "collapsible",
             "open_first": true,
             "show_description": true,
-            "show_reviews": true,
-            "show_reviews_count": true,
+            "show_reviews": false,
+            "show_reviews_count": false,
             "custom_reviews": "",
             "show_specification": false,
             "spec_heading": "Especificaciones",
@@ -412,10 +385,10 @@
     "main",
     "trust_bar_product",
     "details",
+    "1780585006ec95da1b",
     "frutimenu_cta_product",
     "recommendations",
     "cross_sell",
-    "1780585006ec95da1b",
     "recently_viewed_product"
   ]
 }
