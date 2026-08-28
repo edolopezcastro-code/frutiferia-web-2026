@@ -17,55 +17,55 @@
         "icons-with-text-1": {
           "type": "item",
           "settings": {
-            "icon": "truck",
+            "icon": "check_mark_in_circle",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Envío gratis",
-            "text": "<p>En pedidos sobre $50.000</p>",
+            "heading": "Elegido a mano",
+            "text": "<p>Revisamos cada caja antes de que salga</p>",
             "link": ""
           }
         },
         "icons-with-text-2": {
           "type": "item",
           "settings": {
-            "icon": "chat_bubble",
+            "icon": "truck",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "WhatsApp directo",
-            "text": "<p>Atención rápida al +56 9 6609 3891</p>",
-            "link": "https://api.whatsapp.com/send?phone=+56966093891&text=Hola%20FrutiEquipo!"
+            "heading": "Reparto mié y sáb",
+            "text": "<p>Viña, Valpo, Concón, Reñaca y Quilpué</p>",
+            "link": "shopify://pages/reparto"
           }
         },
         "icons-with-text-3": {
           "type": "item",
           "settings": {
-            "icon": "leaf",
+            "icon": "chat_bubble",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Eco-friendly",
-            "text": "<p>Mínimo plástico por pedido</p>",
-            "link": ""
+            "heading": "WhatsApp con personas",
+            "text": "<p>Mora te responde al +56 9 6609 3891</p>",
+            "link": "https://api.whatsapp.com/send?phone=+56966093891&text=Hola%20FrutiEquipo!"
           }
         },
         "icons-with-text-4": {
           "type": "item",
           "settings": {
-            "icon": "check_mark_in_circle",
+            "icon": "lock",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "+20.000 pedidos",
-            "text": "<p>7 años de confianza</p>",
+            "heading": "Garantía simple",
+            "text": "<p>Si algo llega mal, lo reponemos</p>",
             "link": ""
           }
         },
         "item_TCHhUi": {
           "type": "item",
           "settings": {
-            "icon": "lock",
+            "icon": "award",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Pago seguro",
-            "text": "<p>Tarjeta, transferencia y más</p>",
+            "heading": "+20.000 pedidos",
+            "text": "<p>En 7 años</p>",
             "link": ""
           }
         }

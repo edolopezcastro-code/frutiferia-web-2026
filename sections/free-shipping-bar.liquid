@@ -43,9 +43,9 @@
   # setting del editor queda como fallback para anónimos y para cualquier
   # tag que no sea de canal.
   if customer.tags contains 'wellness' or customer.tags contains 'frutologia'
-    assign days = 'Lun AM y Mié'
+    assign days = 'lun AM y mié'
   elsif customer.tags contains 'b2b' or customer.tags contains 'b2g'
-    assign days = 'Mar, Mié, Vie y Sáb'
+    assign days = 'mar, mié, vie y sáb'
   endif
   assign threshold_money = threshold_cents | money
   assign falta_money = falta_cents | money
@@ -115,10 +115,12 @@
       aria-live="polite"
     >
       <div class="fbar__inner">
-        <span class="fbar__icon" aria-hidden="true">
-          {%- if state == 'done' -%}🎉{%- else -%}🚚{%- endif -%}
-        </span>
-
+        {%- comment -%}
+          BELLA-3 (2026-08-27): fuera el emoji (🚚 / 🎉). Era el unico glifo emoji de
+          la home y no aporta informacion — la barra ya se identifica por color
+          y por el riel de progreso. Ademas robaba ancho justo donde el copy
+          necesita caber sin truncarse.
+        {%- endcomment -%}
         <span class="fbar__msg" data-fbar-msg>{{ initial_msg }}</span>
 
         {%- if section.settings.reparto_link != blank -%}
@@ -183,7 +185,7 @@
       "type": "text",
       "id": "delivery_days",
       "label": "Días de reparto",
-      "default": "Mié y Sáb"
+      "default": "mié y sáb"
     },
     {
       "type": "header",
@@ -193,7 +195,7 @@
       "type": "text",
       "id": "copy_empty",
       "label": "Carrito vacío",
-      "default": "Envío gratis en tus compras sobre {threshold} · Repartimos {days}"
+      "default": "Despacho gratis sobre {threshold} · Reparto {days}"
     },
     {
       "type": "text",
