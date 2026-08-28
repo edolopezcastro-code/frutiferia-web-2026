@@ -43,7 +43,7 @@
     "collection-products": {
       "type": "main-collection-products",
       "settings": {
-        "products_per_page": 36,
+        "products_per_page": 50,
         "card_size_mobile": "small",
         "card_size": "medium",
         "show_layout_toggle": true,

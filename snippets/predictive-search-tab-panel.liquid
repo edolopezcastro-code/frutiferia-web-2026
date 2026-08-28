@@ -1,8 +1,25 @@
 <div class="predictive-search__tabpanel focus-inset" id="psearch-{{ type }}" role="tabpanel" tabindex="0" aria-labelledby="psearch-{{ type }}-tab"{% unless forloop.first %} hidden{% endunless %}>
   <ul class="predictive-search__list" role="list">
     {%- for item in items -%}
-      <li class="predictive-search__item" role="option">
-        <a class="predictive-result flex items-start focus-inset js-search-link" href="{{ item.url }}"{% if settings.preload_links %} data-instant{% endif %}>
+      {%- comment -%}
+        D-8 · formatos B2B (5/20 kg) fuera de la búsqueda B2C. Shopify NO trae
+        un filtro nativo de "oculto solo en búsqueda" — el metafield
+        `seo.hidden` (definición custom, boolean) que el admin marca en esos
+        productos no hace nada por sí solo: hay que leerlo aquí y saltar el
+        item. Solo pega en el panel PREDICTIVO (Section Rendering API); la
+        página /search completa queda fuera del alcance de este sprint.
+      {%- endcomment -%}
+      {%- if type == 'products' and item.metafields.seo.hidden -%}
+        {%- continue -%}
+      {%- endif -%}
+      {%- liquid
+        assign show_quick_add = false
+        if type == 'products' and settings.enable_quick_add
+          assign show_quick_add = true
+        endif
+      -%}
+      <li class="predictive-search__item{% if show_quick_add %} flex items-center{% endif %}" role="option">
+        <a class="predictive-result flex items-start focus-inset js-search-link{% if show_quick_add %} grow{% endif %}" href="{{ item.url }}"{% if settings.preload_links %} data-instant{% endif %}>
           {%- if type == 'products' or type == 'collections' -%}
             {%- liquid
               if type == 'products'
@@ -52,6 +69,44 @@
             {%- endif -%}
           </div>
         </a>
+
+        {%- if show_quick_add -%}
+          {%- comment -%}
+            BELLA-7 · quick-add en resultados de búsqueda. Mismo patrón que
+            snippets/product-card-mini.liquid (icon-only, btn--sm), NO el de
+            product-card.liquid: ese vive dentro del <a> que envuelve toda la
+            tarjeta, y aquí el <a> (.js-search-link) envuelve toda la fila —
+            anidar un <form> adentro dispararía el submit Y la navegación al
+            mismo tiempo. .js-search-link tiene que seguir siendo hijo DIRECTO
+            del <li> (lo usa predictive-search.js:180,
+            `[aria-selected="true"] > .js-search-link`, para el Enter del
+            teclado), así que el quick-add va como HERMANO del <a>, no adentro.
+          {%- endcomment -%}
+          <div class="predictive-result__quick-add shrink-0 pr-4">
+            {%- if item.has_only_default_variant -%}
+              {%- assign qa_variant = item.selected_or_first_available_variant -%}
+              <product-form>
+                <div class="alert bg-error-bg text-error-text js-form-error text-start" role="alert" hidden></div>
+                {%- form 'product', item, class: 'js-product-form', id: 'psearch-quick-add-' | append: item.id, novalidate: 'novalidate' -%}
+                  <input type="hidden" name="id" value="{{ qa_variant.id }}">
+                  <button class="btn btn--secondary btn--sm btn--icon tap-target" name="add" aria-haspopup="dialog" aria-label="{{- 'products.product.add_to_cart' | t | escape -}}"
+                          {%- if qa_variant.available == false %} disabled{%- endif %}>
+                    {% render 'icon-add-to-cart' %}
+                  </button>
+                {%- endform -%}
+              </product-form>
+            {%- else -%}
+              <button type="button"
+                      class="btn btn--secondary btn--sm btn--icon tap-target js-quick-add no-js-hidden"
+                      aria-haspopup="dialog"
+                      data-product-url="{{ item.url }}"
+                      data-product-id="{{ item.id }}"
+                      aria-label="{{- 'products.product.add_to_cart' | t | escape -}}">
+                {% render 'icon-add-to-cart' %}
+              </button>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </li>
     {%- endfor -%}
     <li class="predictive-search__item js-submit" role="option">
