@@ -1,0 +1,121 @@
+{%- comment -%}
+  fru-reorder-band — banda de recompra (BELLA-7, S3.1). 1 línea, gateada a
+  {% if customer %} con al menos 1 pedido con variantes disponibles.
+
+  Reusa el cálculo de reorder_path de sections/main-account.liquid:22-33
+  (routes.cart_url/{variant:qty}) — no reinventa /cart/add en lote.
+
+  Anónimo o cliente sin pedidos: NO renderiza nada (ni el <style>, para que
+  el HTML servido a un visitante anónimo no filtre que la banda existe).
+{%- endcomment -%}
+
+{%- liquid
+  assign reorder_path = ''
+  if customer
+    assign last_order = customer.orders.first
+    if last_order
+      for line_item in last_order.line_items
+        if line_item.variant.id and line_item.variant.available
+          assign reorder_path = reorder_path | append: ',' | append: line_item.variant.id | append: ':' | append: line_item.quantity
+        endif
+      endfor
+      assign reorder_path = reorder_path | remove_first: ','
+    endif
+  endif
+-%}
+
+{%- if customer and reorder_path != blank -%}
+  <style>
+    #{{ section.id }} {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    #{{ section.id }} .fru-reorder-band__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 10px var(--gutter);
+      text-align: center;
+    }
+    #{{ section.id }} .fru-reorder-band__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--fru-morado-900);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: var(--lh-snug);
+      text-decoration: none;
+    }
+    #{{ section.id }} .fru-reorder-band__link:hover,
+    #{{ section.id }} .fru-reorder-band__link:focus-visible {
+      text-decoration: underline;
+    }
+    #{{ section.id }} .fru-reorder-band__arrow {
+      display: inline-flex;
+      width: 14px;
+      height: 14px;
+      flex: 0 0 auto;
+      transition: transform var(--dur-micro) var(--ease-out);
+    }
+    #{{ section.id }} .fru-reorder-band__arrow svg {
+      width: 100%;
+      height: 100%;
+    }
+    #{{ section.id }} .fru-reorder-band__link:hover .fru-reorder-band__arrow,
+    #{{ section.id }} .fru-reorder-band__link:focus-visible .fru-reorder-band__arrow {
+      transform: translateX(3px);
+    }
+    @media (max-width: 640px) {
+      #{{ section.id }} .fru-reorder-band__inner {
+        min-height: 64px;
+        padding: 12px var(--gutter);
+      }
+      #{{ section.id }} .fru-reorder-band__link {
+        font-size: 14px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #{{ section.id }} .fru-reorder-band__arrow {
+        transition: none;
+      }
+    }
+  </style>
+
+  <div class="fru-reorder-band" id="{{ section.id }}">
+    <div class="container">
+      <div class="fru-reorder-band__inner">
+        <a
+          class="fru-reorder-band__link"
+          href="{{ routes.cart_url }}/{{ reorder_path }}?utm_source=home&amp;utm_medium=reorder&amp;utm_campaign=band"
+        >
+          <span>Hola {{ customer.first_name }} — {{ section.settings.cta_label }}</span>
+          <span class="fru-reorder-band__arrow" aria-hidden="true">{% render 'icon-arrow-right' %}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Banda de recompra",
+  "class": "fru-reorder-band-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Banda de 1 línea que SOLO ven clientes con sesión iniciada y al menos un pedido: arma el carrito con las variantes disponibles de su última compra. Invitados y clientes sin pedidos no ven nada (no se renderiza)."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto después del nombre",
+      "default": "repite tu última caja"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["index"]
+  }
+}
+{% endschema %}

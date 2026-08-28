@@ -1,5 +1,25 @@
 {%- comment -%}theme-check-disable NestedSnippet{%- endcomment -%}
 
+{%- comment -%}
+  BELLA-7 · reorder_path del drawer vacío. Mismo cálculo que
+  sections/main-account.liquid:22-33 (routes.cart_url/{variant:qty}) — se
+  computa solo cuando el carro está vacío, que es la única vez que se usa.
+{%- endcomment -%}
+{%- liquid
+  assign drawer_reorder_path = ''
+  if cart == empty and customer
+    assign drawer_last_order = customer.orders.first
+    if drawer_last_order
+      for line_item in drawer_last_order.line_items
+        if line_item.variant.id and line_item.variant.available
+          assign drawer_reorder_path = drawer_reorder_path | append: ',' | append: line_item.variant.id | append: ':' | append: line_item.quantity
+        endif
+      endfor
+      assign drawer_reorder_path = drawer_reorder_path | remove_first: ','
+    endif
+  endif
+-%}
+
 {%- liquid
   assign show_promoted_products = false
   if section.settings.promoted_products_visibility == 'empty-cart' and cart == empty
@@ -272,6 +292,12 @@
         {% endif %}
         {% render 'cart-items', is_drawer: true %}
       </form>
+
+      {%- if drawer_reorder_path != blank -%}
+        <a class="link cart-drawer__reorder-link mt-4" href="{{ routes.cart_url }}/{{ drawer_reorder_path }}?utm_source=carro&amp;utm_medium=reorder&amp;utm_campaign=drawer_vacio">
+          Volver a pedir lo de la última vez →
+        </a>
+      {%- endif -%}
     </div>
 
     <div id="cart-promoted-products" class="w-full cart-drawer__promoted-products-container">

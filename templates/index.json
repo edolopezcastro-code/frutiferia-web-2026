@@ -734,10 +734,17 @@
         "accessibility_info": "",
         "prevent_animation": true
       }
+    },
+    "fru_reorder_band": {
+      "type": "fru-reorder-band",
+      "settings": {
+        "cta_label": "repite tu última caja"
+      }
     }
   },
   "order": [
     "fru_hero",
+    "fru_reorder_band",
     "audience_doors",
     "fru_category_tiles",
     "collection-list",
