@@ -355,7 +355,20 @@
       </div>
 
       {%- if settings.enable_quick_add and disable_quickbuy != true -%}
-        <div class="card__quick-add mob:card__quick-add--below desktop:card__quick-add--below">
+        {%- comment -%}
+          BELLA-6 · QUICK-ADD COMPACTO.
+          Antes: una pastilla verde a ancho completo bajo CADA tarjeta. En una
+          grilla de 8 productos eso son 8 barras verdes iguales — la fila de
+          ofertas se lee como un muro de botones y la foto pierde el foco.
+          Ahora: un "+" circular de 44px sobre la esquina inferior derecha de la
+          foto. Al agregar, product-form.js pone data-show-quantity-selector=true
+          y el CSS cambia el "+" por el stepper que YA existe en la tarjeta — no
+          hay JS nuevo, no se toca el form ni el submit.
+          Se quitan las clases mob/desktop --below: en modo FAB el bloque es
+          absoluto sobre la foto, y assets/quick-add.css neutraliza ahi mismo el
+          hover-para-aparecer de escritorio.
+        {%- endcomment -%}
+        <div class="card__quick-add card__quick-add--fab">
           {%- assign product_form_id = 'quick-add-' | append: section_id | append: product.id -%}
 
           {%- if product.has_only_default_variant and product_not_for_sale == false -%}

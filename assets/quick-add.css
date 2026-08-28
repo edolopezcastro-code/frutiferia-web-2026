@@ -275,3 +275,183 @@
     padding-inline-start: calc(6 * var(--space-unit));
   }
 }
+/* ============================================================================
+   BELLA-6 · QUICK-ADD COMPACTO — el "+" que se abre al stepper
+
+   Problema medido en la auditoría: cada tarjeta llevaba una pastilla verde a
+   ancho completo. En la fila de ofertas eso son 8 barras verdes idénticas, una
+   bajo cada foto — el ojo ya no ve la fruta, ve un muro de botones, y el único
+   acento de marca de la grilla se repite 8 veces.
+
+   Patrón nuevo (el de cualquier supermercado): un "+" circular de 44 px pegado
+   a la esquina inferior derecha de la foto. Al agregar, product-form.js pone
+   `data-show-quantity-selector="true"` y el swap a stepper que YA existía en
+   este archivo (líneas 185-205) se encarga del resto.
+
+   ⚠️ NO hay JS nuevo y NO se toca el form: el botón sigue siendo el mismo
+   `button[name=add]` dentro del mismo `form 'product'`, así que `handleSubmit`
+   de assets/product-form.js funciona igual. Lo único que cambia es CSS y una
+   clase en snippets/product-card.liquid.
+
+   Sobre la especificidad: el bloque perdió las clases mob/desktop
+   `--below`, así que vuelve a caer bajo las reglas de escritorio de arriba
+   (`.card__quick-add:not(.desktop\:card__quick-add--below)`, que lo esconde
+   hasta el hover). Esas son (0,3,1) y (0,3,0); por eso aquí se dobla la clase
+   (`.card__quick-add.card__quick-add--fab`) para empatar y ganar por orden —
+   este bloque va al final del archivo. Cero !important.
+============================================================================ */
+.card--product .card__quick-add.card__quick-add--fab {
+  display: block;
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 100%;
+  left: auto;
+  width: auto;
+  padding: 0 8px 8px 0;
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* El "+" y el "Elegir opciones" (productos con variantes) comparten forma:
+   un solo acento verde por tarjeta, venga del form directo o del drawer. */
+.card--product .card__quick-add--fab .btn--primary {
+  --btn-bg-color: 23 132 90; /* --fru-verde-800 #17845A */
+  --btn-bg-hover-color: 19 110 75; /* --fru-verde-900 #136E4B */
+  --btn-text-color: 255 255 255;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* El rótulo se va a lectores de pantalla, no a la pantalla: el `visually-hidden`
+   que ya vive dentro de `.quick-add-btn-icon` sigue dando el nombre accesible
+   ("Agregar al carrito" / "Elegir opciones"), así que el botón NO queda mudo. */
+.card--product .card__quick-add--fab .quick-add-btn-text {
+  display: none;
+}
+
+/* `.quick-add-btn-icon` nace en display:none (línea 54). Aquí vuelve, pero como
+   caja del signo "+" dibujado con pseudo-elementos: el icono del tema es un
+   carrito, y a 44 px un carrito se lee peor que un "+".
+   Se usan los pseudos del SPAN y no los del botón a propósito: `.btn.is-loading`
+   ocupa su propio ::after para el spinner. */
+.card--product .card__quick-add--fab .quick-add-btn-icon {
+  display: block;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+.card--product .card__quick-add--fab .quick-add-btn-icon svg {
+  display: none;
+}
+.card--product .card__quick-add--fab .quick-add-btn-icon::before,
+.card--product .card__quick-add--fab .quick-add-btn-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+.card--product .card__quick-add--fab .quick-add-btn-icon::before {
+  width: 16px;
+  height: 2.5px;
+  transform: translate(-50%, -50%);
+}
+.card--product .card__quick-add--fab .quick-add-btn-icon::after {
+  width: 2.5px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+}
+
+/* El stepper aparece EN EL MISMO SITIO que el "+", creciendo hacia la
+   izquierda (el `left: 0` de la línea 193 lo mandaría fuera de la tarjeta,
+   porque el contenedor ahora mide 44 px, no el ancho completo).
+   Fondo y sombra propios: va encima de la foto y sin ellos el número se pierde
+   sobre cualquier zona clara del producto. */
+.card--product .card__quick-add--fab quantity-input {
+  top: 0;
+  right: 0;
+  left: auto;
+  border-radius: 999px;
+  background-color: rgba(var(--bg-color));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+.card--product .card__quick-add--fab quantity-input .qty-input__input {
+  width: 2.4em;
+}
+
+/* Los mensajes de error del form son bloques de ancho completo: dentro de un
+   contenedor de 44 px quedarían ilegibles. Se sacan al ancho de la tarjeta. */
+.card--product .card__quick-add--fab .js-form-error,
+.card--product .card__quick-add--fab .js-product-form-errors {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  width: max-content;
+  max-width: 200px;
+  margin: 0;
+}
+
+/* Sin JS el swap nunca ocurre y un "+" solitario sobre la foto no dice nada:
+   se vuelve a la pastilla de siempre, con su texto. */
+.no-js .card--product .card__quick-add.card__quick-add--fab {
+  position: static;
+  width: auto;
+  padding: calc(4 * var(--space-unit)) 0 0 0;
+}
+.no-js .card--product .card__quick-add--fab .btn--primary {
+  width: 100%;
+  height: auto;
+  padding: var(--btn-padding-y, 12px) 20px;
+  border-radius: var(--btn-border-radius, 6px);
+}
+.no-js .card--product .card__quick-add--fab .quick-add-btn-icon {
+  display: none;
+}
+.no-js .card--product .card__quick-add--fab .quick-add-btn-text {
+  display: block;
+}
+
+/* La vista LISTA de /collections saca el quick-add del overlay y lo pone en
+   línea junto al texto (línea 82). Esa regla es (0,2,0) y el bloque FAB (0,3,0)
+   se la comía, dejando el "+" flotando sobre una foto de 100 px. Aquí vuelve. */
+.main-products-grid[data-layout=list] .card--product .card__quick-add.card__quick-add--fab {
+  position: static;
+  width: auto;
+  padding: 0;
+  padding-inline-start: 0;
+}
+.main-products-grid[data-layout=list] .card--product .card__quick-add--fab quantity-input {
+  position: relative;
+  top: auto;
+  right: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card--product .card__quick-add--fab .btn--primary,
+  .card--product .card__quick-add--fab quantity-input {
+    transition: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Empata los (0,3,1) de `body:not(.tab-used) .card__quick-add:not(...)` y gana
+     por orden: en modo FAB el botón NO se esconde esperando el hover — es el
+     acceso principal de la tarjeta y en táctil el hover no existe. */
+  body .card--product .card__quick-add.card__quick-add--fab {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
