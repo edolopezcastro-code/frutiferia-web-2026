@@ -374,6 +374,23 @@
     #{{ section.id }} .audience-pill:hover { transform: none; }
   }
 
+  /* Etiqueta corta bajo 400px (iPhone SE / mini): con 3 columnas de ~110px
+     "Para mi negocio" se parte en tres lineas y estira la tira. La pastilla
+     conserva sus 64px de alto minimo — el tap target NO se toca. */
+  #{{ section.id }} .audience-pill__short { display: none; }
+
+  @media (max-width: 399px) {
+    #{{ section.id }} .audience-strip { gap: 6px; padding: 0 14px; }
+    #{{ section.id }} .audience-pill {
+      min-height: 64px;
+      padding: 10px 6px;
+      font-size: 13px;
+      letter-spacing: -.01em;
+    }
+    #{{ section.id }} .audience-pill--has-short .audience-pill__long { display: none; }
+    #{{ section.id }} .audience-pill--has-short .audience-pill__short { display: inline; }
+  }
+
   @media (min-width: 750px) {
     #{{ section.id }} .audience-strip { gap: 12px; }
     #{{ section.id }} .audience-pill {
@@ -411,10 +428,10 @@
       -%}
       <li class="audience-strip__item" {{ block.shopify_attributes }}>
         <a
-          class="audience-pill{% if block.settings.lead %} audience-pill--lead{% endif %}"
+          class="audience-pill{% if block.settings.lead %} audience-pill--lead{% endif %}{% if block.settings.name_short != blank %} audience-pill--has-short{% endif %}"
           style="--door-accent: {{ accent }}; --door-ink: {{ ink }};"
           href="{{ block.settings.cta_link | default: '#' }}"
-        >{{ block.settings.name | escape }}</a>
+        ><span class="audience-pill__long">{{ block.settings.name | escape }}</span>{%- if block.settings.name_short != blank -%}<span class="audience-pill__short">{{ block.settings.name_short | escape }}</span>{%- endif -%}</a>
       </li>
     {%- endfor -%}
   </ul>
@@ -603,6 +620,13 @@
           "label": "Respuesta",
           "info": "Responde literalmente la pregunta de arriba: \"Para mi casa\".",
           "default": "Para mi casa"
+        },
+        {
+          "type": "text",
+          "id": "name_short",
+          "label": "Respuesta corta (pantallas bajo 400px)",
+          "info": "Solo se usa en el layout \"tira\" y bajo 400px de ancho. En blanco, se muestra la respuesta larga.",
+          "default": "Mi casa"
         },
         {
           "type": "text",

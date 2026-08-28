@@ -1,12 +1,27 @@
+{%- comment -%}
+  BELLA-3 (2026-08-27) — segundo layout "grid": 3 resenas SIMULTANEAS en escritorio,
+  apiladas en movil. El carrusel original NO se toca (templates/page.b2b.json lo usa):
+  se elige con el setting `layout`, cuyo default sigue siendo el slideshow.
+  En modo grid no se descargan slideshow.css ni slideshow.js: la seccion deja de
+  necesitar JS para mostrar su contenido.
+{%- endcomment -%}
+
+{%- assign is_grid = false -%}
+{%- if section.settings.layout == 'grid' -%}{%- assign is_grid = true -%}{%- endif -%}
+
 {%- if section.index > 2 -%}
-  <link rel="stylesheet" href="{{ 'slideshow.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- unless is_grid -%}
+    <link rel="stylesheet" href="{{ 'slideshow.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- endunless -%}
   <link rel="stylesheet" href="{{ 'testimonials.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- else -%}
-  {{ 'slideshow.css' | asset_url | stylesheet_tag }}
+  {%- unless is_grid -%}
+    {{ 'slideshow.css' | asset_url | stylesheet_tag }}
+  {%- endunless -%}
   {{ 'testimonials.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
-{%- if section.blocks.size > 1 -%}
+{%- if section.blocks.size > 1 and is_grid == false -%}
   <script src="{{ 'slideshow.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
@@ -38,7 +53,185 @@
   #{{ section.id }} .testimonial-stars .rating__stars {
     --star-color: {{ section.settings.star_color.rgb }}
   }
+
+  /* ==================================================================
+     BELLA-3 — layout "grid": 3 resenas de Google simultaneas.
+     Contraste calculado (no estimado), tarjeta blanca sobre banda lila
+     --fru-morado-050 #F4F0F7:
+       cita        --text  #1A1A1A sobre #FFF ......... 17,40:1  AAA
+       autor/a     --text  #1A1A1A sobre #FFF ......... 17,40:1  AAA
+       "Resena de Google" --text-muted #555 sobre #FFF .. 7,46:1  AAA
+       inicial     #3A2E28 sobre el circulo #F4EFE9 ... 11,47:1  AAA
+       enlace      --color-primary #671D90 sobre lila ... 8,66:1  AAA
+     El circulo #F4EFE9 es DECORATIVO: la inicial repite el nombre que va
+     al lado, asi que WCAG 1.4.11 (3:1) no aplica — igual lleva hairline
+     para que se lea como ficha y no como mancha.
+     ================================================================== */
+
+  #{{ section.id }} .fru-reviews__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  #{{ section.id }} .fru-review {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0;
+    padding: 24px 22px;
+    background: var(--surface, #fff);
+    border: 1px solid var(--border, rgba(103,29,144,.12));
+    border-radius: var(--radius, 16px);
+    text-align: start;
+  }
+  #{{ section.id }} .fru-review__stars { margin: 0; }
+  #{{ section.id }} .fru-review__stars .rating__stars {
+    --star-color: {{ section.settings.star_color.rgb }};
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+  #{{ section.id }} .fru-review__quote {
+    flex: 1 1 auto;
+    margin: 0;
+    font-family: var(--font-body, inherit);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text, #1A1A1A);
+  }
+  #{{ section.id }} .fru-review__quote > *:first-child { margin-top: 0; }
+  #{{ section.id }} .fru-review__quote > *:last-child { margin-bottom: 0; }
+
+  #{{ section.id }} .fru-review__author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--border, rgba(103,29,144,.12));
+  }
+  #{{ section.id }} .fru-review__initial {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #F4EFE9;
+    border: 1px solid #E4D9CC;
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 19px;
+    line-height: 1;
+    color: #3A2E28;
+  }
+  #{{ section.id }} .fru-review__who { min-width: 0; display: block; }
+  #{{ section.id }} .fru-review__name {
+    display: block;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text, #1A1A1A);
+  }
+  #{{ section.id }} .fru-review__source {
+    display: block;
+    margin: 2px 0 0;
+    font-size: 13px;
+    line-height: 1.3;
+    color: var(--text-muted, #555);
+  }
+
+  #{{ section.id }} .fru-reviews__foot {
+    margin: 20px 0 0;
+    text-align: center;
+  }
+  /* Tap target de 44px sin que el subrayado se despegue del texto: el alto lo
+     da el padding del inline-flex y la linea la pone text-decoration, que
+     sigue a la caja del texto y no al borde inferior de la caja del enlace. */
+  #{{ section.id }} .fru-reviews__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-primary, #671D90);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+  #{{ section.id }} .fru-reviews__link:hover,
+  #{{ section.id }} .fru-reviews__link:focus-visible { text-decoration-thickness: 2px; }
+
+  @media (min-width: 750px) {
+    #{{ section.id }} .fru-reviews__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    #{{ section.id }} .fru-review { padding: 28px 26px; }
+    #{{ section.id }} .fru-review__quote { font-size: 16.5px; }
+  }
 {%- endstyle -%}
+
+{%- if is_grid -%}
+
+{%- assign grid_limit = section.settings.grid_limit | default: 3 -%}
+
+<div class="section-{{ section.id }} section section--padded{% if section.settings.full_width %} section--full-width{% endif %}{% unless color_scheme == 'default' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %} relative" id="{{ section.id }}"{% if settings.animations_enabled != "disabled" %} data-cc-animate{% endif %}>
+  <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <div class="section__header">
+        <h2 class="h4 {{ section.settings.text_align }}">{{ section.settings.heading | escape }}</h2>
+      </div>
+    {%- endif -%}
+
+    <ul class="fru-reviews__grid">
+      {%- for block in section.blocks limit: grid_limit -%}
+        {%- liquid
+          assign author = block.settings.author | strip
+          assign initial = author | slice: 0 | upcase
+          assign source = block.settings.author_info | strip
+          if section.settings.source_label != blank
+            assign source = section.settings.source_label
+          endif
+        -%}
+        <li class="fru-review" {{ block.shopify_attributes }}>
+          {%- if block.settings.show_star_rating -%}
+            <div class="fru-review__stars">
+              <div class="rating inline-block align-middle" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: block.settings.star_rating, rating_max: 5 }}">
+                <span class="rating__stars" aria-hidden="true" style="--rating: {{ block.settings.star_rating }}; --rating-max: 5;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              </div>
+            </div>
+          {%- endif -%}
+
+          <blockquote class="fru-review__quote rte">{{ block.settings.testimonial }}</blockquote>
+
+          {%- if author != blank -%}
+            <div class="fru-review__author">
+              <span class="fru-review__initial" aria-hidden="true">{{ initial }}</span>
+              <span class="fru-review__who">
+                <span class="fru-review__name">{{ author | escape }}</span>
+                {%- if source != blank -%}
+                  <span class="fru-review__source">{{ source | escape }}</span>
+                {%- endif -%}
+              </span>
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.reviews_link != blank and section.settings.reviews_link_label != blank -%}
+      <p class="fru-reviews__foot">
+        <a class="fru-reviews__link" href="{{ section.settings.reviews_link }}" target="_blank" rel="noopener nofollow">{{ section.settings.reviews_link_label | escape }}</a>
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- else -%}
 
 {%- unless section.settings.full_width -%}
   <div class="container">
@@ -186,6 +379,8 @@
   </div>
 {%- endunless -%}
 
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Testimonials",
@@ -197,6 +392,49 @@
       "id": "heading",
       "label": "Heading",
       "default": "Testimonials"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "info": "\"Grid\" shows several reviews at once (3 across on desktop, stacked on mobile) and loads no slideshow JS.",
+      "options": [
+        { "value": "slideshow", "label": "Slideshow (one at a time)" },
+        { "value": "grid", "label": "Grid (all at once)" }
+      ],
+      "default": "slideshow"
+    },
+    {
+      "visible_if": "{{ section.settings.layout == 'grid' }}",
+      "type": "range",
+      "id": "grid_limit",
+      "label": "Reviews shown in the grid",
+      "info": "The remaining blocks stay saved in the section, ready to rotate in.",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "visible_if": "{{ section.settings.layout == 'grid' }}",
+      "type": "text",
+      "id": "source_label",
+      "label": "Source line under each name",
+      "info": "Leave blank to keep each block's own \"Location or other information\".",
+      "default": "Rese\u00f1a de Google"
+    },
+    {
+      "visible_if": "{{ section.settings.layout == 'grid' }}",
+      "type": "url",
+      "id": "reviews_link",
+      "label": "Link to all reviews"
+    },
+    {
+      "visible_if": "{{ section.settings.layout == 'grid' }}",
+      "type": "text",
+      "id": "reviews_link_label",
+      "label": "Link text",
+      "default": "Lee nuestras rese\u00f1as en Google \u2192"
     },
     {
       "type": "checkbox",
