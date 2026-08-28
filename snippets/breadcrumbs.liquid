@@ -46,6 +46,19 @@
   endif
 -%}
 
+{%- liquid
+  assign excluded_collection_handles = 'ofertas, all, catalogo-completo, 990, por-mayor' | split: ', '
+  assign breadcrumb_collection = collection
+  if template.name == 'product' and breadcrumb_collection == blank
+    for prod_collection in product.collections
+      unless excluded_collection_handles contains prod_collection.handle
+        assign breadcrumb_collection = prod_collection
+        break
+      endunless
+    endfor
+  endif
+-%}
+
 {%- if template.name == 'blog' and current_tags -%}
   {%- liquid
     assign current_tags_handles = nil | sort | compact
@@ -112,7 +125,7 @@
 
         {%- elsif template.name == 'product' -%}
           {%- assign product_position = 2 -%}
-          {%- if collection -%}
+          {%- if breadcrumb_collection -%}
             {%- if show_collection_listing_link -%}
               {
                 "@type": "ListItem",
@@ -125,8 +138,8 @@
             {
               "@type": "ListItem",
               "position": {{ product_position }},
-              "name": {{ collection.title | json }},
-              "item": {{ shop.url | append: collection.url | json }}
+              "name": {{ breadcrumb_collection.title | json }},
+              "item": {{ shop.url | append: breadcrumb_collection.url | json }}
             },
             {%- if show_collection_listing_link -%}
               {%- assign product_position = 4 -%}
@@ -200,14 +213,14 @@
         </li>
 
       {%- elsif template.name == 'product' -%}
-        {%- if collection -%}
+        {%- if breadcrumb_collection -%}
           {%- if show_collection_listing_link -%}
             <li class="flex items-center">
               <a class="breadcrumbs-list__link" href="{{ routes.collections_url }}">{{ collections_title | escape }}</a> {{ divider }}
             </li>
           {%- endif -%}
           <li class="flex items-center">
-            <a class="breadcrumbs-list__link" href="{{ collection.url }}">{{ collection.title | escape }}</a> {{ divider }}
+            <a class="breadcrumbs-list__link" href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title | escape }}</a> {{ divider }}
           </li>
         {%- endif -%}
         <li class="flex items-center">
