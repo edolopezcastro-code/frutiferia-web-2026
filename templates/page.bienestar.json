@@ -31,10 +31,10 @@
           "type": "button",
           "settings": {
             "button_1_label": "Cotiza tu programa",
-            "button_1_link": "https://cotiza.frutiferia.com/bienestar",
+            "button_1_link": "https://wellness.frutiferia.com",
             "button_1_style": "btn btn--primary",
             "button_2_label": "Ya tengo programa, entrar",
-            "button_2_link": "https://cotiza.frutiferia.com/bienestar",
+            "button_2_link": "https://wellness.frutiferia.com",
             "button_2_style": "btn btn--secondary"
           }
         }
