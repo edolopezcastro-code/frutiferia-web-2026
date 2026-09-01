@@ -9,8 +9,11 @@
         item. Solo pega en el panel PREDICTIVO (Section Rendering API); la
         página /search completa queda fuera del alcance de este sprint.
       {%- endcomment -%}
-      {%- if type == 'products' and item.metafields.seo.hidden -%}
-        {%- continue -%}
+      {%- if type == 'products' -%}
+        {%- capture fru_is_wholesale -%}{%- render 'fru-wholesale-handles', handle: item.handle -%}{%- endcapture -%}
+        {%- if item.metafields.seo.hidden or fru_is_wholesale contains '1' -%}
+          {%- continue -%}
+        {%- endif -%}
       {%- endif -%}
       {%- liquid
         assign show_quick_add = false

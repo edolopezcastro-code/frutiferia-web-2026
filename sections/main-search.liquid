@@ -135,6 +135,13 @@
                 data-filters-open-classes="grid{% if settings.card_contain_gapless and settings.card_contain %} gapless{% endif %} mb-8 md:mb-12 {{ grid_classes_filters_open }} gap-x-5 {% if settings.card_contain %}gap-y-8{% else %}gap-y-10{% endif %}"
                 data-filters-closed-classes="grid{% if settings.card_contain_gapless and settings.card_contain %} gapless{% endif %} mb-8 md:mb-12 {{ grid_classes_filters_closed }} gap-x-5 {% if settings.card_contain %}gap-y-8{% else %}gap-y-10{% endif %}" role="list">
               {%- for item in search.results -%}
+                {%- comment -%} D-8 · los formatos mayoristas no compiten con el de hogar en la búsqueda B2C {%- endcomment -%}
+                {%- if item.object_type == 'product' -%}
+                  {%- capture fru_is_wholesale -%}{%- render 'fru-wholesale-handles', handle: item.handle -%}{%- endcapture -%}
+                  {%- if item.metafields.seo.hidden or fru_is_wholesale contains '1' -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                {%- endif -%}
                 <li class="js-pagination-result">
                   {%- case item.object_type -%}
                     {%- when 'product' -%}

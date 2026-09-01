@@ -1,0 +1,42 @@
+{%- comment -%}
+  D-8 · Formatos MAYORISTAS que no deben aparecer en la búsqueda de la tienda B2C.
+
+  Por qué existe este snippet y no solo el metafield `seo.hidden`:
+  el gancho de `seo.hidden` ya está cableado en la búsqueda (predictiva y /search),
+  pero marcarlo exige editar 69 productos a mano en el admin y el desplegable de
+  esa pantalla no es automatizable. Esta lista hace el mismo trabajo desde el tema,
+  es auditable de una mirada y se revierte borrando una línea. Los dos mecanismos
+  conviven: si algún día se marcan los metafields, el filtro sigue funcionando igual.
+
+  Qué NO hace: los productos siguen publicados, siguen en sus colecciones B2B
+  (`/collections/por-mayor`, `verduras-por-mayor`, …), conservan su URL y su SEO.
+  Solo dejan de competir con el formato de hogar cuando una clienta busca "cebolla".
+
+  Criterio de la lista (mecánico, del título): formato >= 5 kg, >= 10 unidades o
+  >= 10 paquetes. Verificado producto a producto contra el catálogo el 2026-09-01;
+  cada uno tiene su equivalente de hogar visible (ej. «Cebolla (kg)» $990 se queda,
+  «Cebolla (14 kg)» $11.990 se va).
+
+  ⚠️ NO usar el tag `PorMayor` como fuente: miente en las dos direcciones — 58
+  productos con ese tag son formato hogar (frutos secos y aceitunas de 1 kg) y 3
+  mayoristas de verdad no lo llevan (achicoria-10-unidades, coliflor-10-u,
+  lechuga-hidroponica-morada-10-u).
+
+  Cómo se usa (render tiene SCOPE AISLADO: un `assign` de aquí NO llega al padre, por eso
+  este snippet se comunica por lo que IMPRIME):
+      {%- capture fru_is_wholesale -%}{%- render 'fru-wholesale-handles', handle: item.handle -%}{%- endcapture -%}
+      {%- if fru_is_wholesale contains '1' -%}{%- continue -%}{%- endif -%}
+
+  ⚠️ Handles cruzados: en varios pares el handle "corto" es el MAYORISTA y el largo
+  el de hogar — `platano` = 5 kg vs `platanos` = kg; `manzana-roja` = 5 kg vs
+  `manzana-roja-fuji` = kg; `mandarina` = 5 kg vs `lucuma` = kg; `espinaca` = 12 u
+  vs `espinacas` = pqte; `zapallo-1` = 5 kg vs `zapallo` = 650 gr. Por eso la
+  comparación va entre comas: `,platano,` nunca calza con `,platanos,`.
+{%- endcomment -%}
+{%- liquid
+  assign fru_wholesale_handles = ',palta-hass-chilena-20-kg,palta-hass-importada-20-kg,caja-huevo-gallina-libre,champinon-kg-copia,caja-huevo-blanco-extra-180-u,limon-sutil-20-kg,maracuya-5-kg,platano-20-kg,palta-hass-chilena-por-mayor,coliflor-10-u,zapallo-italiano-40-u,tomate-por-mayor,palta-hass-peruana,manzana-roja-15-kg,manzana-verde-15-kg,limon-de-pica,papa-limpia-por-mayor,tomate-cherry-1,zanahoria-por-mayor,papa-sucia-por-mayor,tomate-segunda-18-kg,aji-verde-5kg,cebollas-moradas,naranja-15-kg,betarraga-10-paquetes,brocoli-1,achicoria-10-unidades,papa-camote,pimenton-amarillo-grande-10-u,cebolla-por-mayor,pimenton-rojo-grande-10-u,ajo-40-unidades,albahaca-12-paquetes,limon-sutil,lechuga-chilena-1,kiwi-por-mayor,lechuga-escarola-1,lechuga-hidroponica-u,lechuga-hidroponica-morada-10-u,limon-por-mayor,cebollin-1,choclo-americano-1,cilantro-1,espinaca,lechuga-espanola-u,lechuga-francesa,lechuga-marina-1,mandarina,papa-limpia-10-kg,perejil-1,manzana-roja,manzana-verde-5-kg,papa-sucia-10-kg,pimenton-verde-grande-10-u,platano,tomate-5-kg,zapallo-italiano-por-mayor,cebolla-morada-5-kg,pera-1,pomelo-5-kg,ciboulette-10-pqte,naranja-1,zapallo-1,zanahoria-5-kg,berenjenas-10-unidades,limon-5-kg,pepino-ensalada-10-u,acelga-12-paquetes,cebolla-5-kg,'
+  assign fru_handle_key = handle | prepend: ',' | append: ','
+  if fru_wholesale_handles contains fru_handle_key
+    echo '1'
+  endif
+-%}
