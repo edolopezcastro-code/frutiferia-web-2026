@@ -399,14 +399,19 @@
     }
     #{{ section.id }}.fru-hero .fru-hero__media {
       grid-row: 1;
-      height: clamp(118px, 24vw, 180px);
+      /* Feedback de Eduardo (2026-09-01, iPhone): "no deja espacio a la foto".
+         La franja medía 118-180px y el texto le comía 38px más de solape, así
+         que del bodegón solo se veía una tira sin sujeto reconocible. Con
+         ~240px la escena se lee y el hero sigue muy por debajo de la meta de
+         scroll (el primer tile queda ~670px, meta ≤750). */
+      height: clamp(210px, 46vw, 280px);
     }
     #{{ section.id }}.fru-hero .fru-hero__text {
       grid-row: 2;
       position: relative;
       z-index: 1;
       max-width: none;
-      margin-top: -38px;
+      margin-top: -22px;
       padding: 14px var(--gutter, 20px) 16px;
       gap: 6px;
       background: var(--surface, #fff);
@@ -450,7 +455,7 @@
     #{{ section.id }}.fru-hero .fru-hero__title {
       font-size: clamp(28px, 7.4vw, 34px);
     }
-    #{{ section.id }}.fru-hero .fru-hero__media { height: 118px; }
+    #{{ section.id }}.fru-hero .fru-hero__media { height: 212px; }
     #{{ section.id }}.fru-hero .fru-hero__text {
       padding: 12px var(--gutter, 20px) 14px;
       gap: 5px;

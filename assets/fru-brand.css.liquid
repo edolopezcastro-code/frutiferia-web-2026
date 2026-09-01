@@ -428,7 +428,7 @@ input[type='password'] {
    botón. El input se estira igual para que la pastilla quede pareja.
 ---------------------------------------------------------------------------- */
 .js .qty-input--combined .qty-input__btn {
-  min-width: 44px;
+  min-width: 40px;
   min-height: 44px;
   border: 1px solid var(--border);
   border-radius: var(--btn-border-radius, 6px);
@@ -436,6 +436,37 @@ input[type='password'] {
 
 .js .qty-input--combined .qty-input__input {
   min-height: 44px;
+}
+
+/* ----------------------------------------------------------------------------
+   (h.2) Feedback de Eduardo (2026-09-01, iPhone): "los botones son muy grandes
+   y tapan un poco el recuadro del medio; le daría un poco de espacio sin perder
+   mucho tamaño".
+
+   Tenía razón: los dos bloques verdes de 44x44 dejaban al número en una ranura
+   de ~2,4em y el conjunto se leía como dos botones con un hueco, no como un
+   contador. El arreglo NO baja el área de tap (sigue 40x44, sobre los 24x24 que
+   pide WCAG 2.5.8): lo que cambia es el reparto — el número gana ancho y aire,
+   y el signo pierde peso visual dentro de un botón más angosto.
+
+   El `width` de la tarjeta (quick-add.css:391) es (0,3,1) con elemento; este
+   selector suma la misma cuenta y carga después, así que gana por orden.
+---------------------------------------------------------------------------- */
+.js .qty-input--combined .qty-input__input,
+.card--product .card__quick-add--fab quantity-input .qty-input__input {
+  width: 3.1em;
+  padding-inline: 2px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* El aire entre el número y cada signo: sin esto el 3.1em se lo comen los
+   botones al estirarse. El fondo blanco del centro separa por contraste. */
+.js .qty-input--combined .qty-input__btn:first-child {
+  margin-inline-end: 3px;
+}
+.js .qty-input--combined .qty-input__btn:last-child {
+  margin-inline-start: 3px;
 }
 
 /* El "Agregar al carrito" de la ficha medía 42 px (Chrome, 375): bajo el

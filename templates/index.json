@@ -13,7 +13,7 @@
       "type": "fru-hero",
       "settings": {
         "image_desktop": "shopify://shop_images/hero-desktop.jpg",
-        "image_mobile": "shopify://shop_images/hero-movil.jpg",
+        "image_mobile": "shopify://shop_images/hero-movil-v2.jpg",
         "image_alt": "Selección de verduras frescas sobre el mesón de Frutiferia",
         "overlay_opacity": 10,
         "badge_text": "Código PRIMERA15 · 15% en tu primera compra",
