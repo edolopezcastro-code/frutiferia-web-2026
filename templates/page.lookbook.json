@@ -45,10 +45,10 @@
         "button_9ft6Uy": {
           "type": "button",
           "settings": {
-            "button_1_label": "Ver más",
-            "button_1_link": "",
+            "button_1_label": "Ver el catálogo",
+            "button_1_link": "shopify://collections/all",
             "button_1_style": "btn btn--primary",
-            "button_2_label": "Ver más",
+            "button_2_label": "",
             "button_2_link": "",
             "button_2_style": "btn btn--primary"
           }
@@ -118,7 +118,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -136,7 +136,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -154,7 +154,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -172,7 +172,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -190,7 +190,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -208,7 +208,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -226,7 +226,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -244,7 +244,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -284,53 +284,6 @@
         "overlay_border_radius": 4
       }
     },
-    "background_video_MtknV9": {
-      "type": "background-video",
-      "blocks": {
-        "heading_aqrnAm": {
-          "type": "heading",
-          "settings": {
-            "heading": "Video de fondo",
-            "heading_size": "h1",
-            "heading_h1": false
-          }
-        },
-        "text_TFL4h9": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Agrega un texto al video para mostrar un detalle de Frutiferia o de tus productos.</p>",
-            "enlarge_text": true
-          }
-        },
-        "button_bGeJeV": {
-          "type": "button",
-          "settings": {
-            "button_label": "",
-            "button_link": "",
-            "button_style": "btn btn--secondary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_aqrnAm",
-        "text_TFL4h9",
-        "button_bGeJeV"
-      ],
-      "settings": {
-        "video_external": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_description": "",
-        "video_height": "md",
-        "overlay_text_align": "text-center",
-        "overlay_position": "justify-center items-center",
-        "mob_center_text": true,
-        "color_scheme": "white",
-        "transparent_content_color": "#ffffff",
-        "tint_color": "#000000",
-        "tint_gradient": "",
-        "lazyload": true,
-        "prevent_animation": false
-      }
-    },
     "shoppable-image": {
       "type": "shoppable-image",
       "blocks": {
@@ -367,8 +320,8 @@
       "settings": {
         "show_vendor": true,
         "show_content": true,
-        "heading": "Imagen comprable",
-        "text": "<p>Crea una sección \"Arma tu pedido\" para sugerir productos que combinan y ayudar a tus clientes a comprar.</p>",
+        "heading": "Arma tu pedido",
+        "text": "<p>Toca los puntos de la foto para ver cada producto y agregarlo a tu carro.</p>",
         "button_label": "",
         "button_link": "",
         "hotspot_color": "#222222",
@@ -386,7 +339,7 @@
             "columns": 2,
             "rows": 2,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -404,7 +357,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -422,7 +375,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -440,7 +393,7 @@
             "columns": 2,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -529,7 +482,6 @@
     "image_banner_cKzmAh",
     "rich_text_y7JbGJ",
     "media_grid_G3kadV",
-    "background_video_MtknV9",
     "shoppable-image",
     "media_grid_GrGxCB",
     "featured_collection_4DYtHa",

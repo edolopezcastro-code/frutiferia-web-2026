@@ -144,7 +144,7 @@
             "show_reviews": true,
             "custom_reviews": "",
             "show_specification": false,
-            "spec_heading": "Specifications",
+            "spec_heading": "Especificaciones",
             "spec_metafields": "",
             "spec_right_align": false,
             "spec_show_empty_metafields": true,
@@ -163,13 +163,13 @@
         "highlight_text_hhk3pq": {
           "type": "highlight-text",
           "settings": {
-            "text": "<h4>Destaca un beneficio</h4><p>Texto para resaltar una característica clave de tu producto</p>"
+            "text": "<h4>Frescura garantizada</h4><p>Seleccionamos cada producto a mano para asegurar la mejor calidad. Si no estás conforme, lo resolvemos.</p>"
           }
         },
         "highlight_text_RRCc6R": {
           "type": "highlight-text",
           "settings": {
-            "text": "<h4>Destaca un beneficio</h4><p>Texto para resaltar una característica clave de tu producto</p>"
+            "text": "<h4>Entrega a domicilio</h4><p>Recibe tus frutas y verduras frescas en la puerta de tu casa. Envío gratis sobre $50.000.</p>"
           }
         }
       },
@@ -193,7 +193,7 @@
         "heading_7VcyqL": {
           "type": "heading",
           "settings": {
-            "heading": "Promoción",
+            "heading": "¿Primer pedido?",
             "heading_size": "h5",
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -202,7 +202,7 @@
         "text_FF6dEx": {
           "type": "text",
           "settings": {
-            "text": "<p>Comparte algo especial con tus clientes.</p>",
+            "text": "<p>Usa el código <strong>PRIMERA15</strong> y obtén un 15% de descuento.</p>",
             "enlarge_text": false,
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -211,7 +211,7 @@
         "discount_i6gfBF": {
           "type": "discount",
           "settings": {
-            "discount_code": "DISCOUNTCODE"
+            "discount_code": "PRIMERA15"
           }
         }
       },
@@ -259,17 +259,17 @@
         "text_rGdbDR": {
           "type": "text",
           "settings": {
-            "text": "<p>Cuéntales a tus clientes sobre Frutiferia. Describe un producto, comparte una novedad o dales la bienvenida a la tienda.</p>",
+            "text": "<p>Elegimos a mano lo que entra en cada caja y la revisamos antes de que salga. Repartimos miércoles y sábado en Viña del Mar, Valparaíso, Concón, Reñaca y Quilpué, gratis sobre $50.000.</p>",
             "enlarge_text": false
           }
         },
         "button_EV8QPC": {
           "type": "button",
           "settings": {
-            "button_1_label": "Ver más",
-            "button_1_link": "",
+            "button_1_label": "Ver el catálogo",
+            "button_1_link": "shopify://collections/all",
             "button_1_style": "btn--primary",
-            "button_2_label": "Ver más",
+            "button_2_label": "",
             "button_2_link": "",
             "button_2_style": "btn btn--primary"
           }

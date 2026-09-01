@@ -138,7 +138,7 @@
         "heading_WLQLDt": {
           "type": "heading",
           "settings": {
-            "heading": "Banner con imagen",
+            "heading": "Fruta y verdura elegida a mano",
             "heading_size": "h1",
             "heading_h1": false
           }
@@ -146,17 +146,17 @@
         "text_CW7xyC": {
           "type": "text",
           "settings": {
-            "text": "<p>Cuéntales a tus clientes lo que hace especial a Frutiferia. Describe un producto, comparte una novedad o dales la bienvenida.</p>",
+            "text": "<p>Elegimos a mano lo que entra en cada caja y la revisamos antes de que salga. Repartimos miércoles y sábado en Viña del Mar, Valparaíso, Concón, Reñaca y Quilpué, gratis sobre $50.000.</p>",
             "enlarge_text": false
           }
         },
         "button_WEEAxy": {
           "type": "button",
           "settings": {
-            "button_1_label": "Ver más",
-            "button_1_link": "",
+            "button_1_label": "Ver el catálogo",
+            "button_1_link": "shopify://collections/all",
             "button_1_style": "btn btn--primary",
-            "button_2_label": "Ver más",
+            "button_2_label": "",
             "button_2_link": "",
             "button_2_style": "btn btn--primary"
           }
@@ -195,7 +195,7 @@
             "show_reviews": true,
             "custom_reviews": "",
             "show_specification": false,
-            "spec_heading": "Specifications",
+            "spec_heading": "Especificaciones",
             "spec_metafields": "",
             "spec_right_align": false,
             "spec_show_empty_metafields": true,
@@ -393,7 +393,7 @@
         "media_MVYxtP"
       ],
       "settings": {
-        "title": "Grilla promocional",
+        "title": "Descubre más",
         "heading_align": "text-start",
         "button_label": "Ver todo",
         "button_link": "",
@@ -497,17 +497,17 @@
         "text_rGdbDR": {
           "type": "text",
           "settings": {
-            "text": "<p>Cuéntales a tus clientes sobre Frutiferia. Describe un producto, comparte una novedad o dales la bienvenida a la tienda.</p>",
+            "text": "<p>Elegimos a mano lo que entra en cada caja y la revisamos antes de que salga. Repartimos miércoles y sábado en Viña del Mar, Valparaíso, Concón, Reñaca y Quilpué, gratis sobre $50.000.</p>",
             "enlarge_text": false
           }
         },
         "button_EV8QPC": {
           "type": "button",
           "settings": {
-            "button_1_label": "Ver más",
-            "button_1_link": "",
+            "button_1_label": "Ver el catálogo",
+            "button_1_link": "shopify://collections/all",
             "button_1_style": "btn--primary",
-            "button_2_label": "Ver más",
+            "button_2_label": "",
             "button_2_link": "",
             "button_2_style": "btn btn--primary"
           }

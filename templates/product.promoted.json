@@ -15,8 +15,8 @@
         "feature_Krbchf": {
           "type": "feature",
           "settings": {
-            "heading": "Nombre del beneficio",
-            "text": "<p>Agrega un texto que describa este beneficio del producto.</p>",
+            "heading": "Seleccionado a mano",
+            "text": "<p>Revisamos cada producto antes de que entre a tu caja.</p>",
             "content_align": "text-start",
             "hotspot_x": 28,
             "hotspot_y": 38
@@ -25,8 +25,8 @@
         "feature_3Rbwii": {
           "type": "feature",
           "settings": {
-            "heading": "Nombre del beneficio",
-            "text": "<p>Agrega un texto que describa este beneficio del producto.</p>",
+            "heading": "Despacho gratis sobre $50.000",
+            "text": "<p>Miércoles y sábado en Viña, Valparaíso, Concón, Reñaca y Quilpué.</p>",
             "content_align": "text-start",
             "hotspot_x": 60,
             "hotspot_y": 23
@@ -35,8 +35,8 @@
         "feature_pdNfmk": {
           "type": "feature",
           "settings": {
-            "heading": "Nombre del beneficio",
-            "text": "<p>Agrega un texto que describa este beneficio del producto.</p>",
+            "heading": "Reposición si no cumple",
+            "text": "<p>Si algo no llega al estándar, lo reponemos en la siguiente entrega.</p>",
             "content_align": "text-start",
             "hotspot_x": 73,
             "hotspot_y": 54
@@ -71,7 +71,7 @@
         "text_zHn8YV": {
           "type": "text",
           "settings": {
-            "text": "Cuéntales a tus clientes sobre una promoción",
+            "text": "Elegido a mano en Viña del Mar",
             "link": "",
             "font": "heading",
             "heading_size": "h1"
@@ -87,7 +87,7 @@
         "text_Wh4VR3": {
           "type": "text",
           "settings": {
-            "text": "Comparte una novedad",
+            "text": "Despacho gratis sobre $50.000",
             "link": "",
             "font": "body",
             "heading_size": "h1"
@@ -96,7 +96,7 @@
         "button_bY7phb": {
           "type": "button",
           "settings": {
-            "button_label": "Ver más",
+            "button_label": "",
             "button_link": "",
             "button_style": "btn btn--primary"
           }
@@ -127,8 +127,8 @@
           "settings": {
             "enable_media": true,
             "media_scale": 100,
-            "heading": "Columna",
-            "text": "<p>Combina texto con una imagen para destacar un producto, una categoría o un artículo del blog. Agrega detalles de disponibilidad, características o una reseña.</p>",
+            "heading": "100% fresco",
+            "text": "<p>Seleccionado a mano, producto por producto.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -138,8 +138,8 @@
           "settings": {
             "enable_media": true,
             "media_scale": 100,
-            "heading": "Columna",
-            "text": "<p>Combina texto con una imagen para destacar un producto, una categoría o un artículo del blog. Agrega detalles de disponibilidad, características o una reseña.</p>",
+            "heading": "Envío gratis",
+            "text": "<p>En pedidos sobre $50.000.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -149,8 +149,8 @@
           "settings": {
             "enable_media": true,
             "media_scale": 100,
-            "heading": "Columna",
-            "text": "<p>Combina texto con una imagen para destacar un producto, una categoría o un artículo del blog. Agrega detalles de disponibilidad, características o una reseña.</p>",
+            "heading": "Garantía",
+            "text": "<p>Reposición si algo no cumple.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -160,8 +160,8 @@
           "settings": {
             "enable_media": true,
             "media_scale": 100,
-            "heading": "Columna",
-            "text": "<p>Combina texto con una imagen para destacar un producto, una categoría o un artículo del blog. Agrega detalles de disponibilidad, características o una reseña.</p>",
+            "heading": "Pago seguro",
+            "text": "<p>Tarjetas, transferencia y Mercado Pago.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -174,7 +174,7 @@
         "column_FHQgac"
       ],
       "settings": {
-        "title": "Columnas",
+        "title": "Por qué comprar en Frutiferia",
         "heading_align": "text-start",
         "button_label": "Ver todo",
         "button_link": "",
@@ -193,7 +193,7 @@
         "heading_FqQxwX": {
           "type": "heading",
           "settings": {
-            "heading": "Promoción",
+            "heading": "¿Primer pedido?",
             "heading_size": "h4",
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -202,7 +202,7 @@
         "text_3GbF3V": {
           "type": "text",
           "settings": {
-            "text": "<p>Comparte algo especial con tus clientes.</p>",
+            "text": "<p>Usa el código <strong>PRIMERA15</strong> y obtén un 15% de descuento.</p>",
             "enlarge_text": false,
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -211,7 +211,7 @@
         "discount_xERp7x": {
           "type": "discount",
           "settings": {
-            "discount_code": "DISCOUNTCODE"
+            "discount_code": "PRIMERA15"
           }
         }
       },
@@ -354,17 +354,17 @@
         "text_4NTjKf": {
           "type": "text",
           "settings": {
-            "text": "<p>Cuéntales a tus clientes sobre Frutiferia. Describe un producto, comparte una novedad o dales la bienvenida a la tienda.</p>",
+            "text": "<p>Elegimos a mano lo que entra en cada caja y la revisamos antes de que salga. Repartimos miércoles y sábado en Viña del Mar, Valparaíso, Concón, Reñaca y Quilpué, gratis sobre $50.000.</p>",
             "enlarge_text": false
           }
         },
         "button_fGcinN": {
           "type": "button",
           "settings": {
-            "button_1_label": "Ver más",
-            "button_1_link": "",
+            "button_1_label": "Ver el catálogo",
+            "button_1_link": "shopify://collections/all",
             "button_1_style": "btn--primary",
-            "button_2_label": "Ver más",
+            "button_2_label": "",
             "button_2_link": "",
             "button_2_style": "btn btn--primary"
           }
@@ -395,7 +395,7 @@
             "columns": 2,
             "rows": 2,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -413,7 +413,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -431,7 +431,7 @@
             "columns": 1,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -449,7 +449,7 @@
             "columns": 2,
             "rows": 1,
             "subheading": "",
-            "title": "<p>Título del contenido</p>",
+            "title": "",
             "heading_size": "h5",
             "button_label": "",
             "button_link": "",
@@ -491,7 +491,7 @@
         "richtext_WEAW6A": {
           "type": "richtext",
           "settings": {
-            "text": "<p>Cuéntales a tus clientes sobre este producto.</p>"
+            "text": "<p>Elegimos y revisamos este producto a mano antes de que entre a tu caja.</p>"
           }
         },
         "71057e1b-320d-4706-a43a-06d66046c5a7": {
@@ -503,7 +503,7 @@
             "show_reviews": true,
             "custom_reviews": "",
             "show_specification": true,
-            "spec_heading": "Specifications",
+            "spec_heading": "Especificaciones",
             "spec_metafields": "",
             "spec_right_align": false,
             "spec_show_empty_metafields": true,
@@ -522,13 +522,13 @@
         "highlight_text_hhk3pq": {
           "type": "highlight-text",
           "settings": {
-            "text": "<h4>Destaca un beneficio</h4><p>Texto para resaltar una característica clave de tu producto</p>"
+            "text": "<h4>Frescura garantizada</h4><p>Seleccionamos cada producto a mano para asegurar la mejor calidad. Si no estás conforme, lo resolvemos.</p>"
           }
         },
         "highlight_text_RRCc6R": {
           "type": "highlight-text",
           "settings": {
-            "text": "<h4>Destaca un beneficio</h4><p>Texto para resaltar una característica clave de tu producto</p>"
+            "text": "<h4>Entrega a domicilio</h4><p>Recibe tus frutas y verduras frescas en la puerta de tu casa. Envío gratis sobre $50.000.</p>"
           }
         }
       },
@@ -541,7 +541,7 @@
       "settings": {
         "content_size": "default",
         "placement": "left",
-        "text": "<h4>Destaca más beneficios del producto</h4>",
+        "text": "<h3>¿Por qué elegir Frutiferia?</h3><p>Más de 7 años entregando productos frescos y de calidad a hogares y negocios de la Región de Valparaíso. +20.000 pedidos nos respaldan.</p>",
         "show_image_first": true,
         "color_scheme": "default",
         "full_width": false
@@ -654,7 +654,7 @@
         "media_fjVNCg"
       ],
       "settings": {
-        "title": "Grilla promocional",
+        "title": "Descubre más",
         "heading_align": "text-start",
         "button_label": "Ver todo",
         "button_link": "",

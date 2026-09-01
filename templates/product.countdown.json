@@ -15,7 +15,7 @@
         "countdown-subheading": {
           "type": "subheading",
           "settings": {
-            "text": "Nombre del producto"
+            "text": "Próximamente"
           }
         },
         "countdown-heading": {
@@ -28,7 +28,7 @@
         "countdown-text": {
           "type": "text",
           "settings": {
-            "text": "<p>La cuenta regresiva ya comenzó...</p>",
+            "text": "<p>La cuenta regresiva ya comenzó. Te avisamos apenas esté disponible.</p>",
             "enlarge_text": true
           }
         },
@@ -96,7 +96,7 @@
           "type": "message",
           "settings": {
             "icon": "heart",
-            "title": "<h6>Mensaje del producto</h6><p>Describe el producto, destaca lo que lo hace especial o comparte una novedad.</p>",
+            "title": "<h6>Aún no está disponible</h6><p>Déjanos tu correo y te avisamos apenas llegue. Repartimos miércoles y sábado.</p>",
             "close": "once",
             "show_over_media": false,
             "visibility_duration": 7,
@@ -185,7 +185,7 @@
         "scrolling-banner-text-1": {
           "type": "text",
           "settings": {
-            "text": "Cuéntales a tus clientes sobre una promoción",
+            "text": "Elegido a mano en Viña del Mar",
             "link": "",
             "font": "heading",
             "heading_size": "h2"
@@ -201,7 +201,7 @@
         "scrolling-banner-text-2": {
           "type": "text",
           "settings": {
-            "text": "Comparte una novedad",
+            "text": "Despacho gratis sobre $50.000",
             "link": "",
             "font": "body",
             "heading_size": "h2"
@@ -210,7 +210,7 @@
         "button_4hznEn": {
           "type": "button",
           "settings": {
-            "button_label": "Ver más",
+            "button_label": "",
             "button_link": "",
             "button_style": "btn btn--primary"
           }
@@ -233,38 +233,6 @@
         "prevent_animation": false
       }
     },
-    "video": {
-      "type": "video",
-      "blocks": {
-        "video-heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Video",
-            "heading_size": "h2",
-            "heading_h1": false
-          }
-        },
-        "video-text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Agrega un texto al video para mostrar un detalle de Frutiferia o de tus productos.</p>",
-            "enlarge_text": false
-          }
-        }
-      },
-      "block_order": [
-        "video-heading",
-        "video-text"
-      ],
-      "settings": {
-        "video_external": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_description": "",
-        "video_size": "md",
-        "video_autoplay": true,
-        "text_align": "text-center",
-        "color_scheme": "default"
-      }
-    },
     "details": {
       "type": "product-details",
       "blocks": {
@@ -277,7 +245,7 @@
             "show_reviews": true,
             "custom_reviews": "",
             "show_specification": true,
-            "spec_heading": "Specifications",
+            "spec_heading": "Especificaciones",
             "spec_metafields": "",
             "spec_right_align": true,
             "spec_show_empty_metafields": false,
@@ -296,13 +264,13 @@
         "highlight-text": {
           "type": "highlight-text",
           "settings": {
-            "text": "<h4>Destaca un beneficio</h4><p>Texto para resaltar una característica clave de tu producto</p>"
+            "text": "<h4>Frescura garantizada</h4><p>Seleccionamos cada producto a mano para asegurar la mejor calidad. Si no estás conforme, lo resolvemos.</p>"
           }
         },
         "highlight_text_PJnD8q": {
           "type": "highlight-text",
           "settings": {
-            "text": "<h4>Destaca un beneficio</h4><p>Texto para resaltar una característica clave de tu producto</p>"
+            "text": "<h4>Entrega a domicilio</h4><p>Recibe tus frutas y verduras frescas en la puerta de tu casa. Envío gratis sobre $50.000.</p>"
           }
         }
       },
@@ -326,7 +294,7 @@
         "heading_n8hmhd": {
           "type": "heading",
           "settings": {
-            "heading": "Promoción",
+            "heading": "¿Primer pedido?",
             "heading_size": "h4",
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -335,7 +303,7 @@
         "text_LqHp3b": {
           "type": "text",
           "settings": {
-            "text": "<p>Comparte algo especial con tus clientes.</p>",
+            "text": "<p>Usa el código <strong>PRIMERA15</strong> y obtén un 15% de descuento.</p>",
             "enlarge_text": false,
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -344,7 +312,7 @@
         "discount_7UpUcM": {
           "type": "discount",
           "settings": {
-            "discount_code": "DISCOUNTCODE"
+            "discount_code": "PRIMERA15"
           }
         }
       },
@@ -414,7 +382,6 @@
     "countdown-timer",
     "main",
     "scrolling-banner",
-    "video",
     "details",
     "promo_strip_TjDBrg",
     "recommendations",

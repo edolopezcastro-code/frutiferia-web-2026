@@ -48,7 +48,7 @@
           "type": "message",
           "settings": {
             "icon": "heart",
-            "title": "<h6>Mensaje del producto</h6><p>Describe el producto, destaca lo que lo hace especial o comparte una novedad.</p>",
+            "title": "<h6>Producto por encargo</h6><p>Lo pedimos especialmente para ti. Coordinamos contigo el día de entrega al momento de confirmar.</p>",
             "close": "once",
             "show_over_media": false,
             "visibility_duration": 7,
@@ -137,7 +137,7 @@
         "heading_Ayxy9d": {
           "type": "heading",
           "settings": {
-            "heading": "Promoción",
+            "heading": "¿Primer pedido?",
             "heading_size": "h4",
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -146,7 +146,7 @@
         "text_ptxkM4": {
           "type": "text",
           "settings": {
-            "text": "<p>Comparte algo especial con tus clientes.</p>",
+            "text": "<p>Usa el código <strong>PRIMERA15</strong> y obtén un 15% de descuento.</p>",
             "enlarge_text": false,
             "show_on_mobile": true,
             "show_on_desktop": true
@@ -155,7 +155,7 @@
         "discount_izh3FM": {
           "type": "discount",
           "settings": {
-            "discount_code": "DISCOUNTCODE"
+            "discount_code": "PRIMERA15"
           }
         }
       },
@@ -178,13 +178,13 @@
         "highlight-text": {
           "type": "highlight-text",
           "settings": {
-            "text": "<h4>Destaca un beneficio</h4><p>Texto para resaltar una característica clave de tu producto</p>"
+            "text": "<h4>Frescura garantizada</h4><p>Seleccionamos cada producto a mano para asegurar la mejor calidad. Si no estás conforme, lo resolvemos.</p>"
           }
         },
         "highlight_text_Ti6fJU": {
           "type": "highlight-text",
           "settings": {
-            "text": "<h4>Destaca un beneficio</h4><p>Texto para resaltar una característica clave de tu producto</p>"
+            "text": "<h4>Entrega a domicilio</h4><p>Recibe tus frutas y verduras frescas en la puerta de tu casa. Envío gratis sobre $50.000.</p>"
           }
         },
         "tabs": {
@@ -196,7 +196,7 @@
             "show_reviews": false,
             "custom_reviews": "",
             "show_specification": true,
-            "spec_heading": "Specifications",
+            "spec_heading": "Especificaciones",
             "spec_metafields": "",
             "spec_right_align": true,
             "spec_show_empty_metafields": true,
