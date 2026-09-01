@@ -192,7 +192,8 @@
         "disabled": false,
         "settings": {}
       }
-    }
+    },
+    "show_search_types": false
   },
   "presets": {
     "Canopy": {
