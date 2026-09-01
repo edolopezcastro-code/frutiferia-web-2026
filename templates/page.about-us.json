@@ -32,7 +32,7 @@
         "text_4xLgDG": {
           "type": "text",
           "settings": {
-            "text": "<p>Más de 7 años llevando frescura y calidad a los hogares de la Región de Valparaíso.</p>",
+            "text": "<p>Más de 7 años llevando fruta y verdura fresca a hogares, cocinas y equipos de trabajo de la Región de Valparaíso.</p>",
             "enlarge_text": false
           }
         },
@@ -75,13 +75,13 @@
         "subheading_k3L7nF": {
           "type": "subheading",
           "settings": {
-            "text": "Desde 2019"
+            "text": "NOSOTROS"
           }
         },
         "heading_YdJ6dU": {
           "type": "heading",
           "settings": {
-            "heading": "Frutas y verduras frescas, con amor y compromiso",
+            "heading": "Un local en Viña del Mar, no una plataforma",
             "heading_size": "h2",
             "heading_h1": false
           }
@@ -89,7 +89,7 @@
         "text_6yC6WE": {
           "type": "text",
           "settings": {
-            "text": "<p>En Frutiferia creemos que comer sano no tiene por qué ser complicado. Seleccionamos a mano cada producto para que recibas lo mejor de la temporada, directo en la puerta de tu casa.</p>",
+            "text": "<p>Frutiferia es un local en Viña del Mar con equipo propio. Elegimos a mano lo que entra en cada caja y la revisamos antes de que salga.</p><p>Puedes pedir online, escribirle a Mora por WhatsApp o armar tu semana en FrutiMenu: al final de cualquiera de esos caminos hay alguien de acá mirando tu pedido.</p>",
             "enlarge_text": false
           }
         },
@@ -134,7 +134,7 @@
         "text_YQEyxg": {
           "type": "text",
           "settings": {
-            "text": "<p>Trabajamos directamente con productores locales de la Región de Valparaíso para garantizar productos frescos, de temporada y al mejor precio.</p>",
+            "text": "<p>Compramos con tu pedido ya en la mano: por eso el corte es a las 22:00 del día anterior. Cada producto se revisa antes de entrar a tu caja y, si algo no llega al estándar, lo reponemos en la siguiente entrega.</p>",
             "enlarge_text": false
           }
         },
@@ -165,147 +165,64 @@
         "only_content_color_scheme": false
       }
     },
-    "background_video_XeA46L": {
-      "type": "background-video",
+    "resenas": {
+      "type": "testimonials",
       "blocks": {
-        "heading_YUGK4V": {
-          "type": "heading",
-          "settings": {
-            "heading": "La experiencia Frutiferia",
-            "heading_size": "h1",
-            "heading_h1": false
-          }
-        },
-        "text_QwnBt6": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Conoce cómo seleccionamos, preparamos y entregamos cada pedido con cuidado.</p>",
-            "enlarge_text": false
-          }
-        },
-        "button_8GNbFz": {
-          "type": "button",
-          "settings": {
-            "button_label": "Arma tu semana con FrutiMenu",
-            "button_link": "shopify://pages/frutimenu",
-            "button_style": "btn btn--primary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_YUGK4V",
-        "text_QwnBt6",
-        "button_8GNbFz"
-      ],
-      "settings": {
-        "video_external": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_description": "",
-        "video_height": "md",
-        "overlay_text_align": "text-center",
-        "overlay_position": "justify-center items-center",
-        "mob_center_text": true,
-        "color_scheme": "white",
-        "transparent_content_color": "#ffffff",
-        "tint_color": "#000000",
-        "tint_gradient": "",
-        "lazyload": true,
-        "prevent_animation": false
-      }
-    },
-    "media_with_text_437PbW": {
-      "type": "media-with-text",
-      "blocks": {
-        "heading_fLXtit": {
-          "type": "heading",
-          "settings": {
-            "heading": "Comprometidos con el medio ambiente",
-            "heading_size": "h3",
-            "heading_h1": false
-          }
-        },
-        "text_9x7kjT": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Minimizamos el uso de plástico innecesario en nuestros empaques. Cada pedido es preparado con conciencia ambiental.</p>",
-            "enlarge_text": false
-          }
-        },
-        "button_Af7qq3": {
-          "type": "button",
-          "settings": {
-            "button_label": "",
-            "button_link": "",
-            "button_style": "btn btn--primary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_fLXtit",
-        "text_9x7kjT",
-        "button_Af7qq3"
-      ],
-      "settings": {
-        "video_external": "",
-        "video_description": "",
-        "video_autoplay": false,
-        "layout": "right",
-        "image_fit": "contain",
-        "media_width": 50,
-        "media_scale": 100,
-        "text_align": "text-start",
-        "color_scheme": "none",
-        "only_content_color_scheme": false
-      }
-    },
-    "press_testimonials_9FYiaX": {
-      "type": "press-testimonials",
-      "blocks": {
-        "testimonial_dkF4aR": {
+        "resena_carolina": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "<p>Llevo más de 2 años pidiendo y la calidad siempre es excelente. Las frutas llegan frescas y el servicio es muy puntual.</p>",
-            "logo_width": 120,
-            "show_star_rating": false,
+            "testimonial": "<p>Excelente experiencia. Productos frescos, que duran. Muy fácil para elegir, pagar y solicitar reparto. 10/10.</p>",
+            "author": "Carolina Espíndola Patterson",
+            "author_info": "Reseña de Google",
+            "show_star_rating": true,
             "star_rating": 5
           }
         },
-        "testimonial_FxQ3K7": {
+        "resena_magdalena": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "<p>Pedimos FrutiPacks para la oficina todas las semanas. Excelente relación calidad-precio y packaging consciente.</p>",
-            "logo_width": 120,
-            "show_star_rating": false,
+            "testimonial": "<p>Me encanta Frutiferia!! Es el único lugar donde escogen las frutas y verduras como si uno fuera a la feria o al súper. Excelente calidad siempre, precios convenientes y con un sello de amor por el trabajo maravillosooo. Me encantan y los recomiendo a miiil!!!</p>",
+            "author": "Magdalena López",
+            "author_info": "Reseña de Google",
+            "show_star_rating": true,
             "star_rating": 5
           }
         },
-        "testimonial_wB7MGP": {
+        "resena_beatriz": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "<p>Me encanta pedir por WhatsApp y que me llegue todo a la puerta. Las verduras siempre frescas y el equipo muy amable.</p>",
-            "logo_width": 120,
-            "show_star_rating": false,
+            "testimonial": "<p>Siempre pido la fruta y verdura a Frutiferia por la comodidad de que llegue a tu casa, exactamente lo que pediste y en el horario convenido, me gusta también que siempre venga todo ordenado y protegido, se mueren además lo rico que es todo, especialmente las frutillas, que es mi fruta favorita!!!</p>",
+            "author": "Beatriz Barry",
+            "author_info": "Reseña de Google",
+            "show_star_rating": true,
             "star_rating": 5
           }
         }
       },
       "block_order": [
-        "testimonial_dkF4aR",
-        "testimonial_FxQ3K7",
-        "testimonial_wB7MGP"
+        "resena_carolina",
+        "resena_magdalena",
+        "resena_beatriz"
       ],
       "settings": {
-        "heading": "Lo que dicen nuestros clientes",
-        "show_quotes": true,
+        "heading": "Lo que dicen nuestras clientas en Google",
+        "layout": "grid",
+        "grid_limit": 3,
+        "source_label": "Reseña de Google",
+        "reviews_link": "https://www.google.com/maps/search/?api=1&query=Frutiferia+Vi%C3%B1a+del+Mar",
+        "reviews_link_label": "Lee nuestras reseñas en Google →",
+        "show_quotes": false,
         "testimonial_size": "h3",
-        "testimonial_font": "heading",
+        "testimonial_font": "body",
         "text_position": "justify-center",
-        "text_align": "text-center justify-center",
+        "text_align": "text-start justify-start",
+        "nav_style": "slideshow_nav_dots",
         "transition": "slide-fade",
-        "autoplay": true,
+        "autoplay": false,
         "slider_pause": false,
         "autoplay_speed": 5,
         "color_scheme": "1",
-        "star_color": "#f7c346",
+        "star_color": "#B87A05",
         "full_width": true
       }
     },
@@ -315,7 +232,7 @@
         "heading_qU4Cwe": {
           "type": "heading",
           "settings": {
-            "heading": "FrutiLocal: nuestra tienda física",
+            "heading": "Retiro en el local, Viña del Mar",
             "heading_size": "h3",
             "heading_h1": false
           }
@@ -323,7 +240,7 @@
         "text_jmezFw": {
           "type": "text",
           "settings": {
-            "text": "<p>Visítanos en 6 1/2 Oriente 212, Viña del Mar. Encuentra productos frescos, snacks saludables y más. ¡Te esperamos!</p>",
+            "text": "<p>6 1/2 Oriente 212, Viña del Mar. Miércoles y sábado de 10:00 a 15:00.</p><p>Pide hasta las 22:00 del día anterior y te lo dejamos listo. Si prefieres que llegue a tu puerta, repartimos en Viña, Valparaíso, Concón, Reñaca y Quilpué, gratis sobre $50.000.</p>",
             "enlarge_text": false
           }
         },
@@ -360,7 +277,7 @@
         "text_iF7UED": {
           "type": "text",
           "settings": {
-            "text": "7 Años de Experiencia",
+            "text": "7 años en la V Región",
             "link": "",
             "font": "heading",
             "heading_size": "h1"
@@ -376,7 +293,7 @@
         "text_wW6x7z": {
           "type": "text",
           "settings": {
-            "text": "Más de 20.000 Pedidos Entregados",
+            "text": "+20.000 pedidos entregados",
             "link": "",
             "font": "body",
             "heading_size": "h1"
@@ -451,9 +368,7 @@
     "image_banner_FXzkHC",
     "rich_text_EPGfTq",
     "media_with_text_b8GhJY",
-    "background_video_XeA46L",
-    "media_with_text_437PbW",
-    "press_testimonials_9FYiaX",
+    "resenas",
     "media_with_text_iqDQ6d",
     "scrolling_banner_WjLLFf",
     "newsletter_EhMJex"
