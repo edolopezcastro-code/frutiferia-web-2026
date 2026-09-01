@@ -1,0 +1,181 @@
+/* ============================================================================
+   Frutiferia — Portada editorial de "Conócenos"
+   Se carga desde sections/fru-nosotros.liquid con | stylesheet_tag.
+
+   El problema que resuelve: /pages/conocenos servía la plantilla por defecto
+   (page.json = solo el título) y en producción era una página en blanco — con
+   el botón "Conoce más de nosotros" de la home apuntando ahí. Esta sección es
+   la apertura de esa página: quién arma la caja, en una pantalla.
+
+   Decisiones que NO son cosméticas — si las tocas, revisa el porqué:
+   · CERO overlay sobre la foto. Misma regla que los tiles y el hero: el morado
+     va en tipografía, líneas y pastillas, nunca como velo encima de la comida
+     o de la gente (f/carrusel_overlay_tenia_la_comida). La foto va limpia en su
+     columna y el texto en la suya.
+   · La foto NO lleva aspect-ratio. Es un retrato del equipo subido por Eduardo
+     y un recorte fijo le corta cabezas: se respeta la proporción original y la
+     columna se estira sola. Cambiar la foto es un cambio de admin, no de CSS.
+   · Las cifras van en una tira de hairlines (--border, morado al 12%) y no en
+     tarjetas con sombra: son datos, no botones. El número usa --fru-morado-900
+     (9,74:1 sobre blanco) y la glosa --text-muted (5,10:1). Con menta
+     (--data-positive) el número caía a 2,6:1 y no pasa AA como texto.
+   · El titular parte en dos ajustes (heading + heading_accent) para poder
+     teñir de morado solo el segundo tramo, igual que el hero de BELLA-2. Si
+     accent va vacío, el titular se ve entero en tinta y no se rompe nada.
+   ========================================================================== */
+
+.fru-nosotros {
+  font-family: var(--font-body);
+  padding-block: clamp(28px, 4.4vw, 64px) clamp(24px, 3.4vw, 48px);
+}
+.fru-nosotros *,
+.fru-nosotros *::before,
+.fru-nosotros *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Bloque superior: texto + foto ---------- */
+
+.fru-nosotros__top {
+  display: grid;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .fru-nosotros__top {
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  }
+  /* Con la foto a la izquierda el texto pasa a la segunda columna sin cambiar
+     el orden del DOM: el titular sigue siendo lo primero que lee un lector de
+     pantalla, mande lo que mande el ajuste visual. */
+  .fru-nosotros--media-start .fru-nosotros__copy {
+    order: 2;
+  }
+}
+
+.fru-nosotros__eyebrow {
+  margin: 0 0 10px;
+  font-family: var(--font-brand); /* Righteous: úsala corta o déjala vacía */
+  font-size: var(--fs-marker);
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.fru-nosotros__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(31px, 4.4vw, 52px);
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  color: var(--text);
+  text-wrap: balance;
+}
+.fru-nosotros__accent {
+  color: var(--fru-morado-900);
+}
+
+/* Filete corto entre el titular y la bajada: marca el cambio de voz sin meter
+   un separador de ancho completo, que partiría la columna en dos bloques. */
+.fru-nosotros__rule {
+  width: 48px;
+  height: 2px;
+  margin: clamp(16px, 2vw, 22px) 0;
+  background: var(--fru-morado-900);
+  border: 0;
+}
+
+.fru-nosotros__lead {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 17px;
+  line-height: 1.62;
+  color: var(--text-muted);
+}
+.fru-nosotros__lead p {
+  margin: 0 0 0.85em;
+}
+.fru-nosotros__lead p:last-child {
+  margin-bottom: 0;
+}
+@media (min-width: 750px) {
+  .fru-nosotros__lead {
+    font-size: 18px;
+  }
+}
+
+.fru-nosotros__media {
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  background: var(--surface-muted);
+}
+.fru-nosotros__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Pie de foto opcional: va DENTRO de la caja, sobre una banda lila, para que
+   no quede flotando como un párrafo huérfano bajo la imagen. */
+.fru-nosotros__caption {
+  margin: 0;
+  padding: 10px 14px;
+  background: var(--surface-muted);
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-caption);
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* ---------- Tira de cifras ---------- */
+
+.fru-nosotros__figures {
+  margin: clamp(28px, 4vw, 52px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--border);
+}
+.fru-nosotros__figure {
+  padding: clamp(14px, 2vw, 20px) 0;
+  padding-inline-end: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.fru-nosotros__figure:nth-child(even) {
+  border-inline-start: 1px solid var(--border);
+  padding-inline-start: clamp(14px, 2vw, 22px);
+}
+@media (min-width: 750px) {
+  .fru-nosotros__figures {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .fru-nosotros__figure + .fru-nosotros__figure {
+    border-inline-start: 1px solid var(--border);
+    padding-inline-start: clamp(16px, 2vw, 24px);
+  }
+}
+
+.fru-nosotros__value {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(28px, 3.6vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fru-morado-900);
+}
+.fru-nosotros__label {
+  display: block;
+  margin-top: 7px;
+  max-width: 24ch;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}

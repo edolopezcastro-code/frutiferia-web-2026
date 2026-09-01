@@ -1,0 +1,201 @@
+{%- comment -%}
+  Frutiferia — Portada editorial de "Conócenos".
+
+  Apertura de /pages/conocenos: eyebrow, titular partido en dos tramos (el
+  segundo se tiñe de morado), bajada, foto propia y una tira de cifras.
+
+  Por qué existe y no se armó con rich-text + media-with-text: esas dos
+  secciones genéricas de Canopy son las que dejaron la plantilla page.about-us
+  con cara de demo. Acá el titular, la foto y las cifras son UNA composición
+  con su propia retícula, no tres bloques apilados.
+
+  Las cifras son BLOQUES: se agregan, se sacan y se reordenan desde el editor
+  sin tocar código. Cualquier cifra que se escriba acá sale publicada como
+  afirmación de la marca — antes de inventar una, que exista en otra superficie
+  ya firmada por Eduardo (footer, hero, landing B2B).
+
+  Estilo, contraste y el porqué de cada decisión: ver el encabezado de
+  assets/fru-nosotros.css.
+{%- endcomment -%}
+
+{{ 'fru-nosotros.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign color_scheme = section.settings.color_scheme
+  assign heading_id = section.id | append: '-heading'
+
+  assign figures = section.blocks | where: 'type', 'figure'
+-%}
+
+<div
+  class="fru-nosotros{% if section.settings.media_position == 'start' %} fru-nosotros--media-start{% endif %}{% if section.settings.full_width %} section--full-width{% endif %}{% unless color_scheme == 'none' %} color-scheme color-scheme--{{ color_scheme }}{% endunless %}"
+>
+  <div class="container">
+    <div class="fru-nosotros__top">
+      <div class="fru-nosotros__copy">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="fru-nosotros__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank or section.settings.heading_accent != blank -%}
+          <h1 class="fru-nosotros__heading" id="{{ heading_id }}">
+            {{- section.settings.heading | escape -}}
+            {%- if section.settings.heading_accent != blank -%}
+              {{ ' ' }}<span class="fru-nosotros__accent">{{ section.settings.heading_accent | escape }}</span>
+            {%- endif -%}
+          </h1>
+        {%- endif -%}
+
+        {%- if section.settings.lead != blank -%}
+          <hr class="fru-nosotros__rule" aria-hidden="true">
+          <div class="fru-nosotros__lead rte">{{ section.settings.lead }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.image != blank -%}
+        <figure class="fru-nosotros__media">
+          {%- comment -%}
+            src_width 860: a 1440px la columna mide ~640px, así que 860 cubre el
+            2x del breakpoint intermedio sin bajar el original completo.
+            lazy_load 'native': acá no hay swap de imagen por JS (FRUTI3-16).
+          {%- endcomment -%}
+          {%- render 'image',
+            image: section.settings.image,
+            src_width: 860,
+            widths: '380, 480, 640, 860, 1100, 1400',
+            sizes: '(min-width: 900px) 46vw, 92vw',
+            quality: 0.8,
+            lazy_load: false,
+            fetchpriority: 'high'
+          -%}
+          {%- if section.settings.caption != blank -%}
+            <figcaption class="fru-nosotros__caption">{{ section.settings.caption | escape }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endif -%}
+    </div>
+
+    {%- if figures.size > 0 -%}
+      <ul class="fru-nosotros__figures">
+        {%- for block in figures -%}
+          <li class="fru-nosotros__figure" {{ block.shopify_attributes }}>
+            <span class="fru-nosotros__value">{{ block.settings.value | escape }}</span>
+            <span class="fru-nosotros__label">{{ block.settings.label | escape }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Portada nosotros",
+  "tag": "section",
+  "class": "cc-fru-nosotros",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Antetítulo",
+      "info": "Corto: se compone en Righteous, la fuente de marca.",
+      "default": "Nosotros"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titular",
+      "default": "Siete años eligiendo a mano"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Titular — tramo en morado",
+      "info": "Se pega a continuación del titular, teñido con el morado de marca. Déjalo vacío para un titular de un solo color.",
+      "default": "lo que llega a tu mesa"
+    },
+    {
+      "type": "richtext",
+      "id": "lead",
+      "label": "Bajada",
+      "default": "<p>Somos un local en Viña del Mar con equipo propio, no una plataforma.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Foto"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Pie de foto"
+    },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Posición de la foto en escritorio",
+      "options": [
+        { "value": "end", "label": "A la derecha" },
+        { "value": "start", "label": "A la izquierda" }
+      ],
+      "default": "end"
+    },
+    {
+      "type": "header",
+      "content": "Sección"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "options": [
+        { "value": "none", "label": "Ninguno" },
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "white", "label": "Blanco" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Ancho completo",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "figure",
+      "name": "Cifra",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Cifra",
+          "default": "+20.000"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Glosa",
+          "info": "Solo datos que ya estén publicados en otra parte del sitio. Una cifra acá es una afirmación de la marca.",
+          "default": "pedidos entregados"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Portada nosotros",
+      "category": "Storytelling",
+      "blocks": [{ "type": "figure" }, { "type": "figure" }, { "type": "figure" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,192 @@
+/* ============================================================================
+   Frutiferia — "Cómo llega tu pedido": pasos + vías de entrega
+   Se carga desde sections/fru-proceso.liquid con | stylesheet_tag.
+
+   Decisiones que NO son cosméticas — si las tocas, revisa el porqué:
+   · Los pasos NO son tarjetas. Una tarjeta con sombra dice "tócame" y estos
+     pasos no llevan a ninguna parte: son texto. El ritmo lo pone un filete
+     morado de 2px sobre cada paso — morado como línea, que es donde el canon
+     lo permite (jamás un rectángulo morado de 400px de alto, D-4 del plan
+     BELLA).
+   · 4 columnas en escritorio y 2 en tablet. A 4 columnas cada paso mide ~290px
+     a 1440px: cabe una frase de dos líneas sin quedar en columna de diario.
+     Bajo 750px se apila; el filete superior sigue separando paso de paso.
+   · Las dos vías de entrega (reparto y retiro) van en un panel de hairlines
+     hecho con `gap: 1px` sobre un fondo --border: da una división de 1px
+     perfecta en cualquier zoom, sin dobles bordes al colapsar.
+   · La numeración es decorativa (aria-hidden): el orden ya lo dice la lista
+     ordenada. Sin eso, un lector de pantalla escucha "cero uno" antes de cada
+     título y encima el número del propio elemento de lista.
+   ========================================================================== */
+
+.fru-proceso {
+  font-family: var(--font-body);
+  padding-block: clamp(26px, 3.6vw, 52px);
+}
+.fru-proceso *,
+.fru-proceso *::before,
+.fru-proceso *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Enunciado ---------- */
+
+.fru-proceso__head {
+  display: grid;
+  gap: 8px;
+  margin-bottom: clamp(20px, 2.6vw, 30px);
+  max-width: 60ch;
+}
+.fru-proceso__eyebrow {
+  margin: 0;
+  font-family: var(--font-brand);
+  font-size: var(--fs-marker);
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.fru-proceso__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(26px, 3.2vw, 36px);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.018em;
+  color: var(--text);
+  text-wrap: balance;
+}
+.fru-proceso__sub {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.fru-proceso__sub p {
+  margin: 0;
+}
+
+/* ---------- Los pasos ---------- */
+
+.fru-proceso__steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: clamp(20px, 2.6vw, 30px);
+}
+@media (min-width: 750px) {
+  .fru-proceso__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1000px) {
+  .fru-proceso__steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.fru-proceso__step {
+  border-top: 2px solid var(--fru-morado-900);
+  padding-top: 13px;
+}
+.fru-proceso__num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  font-variant-numeric: tabular-nums;
+  color: var(--fru-morado-900);
+}
+.fru-proceso__step-title {
+  margin: 9px 0 6px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(19px, 2.1vw, 22px);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  color: var(--text);
+}
+.fru-proceso__step-text {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+.fru-proceso__step-text p {
+  margin: 0 0 0.7em;
+}
+.fru-proceso__step-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Panel de vías de entrega ---------- */
+
+.fru-proceso__ways {
+  margin: clamp(28px, 3.6vw, 44px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+@media (min-width: 750px) {
+  .fru-proceso__ways {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.fru-proceso__way {
+  background: var(--surface);
+  padding: clamp(20px, 2.4vw, 28px);
+}
+.fru-proceso__way-kicker {
+  margin: 0 0 4px;
+  font-size: var(--fs-marker);
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.fru-proceso__way-title {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+.fru-proceso__way-text {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.fru-proceso__way-text p {
+  margin: 0 0 0.7em;
+}
+.fru-proceso__way-text p:last-child {
+  margin-bottom: 0;
+}
+.fru-proceso__way-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.fru-proceso__way-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fru-morado-900);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.fru-proceso__way-link:hover {
+  color: var(--fru-morado-700);
+  text-decoration-thickness: 2px;
+}
