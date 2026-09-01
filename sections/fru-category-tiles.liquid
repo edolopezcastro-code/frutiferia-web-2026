@@ -58,7 +58,10 @@
         {%- liquid
           assign tile_collection = collections[block.settings.collection]
 
-          assign tile_image = tile_collection.image
+          assign tile_image = block.settings.image
+          if tile_image == blank
+            assign tile_image = tile_collection.image
+          endif
           if tile_image == blank
             assign tile_image = tile_collection.products.first.featured_image
           endif
@@ -218,6 +221,12 @@
       "type": "tile",
       "name": "Tile",
       "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Foto del tile",
+          "info": "Opcional. Si la dejas vacía usa la imagen de la colección."
+        },
         {
           "type": "collection",
           "id": "collection",

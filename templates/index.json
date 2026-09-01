@@ -12,9 +12,9 @@
     "fru_hero": {
       "type": "fru-hero",
       "settings": {
-        "image_desktop": "shopify://shop_images/314_c1180fc8-a974-4e9e-8a73-3fe41ddbfd98.jpg",
-        "image_mobile": "shopify://shop_images/314_c1180fc8-a974-4e9e-8a73-3fe41ddbfd98.jpg",
-        "image_alt": "Cajón de frutas y verduras de temporada de Frutiferia",
+        "image_desktop": "shopify://shop_images/hero-desktop.jpg",
+        "image_mobile": "shopify://shop_images/hero-movil.jpg",
+        "image_alt": "Selección de verduras frescas sobre el mesón de Frutiferia",
         "overlay_opacity": 10,
         "badge_text": "Código PRIMERA15 · 15% en tu primera compra",
         "heading": "Fruta y verdura seleccionada",
@@ -104,7 +104,8 @@
           "settings": {
             "collection": "frutas-deliciosas",
             "label": "Frutas",
-            "subtitle": "Plátano, manzana y fruta de estación"
+            "subtitle": "Plátano, manzana y fruta de estación",
+            "image": "shopify://shop_images/tile-frutas.jpg"
           }
         },
         "tile_verduras": {
@@ -112,7 +113,8 @@
           "settings": {
             "collection": "verduras-frescas",
             "label": "Verduras",
-            "subtitle": "Tomate, papa y verdura fresca del día"
+            "subtitle": "Tomate, papa y verdura fresca del día",
+            "image": "shopify://shop_images/tile-verduras.jpg"
           }
         },
         "tile_despensa": {
@@ -120,7 +122,8 @@
           "settings": {
             "collection": "despensa",
             "label": "Despensa",
-            "subtitle": "Huevos, legumbres y básicos de la casa"
+            "subtitle": "Huevos, legumbres y básicos de la casa",
+            "image": "shopify://shop_images/tile-despensa.jpg"
           }
         },
         "tile_snacks": {
@@ -128,7 +131,8 @@
           "settings": {
             "collection": "snacks",
             "label": "Snacks",
-            "subtitle": "Maní, frutos secos y algo para picar"
+            "subtitle": "Maní, frutos secos y algo para picar",
+            "image": "shopify://shop_images/tile-snacks.jpg"
           }
         },
         "tile_frutipack": {
@@ -136,7 +140,8 @@
           "settings": {
             "collection": "frutipack",
             "label": "FrutiPack",
-            "subtitle": "Canastas armadas, listas para pedir"
+            "subtitle": "Canastas armadas, listas para pedir",
+            "image": "shopify://shop_images/tile-frutipack.jpg"
           }
         },
         "tile_ofertas": {
@@ -144,7 +149,8 @@
           "settings": {
             "collection": "ofertas",
             "label": "Ofertas",
-            "subtitle": "Plátano, tomate y más a precio rebajado"
+            "subtitle": "Plátano, tomate y más a precio rebajado",
+            "image": "shopify://shop_images/tile-ofertas.jpg"
           }
         }
       },
@@ -570,12 +576,12 @@
         "button_bpJb3G"
       ],
       "settings": {
-        "image": "shopify://shop_images/Frutiferia.png",
+        "image": "shopify://shop_images/fundadores.jpg",
         "video_external": "",
         "video_description": "",
         "video_autoplay": false,
         "layout": "left",
-        "image_fit": "contain",
+        "image_fit": "cover",
         "media_width": 50,
         "media_scale": 100,
         "text_align": "text-start",
