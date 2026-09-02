@@ -13,7 +13,15 @@
   {%- endif -%}
 </title>
 
-{%- if canonical_url != blank -%}
+{%- comment -%}
+  /pages/bienestar: el Programa Bienestar vive en wellness.frutiferia.com (una sola
+  cosa). Salto inmediato + canonical al sitio real + noindex de esta cáscara.
+{%- endcomment -%}
+{%- if template.name == 'page' and template.suffix == 'bienestar' -%}
+  <meta http-equiv="refresh" content="0; url=https://wellness.frutiferia.com/">
+  <link rel="canonical" href="https://wellness.frutiferia.com/">
+  <meta name="robots" content="noindex, follow">
+{%- elsif canonical_url != blank -%}
   <link rel="canonical" href="{{ canonical_url }}">
 {%- endif -%}
 

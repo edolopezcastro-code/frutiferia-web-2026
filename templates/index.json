@@ -76,7 +76,7 @@
             "meta": "Cajas semanales o mensuales · Informe para RRHH",
             "proof": "",
             "cta_label": "Cotizar cajas",
-            "cta_link": "shopify://pages/bienestar",
+            "cta_link": "https://wellness.frutiferia.com",
             "lead": false,
             "name_short": "Mi equipo"
           }

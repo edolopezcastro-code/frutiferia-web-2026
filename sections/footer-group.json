@@ -119,7 +119,7 @@
           "settings": {
             "image_width": 150,
             "heading": "Frutiferia para…",
-            "text": "<ul><li><a href=\"/collections\">Hogares</a></li><li><a href=\"https://cotiza.frutiferia.com\">Negocios (cotizador)</a></li><li><a href=\"/pages/frutimenu\">Menú semanal</a></li><li><a href=\"/pages/bienestar\">Oficinas</a></li></ul>",
+            "text": "<ul><li><a href=\"/collections\">Hogares</a></li><li><a href=\"https://cotiza.frutiferia.com\">Negocios (cotizador)</a></li><li><a href=\"/pages/frutimenu\">Menú semanal</a></li><li><a href=\"https://wellness.frutiferia.com\">Oficinas</a></li></ul>",
             "enable_follow_on_shop": false,
             "show_social": false,
             "text_align": "text-start"
