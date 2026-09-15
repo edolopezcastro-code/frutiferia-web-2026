@@ -90,7 +90,7 @@
               {%- assign qa_variant = item.selected_or_first_available_variant -%}
               <product-form>
                 <div class="alert bg-error-bg text-error-text js-form-error text-start" role="alert" hidden></div>
-                {%- form 'product', item, class: 'js-product-form', id: 'psearch-quick-add-' | append: item.id, novalidate: 'novalidate' -%}
+                {%- form item.id, novalidate: 'novalidate' -%}
                   <input type="hidden" name="id" value="{{ qa_variant.id }}">
                   <button class="btn btn--secondary btn--sm btn--icon tap-target" name="add" aria-haspopup="dialog" aria-label="{{- 'products.product.add_to_cart' | t | escape -}}"
                           {%- if qa_variant.available == false %} disabled{%- endif %}>
@@ -119,3 +119,14 @@
     </li>
   </ul>
 </div>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- form 'product', item, class: 'js-product-form', id: 'psearch-quick-add-'
+    | append: item.id, novalidate: 'novalidate' -%}"
+  to: "{%- form item.id, novalidate: 'novalidate' -%}"
+  position: 5232..5278
+{% endcomment %}
