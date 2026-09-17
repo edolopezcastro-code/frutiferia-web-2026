@@ -39,6 +39,15 @@
         </div>
       {% endif %}
 
+      {%- comment -%} FRU · franja «Sigue sumando»: ver snippets/fru-cart-sigue-sumando.liquid {%- endcomment -%}
+      {%- if section.settings.fru_sumar_show -%}
+        {% render 'fru-cart-sigue-sumando',
+          products: section.settings.fru_sumar_products,
+          heading: section.settings.fru_sumar_heading,
+          max: section.settings.fru_sumar_max
+        %}
+      {%- endif -%}
+
       <div class="alert mt-8 mb-8 bg-error-bg text-error-text" id="cart-errors" role="alert" hidden></div>
 
       {% render 'cart-items' %}
@@ -423,6 +432,37 @@
       "label": "Default country",
       "info": "If the customer is logged-in, their default shipping address details will be selected.",
       "default": "United States"
+    },
+    {
+      "type": "header",
+      "content": "Sigue sumando (Frutiferia)"
+    },
+    {
+      "type": "checkbox",
+      "id": "fru_sumar_show",
+      "label": "Mostrar la franja «Sigue sumando» bajo la barra de despacho",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "fru_sumar_heading",
+      "label": "Título",
+      "default": "Sigue sumando a tu pedido"
+    },
+    {
+      "type": "product_list",
+      "id": "fru_sumar_products",
+      "label": "Productos (en orden; se saltan los que ya están en el carrito)",
+      "limit": 24
+    },
+    {
+      "type": "range",
+      "id": "fru_sumar_max",
+      "label": "Máximo de tarjetas",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "default": 10
     }
   ]
 }

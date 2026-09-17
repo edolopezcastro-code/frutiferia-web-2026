@@ -21,11 +21,15 @@
         "show_additional_checkout_buttons": true,
         "cart_terms_page": "",
         "continue_shopping_page": "shopify://collections/all",
-        "cart_notification_show": true,
+        "cart_notification_show": false,
         "cart_notification_text": "<p>Envío gratis en pedidos sobre $50.000. ¡Agrega más y ahorra!</p>",
         "cart_notification_pos": "",
         "show_shipping_calculator": true,
-        "shipping_calculator_default_country": "Chile"
+        "shipping_calculator_default_country": "Chile",
+        "fru_sumar_show": true,
+        "fru_sumar_heading": "Sigue sumando a tu pedido",
+        "fru_sumar_products": ["zanahoria", "papa-limpia", "platanos", "cebolla", "tomate", "pepino-ensalada", "limon", "brocoli", "zapallo-italiano", "espinacas", "zapallo", "ajo-1-unidad", "lechuga-escarola", "cebollin", "manzana-roja-fuji", "lucuma", "morron-chico-verde", "palta-hass-chilena", "choclo-americano", "kiwi", "pera", "acelga-1-paquete", "naranja", "lechuga-chilena"],
+        "fru_sumar_max": 10
       }
     },
     "trust_cart": {

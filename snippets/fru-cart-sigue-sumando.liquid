@@ -1,0 +1,267 @@
+{%- comment -%}
+  FRU · «Sigue sumando» en la página del carrito.
+
+  Por qué existe (Eduardo, 17-sep-2026): el correo de reactivación B2C «La canasta» abre
+  /cart con los 8 productos más pedidos ya puestos. Desde ahí no había cómo seguir
+  sumando sin salir del carrito, y a esa canasta le faltan ~$39.000 para el despacho
+  gratis. Esta franja pone lo más pedido a un toque, justo bajo la barra de despacho.
+
+  Criterio de venta (skill neuro-venta): agregar sin salir del carrito (fricción mínima),
+  pegado a la barra de lo que falta para el despacho gratis (progreso visible), y solo lo
+  que de verdad más se pide a domicilio (prueba social honesta). La lista sale de los
+  pedidos B2C de 90 días (medida el 17-sep-2026) y se edita en `templates/cart.json`.
+
+  NO usa <product-form>: la franja vive DENTRO de <form id="cart">, y un formulario anidado
+  el navegador lo descarta. Por eso agrega con /cart/add.js y le pide al carrito de la
+  página que se vuelva a pintar (`cart-items.refreshCartItems()`), igual que product-form.
+
+  Parameters:
+  - products {Array} - lista de productos (setting product_list)
+  - heading {String} - título
+  - max {Number} - cuántas tarjetas mostrar como máximo
+{%- endcomment -%}
+
+{%- liquid
+  assign en_carrito = ','
+  for item in cart.items
+    assign en_carrito = en_carrito | append: item.product_id | append: ','
+  endfor
+  if max == blank
+    assign max = 10
+  endif
+  assign mostrados = 0
+-%}
+
+{%- if cart != empty and products != blank -%}
+  <div class="fru-sumar" id="fru-sumar" data-added-text="Agregado" data-error-text="No se pudo agregar. Intenta de nuevo.">
+    <div class="fru-sumar__head">
+      <p class="fru-sumar__title">{{ heading | default: 'Sigue sumando a tu pedido' }}</p>
+      <p class="fru-sumar__sub">Lo más pedido a domicilio. Se agrega sin salir del carrito.</p>
+    </div>
+
+    <ul class="fru-sumar__row" role="list">
+      {%- for product in products -%}
+        {%- assign clave = ',' | append: product.id | append: ',' -%}
+        {%- if en_carrito contains clave or product.available == false -%}{%- continue -%}{%- endif -%}
+        {%- if mostrados >= max -%}{%- break -%}{%- endif -%}
+        {%- assign mostrados = mostrados | plus: 1 -%}
+        {%- assign variante = product.selected_or_first_available_variant -%}
+        <li class="fru-sumar__card">
+          <a href="{{ product.url }}" class="fru-sumar__media" tabindex="-1" aria-hidden="true">
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 240 }}"
+                   srcset="{{ product.featured_image | image_url: width: 160 }} 160w, {{ product.featured_image | image_url: width: 320 }} 320w"
+                   sizes="140px" width="140" height="140" loading="lazy" alt="">
+            {%- endif -%}
+          </a>
+          <a href="{{ product.url }}" class="fru-sumar__name">{{ product.title | escape }}</a>
+          <span class="fru-sumar__price">{%- render 'price-as-money', price: variante.price -%}</span>
+          {%- if product.has_only_default_variant -%}
+            <button type="button" class="fru-sumar__add js-fru-sumar-add" data-variant-id="{{ variante.id }}"
+                    aria-label="Agregar {{ product.title | escape }} al carrito">
+              <span class="fru-sumar__add-label">+ Agregar</span>
+            </button>
+          {%- else -%}
+            <a class="fru-sumar__add" href="{{ product.url }}">Elegir formato</a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <nav class="fru-sumar__cats" aria-label="Seguir comprando por categoría">
+      <span class="fru-sumar__cats-label">¿Buscas algo más?</span>
+      <a class="fru-sumar__chip" href="{{ routes.collections_url }}/verduras-frescas">Verduras</a>
+      <a class="fru-sumar__chip" href="{{ routes.collections_url }}/frutas-deliciosas">Frutas</a>
+      <a class="fru-sumar__chip" href="{{ routes.collections_url }}/despensa">Despensa</a>
+      <a class="fru-sumar__chip" href="{{ routes.collections_url }}/ofertas">Ofertas de la semana</a>
+    </nav>
+    <p class="fru-sumar__error" role="alert" hidden></p>
+  </div>
+
+  <style>
+    .fru-sumar {
+      margin: 0 0 2.4rem;
+      padding: 1.6rem 0 0;
+    }
+    .fru-sumar__head { margin-bottom: 1.2rem; }
+    .fru-sumar__title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+      font-weight: 700;
+      color: var(--text, #1A1A1A);
+    }
+    .fru-sumar__sub {
+      margin: .2rem 0 0;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text-muted, #555);
+    }
+    .fru-sumar__row {
+      display: flex;
+      gap: 10px;
+      margin: 0 -2px;
+      padding: 2px 2px 10px;
+      list-style: none;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .fru-sumar__card {
+      flex: 0 0 148px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px;
+      margin: 0;
+      background: var(--surface, #fff);
+      border: 1px solid var(--border, rgba(103,29,144,.12));
+      border-radius: 14px;
+      scroll-snap-align: start;
+    }
+    .fru-sumar__media {
+      display: block;
+      aspect-ratio: 1 / 1;
+      margin-bottom: 4px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .fru-sumar__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .fru-sumar__name {
+      font-size: 14px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: var(--text, #1A1A1A);
+      text-decoration: none;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: calc(14px * 1.3 * 2);
+    }
+    .fru-sumar__price {
+      font-size: 14px;
+      color: var(--text-muted, #555);
+      font-variant-numeric: tabular-nums;
+    }
+    .fru-sumar__add {
+      margin-top: auto;
+      min-height: 40px;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--color-primary, #671D90);
+      border-radius: 10px;
+      background: transparent;
+      color: var(--color-primary, #671D90);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color .15s ease, color .15s ease;
+    }
+    .fru-sumar__add:hover,
+    .fru-sumar__add:focus-visible {
+      background: var(--color-primary, #671D90);
+      color: var(--on-primary, #fff);
+    }
+    .fru-sumar__add[aria-busy="true"] { opacity: .6; cursor: progress; }
+    .fru-sumar__add.is-added {
+      background: var(--color-cta-solid, #248F57);
+      border-color: var(--color-cta-solid, #248F57);
+      color: #fff;
+    }
+    .fru-sumar__cats {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1.2rem;
+    }
+    .fru-sumar__cats-label {
+      font-size: 14px;
+      color: var(--text-muted, #555);
+      margin-right: 2px;
+    }
+    .fru-sumar__chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: var(--surface-muted, #F4F0F7);
+      color: var(--color-primary, #671D90);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .fru-sumar__chip:hover { text-decoration: underline; }
+    .fru-sumar__error {
+      margin: .8rem 0 0;
+      font-size: 14px;
+      color: #B42318;
+    }
+    @media (min-width: 769px) {
+      .fru-sumar__card { flex-basis: 156px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fru-sumar__add { transition: none; }
+    }
+  </style>
+
+  <script>
+    (function () {
+      var root = document.getElementById('fru-sumar');
+      if (!root || root.dataset.ready) return;
+      root.dataset.ready = '1';
+      var errorEl = root.querySelector('.fru-sumar__error');
+      var addUrl = (window.theme && theme.routes && theme.routes.cartAdd) ? theme.routes.cartAdd + '.js' : '/cart/add.js';
+
+      root.addEventListener('click', function (evt) {
+        var btn = evt.target.closest('.js-fru-sumar-add');
+        if (!btn || btn.getAttribute('aria-busy') === 'true') return;
+        evt.preventDefault();
+        var label = btn.querySelector('.fru-sumar__add-label');
+        var original = label.textContent;
+        btn.setAttribute('aria-busy', 'true');
+        errorEl.hidden = true;
+
+        fetch(addUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ items: [{ id: Number(btn.dataset.variantId), quantity: 1 }] })
+        })
+          .then(function (res) { return res.json().then(function (data) { if (!res.ok) throw data; return data; }); })
+          .then(function () {
+            btn.classList.add('is-added');
+            label.textContent = '✓ ' + root.dataset.addedText;
+            var cartItems = document.querySelector('cart-items');
+            if (cartItems && typeof cartItems.refreshCartItems === 'function') {
+              cartItems.refreshCartItems();
+            } else {
+              window.location.reload();
+            }
+            document.dispatchEvent(new CustomEvent('on:cart:add', { detail: { variantId: Number(btn.dataset.variantId) } }));
+            setTimeout(function () {
+              btn.classList.remove('is-added');
+              label.textContent = original;
+            }, 1800);
+          })
+          .catch(function (err) {
+            errorEl.textContent = (err && (err.description || err.message)) || root.dataset.errorText;
+            errorEl.hidden = false;
+          })
+          .finally(function () { btn.removeAttribute('aria-busy'); });
+      });
+    })();
+  </script>
+{%- endif -%}
