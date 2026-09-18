@@ -49,8 +49,8 @@
             "icon": "box",
             "use_custom_icon_color": false,
             "icon_color": "#000000",
-            "heading": "Lista de compras lista",
-            "text": "<p>Tu lista de ingredientes lista para pedir directo en Frutiferia.</p>",
+            "heading": "Lo fresco, listo para pedir",
+            "text": "<p>Lo fresco de tus recetas queda armado en frutiferia.com. Tú eliges qué sumar.</p>",
             "link": ""
           }
         },
@@ -118,7 +118,7 @@
             "enable_media": false,
             "media_scale": 100,
             "heading": "3. Compra en Frutiferia",
-            "text": "<p>Recibes la lista de ingredientes lista para pedir frescos en Frutiferia y cocinar tranquilo toda la semana.</p>",
+            "text": "<p>Lo fresco de tus recetas queda armado en tu carrito de Frutiferia: revisas, sumas lo que quieras y pides.</p>",
             "button_label": "",
             "button_link": ""
           }

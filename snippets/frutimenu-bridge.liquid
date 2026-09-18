@@ -13,6 +13,9 @@
   de un intento viejo (doble-click) en vez de resolver el intento equivocado.
 
   Robustez:
+    - CR-10: apretar "Comprar" de nuevo REEMPLAZA lo del menú, no lo suma. Cada línea
+      que pone el menú va marcada con la propiedad oculta `_menu` y se vacía antes de
+      agregar la tanda nueva. Lo que la persona agregó a mano queda intacto.
     - Origen estricto (solo el del iframe) + saneo de ids/cantidades: nadie más puede
       empujar al carrito desde otra pestaña/origen.
     - El ack se manda AL RECIBIR (no al terminar) para frenar el fallback de la app
@@ -45,12 +48,71 @@
       if (f && f.contentWindow) f.contentWindow.postMessage(msg, ALLOWED);
     }
 
+    // Cada línea que pone el menú viaja marcada con esta propiedad oculta (el guion
+    // bajo la esconde en el carrito y en el correo de confirmación). Es lo que nos
+    // deja distinguir "esto lo puso el menú" de "esto lo agregó la persona a mano".
+    var MARCA_MENU = "_menu";
+
+    /**
+     * CR-10 — Vacía lo que el menú había dejado antes de volver a agregar.
+     *
+     * Por qué: /cart/add.js SUMA. Sin esto, volver al menú, cambiar algo y apretar
+     * "Comprar" de nuevo dejaba el carrito con las dos versiones encima (la persona
+     * veía el doble de todo y tenía que corregir a mano, o pagaba de más).
+     *
+     * Solo toca líneas con la marca del menú: lo que la persona agregó por su cuenta
+     * (por ejemplo desde la franja "Sigue sumando") se queda intacto.
+     *
+     * Best-effort a propósito: si /cart.js o /cart/update.js fallan, seguimos igual
+     * al add — es preferible un carrito sumado (el comportamiento viejo) a un botón
+     * "Comprar" que no hace nada.
+     */
+    function limpiarLineasDelMenu() {
+      return fetch("/cart.js", {
+        credentials: "same-origin",
+        headers: { Accept: "application/json" },
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("cart.js " + res.status);
+          return res.json();
+        })
+        .then(function (cart) {
+          var lineas = (cart && cart.items) || [];
+          var updates = {};
+          var hay = false;
+          lineas.forEach(function (li) {
+            var props = li && li.properties;
+            if (props && props[MARCA_MENU] && li.key) {
+              updates[li.key] = 0;
+              hay = true;
+            }
+          });
+          if (!hay) return null;
+          return fetch("/cart/update.js", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({ updates: updates }),
+          }).then(function (res) {
+            if (!res.ok) throw new Error("cart/update " + res.status);
+            return res.json();
+          });
+        })
+        .catch(function (err) {
+          if (window.console) console.warn("[frutimenu-bridge] no pude limpiar lo anterior del menú", err);
+          return null;
+        });
+    }
+
     function addToCart(items) {
       return fetch("/cart/add.js", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          items: items.map(function (i) { return { id: i.variantId, quantity: i.quantity }; }),
+          items: items.map(function (i) {
+            var props = {};
+            props[MARCA_MENU] = "1";
+            return { id: i.variantId, quantity: i.quantity, properties: props };
+          }),
         }),
       }).then(function (res) {
         if (!res.ok) throw new Error("cart/add " + res.status);
@@ -100,7 +162,8 @@
       // Ecoa el nonce del pedido (FM-4.1) para que la app sepa que es ESTE intento.
       ack(data.nonce);
 
-      addToCart(items)
+      limpiarLineasDelMenu()
+        .then(function () { return addToCart(items); })
         .then(function () { return applyDiscount(data.discount); })
         .then(openDrawer)
         .catch(function (err) {
