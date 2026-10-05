@@ -99,10 +99,43 @@
     }
     /* Canopy sólo colapsa la búsqueda a ícono cuando el logo está centrado
        (logo_position: top-center). Con logo a la izquierda, minimise_search_desktop
-       no tiene CSS propio: se oculta la barra completa y queda el ícono de
-       .header__icons (ya enlaza a routes.search_url) como entrada a /search. */
-    .header__search--collapsible-desktop {
-      display: none;
+       no tiene CSS propio y la barra completa aplasta el menú. La barra sale de
+       la fila y se abre como panel bajo el header con la lupa de .header__icons.
+       Ojo: la lupa NO navega a /search — main.js (StoreHeader) le hace
+       preventDefault y alterna search-is-collapsed/visible; un display:none fijo
+       aquí deja la lupa muerta (pasó desde WUX-2 hasta 2026-10-05). */
+    .header__grid {
+      position: relative;
+    }
+    .header__grid .header__search--collapsible-desktop {
+      position: absolute;
+      top: calc(100% + 3 * var(--space-unit));
+      inset-inline-end: var(--gutter);
+      z-index: 2;
+      width: min(520px, calc(100% - var(--gutter) * 2));
+      padding: calc(3 * var(--space-unit));
+      border-radius: 0 0 12px 12px;
+      background-color: rgb(var(--bg-color));
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+      transition: opacity 0.2s, transform 0.2s, visibility 0s;
+    }
+    /* visibility se apaga con retraso (deja ver el fade al cerrar) pero se
+       prende al instante: main.js enfoca el input a los 300 ms de abrir y un
+       input aún hidden no toma el foco (Enter caía en la lupa y la cerraba). */
+    .search-is-collapsed .header__grid .header__search--collapsible-desktop {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.2s, transform 0.2s, visibility 0s linear 0.2s;
+    }
+    /* El panel ya anima; se anula el hide y la transición propios de Canopy en
+       el hijo (si no, su visibility heredada vuelve a llegar tarde al foco). */
+    .header__grid .header__search--collapsible-desktop predictive-search,
+    .search-is-collapsed .header__grid .header__search--collapsible-desktop predictive-search {
+      visibility: inherit;
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
     .header__icons {
       order: 3;

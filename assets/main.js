@@ -1021,6 +1021,11 @@ class StoreHeader extends HTMLElement {
     if (Shopify.designMode) {
       document.removeEventListener('shopify:section:load', this.resizeHandler);
     }
+
+    if (this.searchDismissHandler) {
+      document.removeEventListener('click', this.searchDismissHandler);
+      document.removeEventListener('keydown', this.searchDismissHandler);
+    }
   }
 
   bindEvents() {
@@ -1043,6 +1048,12 @@ class StoreHeader extends HTMLElement {
       if (this.searchToggleLeft) {
         this.searchToggleLeft.addEventListener('click', this.handleSearchToggleClick.bind(this));
       }
+
+      // Frutiferia: con logo a la izquierda la búsqueda abre como panel flotante
+      // (sections/header.liquid), así que se cierra con Esc o con un clic afuera.
+      this.searchDismissHandler = this.searchDismissHandler || this.handleSearchDismiss.bind(this);
+      document.addEventListener('click', this.searchDismissHandler);
+      document.addEventListener('keydown', this.searchDismissHandler);
     }
 
     if (Shopify.designMode) {
@@ -1110,6 +1121,35 @@ class StoreHeader extends HTMLElement {
       });
 
       setTimeout(window.setHeaderHeight, this.headerTransitionSpeed);
+    }
+  }
+
+  /**
+   * Closes the open search bar on Escape or on a click outside it
+   * @param {object} evt - Event object
+   */
+  handleSearchDismiss(evt) {
+    if (!this.classList.contains('search-is-visible')) return;
+    if (evt.type === 'keydown' && evt.key !== 'Escape') return;
+
+    const searchBar = this.querySelector('.js-search-bar');
+    if (evt.type === 'click' && !evt.target.closest('.js-search-overlay')
+      && (searchBar.contains(evt.target) || evt.target.closest('.js-show-search, .js-show-search-left'))) {
+      return;
+    }
+
+    const focusWasInside = searchBar.contains(document.activeElement);
+    const predictiveSearch = searchBar.querySelector('predictive-search');
+    if (predictiveSearch && typeof predictiveSearch.close === 'function') predictiveSearch.close();
+
+    this.classList.remove('search-is-visible');
+    setTimeout(() => {
+      this.classList.add('search-is-collapsed');
+    });
+    setTimeout(window.setHeaderHeight, this.headerTransitionSpeed);
+
+    if (evt.type === 'keydown' && focusWasInside && this.searchToggle) {
+      this.searchToggle.focus();
     }
   }
 
