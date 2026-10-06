@@ -36,6 +36,11 @@ if (!customElements.get('delivery-picker')) {
   var MONTHS_ABBR_ES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
   var DAYS_ES = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
   var ZONE_STORAGE_KEY = 'fru-delivery-zone';
+  // Cómo se MUESTRA una zona. El valor que viaja al OS no cambia ('Placilla [..]'):
+  // solo la etiqueta, para que alguien de Curauma reconozca su zona (2026-10-05).
+  var ZONE_LABELS = { Placilla: 'Placilla y Curauma' };
+  // Ciudad del cliente → zona del selector, cuando no se llaman igual.
+  var CITY_TO_ZONE = { curauma: 'placilla' };
   // Corte real de pedidos: 22:00 del día ANTERIOR a la entrega (Eduardo 2026-08-27).
   var CUTOFF_MINUTES = 22 * 60;
 
@@ -324,7 +329,7 @@ if (!customElements.get('delivery-picker')) {
       let valid = false;
       zones.forEach((z) => {
         const value = `${z} [${this.window}]`; // formato que parsea OS: 'Zona [HH:MM-HH:MM]'
-        const o = this.opt(value, `${z} (${this.window})`);
+        const o = this.opt(value, `${ZONE_LABELS[z] || z} (${this.window})`);
         o.dataset.zone = z;
         if (value === this.selectedZone) {
           o.selected = true;
@@ -386,7 +391,7 @@ if (!customElements.get('delivery-picker')) {
       if (!this.selectedZone && this.zoneSelect) {
         const opts = this.realOptions(this.zoneSelect);
         const remembered = fold(this.rememberedZone());
-        const city = fold(this.customerCity);
+        const city = CITY_TO_ZONE[fold(this.customerCity)] || fold(this.customerCity);
         let pick = null;
         if (remembered) pick = opts.filter((o) => fold(o.dataset.zone) === remembered)[0] || null;
         if (!pick && city) pick = opts.filter((o) => fold(o.dataset.zone) === city)[0] || null;
@@ -424,7 +429,8 @@ if (!customElements.get('delivery-picker')) {
       if (!this.fields || !this.summaryBtn) return;
       const collapse = this.isComplete() && !this.expanded;
       if (collapse && this.summaryText) {
-        this.summaryText.textContent = `${this.dateShort(this.selectedDate)} · ${this.zoneName(this.selectedZone)}`;
+        const zn = this.zoneName(this.selectedZone);
+        this.summaryText.textContent = `${this.dateShort(this.selectedDate)} · ${ZONE_LABELS[zn] || zn}`;
       }
       this.fields.hidden = collapse;
       this.summaryBtn.hidden = !collapse;

@@ -36,7 +36,7 @@
         "figura_comunas": {
           "type": "figure",
           "settings": {
-            "value": "5",
+            "value": "7",
             "label": "comunas con reparto"
           }
         }
@@ -95,7 +95,7 @@
           "settings": {
             "kicker": "A domicilio",
             "title": "Reparto a tu puerta",
-            "text": "<p><strong>Hogares:</strong> miércoles y sábado.<br><strong>Negocios y oficinas:</strong> martes, miércoles, viernes y sábado.</p><p>Viña del Mar, Valparaíso, Concón, Reñaca y Quilpué. Despacho gratis sobre $50.000.</p>",
+            "text": "<p><strong>Hogares:</strong> miércoles y sábado.<br><strong>Negocios y oficinas:</strong> martes, miércoles, viernes y sábado.</p><p>Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Placilla y Curauma. Despacho gratis sobre $50.000.</p>",
             "link_label": "Ver zonas y tarifas",
             "link": "shopify://pages/reparto"
           }
