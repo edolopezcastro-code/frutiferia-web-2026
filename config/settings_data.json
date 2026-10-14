@@ -163,6 +163,7 @@
     "image_quality": "1",
     "show_blur_messages": true,
     "blur_message_1": "Te guardamos el 15%: usa PRIMERA15 en tu primer pedido",
+    "blur_message_2": "¿Seguimos? Tu fruta te espera 🍎",
     "blur_message_delay": 3,
     "vibrate_on_atc": true,
     "checkout_logo_position": "left",

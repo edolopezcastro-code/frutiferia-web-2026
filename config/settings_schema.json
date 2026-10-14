@@ -3012,13 +3012,13 @@
         "type": "text",
         "id": "blur_message_1",
         "label": "Message 1",
-        "default": "Something we said?"
+        "default": "¿Te vas tan pronto?"
       },
       {
         "type": "text",
         "id": "blur_message_2",
         "label": "Message 2",
-        "default": "We're still here!"
+        "default": "¿Seguimos? Tu fruta te espera 🍎"
       },
       {
         "type": "range",
