@@ -89,7 +89,7 @@
         "text_6yC6WE": {
           "type": "text",
           "settings": {
-            "text": "<p>Frutiferia es un local en Viña del Mar con equipo propio. Elegimos a mano lo que entra en cada caja y la revisamos antes de que salga.</p><p>Puedes pedir online o armar tu semana en FrutiMenu, y si tienes una duda, Mora te responde por WhatsApp: al final de cualquiera de esos caminos hay alguien de acá mirando tu pedido.</p>",
+            "text": "<p>Frutiferia es un local en Viña del Mar con equipo propio. Elegimos a mano lo que entra en cada caja y la revisamos antes de que salga.</p><p>Puedes pedir online, armar tu semana en FrutiMenu o hacer tu pedido por WhatsApp con Mora: al final de cualquiera de esos caminos hay alguien de acá mirando tu pedido.</p>",
             "enlarge_text": false
           }
         },
@@ -134,7 +134,7 @@
         "text_YQEyxg": {
           "type": "text",
           "settings": {
-            "text": "<p>Compramos con tu pedido ya en la mano: por eso el corte es a las 22:00 del día anterior. Cada producto se revisa antes de entrar a tu caja y, si algo no llega al estándar, lo reponemos en la siguiente entrega.</p>",
+            "text": "<p>Compramos con tu pedido ya en la mano: por eso el corte es a las 22:00 del día anterior. Cada producto se revisa antes de entrar a tu caja y, si algo no llega al estándar, te lo reponemos en la siguiente entrega o te compensamos con un cupón o la devolución de lo afectado.</p>",
             "enlarge_text": false
           }
         },

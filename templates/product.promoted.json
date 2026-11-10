@@ -36,7 +36,7 @@
           "type": "feature",
           "settings": {
             "heading": "Reposición si no cumple",
-            "text": "<p>Si algo no llega al estándar, lo reponemos en la siguiente entrega.</p>",
+            "text": "<p>Si algo no llega al estándar, te lo reponemos en la siguiente entrega o te compensamos con un cupón o la devolución de lo afectado.</p>",
             "content_align": "text-start",
             "hotspot_x": 73,
             "hotspot_y": 54
