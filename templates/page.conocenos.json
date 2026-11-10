@@ -51,7 +51,7 @@
         "eyebrow": "Nosotros",
         "heading": "Siete años eligiendo a mano",
         "heading_accent": "lo que llega a tu mesa",
-        "lead": "<p>Frutiferia es un local en Viña del Mar con equipo propio, no una plataforma. Elegimos a mano lo que entra en cada caja y la revisamos antes de que salga, para hogares, cocinas y equipos de trabajo de toda la Región de Valparaíso.</p><p>Puedes pedir online, escribirle a Mora por WhatsApp o armar tu semana en FrutiMenu. Al final de cualquiera de esos caminos hay alguien de acá mirando tu pedido.</p>",
+        "lead": "<p>Frutiferia es un local en Viña del Mar con equipo propio, no una plataforma. Elegimos a mano lo que entra en cada caja y la revisamos antes de que salga, para hogares, cocinas y equipos de trabajo de toda la Región de Valparaíso.</p><p>Puedes pedir online o armar tu semana en FrutiMenu, y si tienes una duda, Mora te responde por WhatsApp. Al final de cualquiera de esos caminos hay alguien de acá mirando tu pedido.</p>",
         "image": "shopify://shop_images/fundadores.jpg",
         "caption": "Nosotros dos, en el local de Viña del Mar.",
         "media_position": "end",
@@ -66,7 +66,7 @@
           "type": "paso",
           "settings": {
             "title": "Pides",
-            "text": "<p>Online en frutiferia.com, por WhatsApp con Mora o armando tu semana en FrutiMenu. El corte es a las 22:00 del día anterior a tu reparto.</p>"
+            "text": "<p>Online en frutiferia.com o armando tu semana en FrutiMenu. El corte es a las 22:00 del día anterior a tu reparto. ¿Dudas? Mora te responde por WhatsApp.</p>"
           }
         },
         "paso_compramos": {
@@ -95,7 +95,7 @@
           "settings": {
             "kicker": "A domicilio",
             "title": "Reparto a tu puerta",
-            "text": "<p><strong>Hogares:</strong> miércoles y sábado.<br><strong>Negocios y oficinas:</strong> martes, miércoles, viernes y sábado.</p><p>Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Placilla y Curauma. Despacho gratis sobre $50.000.</p>",
+            "text": "<p><strong>Hogares:</strong> miércoles y sábado, de 12:00 a 16:00.<br><strong>Negocios:</strong> martes, miércoles, viernes y sábado.<br><strong>Oficinas:</strong> lunes (AM) y miércoles.</p><p>Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Villa Alemana, Placilla y Curauma. Despacho gratis sobre $50.000.</p>",
             "link_label": "Ver zonas y tarifas",
             "link": "shopify://pages/reparto"
           }
@@ -105,7 +105,7 @@
           "settings": {
             "kicker": "En el local",
             "title": "Retiro en Viña del Mar",
-            "text": "<p>6 1/2 Oriente 212, Viña del Mar.</p><p>Miércoles y sábado de 10:00 a 15:00. Pide hasta las 22:00 del día anterior y te lo dejamos listo.</p>",
+            "text": "<p>6 1/2 Oriente 212, Viña del Mar.</p><p>Miércoles y sábado de 10:30 a 14:00. Pide hasta las 22:00 del día anterior y te lo dejamos listo.</p>",
             "link_label": "Cómo llegar",
             "link": "https://maps.google.com/?q=6+1%2F2+Oriente+212%2C+Vi%C3%B1a+del+Mar"
           }

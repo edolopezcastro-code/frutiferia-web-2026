@@ -88,7 +88,7 @@
           "settings": {
             "heading": "Envío y entrega",
             "icon": "truck",
-            "text": "<p>Despacho a domicilio los <strong>miércoles y sábado</strong> en Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Placilla y Curauma. ¿Tienes un negocio? También despachamos martes, miércoles, viernes y sábado. <strong>Despacho gratis sobre $50.000.</strong></p>",
+            "text": "<p>Despacho a domicilio los <strong>miércoles y sábado</strong> en Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Villa Alemana, Placilla y Curauma. ¿Tienes un negocio? También despachamos martes, miércoles, viernes y sábado. <strong>Despacho gratis sobre $50.000.</strong></p>",
             "page": "",
             "open": false
           }
@@ -96,7 +96,7 @@
         "retiro_horario": {
           "type": "custom-liquid",
           "settings": {
-            "custom_liquid": "<p style=\"font-size:14px;color:var(--text-muted);\">Retiro gratis en tienda: <strong>miércoles y sábado de 10:00 a 15:00</strong> — pide hasta las 22:00 del día anterior.</p>",
+            "custom_liquid": "<p style=\"font-size:14px;color:var(--text-muted);\">Retiro gratis en tienda: <strong>miércoles y sábado de 10:30 a 14:00</strong> — pide hasta las 22:00 del día anterior.</p>",
             "variant_content": false
           }
         },

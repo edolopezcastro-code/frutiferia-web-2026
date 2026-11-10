@@ -32,7 +32,7 @@
         "text_hero": {
           "type": "text",
           "settings": {
-            "text": "<p>Abastecemos cocinas de Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Placilla y Curauma. Reparto martes, miércoles, viernes y sábado, con factura al día.</p>",
+            "text": "<p>Abastecemos cocinas de Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Villa Alemana, Placilla y Curauma. Reparto martes, miércoles, viernes y sábado, con factura al día.</p>",
             "enlarge_text": true
           }
         },
@@ -573,7 +573,7 @@
           "settings": {
             "icon": "box",
             "heading": "¿Cuál es el pedido mínimo?",
-            "text": "<p>No tenemos un monto mínimo estricto. El envío es <strong>gratis desde $50.000</strong>; bajo ese monto se cobra según el rango de tu zona. Los precios por mayor mejoran con el formato: mientras más grande la malla, la caja o el saco, más conveniente queda el kilo.</p>"
+            "text": "<p>No tenemos un monto mínimo estricto. El envío es <strong>gratis desde $50.000</strong>; bajo ese monto, el flete te lo confirma Francisco. Los precios por mayor mejoran con el formato: mientras más grande la malla, la caja o el saco, más conveniente queda el kilo.</p>"
           }
         },
         "q_pago": {
@@ -605,7 +605,7 @@
           "settings": {
             "icon": "map_pin",
             "heading": "¿A qué zonas llegan con despacho B2B?",
-            "text": "<p>Cubrimos siete comunas: <strong>Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Placilla y Curauma</strong>. Para zonas fuera de esa cobertura, consulta disponibilidad.</p>"
+            "text": "<p>Cubrimos <strong>Viña del Mar, Valparaíso, Concón, Reñaca, Quilpué, Villa Alemana, Placilla y Curauma</strong>. Más allá, lo vemos caso a caso según el volumen.</p>"
           }
         }
       },

@@ -62,7 +62,7 @@
           "settings": {
             "enable_media": false,
             "heading": "1. Contáctanos",
-            "text": "<p>Escríbenos por WhatsApp al +56 9 6609 3891 con una foto del producto y tu número de pedido.</p>",
+            "text": "<p>Escríbenos por WhatsApp al +56 9 6609 3891 con una foto del producto y tu número de pedido, dentro de los 3 días siguientes a la entrega.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -72,7 +72,7 @@
           "settings": {
             "enable_media": false,
             "heading": "2. Evaluamos",
-            "text": "<p>Revisamos tu caso en menos de 24 horas. Si el producto no cumple nuestros estándares, procedemos de inmediato.</p>",
+            "text": "<p>El equipo revisa tu caso y te responde por WhatsApp. Si el producto no cumple nuestros estándares, lo resolvemos.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -82,7 +82,7 @@
           "settings": {
             "enable_media": false,
             "heading": "3. Reponemos o reembolsamos",
-            "text": "<p>Puedes elegir: reposición del producto en tu próxima entrega o reembolso completo del producto.</p>",
+            "text": "<p>Te lo reponemos sin costo en tu próxima entrega, o te compensamos con un cupón o la devolución de lo afectado.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -115,7 +115,7 @@
           "settings": {
             "icon": "clock",
             "heading": "¿Cuánto tiempo tengo para reportar un problema?",
-            "text": "<p>Tienes hasta 24 horas después de recibir tu pedido para reportar cualquier problema con los productos.</p>"
+            "text": "<p>Tienes 3 días desde que recibes tu pedido para avisarnos de cualquier problema con los productos.</p>"
           }
         },
         "q_que_productos": {
@@ -123,7 +123,7 @@
           "settings": {
             "icon": "leaf",
             "heading": "¿Qué productos se pueden devolver?",
-            "text": "<p>Aceptamos devoluciones de productos que lleguen en mal estado, dañados o que no correspondan a lo pedido. Dado que son perecibles, es importante reportar dentro de las 24 horas.</p>"
+            "text": "<p>Aceptamos devoluciones de productos que lleguen en mal estado, dañados o que no correspondan a lo pedido. Dado que son perecibles, hay que avisar dentro de los 3 días siguientes a la entrega.</p>"
           }
         },
         "q_reembolso": {
@@ -139,7 +139,7 @@
           "settings": {
             "icon": "calendar",
             "heading": "¿Cuánto tarda el reembolso?",
-            "text": "<p>Procesamos los reembolsos en 24-48 horas hábiles. Dependiendo de tu banco, puede tardar 3-5 días hábiles adicionales en verse reflejado.</p>"
+            "text": "<p>Apenas confirmamos la devolución, la hacemos. Si a los 3 días hábiles no la ves reflejada, escríbenos por WhatsApp.</p>"
           }
         }
       },
